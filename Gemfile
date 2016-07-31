@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'foundation-rails'
 gem 'slim'
 gem 'devise'
+gem 'activerecord-import'
 
 group :development, :test do
     gem 'rspec-rails'

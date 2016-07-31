@@ -13,5 +13,6 @@ module HsDecks
             g.fixture_replacement :factory_girl, dir: 'spec/factories'
         end
         config.active_record.raise_in_transactional_callbacks = true
+        config.autoload_paths += %W(#{config.root}/lib)
     end
 end

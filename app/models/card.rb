@@ -3,6 +3,9 @@ class Card < ApplicationRecord
 
     belongs_to :collection
 
+    has_many :packs
+    has_many :users, through: :packs
+
     validates :cardId, :name, :type, :rarity, :collection_id, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true

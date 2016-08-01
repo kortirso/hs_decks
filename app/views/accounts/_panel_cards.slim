@@ -15,4 +15,5 @@
                         p= "Cost is #{cost}"
                         - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
                         - cards_with_cost.sort_by{ |card| card.name }.each do |card|
-                            p= card.name
+                            p class="#{@packs.include?(card.id) ? 'exist' : 'none'}"
+                                = card.name

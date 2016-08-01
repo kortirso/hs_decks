@@ -53,6 +53,12 @@ body {
             width: 12.5%;
             p {
                 font-size: 10px;
+                &.none {
+                    color: #CCC;
+                }
+                &.exist {
+                    color: #000;
+                }
             }
         }
     }

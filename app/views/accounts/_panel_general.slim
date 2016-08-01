@@ -1,2 +1,8 @@
 h4 This is your personal page with cards and decks
 p You can choose cards in your library and then check decks for this cards
+- if current_user.deck_master?
+    h5 Ohh! You are deck master
+    p
+        = 'You can '
+        = link_to 'visit', decks_path, 'data-turbolinks': 'false'
+        = ' decks page, build new one or edit your old deck'

@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
     def get_access
         render template: 'welcome/index' unless current_user
     end
+
+    def render_404
+        render template: 'layouts/404', status: 404
+    end
 end

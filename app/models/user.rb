@@ -3,4 +3,13 @@ class User < ApplicationRecord
 
     has_many :packs, dependent: :destroy
     has_many :cards, through: :packs
+
+    has_many :decks
+
+    validates :role, presence: true
+    validates :role, inclusion: { in: %w(user deck_master) }
+
+    def deck_master?
+        return self.role == 'deck_master' ? true : false
+    end
 end

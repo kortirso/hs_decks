@@ -2,7 +2,7 @@ class Pack < ApplicationRecord
     belongs_to :user
     belongs_to :card
 
-    validates :user_id, :card_id, :amount, presence: true
+    validates :amount, :user_id, :card_id, presence: true
     validates :amount, inclusion: { in: 1..2 }
 
     def self.collect_ids

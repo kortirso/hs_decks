@@ -10,6 +10,8 @@ RSpec.describe Card, type: :model do
     it { should validate_inclusion_of(:rarity).in_array(%w(Free Common Rare Epic Legendary)) }
     it { should have_many :packs }
     it { should have_many(:users).through(:packs) }
+    it { should have_many :positions }
+    it { should have_many(:decks).through(:positions) }
 
     it 'should be valid' do
         card = create :card

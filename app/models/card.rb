@@ -3,8 +3,11 @@ class Card < ApplicationRecord
 
     belongs_to :collection
 
-    has_many :packs
+    has_many :packs, dependent: :destroy
     has_many :users, through: :packs
+
+    has_many :positions, dependent: :destroy
+    has_many :decks, through: :positions
 
     validates :cardId, :name, :type, :rarity, :collection_id, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }

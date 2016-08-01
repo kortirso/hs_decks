@@ -1,7 +1,7 @@
 FactoryGirl.define do
-    factory :pack do
+    factory :position do
         amount 1
-        association :user
+        association :deck
         association :card
     end
 end

@@ -8,9 +8,12 @@ class Card < ApplicationRecord
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true
     validates :rarity, inclusion: { in: %w(Free Common Rare Epic Legendary) }
 
+    scope :not_heroes, -> { where.not(cost: nil) }
     scope :of_type, -> (type) { where type: type }
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_rarity, -> (rarity) { where rarity: rarity }
-    scope :with_cost, -> (cost) { where cost: cost }
-    scope :overpowered, -> { where('cost >= 7') }
+
+    def self.with_cost(cost)
+        return cost < 7 ? where(cost: cost) : where('cost >= 7')
+    end
 end

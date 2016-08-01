@@ -1,0 +1,18 @@
+#cards_collection
+    - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
+    h4 At this section you can choose cards from your collection
+    ul#cards-tabs.tabs data-tabs=''
+        - classes_list.each_with_index do |name, index|
+            li.tabs-title class="#{'is-active' if index == 0}"
+                = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+    .tabs-content data-tabs-content='cards-tabs'
+        - classes_list.each_with_index do |name, index|
+            .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
+                - name = nil if name == 'Common'
+                - cards = @cards.select { |card| card.playerClass == name }
+                - (0..7).each do |cost|
+                    .costs
+                        p= "Cost is #{cost}"
+                        - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
+                        - cards_with_cost.sort_by{ |card| card.name }.each do |card|
+                            p= card.name

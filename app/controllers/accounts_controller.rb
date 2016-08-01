@@ -5,4 +5,8 @@ class AccountsController < ApplicationController
         @cards = Card.not_heroes.to_a
         @packs = current_user.packs.collect_ids.to_a
     end
+
+    def create
+
+    end
 end

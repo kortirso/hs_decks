@@ -66,15 +66,26 @@ body {
         .costs {
             float: left;
             width: 12.5%;
-            p {
-                font-size: 10px;
-                &.none {
-                    color: #CCC;
-                }
-                &.exist {
-                    color: #000;
+            input[type="checkbox"] {
+                position: absolute;
+                opacity: 0;
+            }
+            label {
+                font-size: 11px;
+                display: block;
+                margin: 0;
+                padding-left: 14px;
+                background-image: image-url('uncheck.png');
+                background-repeat: no-repeat;
+                background-position: 0 3px;
+                &.checked {
+                    background-image: image-url('check.png');
+                    background-repeat: no-repeat;
                 }
             }
         }
+    }
+    .button {
+        margin: 0;
     }
 }

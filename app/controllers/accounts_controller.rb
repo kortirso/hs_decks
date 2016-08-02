@@ -3,10 +3,10 @@ class AccountsController < ApplicationController
 
     def index
         @cards = Card.not_heroes.to_a
-        @packs = current_user.packs.collect_ids.to_a
+        @packs = current_user.packs.collect_ids
     end
 
     def create
-
+        Pack.build(current_user.id, params, current_user.packs.collect_ids)
     end
 end

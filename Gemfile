@@ -15,6 +15,7 @@ gem 'foundation-rails'
 gem 'slim'
 gem 'devise'
 gem 'simple_form'
+gem 'activerecord-import'
 
 group :development, :test do
     gem 'rspec-rails'

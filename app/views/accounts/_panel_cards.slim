@@ -18,6 +18,6 @@
                             - cards_with_cost.sort_by{ |card| card.name }.each do |card|
                                 p
                                     - checks = @packs.include?(card.id) ? true : false
-                                    = check_box_tag "card_#{card.id}", value = '1', checked = checks
-                                    = label_tag "card_#{card.id}", card.name, class: "#{'checked' if checks}"
+                                    = check_box_tag "#{card.id}", value = '1', checked = checks
+                                    = label_tag "#{card.id}", card.name, class: "#{'checked' if checks}"
             = submit_tag 'Save', class: 'button', 'data-turbolinks': 'false'

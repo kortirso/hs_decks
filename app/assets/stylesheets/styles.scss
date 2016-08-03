@@ -75,11 +75,17 @@ body {
                 display: block;
                 margin: 0;
                 padding-left: 14px;
-                background-image: image-url('uncheck.png');
-                background-repeat: no-repeat;
                 background-position: 0 3px;
-                &.checked {
-                    background-image: image-url('check.png');
+                &.none {
+                    background-image: image-url('uncheck.png');
+                    background-repeat: no-repeat;
+                }
+                &.single {
+                    background-image: image-url('single.png');
+                    background-repeat: no-repeat;
+                }
+                &.double {
+                    background-image: image-url('double.png');
                     background-repeat: no-repeat;
                 }
             }

@@ -1,6 +1,7 @@
 #cards_collection
     - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
     h4 At this section you can choose cards from your collection
+    p Click to card to change amount from 0 to 2 and then click to Save
     ul#cards-tabs.tabs data-tabs=''
         - classes_list.each_with_index do |name, index|
             li.tabs-title class="#{'is-active' if index == 0}"
@@ -17,7 +18,8 @@
                             - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
                             - cards_with_cost.sort_by{ |card| card.name }.each do |card|
                                 p
-                                    - checks = @packs.include?(card.id) ? true : false
-                                    = check_box_tag card.id, value = '1', checked = checks
-                                    = label_tag card.id, card.name, class: "#{'checked' if checks}"
+                                    - ids = @packs.collect { |elem| elem[0] }
+                                    - checks = ids.include?(card.id)
+                                    = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
+                                    = label_tag card.id, card.name, class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"
             = submit_tag 'Save', class: 'button', 'data-turbolinks': 'false'

@@ -95,3 +95,10 @@ body {
         margin: 0;
     }
 }
+
+#new_deck {
+    input, select {
+        font-size: 0.8rem;
+        height: 2rem;
+    }
+}

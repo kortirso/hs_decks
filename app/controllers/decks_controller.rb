@@ -13,11 +13,18 @@ class DecksController < ApplicationController
     end
 
     def new
-
+        building_positions
     end
 
     def create
-
+        params['deck']['positions_attributes'] = Deck.remove_empty_params(params['deck']['positions_attributes'])
+        if Deck.good_params?(params)
+            Deck.create(decks_params.merge(user: current_user))
+            render :index
+        else
+            building_positions
+            render :new
+        end
     end
 
     def edit
@@ -34,8 +41,14 @@ class DecksController < ApplicationController
 
     private
 
-    def decks_params
+    def building_positions
+        @cards = Card.not_heroes.order(name: :asc)
+        @deck = current_user.decks.new
+        30.times { @deck.positions.build }
+    end
 
+    def decks_params
+        params.require(:deck).permit(:name, :playerClass, positions_attributes: [:card_id, :amount, :id, :_destroy])
     end
 
     def check_user_role

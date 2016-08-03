@@ -3,6 +3,7 @@ class DecksController < ApplicationController
     before_action :check_user_role, except: :show
     before_action :find_deck, only: [:show, :edit, :update, :destroy]
     before_action :check_deck_author, only: [:edit, :update, :destroy]
+    autocomplete :card, :name
 
     def index
         @decks = current_user.decks
@@ -42,7 +43,6 @@ class DecksController < ApplicationController
     private
 
     def building_positions
-        @cards = Card.not_heroes.order(name: :asc)
         @deck = current_user.decks.new
         30.times { @deck.positions.build }
     end

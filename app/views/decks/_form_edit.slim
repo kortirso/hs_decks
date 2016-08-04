@@ -1,10 +1,10 @@
 = simple_form_for @deck do |f|
     .columns.small-4= f.input :name, label: 'Deck Name'
-    .columns.small-4= f.input :playerClass, collection: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue), label: 'Player Class', include_blank: false
+    .columns.small-4= f.input :playerClass, label: 'Player Class', disabled: true
     .columns.small-4= f.input :link, label: 'Link'
     .columns.small-12= f.input :caption, label: 'Caption'
     = f.simple_fields_for :positions do |position|
-        .columns.small-3= position.input :card_id, url: autocomplete_card_name_decks_path, as: :autocomplete, label: false
+        .columns.small-3= position.input :card_id, collection: @cards, label: false, label_method: :name, value_method: :id
         .columns.small-1= position.input :amount, label: false, placeholder: 'count'
     .clearfix
     = f.button :submit, class: 'button', 'data-turbolinks': 'false'

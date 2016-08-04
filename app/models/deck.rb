@@ -15,12 +15,22 @@ class Deck < ApplicationRecord
         params = new_params
     end
 
-    def self.good_params?(params)
+    def self.good_params?(params, playerClass = nil)
         positions = params['deck']['positions_attributes']
         return false if Deck.check_30_cards(positions)
         return false if Deck.check_dublicates(positions)
-        return false if Deck.check_class_cards(positions, params['deck']['playerClass'])
-        true
+        return false if Deck.check_class_cards(positions, playerClass.nil? ? params['deck']['playerClass'] : playerClass)
+        return true
+    end
+
+    def remove_positions(cards)
+        ids_new_pos = cards.to_a.select { |pos| pos[1]['amount'] == '1' || pos[1]['amount'] == '2' }.collect { |pos| pos[1]['card_id'].strip }
+        positions.each { |pos| pos.destroy unless ids_new_pos.include?(pos.card.name) }
+    end
+
+    def build_positions(cards)
+        created_cards = cards.to_a.select { |pos| pos[1]['amount'] == '1' || pos[1]['amount'] == '2' }.collect { |pos| pos[1] }
+        created_cards.each { |pos| self.positions.create(card: Card.find_by(name: pos['card_id'].strip), amount: pos['amount']) }
     end
 
     private
@@ -30,15 +40,15 @@ class Deck < ApplicationRecord
     end
 
     def self.check_dublicates(cards)
-        ids = cards.to_a.collect { |pos| pos[1]['card_id'] }.select { |pos| !pos.empty? }
+        ids = cards.to_a.select { |pos| pos[1]['amount'] == '1' || pos[1]['amount'] == '2' }.collect { |pos| pos[1]['card_id'].strip }
         ids.size != ids.uniq.size
     end
 
     def self.check_class_cards(cards, playerClass)
-        ids = cards.to_a.collect { |pos| pos[1]['card_id'] }.select { |pos| !pos.empty? }
-        allowed_cards_ids = Card.not_heroes.where(playerClass: nil).or(Card.not_heroes.where(playerClass: playerClass)).to_a.collect { |x| x.id }
+        ids = cards.to_a.select { |pos| pos[1]['amount'] == '1' || pos[1]['amount'] == '2' }.collect { |pos| pos[1]['card_id'].strip }
+        allowed_cards_ids = Card.not_heroes.where(playerClass: nil).or(Card.not_heroes.where(playerClass: playerClass)).to_a.collect { |x| x.name }
         errors = 0
-        ids.each { |pos| errors += 1 unless allowed_cards_ids.include? pos.to_i }
+        ids.each { |pos| errors += 1 unless allowed_cards_ids.include? pos }
         errors != 0
     end
 end

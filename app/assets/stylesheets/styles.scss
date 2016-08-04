@@ -97,12 +97,37 @@ body {
 }
 
 #new_deck {
+    padding: 10px 0;
     input, select {
         font-size: 0.8rem;
-        height: 2rem;
+        height: 2.5rem;
+    }
+    .button {
+        margin: 0 10px 0 0;
     }
 }
 
 .ui-widget {
     font-size: 0.8rem !important;
+}
+
+#decks {
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+    .deck {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        p {
+            margin: 0;
+            .button {
+                margin: 0 10px 0 0;
+            }
+        }
+    }
 }

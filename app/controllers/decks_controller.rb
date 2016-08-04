@@ -19,7 +19,7 @@ class DecksController < ApplicationController
 
     def create
         params['deck']['positions_attributes'] = Deck.remove_empty_params(params['deck']['positions_attributes'])
-        if Deck.good_params?(params)
+        if Deck.good_params?(params, :create)
             @deck = current_user.decks.create(decks_params)
             @deck.build_positions(params['deck']['positions_attributes'])
             redirect_to decks_path
@@ -29,13 +29,13 @@ class DecksController < ApplicationController
     end
 
     def edit
-        @cards = Card.of_player_class(@deck.playerClass).or(Card.where(playerClass: nil)).order(name: :asc)
+        @cards = Card.not_heroes.of_player_class(@deck.playerClass).or(Card.where(playerClass: nil)).order(name: :asc)
         (30 - @deck.positions.size).times { @deck.positions.build }
     end
 
     def update
         params['deck']['positions_attributes'] = Deck.remove_empty_params(params['deck']['positions_attributes'])
-        if Deck.good_params?(params, @deck.playerClass)
+        if Deck.good_params?(params, :update, @deck.playerClass)
             @deck.remove_positions(params['deck']['positions_attributes'])
             @deck.update(decks_params)
             redirect_to decks_path
@@ -56,7 +56,7 @@ class DecksController < ApplicationController
     end
 
     def decks_params
-        params.require(:deck).permit(:name, :playerClass, :link, :caption)
+        params.require(:deck).permit(:name, :playerClass, :link, :caption, positions_attributes: [:card_id, :amount, :id, :_destroy])
     end
 
     def check_user_role

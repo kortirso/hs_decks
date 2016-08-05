@@ -16,8 +16,6 @@ gem 'slim'
 gem 'devise'
 gem 'simple_form'
 gem 'activerecord-import'
-gem 'jquery-ui-rails'
-gem 'rails4-autocomplete'
 
 group :development, :test do
     gem 'rspec-rails'

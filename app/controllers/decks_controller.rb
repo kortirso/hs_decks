@@ -3,7 +3,6 @@ class DecksController < ApplicationController
     before_action :check_user_role, except: :show
     before_action :find_deck, only: [:show, :edit, :update, :destroy]
     before_action :check_deck_author, only: [:edit, :update, :destroy]
-    autocomplete :card, :name
 
     def index
         @decks = current_user.decks
@@ -14,14 +13,11 @@ class DecksController < ApplicationController
     end
 
     def new
-        building_positions
+        @cards = Card.not_heroes.to_a
     end
 
     def create
-        params['deck']['positions_attributes'] = Deck.remove_empty_params(params['deck']['positions_attributes'])
-        if Deck.good_params?(params, :create)
-            @deck = current_user.decks.create(decks_params)
-            @deck.build_positions(params['deck']['positions_attributes'])
+        if Deck.build(params, current_user.id)
             redirect_to decks_path
         else
             redirect_to new_deck_path
@@ -29,19 +25,11 @@ class DecksController < ApplicationController
     end
 
     def edit
-        @cards = Card.not_heroes.of_player_class(@deck.playerClass).or(Card.where(playerClass: nil)).order(name: :asc)
-        (30 - @deck.positions.size).times { @deck.positions.build }
+
     end
 
     def update
-        params['deck']['positions_attributes'] = Deck.remove_empty_params(params['deck']['positions_attributes'])
-        if Deck.good_params?(params, :update, @deck.playerClass)
-            @deck.remove_positions(params['deck']['positions_attributes'])
-            @deck.update(decks_params)
-            redirect_to decks_path
-        else
-            redirect_to edit_deck_path(@deck)
-        end
+
     end
 
     def destroy
@@ -49,15 +37,6 @@ class DecksController < ApplicationController
     end
 
     private
-
-    def building_positions
-        @deck = current_user.decks.new
-        30.times { @deck.positions.build }
-    end
-
-    def decks_params
-        params.require(:deck).permit(:name, :playerClass, :link, :caption, positions_attributes: [:card_id, :amount, :id, :_destroy])
-    end
 
     def check_user_role
         render_404 unless current_user.deck_master?

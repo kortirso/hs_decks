@@ -54,7 +54,7 @@ body {
     }
 }
 
-#cards_collection {
+#cards_collection, #new_deck {
     .tabs-panel {
         &:before, &:after {
             content: " ";

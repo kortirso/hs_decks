@@ -1,11 +1,27 @@
-= simple_form_for @deck do |f|
-    .columns.small-4= f.input :name, label: 'Deck Name'
-    .columns.small-4= f.input :playerClass, collection: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue), label: 'Player Class', include_blank: false
-    .columns.small-4= f.input :link, label: 'Link'
-    .columns.small-12= f.input :caption, label: 'Caption'
-    = f.simple_fields_for :positions do |position|
-        .columns.small-3= position.input :card_id, url: autocomplete_card_name_decks_path, as: :autocomplete, label: false
-        .columns.small-1= position.input :amount, label: false, placeholder: 'count'
+- classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
+= form_tag({ controller: 'decks', action: 'create' }, method: 'post') do
+    .columns.small-4= text_field_tag :name, nil, placeholder: 'Deck Name'
+    .columns.small-4= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
+    .columns.small-4= text_field_tag :link, nil, placeholder: 'Link'
+    .columns.small-4= text_field_tag :caption, nil, placeholder: 'Caption'
     .clearfix
-    = f.button :submit, class: 'button', 'data-turbolinks': 'false'
-    = link_to 'Back', decks_path, class: 'button', 'data-turbolinks': 'false'
+    ul#new-cards-tabs.tabs data-tabs=''
+        - classes_list.each_with_index do |name, index|
+            li.tabs-title class="#{'is-active' if index == 0}"
+                = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+    .tabs-content data-tabs-content='new-cards-tabs'
+        - classes_list.each_with_index do |name, index|
+            .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
+                - name = nil if name == 'Common'
+                - cards = @cards.select { |card| card.playerClass == name }
+                - (0..7).each do |cost|
+                    .costs
+                        p= "Cost is #{cost}"
+                        - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
+                        - cards_with_cost.sort_by{ |card| card.name }.each do |card|
+                            p
+                                /- ids = @packs.collect { |elem| elem[0] }
+                                /- checks = ids.include?(card.id)
+                                = check_box_tag card.id, value = '0', checked = false
+                                = label_tag card.id, card.name, class: 'none'
+        = submit_tag 'Save', class: 'button', 'data-turbolinks': 'false'

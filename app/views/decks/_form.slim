@@ -5,11 +5,15 @@
     .columns.small-4= text_field_tag :link, nil, placeholder: 'Link'
     .columns.small-4= text_field_tag :caption, nil, placeholder: 'Caption'
     .clearfix
+    p
+        = 'Cards amount in the deck - '
+        span#card_amount= '0'
+    p Click Save button at the page's bottom to save your cards
     ul#new-cards-tabs.tabs data-tabs=''
         - classes_list.each_with_index do |name, index|
-            li.tabs-title class="#{'is-active' if index == 0}"
+            li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
                 = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
-    .tabs-content data-tabs-content='new-cards-tabs'
+    .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
         - classes_list.each_with_index do |name, index|
             .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
                 - name = nil if name == 'Common'
@@ -23,5 +27,5 @@
                                 /- ids = @packs.collect { |elem| elem[0] }
                                 /- checks = ids.include?(card.id)
                                 = check_box_tag card.id, value = '0', checked = false
-                                = label_tag card.id, card.name, class: 'none'
+                                = label_tag card.id, card.name, class: "#{card.rarity == 'Legendary' ? 'legendary none' : 'none' }"
         = submit_tag 'Save', class: 'button', 'data-turbolinks': 'false'

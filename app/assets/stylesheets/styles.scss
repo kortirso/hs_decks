@@ -88,6 +88,9 @@ body {
                     background-image: image-url('double.png');
                     background-repeat: no-repeat;
                 }
+                &.legendary {
+                    color: orange;
+                }
             }
         }
     }

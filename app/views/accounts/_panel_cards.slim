@@ -6,8 +6,9 @@
         - classes_list.each_with_index do |name, index|
             li.tabs-title class="#{'is-active' if index == 0}"
                 = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
-    .tabs-content data-tabs-content='cards-tabs'
+    .tabs-content#tabs-content data-tabs-content='cards-tabs'
         = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
+            - ids = @packs.collect { |elem| elem[0] }
             - classes_list.each_with_index do |name, index|
                 .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
                     - name = nil if name == 'Common'
@@ -18,7 +19,6 @@
                             - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
                             - cards_with_cost.sort_by{ |card| card.name }.each do |card|
                                 p
-                                    - ids = @packs.collect { |elem| elem[0] }
                                     - checks = ids.include?(card.id)
                                     = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
                                     = label_tag card.id, card.name, class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}#{' legendary' if card.rarity == 'Legendary' }"

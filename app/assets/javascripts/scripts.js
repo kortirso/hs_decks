@@ -31,7 +31,7 @@ $(function() {
         }
     });
 
-    $('.costs label').click(function(e) {
+    $('#tabs-content .costs label').click(function(e) {
         e.preventDefault();
         if($(this).hasClass('none')) {
             $(this).removeClass('none').addClass('single');

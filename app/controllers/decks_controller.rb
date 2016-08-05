@@ -25,15 +25,21 @@ class DecksController < ApplicationController
     end
 
     def edit
-
+        @cards = Card.where(playerClass: nil).or(Card.not_heroes.where(playerClass: @deck.playerClass)).to_a
+        @positions = @deck.positions.collect_ids
     end
 
     def update
-
+        if @deck.refresh(params)
+            redirect_to decks_path
+        else
+            redirect_to edit_deck_path(@deck)
+        end
     end
 
     def destroy
-
+        @deck.destroy
+        redirect_to decks_path
     end
 
     private

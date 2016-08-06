@@ -11,4 +11,14 @@ RSpec.describe Pack, type: :model do
 
         expect(pack).to be_valid
     end
+
+    context 'methods' do
+        context '.collect_ids' do
+
+        end
+
+        context '.build' do
+
+        end
+    end
 end

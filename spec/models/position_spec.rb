@@ -11,4 +11,10 @@ RSpec.describe Position, type: :model do
 
         expect(position).to be_valid
     end
+
+    context 'methods' do
+        context '.collect_ids' do
+
+        end
+    end
 end

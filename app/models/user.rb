@@ -17,7 +17,6 @@ class User < ApplicationRecord
     def check_decks
         self.checks.destroy_all
         checks = []
-
         cards_ids = self.packs.collect_ids
         Deck.all.includes(:positions).each do |deck|
             check = self.checks.new deck_id: deck.id, success: self.check_deck(cards_ids, deck.positions.collect_ids)

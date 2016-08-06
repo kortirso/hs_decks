@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
     it { should have_many :packs }
     it { should have_many(:cards).through(:packs) }
     it { should have_many :decks }
+    it { should have_many :checks }
     it { should validate_inclusion_of(:role).in_array(%w(user deck_master)) }
 
     describe 'User' do
@@ -16,6 +17,20 @@ RSpec.describe User, type: :model do
 
         it 'should be invalid when sign up with existed email' do
             expect { create :user, email: user.email }.to raise_error(ActiveRecord::RecordInvalid)
+        end
+    end
+
+    context 'methods' do
+        context '.deck_master?' do
+
+        end
+
+        context '.check_decks' do
+
+        end
+
+        context '.check_deck' do
+
         end
     end
 end

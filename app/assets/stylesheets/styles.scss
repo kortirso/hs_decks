@@ -160,3 +160,12 @@ body {
 .tabs-content {
     margin-bottom: 10px;
 }
+
+#checks {
+    .button {
+        margin: 0 10px 0 0;
+    }
+    tbody th, tbody td {
+        padding: 5px 10px;
+    }
+}

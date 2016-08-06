@@ -4,6 +4,8 @@ class Deck < ApplicationRecord
     has_many :positions
     has_many :cards, through: :positions
 
+    has_many :checks
+
     validates :name, :playerClass, :user_id, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
 

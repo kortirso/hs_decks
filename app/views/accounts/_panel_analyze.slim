@@ -1,2 +1,27 @@
 h4 Current cards analyzer
 p At this page you can start analyze your cards and look on best decks for you
+= form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
+    = submit_tag 'Check Decks', class: 'button', 'data-turbolinks': 'false'
+#checks
+    - if @checks.size > 0
+        h5 Last deck checks
+        table
+            thead
+                tr
+                    th #
+                    th Success
+                    th Deck name
+                    th Deck class
+                    th Deck creator
+                    th Controls
+            tbody
+                - @checks.each_with_index do |check, index|
+                    tr
+                        td= index + 1
+                        td= "#{check.success}%"
+                        td= check.deck.name
+                        td= check.deck.playerClass
+                        td= check.deck.user.email
+                        td
+                            = link_to 'View Check', check_path(check), class: 'button small', 'data-turbolinks': 'false'
+                            = link_to 'View Deck', deck_path(check.deck), class: 'button small', 'data-turbolinks': 'false'

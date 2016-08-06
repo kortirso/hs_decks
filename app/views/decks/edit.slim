@@ -1,3 +1,6 @@
+- provide(:title, 'Edit deck')
+.inside
+    .shadow
 .row
     .columns.small-12
         #new_deck
@@ -7,7 +10,7 @@
                 .columns.small-4= text_field_tag :name, nil, placeholder: 'Deck Name', value: @deck.name
                 .columns.small-4= text_field_tag :playerClass, nil, placeholder: 'PlayerClass', value: @deck.playerClass, disabled: true
                 .columns.small-4= text_field_tag :link, nil, placeholder: 'Link', value: @deck.link
-                .columns.small-4= text_field_tag :caption, nil, placeholder: 'Caption', value: @deck.caption
+                .columns.small-12= text_field_tag :caption, nil, placeholder: 'Caption', value: @deck.caption
                 .clearfix
                 p
                     = 'Cards amount in the deck - '

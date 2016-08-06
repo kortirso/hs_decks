@@ -1,3 +1,6 @@
+- provide(:title, 'New deck')
+.inside
+    .shadow
 .row
     .columns.small-12
         #new_deck
@@ -7,7 +10,7 @@
                 .columns.small-4= text_field_tag :name, nil, placeholder: 'Deck Name'
                 .columns.small-4= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
                 .columns.small-4= text_field_tag :link, nil, placeholder: 'Link'
-                .columns.small-4= text_field_tag :caption, nil, placeholder: 'Caption'
+                .columns.small-12= text_field_tag :caption, nil, placeholder: 'Caption'
                 .clearfix
                 p
                     = 'Cards amount in the deck - '

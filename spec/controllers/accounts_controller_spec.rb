@@ -21,7 +21,7 @@ RSpec.describe AccountsController, type: :controller do
             end
 
             it 'and collects an array of packs with card ids' do
-                expect(assigns(:packs)).to match_array([pack.card_id])
+                expect(assigns(:packs)).to match_array([[pack.card_id, pack.amount]])
             end
         end
     end

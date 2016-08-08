@@ -12,6 +12,8 @@ RSpec.describe Card, type: :model do
     it { should have_many(:users).through(:packs) }
     it { should have_many :positions }
     it { should have_many(:decks).through(:positions) }
+    it { should validate_presence_of :formats }
+    it { should validate_inclusion_of(:formats).in_array(%w(standard free)) }
 
     it 'should be valid' do
         card = create :card

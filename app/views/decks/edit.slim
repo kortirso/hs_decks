@@ -7,9 +7,10 @@
             h4 Deck editing
             - classes_list = [@deck.playerClass, 'Common']
             = form_tag({ controller: 'decks', action: 'update' }, method: 'patch') do
-                .columns.small-4= text_field_tag :name, nil, placeholder: 'Deck Name', value: @deck.name
-                .columns.small-4= text_field_tag :playerClass, nil, placeholder: 'PlayerClass', value: @deck.playerClass, disabled: true
-                .columns.small-4= text_field_tag :link, nil, placeholder: 'Link', value: @deck.link
+                .columns.small-3= text_field_tag :name, nil, placeholder: 'Deck Name', value: @deck.name
+                .columns.small-3= text_field_tag :playerClass, nil, placeholder: 'PlayerClass', value: @deck.playerClass, disabled: true
+                .columns.small-3= text_field_tag :formats, nil, placeholder: 'Format', value: @deck.formats, disabled: true
+                .columns.small-3= text_field_tag :link, nil, placeholder: 'Link', value: @deck.link
                 .columns.small-12= text_field_tag :caption, nil, placeholder: 'Caption', value: @deck.caption
                 .clearfix
                 p
@@ -31,7 +32,7 @@
                                     p= "Cost is #{cost}"
                                     - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
                                     - cards_with_cost.sort_by{ |card| card.name }.each do |card|
-                                        p
+                                        p class="#{card.formats}"
                                             - checks = ids.include?(card.id)
                                             = check_box_tag card.id, value = "#{checks ? @positions[ids.index(card.id)][1] : 0}", checked = checks
                                             = label_tag card.id, card.name, class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}#{' legendary' if card.rarity == 'Legendary' }"

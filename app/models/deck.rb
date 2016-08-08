@@ -6,35 +6,31 @@ class Deck < ApplicationRecord
 
     has_many :checks
 
-    validates :name, :playerClass, :user_id, presence: true
+    validates :name, :playerClass, :user_id, :formats, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
-    validates :formats, presence: true, inclusion: { in: %w(standard free) }
+    validates :formats, inclusion: { in: %w(standard free) }
 
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
-    scope :standard_format, -> { where formats: 'standard' }
+    scope :of_format, -> (format) { where formats: format }
 
     def self.build(params, user_id)
         data = Deck.remove_params(params)
-        deck_params, positions_params, decks = data[0..3], data[4..-1], []
-        if Deck.good_params?(deck_params, positions_params)
-            deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], link: deck_params[2][1], caption: deck_params[3][1], user_id: user_id
-            positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i }
-            decks << deck
-            Deck.import decks, recursive: true
-            return true
-        end
-        return false
+        deck_params, positions_params, decks = data[0..4], data[5..-1], []
+        return false unless Deck.good_params?(deck_params, positions_params)
+        deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], link: deck_params[2][1], caption: deck_params[3][1], user_id: user_id
+        positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i }
+        decks << deck
+        Deck.import decks, recursive: true
+        return true
     end
 
     def refresh(params)
         data = Deck.remove_params(params)
         deck_params, positions_params = data[0..2], data[3..-1]
-        if Deck.good_params?(deck_params, positions_params, self.playerClass)
-            self.update name: deck_params[0][1], link: deck_params[1][1], caption: deck_params[2][1]
-            self.update_positions(positions_params)
-            return true
-        end
-        return false
+        return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
+        self.update name: deck_params[0][1], link: deck_params[1][1], caption: deck_params[2][1]
+        self.update_positions(positions_params)
+        return true
     end
 
     def update_positions(cards)

@@ -6,6 +6,7 @@ FactoryGirl.define do
         cost 0
         playerClass 'Shaman'
         rarity 'Free'
+        formats 'standard'
         association :collection
     end
 end

@@ -11,6 +11,6 @@ class User < ApplicationRecord
     validates :role, inclusion: { in: %w(user deck_master) }
 
     def deck_master?
-        return self.role == 'deck_master' ? true : false
+        self.role == 'deck_master'
     end
 end

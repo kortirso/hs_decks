@@ -1,0 +1,19 @@
+h4 All decks existed in system
+p At this page you can view all decks of our experts
+#decks
+    table
+        thead
+            tr
+                th #
+                th Deck name
+                th Deck class
+                th Deck creator
+                th Controls
+        tbody
+            - @decks.each_with_index do |deck, index|
+                tr
+                    td= index + 1
+                    td= deck.name
+                    td= deck.playerClass
+                    td= deck.user.email
+                    td= link_to 'View Deck', deck_path(deck), class: 'button small', 'data-turbolinks': 'false'

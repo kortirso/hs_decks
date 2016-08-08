@@ -25,7 +25,7 @@ class DecksController < ApplicationController
     end
 
     def edit
-        @cards = Card.where(playerClass: nil).or(Card.not_heroes.where(playerClass: @deck.playerClass)).to_a
+        @cards = Card.for_all_classes.or(Card.not_heroes.of_player_class(@deck.playerClass)).to_a
         @positions = @deck.positions.collect_ids
     end
 

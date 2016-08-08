@@ -16,6 +16,7 @@ class Card < ApplicationRecord
 
     scope :not_heroes, -> { where.not(cost: nil) }
     scope :of_type, -> (type) { where type: type }
+    scope :for_all_classes, -> { where player_class: nil }
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_rarity, -> (rarity) { where rarity: rarity }
 

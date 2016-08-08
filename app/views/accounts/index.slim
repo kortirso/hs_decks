@@ -3,10 +3,12 @@
     .shadow
 .row
     ul#account-tabs.tabs data-tabs=''
-        li.tabs-title.is-active= link_to 'General Info', '#panel1', 'aria-selected' => 'true', 'data-turbolinks': 'false'
-        li.tabs-title= link_to 'Cards Collection', '#panel2', 'data-turbolinks': 'false'
-        li.tabs-title= link_to 'Decks Analyzer', '#panel3', 'data-turbolinks': 'false'
+        li.tabs-title.is-active= link_to 'General info', '#panel1', 'aria-selected' => 'true', 'data-turbolinks': 'false'
+        li.tabs-title= link_to 'Your cards collection', '#panel2', 'data-turbolinks': 'false'
+        li.tabs-title= link_to "Expert's decks", '#panel3', 'data-turbolinks': 'false'
+        li.tabs-title= link_to 'Decks analyzer', '#panel4', 'data-turbolinks': 'false'
     .tabs-content data-tabs-content='account-tabs'
         #panel1.tabs-panel.is-active= render 'panel_general'
         #panel2.tabs-panel= render 'panel_cards'
-        #panel3.tabs-panel= render 'panel_analyze'
+        #panel3.tabs-panel= render 'panel_decks'
+        #panel4.tabs-panel= render 'panel_analyze'

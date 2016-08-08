@@ -73,7 +73,7 @@ class Deck < ApplicationRecord
 
     def self.check_cards_class(cards, playerClass)
         ids = cards.collect { |pos| pos[0].strip.to_i }
-        allowed_cards_ids = Card.where(playerClass: nil).or(Card.not_heroes.where(playerClass: playerClass)).to_a.collect { |x| x.id }
+        allowed_cards_ids = Card.for_all_classes.or(Card.not_heroes.of_player_class(playerClass)).to_a.collect { |x| x.id }
         errors = 0
         ids.each { |pos| errors += 1 unless allowed_cards_ids.include? pos }
         errors != 0

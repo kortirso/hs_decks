@@ -24,13 +24,5 @@ RSpec.describe User, type: :model do
         context '.deck_master?' do
 
         end
-
-        context '.check_decks' do
-
-        end
-
-        context '.check_deck' do
-
-        end
     end
 end

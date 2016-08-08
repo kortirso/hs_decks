@@ -7,6 +7,7 @@ p At this page you can view all decks of our experts
                 th #
                 th Deck name
                 th Deck class
+                th Deck format
                 th Deck creator
                 th Controls
         tbody
@@ -15,5 +16,6 @@ p At this page you can view all decks of our experts
                     td= index + 1
                     td= deck.name
                     td= deck.playerClass
+                    td= deck.formats
                     td= deck.user.email
                     td= link_to 'View Deck', deck_path(deck), class: 'button small', 'data-turbolinks': 'false'

@@ -1,6 +1,10 @@
 h4 Current cards analyzer
 p At this page you can start analyze your cards and look on best decks for you
+p In addition you can select minimal success rating of decks, spesific player class and deck format.
 = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
+    .columns.small-4= text_field_tag :success, nil, placeholder: 'Minimal success rating'
+    .columns.small-4= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)), prompt: 'All or spesific class'
+    .columns.small-4= select_tag :formats, options_for_select(%w(standard free))
     = submit_tag 'Check Decks', class: 'button', 'data-turbolinks': 'false'
 #checks
     - if @checks.size > 0
@@ -12,6 +16,7 @@ p At this page you can start analyze your cards and look on best decks for you
                     th Success
                     th Deck name
                     th Deck class
+                    th Deck format
                     th Deck creator
                     th Controls
             tbody
@@ -21,6 +26,7 @@ p At this page you can start analyze your cards and look on best decks for you
                         td= "#{check.success}%"
                         td= check.deck.name
                         td= check.deck.playerClass
+                        td= check.deck.formats
                         td= check.deck.user.email
                         td
                             = link_to 'View Check', check_path(check), class: 'button small', 'data-turbolinks': 'false'

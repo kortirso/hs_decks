@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806070458) do
+ActiveRecord::Schema.define(version: 20160808121743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,19 +39,21 @@ ActiveRecord::Schema.define(version: 20160806070458) do
   end
 
   create_table "collections", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                            null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "formats",    default: "standard", null: false
   end
 
   create_table "decks", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.integer  "user_id",     null: false
-    t.string   "playerClass", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",                             null: false
+    t.integer  "user_id",                          null: false
+    t.string   "playerClass",                      null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "link"
     t.string   "caption"
+    t.string   "formats",     default: "standard", null: false
     t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
   end
 

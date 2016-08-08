@@ -10,4 +10,22 @@ RSpec.describe Check, type: :model do
 
         expect(check).to be_valid
     end
+
+    context 'Methods' do
+        context '.build' do
+
+        end
+
+        context '.getting_params' do
+
+        end
+
+        context '.getting_decks' do
+
+        end
+
+        context '.check_deck' do
+
+        end
+    end
 end

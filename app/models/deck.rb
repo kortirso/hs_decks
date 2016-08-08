@@ -8,6 +8,10 @@ class Deck < ApplicationRecord
 
     validates :name, :playerClass, :user_id, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
+    validates :formats, presence: true, inclusion: { in: %w(standard free) }
+
+    scope :of_player_class, -> (player_class) { where playerClass: player_class }
+    scope :standard_format, -> { where formats: 'standard' }
 
     def self.build(params, user_id)
         data = Deck.remove_params(params)
@@ -40,6 +44,16 @@ class Deck < ApplicationRecord
 
         old_ids.each { |pos| cards_ids.include?(pos) ? self.positions.find_by(card_id: pos).update(amount: cards[cards_ids.index(pos)][1]) : self.positions.find_by(card_id: pos).destroy }
         cards_ids.each { |pos| self.positions.create card_id: pos, amount: cards[cards_ids.index(pos)][1] unless old_ids.include?(pos) }
+    end
+
+    def self.check_format
+        all.each { |deck| deck.check_deck_format }
+    end
+
+    def check_deck_format
+        free_cards = 0
+        self.cards.includes(:collection).each { |card| free_cards += 1 if card.collection.free_format? }
+        self.update(formats: 'free') if free_cards > 0
     end
 
     private

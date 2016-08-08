@@ -6,7 +6,9 @@ RSpec.describe Deck, type: :model do
     it { should validate_presence_of :name }
     it { should validate_presence_of :playerClass }
     it { should validate_presence_of :user_id }
+    it { should validate_presence_of :formats }
     it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)) }
+    it { should validate_inclusion_of(:formats).in_array(%w(standard free)) }
 
     it 'should be valid' do
         deck = create :deck
@@ -28,6 +30,10 @@ RSpec.describe Deck, type: :model do
         end
 
         context '.remove_params' do
+
+        end
+
+        context '.check_deck_format' do
 
         end
 

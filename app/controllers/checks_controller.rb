@@ -8,7 +8,7 @@ class ChecksController < ApplicationController
     end
 
     def create
-        current_user.check_decks
+        Check.build(current_user.id, params)
     end
 
     private

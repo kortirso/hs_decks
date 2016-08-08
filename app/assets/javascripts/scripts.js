@@ -76,7 +76,7 @@ $(function() {
         $('#new-tabs-content .tabs-panel label').removeClass('single').removeClass('double').removeClass('none').addClass('none');
         $('#new-tabs-content .tabs-panel input').val(0).prop('checked', false);
         
-        if(this.value == 'standard') $('.costs p.free').hide();
-        else $('.costs p.free').show();
+        if(this.value == 'standard') $('.costs p.wild').hide();
+        else $('.costs p.wild').show();
     });
 });

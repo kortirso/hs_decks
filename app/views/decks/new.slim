@@ -9,7 +9,7 @@
             = form_tag({ controller: 'decks', action: 'create' }, method: 'post') do
                 .columns.small-3= text_field_tag :name, nil, placeholder: 'Deck Name'
                 .columns.small-3= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
-                .columns.small-3= select_tag :formats, options_for_select(%w(free standard)), include_blank: false
+                .columns.small-3= select_tag :formats, options_for_select(%w(wild standard)), include_blank: false
                 .columns.small-3= text_field_tag :link, nil, placeholder: 'Link'
                 .columns.small-12= text_field_tag :caption, nil, placeholder: 'Caption'
                 .clearfix

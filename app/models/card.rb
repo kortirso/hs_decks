@@ -13,7 +13,7 @@ class Card < ApplicationRecord
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true
     validates :rarity, inclusion: { in: %w(Free Common Rare Epic Legendary) }
-    validates :formats, inclusion: { in: %w(standard free) }
+    validates :formats, inclusion: { in: %w(standard wild) }
 
     scope :not_heroes, -> { where.not(cost: nil) }
     scope :of_type, -> (type) { where type: type }
@@ -27,6 +27,6 @@ class Card < ApplicationRecord
     end
 
     def self.check_cards_format
-        Collection.of_format('free').includes(:cards).each { |collection| collection.cards.each { |card| card.update(formats: 'free') } }
+        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.each { |card| card.update(formats: 'wild') } }
     end
 end

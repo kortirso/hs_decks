@@ -4,7 +4,7 @@ p In addition you can select minimal success rating of decks, spesific player cl
 = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
     .columns.small-4= text_field_tag :success, nil, placeholder: 'Minimal success rating'
     .columns.small-4= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)), prompt: 'All or spesific class'
-    .columns.small-4= select_tag :formats, options_for_select(%w(standard free))
+    .columns.small-4= select_tag :formats, options_for_select(%w(standard wild))
     = submit_tag 'Check Decks', class: 'button', 'data-turbolinks': 'false'
 #checks
     - if @checks.size > 0

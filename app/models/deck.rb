@@ -8,7 +8,7 @@ class Deck < ApplicationRecord
 
     validates :name, :playerClass, :user_id, :formats, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
-    validates :formats, inclusion: { in: %w(standard free) }
+    validates :formats, inclusion: { in: %w(standard wild) }
 
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_format, -> (format) { where formats: format }
@@ -48,8 +48,8 @@ class Deck < ApplicationRecord
 
     def check_deck_format
         free_cards = 0
-        self.cards.includes(:collection).each { |card| free_cards += 1 if card.collection.free_format? }
-        self.update(formats: 'free') if free_cards > 0
+        self.cards.includes(:collection).each { |card| free_cards += 1 if card.collection.wild_format? }
+        self.update(formats: 'wild') if free_cards > 0
     end
 
     private

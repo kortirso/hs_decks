@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
     def index
         @cards = Card.not_heroes.to_a
         @packs = current_user.packs.collect_ids
-        @checks = current_user.checks.includes(:deck).order(success: :asc)
+        @checks = current_user.checks.includes(:deck).order(success: :desc)
         @decks = Deck.all.includes(:user).order(playerClass: :asc)
     end
 

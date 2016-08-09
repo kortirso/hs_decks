@@ -4,7 +4,8 @@ class ChecksController < ApplicationController
     before_action :check_author, only: :show
 
     def show
-
+        @deck = @check.deck
+        @lines = @check.lines
     end
 
     def create

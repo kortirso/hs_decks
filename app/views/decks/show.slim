@@ -4,6 +4,7 @@
 .row
     .columns.small-12
         #deck
+            = link_to 'Back', root_path, class: 'button', 'data-turbolinks': 'false'
             h4 At this page you can see spesific deck.
             p= "Deck name - #{@deck.name}"
             p= "Deck creator - #{@deck.user.email}"

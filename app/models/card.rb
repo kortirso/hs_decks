@@ -9,6 +9,9 @@ class Card < ApplicationRecord
     has_many :positions, dependent: :destroy
     has_many :decks, through: :positions
 
+    has_many :lines, dependent: :destroy
+    has_many :checks, through: :lines
+
     validates :cardId, :name, :type, :rarity, :collection_id, :formats, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true

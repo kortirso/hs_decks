@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809110528) do
+ActiveRecord::Schema.define(version: 20160809143706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20160809110528) do
     t.string   "caption"
     t.string   "formats",     default: "standard", null: false
     t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
+  end
+
+  create_table "lines", force: :cascade do |t|
+    t.integer  "check_id"
+    t.integer  "card_id"
+    t.string   "success",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_lines_on_card_id", using: :btree
+    t.index ["check_id"], name: "index_lines_on_check_id", using: :btree
   end
 
   create_table "packs", force: :cascade do |t|

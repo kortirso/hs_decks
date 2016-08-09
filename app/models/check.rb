@@ -1,4 +1,7 @@
 class Check < ApplicationRecord
+    has_many :lines, dependent: :destroy
+    has_many :cards, through: :lines
+
     belongs_to :user
     belongs_to :deck
 
@@ -11,12 +14,12 @@ class Check < ApplicationRecord
         user.checks.destroy_all
         cards_ids = user.packs.collect_ids
         Check.getting_decks(params).each do |deck|
-            rating = Check.check_deck(cards_ids, deck.positions.collect_ids)
-            if params['success'].empty? || !params['success'].empty? && rating >= params['success'].to_i
-                check = Check.create deck_id: deck.id, success: rating, user_id: user_id
+            check = Check.check_deck(cards_ids, deck.positions.collect_ids, user_id, deck.id)
+            if params['success'].empty? || !params['success'].empty? && check.success >= params['success'].to_i
                 checks.push check.success
-                sortable_checks = checks.sort.reverse
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: sortable_checks.index(check.success) + 1, username: check.deck.user.email, size: checks.size
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success) + 1, username: check.deck.user.email, size: checks.size
+            else
+                check.destroy
             end
         end
     end
@@ -34,13 +37,25 @@ class Check < ApplicationRecord
         decks
     end
 
-    def self.check_deck(cards, positions)
-        result, cards_ids, pos_ids = 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }
+    def self.check_deck(cards, positions, user_id, deck_id)
+        result, cards_ids, pos_ids, lines, t = 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], Time.current
+        check = Check.create deck_id: deck_id, user_id: user_id, success: 0
         pos_ids.each do |pos|
             if cards_ids.include?(pos)
-                cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1] ? result += positions[pos_ids.index(pos)][1] : result += 1
+                if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
+                    result += positions[pos_ids.index(pos)][1]
+                    success = 'full'
+                else
+                    result += 1
+                    success = 'half'
+                end
+            else
+                success = 'none'
             end
+            lines.push "(#{check.id}, '#{pos}', '#{success}', '#{t}', '#{t}')"
         end
-        (result * 100) / 30
+        check.update(success: (result * 100) / 30)
+        Line.connection.execute "INSERT INTO lines (check_id, card_id, success, created_at, updated_at) VALUES #{lines.join(", ")}"
+        check
     end
 end

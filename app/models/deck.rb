@@ -4,7 +4,7 @@ class Deck < ApplicationRecord
     has_many :positions
     has_many :cards, through: :positions
 
-    has_many :checks
+    has_many :checks, dependent: :destroy
 
     validates :name, :playerClass, :user_id, :formats, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
@@ -17,7 +17,7 @@ class Deck < ApplicationRecord
         data = Deck.remove_params(params)
         deck_params, positions_params, decks = data[0..4], data[5..-1], []
         return false unless Deck.good_params?(deck_params, positions_params)
-        deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], link: deck_params[2][1], caption: deck_params[3][1], user_id: user_id
+        deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], formats: deck_params[2][1], link: deck_params[3][1], caption: deck_params[4][1], user_id: user_id
         positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i }
         decks << deck
         Deck.import decks, recursive: true

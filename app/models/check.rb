@@ -30,6 +30,7 @@ class Check < ApplicationRecord
         decks = Deck.all.includes(:positions)
         decks = decks.of_player_class(params['playerClass']) unless params['playerClass'].empty?
         decks = decks.of_format('standard') if params['formats'] == 'standard'
+        decks
     end
 
     def self.check_deck(cards, positions)

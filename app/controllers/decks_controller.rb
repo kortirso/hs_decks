@@ -9,7 +9,7 @@ class DecksController < ApplicationController
     end
 
     def show
-        
+        @positions = @deck.positions.collect_ids
     end
 
     def new

@@ -13,13 +13,14 @@
                 .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
                     - name = nil if name == 'Common'
                     - cards = @cards.select { |card| card.playerClass == name }
-                    - (0..7).each do |cost|
-                        .costs
-                            p= "Cost is #{cost}"
-                            - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
-                            - cards_with_cost.sort_by{ |card| card.name }.each do |card|
-                                p
-                                    - checks = ids.include?(card.id)
-                                    = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
-                                    = label_tag card.id, card.name, class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}#{' legendary' if card.rarity == 'Legendary' }"
+                    .inside_panel
+                        - (0..7).each do |cost|
+                            .costs
+                                p= "Mana cost - #{cost}"
+                                - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
+                                - cards_with_cost.sort_by{ |card| card.name }.each do |card|
+                                    p
+                                        - checks = ids.include?(card.id)
+                                        = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
+                                        = label_tag card.id, card.name, class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}#{' legendary' if card.rarity == 'Legendary' }"
             = submit_tag 'Save', class: 'button', 'data-turbolinks': 'false'

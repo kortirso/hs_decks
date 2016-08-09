@@ -7,27 +7,24 @@ p In addition you can select minimal success rating of decks, spesific player cl
     .columns.small-4= select_tag :formats, options_for_select(%w(standard wild))
     = submit_tag 'Check Decks', class: 'button', 'data-turbolinks': 'false'
 #checks
-    - if @checks.size > 0
-        h5 Last deck checks
-        table
-            thead
+    h5 Last deck checks
+    table
+        thead
+            tr
+                th Success
+                th Deck name
+                th Deck class
+                th Deck format
+                th Deck creator
+                th Controls
+        tbody
+            - @checks.each do |check|
                 tr
-                    th #
-                    th Success
-                    th Deck name
-                    th Deck class
-                    th Deck format
-                    th Deck creator
-                    th Controls
-            tbody
-                - @checks.each_with_index do |check, index|
-                    tr
-                        td= index + 1
-                        td= "#{check.success}%"
-                        td= check.deck.name
-                        td= check.deck.playerClass
-                        td= check.deck.formats
-                        td= check.deck.user.email
-                        td
-                            = link_to 'View Check', check_path(check), class: 'button small', 'data-turbolinks': 'false'
-                            = link_to 'View Deck', deck_path(check.deck), class: 'button small', 'data-turbolinks': 'false'
+                    td= "#{check.success}%"
+                    td= check.deck.name
+                    td= check.deck.playerClass
+                    td= check.deck.formats
+                    td= check.deck.user.email
+                    td
+                        = link_to 'View Check', check_path(check), class: 'button small', 'data-turbolinks': 'false'
+                        = link_to 'View Deck', deck_path(check.deck), class: 'button small', 'data-turbolinks': 'false'

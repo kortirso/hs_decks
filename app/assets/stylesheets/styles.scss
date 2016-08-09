@@ -49,13 +49,28 @@ body {
     &::-webkit-scrollbar-thumb {
         -webkit-border-radius: 6px;
         border-radius: 6px;
-        background: rgba(217,217,217,0.8);
+        background: #2199e8;
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     }
 }
 
 #cards_collection, #new_deck {
     .tabs-panel {
+        overflow: hidden;
+        overflow-x: scroll;
+        &::-webkit-scrollbar {
+            height: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            background: #2199e8;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
         &:before, &:after {
             content: " ";
             display: table;
@@ -63,33 +78,44 @@ body {
         &:after {
             clear: both;
         }
-        .costs {
-            float: left;
-            width: 12.5%;
-            input[type="checkbox"] {
-                position: absolute;
-                opacity: 0;
-            }
-            label {
-                font-size: 11px;
-                display: block;
-                margin: 0;
-                padding-left: 14px;
-                background-position: 0 3px;
-                &.none {
-                    background-image: image-url('uncheck.png');
-                    background-repeat: no-repeat;
+        .inside_panel {
+            width: 1600px;
+            .costs {
+                float: left;
+                width: 12.5%;
+                p:nth-of-type(1) {
+                    text-align: center;
+                    color: #FFF;
+                    background: #2199e8;
+                    padding: 5px 0;
+                    margin: 0 auto 10px;
+                    width: 90%;
                 }
-                &.single {
-                    background-image: image-url('single.png');
-                    background-repeat: no-repeat;
+                input[type="checkbox"] {
+                    position: absolute;
+                    opacity: 0;
                 }
-                &.double {
-                    background-image: image-url('double.png');
-                    background-repeat: no-repeat;
-                }
-                &.legendary {
-                    color: orange;
+                label {
+                    font-size: 15px;
+                    display: block;
+                    margin: 0;
+                    padding-left: 25px;
+                    background-position: 0 3px;
+                    &.none {
+                        background-image: image-url('uncheck.png');
+                        background-repeat: no-repeat;
+                    }
+                    &.single {
+                        background-image: image-url('single.png');
+                        background-repeat: no-repeat;
+                    }
+                    &.double {
+                        background-image: image-url('double.png');
+                        background-repeat: no-repeat;
+                    }
+                    &.legendary {
+                        color: orange;
+                    }
                 }
             }
         }
@@ -116,7 +142,7 @@ body {
     font-size: 0.8rem !important;
 }
 
-#decks {
+#decks, #deck {
     background: #FFF;
     padding: 10px;
     margin: 10px 0;
@@ -136,6 +162,24 @@ body {
             .button {
                 margin: 0 10px 0 0;
             }
+        }
+    }
+}
+
+#deck {
+    .card {
+        float: left;
+        width: 12.5%;
+        p {
+            margin: 0;
+        }
+        p:nth-of-type(2) {
+            text-align: center;
+            color: #FFF;
+            background: #2199e8;
+            padding: 5px 0;
+            margin: 0 auto 10px;
+            width: 50%;
         }
     }
 }

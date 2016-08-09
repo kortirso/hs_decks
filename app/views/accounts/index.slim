@@ -1,7 +1,7 @@
 - provide(:title, 'Account')
 .inside
     .shadow
-.row
+.row#user data={ owner: "#{current_user.id}" }
     ul#account-tabs.tabs data-tabs=''
         li.tabs-title.is-active= link_to 'General info', '#panel1', 'aria-selected' => 'true', 'data-turbolinks': 'false'
         li.tabs-title= link_to 'Your cards collection', '#panel2', 'data-turbolinks': 'false'

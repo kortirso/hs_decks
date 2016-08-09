@@ -13,11 +13,12 @@ class Check < ApplicationRecord
         Check.getting_decks(params).each do |deck|
             rating = Check.check_deck(cards_ids, deck.positions.collect_ids)
             if params['success'].empty? || !params['success'].empty? && rating >= params['success'].to_i
-                check = Check.new deck_id: deck.id, success: rating, user_id: user_id
-                checks << check
+                check = Check.create deck_id: deck.id, success: rating, user_id: user_id
+                checks.push check.success
+                sortable_checks = checks.sort.reverse
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: sortable_checks.index(check.success) + 1, username: check.deck.user.email, size: checks.size
             end
         end
-        Check.import checks
     end
 
     private

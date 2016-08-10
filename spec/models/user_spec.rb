@@ -22,7 +22,16 @@ RSpec.describe User, type: :model do
 
     context 'methods' do
         context '.deck_master?' do
+            let!(:user_1) { create :user }
+            let!(:user_2) { create :user, :deck_master }
 
+            it 'should return false if user is not deck_master' do
+                expect(user_1.deck_master?).to eq false
+            end
+
+            it 'should return true if user is deck_master' do
+                expect(user_2.deck_master?).to eq true
+            end
         end
     end
 end

@@ -15,10 +15,11 @@ class Deck < ApplicationRecord
 
     def self.build(params, user_id)
         data = Deck.remove_params(params)
-        deck_params, positions_params, decks = data[0..4], data[5..-1], []
+        deck_params, positions_params, decks = data[0..5], data[6..-1], []
         return false unless Deck.good_params?(deck_params, positions_params)
         deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], formats: deck_params[2][1], link: deck_params[3][1], caption: deck_params[4][1], user_id: user_id
-        positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i }
+        positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i if pos[1].to_i > 0 }
+        ## todo: add removing cards
         decks << deck
         Deck.import decks, recursive: true
         return true
@@ -26,7 +27,7 @@ class Deck < ApplicationRecord
 
     def refresh(params)
         data = Deck.remove_params(params)
-        deck_params, positions_params = data[0..2], data[3..-1]
+        deck_params, positions_params = data[0..3], data[4..-1]
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
         self.update name: deck_params[0][1], link: deck_params[1][1], caption: deck_params[2][1]
         self.update_positions(positions_params)
@@ -38,7 +39,13 @@ class Deck < ApplicationRecord
         cards_ids = cards.collect { |pos| pos[0] }
         old_ids = self.positions.collect_ids.collect { |pos| pos[0] }
 
-        old_ids.each { |pos| cards_ids.include?(pos) ? self.positions.find_by(card_id: pos).update(amount: cards[cards_ids.index(pos)][1]) : self.positions.find_by(card_id: pos).destroy }
+        old_ids.each do |pos|
+            if cards_ids.include?(pos) && cards[cards_ids.index(pos)][1] > 0
+                self.positions.find_by(card_id: pos).update(amount: cards[cards_ids.index(pos)][1])
+            else
+                self.positions.find_by(card_id: pos).destroy
+            end
+        end
         cards_ids.each { |pos| self.positions.create card_id: pos, amount: cards[cards_ids.index(pos)][1] unless old_ids.include?(pos) }
     end
 

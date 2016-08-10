@@ -1,40 +1,46 @@
 - provide(:title, 'Edit deck')
-.inside
+/.inside
     .shadow
 .row
-    .columns.small-12
-        #new_deck
-            h4 Deck editing
-            - classes_list = [@deck.playerClass, 'Common']
-            = form_tag({ controller: 'decks', action: 'update' }, method: 'patch') do
-                .columns.small-3= text_field_tag :name, nil, placeholder: 'Deck Name', value: @deck.name
-                .columns.small-3= text_field_tag :playerClass, nil, placeholder: 'PlayerClass', value: @deck.playerClass, disabled: true
-                .columns.small-3= text_field_tag :formats, nil, placeholder: 'Format', value: @deck.formats, disabled: true
-                .columns.small-3= text_field_tag :link, nil, placeholder: 'Link', value: @deck.link
-                .columns.small-12= text_field_tag :caption, nil, placeholder: 'Caption', value: @deck.caption
-                .clearfix
-                p
-                    = 'Cards amount in the deck - '
-                    span#card_amount= '30'
-                p Click Update button at the page's bottom to update your cards
-                ul#new-cards-tabs.tabs data-tabs=''
-                    - classes_list.each_with_index do |name, index|
-                        li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
-                            = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
-                .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
-                    - ids = @positions.collect { |elem| elem[0] }
-                    - classes_list.each_with_index do |name, index|
-                        .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
-                            - name = nil if name == 'Common'
-                            - cards = @cards.select { |card| card.playerClass == name }
-                            .inside_panel
-                                - (0..7).each do |cost|
-                                    .costs
-                                        p= "Cost is #{cost}"
-                                        - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
-                                        - cards_with_cost.sort_by{ |card| card.name }.each do |card|
-                                            p class="#{card.formats}"
-                                                - checks = ids.include?(card.id)
-                                                = check_box_tag card.id, value = "#{checks ? @positions[ids.index(card.id)][1] : 0}", checked = checks
-                                                = label_tag card.id, card.name, class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}#{' legendary' if card.rarity == 'Legendary' }"
-                    = submit_tag 'Update', class: 'button', 'data-turbolinks': 'false'
+    #new_deck
+        h4 Deck editing
+        - classes_list = [@deck.playerClass, 'Common']
+        = form_tag({ controller: 'decks', action: 'update' }, method: 'patch') do
+            .columns.small-3= text_field_tag :name, nil, placeholder: 'Deck Name', value: @deck.name
+            .columns.small-3= text_field_tag :playerClass, nil, placeholder: 'PlayerClass', value: @deck.playerClass, disabled: true
+            .columns.small-3= text_field_tag :formats, nil, placeholder: 'Format', value: @deck.formats, disabled: true
+            .columns.small-3= text_field_tag :link, nil, placeholder: 'Link', value: @deck.link
+            .columns.small-12= text_field_tag :caption, nil, placeholder: 'Caption', value: @deck.caption
+            .clearfix
+            p
+                = 'Cards amount in the deck - '
+                span#card_amount= '30'
+            p Click Update button at the page's bottom to update your cards
+            #filters
+                span
+                    strong Filters
+                span Mana cost
+                span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: 'All'
+            ul#new-cards-tabs.tabs data-tabs=''
+                - classes_list.each_with_index do |name, index|
+                    li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
+                        = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+            .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
+                - ids = @positions.collect { |elem| elem[0] }
+                - classes_list.each_with_index do |name, index|
+                    .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
+                        - name = nil if name == 'Common'
+                        - cards = @cards.select { |card| card.playerClass == name }
+                        - (0..7).each do |cost|
+                            .costs class="cost_#{cost}"
+                                p= "Mana cost - #{cost}"
+                                - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
+                                - cards_with_cost.sort_by{ |card| card.name }.each do |card|
+                                    .card class="#{card.collection.name.split(' ').join('_')}" class="#{card.rarity}" class="#{card.formats}"
+                                        .image style="background-image: url('#{card.image}');"
+                                            .card-shadow
+                                        .inner
+                                            - checks = ids.include?(card.id)
+                                            = check_box_tag card.id, value = "#{checks ? @positions[ids.index(card.id)][1] : 0}", checked = checks
+                                            = label_tag card.id, card.name, class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"
+                = submit_tag 'Update', class: 'button', 'data-turbolinks': 'false'

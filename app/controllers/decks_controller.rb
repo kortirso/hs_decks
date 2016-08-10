@@ -13,7 +13,7 @@ class DecksController < ApplicationController
     end
 
     def new
-        @cards = Card.not_heroes.to_a
+        @cards = Card.not_heroes.includes(:collection)
     end
 
     def create
@@ -25,7 +25,7 @@ class DecksController < ApplicationController
     end
 
     def edit
-        @cards = Card.for_all_classes.or(Card.not_heroes.of_player_class(@deck.playerClass)).to_a
+        @cards = Card.for_all_classes.or(Card.not_heroes.of_player_class(@deck.playerClass)).includes(:collection)
         @positions = @deck.positions.collect_ids
     end
 

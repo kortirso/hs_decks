@@ -8,25 +8,25 @@ $(function() {
         if($(this).hasClass('none')) {
             if(amount < 30) {
                 $(this).removeClass('none').addClass('single');
-                $(this).closest('p').children('input').val(1).attr('checked', true);
+                $(this).closest('div').children('input').val(1).attr('checked', true);
                 $('#card_amount').html(amount + 1);
             }
         }
         else if($(this).hasClass('single')) {
-            if(amount >= 30 || $(this).hasClass('legendary')) {
+            if(amount >= 30 || $(this).closest('.card').hasClass('Legendary')) {
                 $(this).removeClass('single').addClass('none');
-                $(this).closest('p').children('input').val(0).attr('checked', false);
+                $(this).closest('div').children('input').val(0);
                 $('#card_amount').html(amount - 1);
             }
             else {
                 $(this).removeClass('single').addClass('double');
-                $(this).closest('p').children('input').val(2);
+                $(this).closest('div').children('input').val(2);
                 $('#card_amount').html(amount + 1);
             }
         }
-        else {
+        else if($(this).hasClass('double')) {
             $(this).removeClass('double').addClass('none');
-            $(this).closest('p').children('input').val(0).attr('checked', false);
+            $(this).closest('div').children('input').val(0);
             $('#card_amount').html(amount - 2);
         }
     });
@@ -35,21 +35,21 @@ $(function() {
         e.preventDefault();
         if($(this).hasClass('none')) {
             $(this).removeClass('none').addClass('single');
-            $(this).closest('p').children('input').val(1).attr('checked', true);
+            $(this).closest('div').children('input').val(1).attr('checked', true);
         }
         else if($(this).hasClass('single')) {
-            if($(this).hasClass('legendary')) {
+            if($(this).closest('.card').hasClass('Legendary')) {
                 $(this).removeClass('single').addClass('none');
-                $(this).closest('p').children('input').val(0).attr('checked', false);
+                $(this).closest('div').children('input').val(0);
             }
             else {
                 $(this).removeClass('single').addClass('double');
-                $(this).closest('p').children('input').val(2);
+                $(this).closest('div').children('input').val(2);
             }
         }
         else {
             $(this).removeClass('double').addClass('none');
-            $(this).closest('p').children('input').val(0).attr('checked', false);
+            $(this).closest('div').children('input').val(0);
         }
     });
 
@@ -76,7 +76,25 @@ $(function() {
         $('#new-tabs-content .tabs-panel label').removeClass('single').removeClass('double').removeClass('none').addClass('none');
         $('#new-tabs-content .tabs-panel input').val(0).prop('checked', false);
         
-        if(this.value == 'standard') $('.costs p.wild').hide();
-        else $('.costs p.wild').show();
+        if(this.value == 'standard') $('.costs .wild').hide();
+        else $('.costs .wild').show();
+    });
+
+    $('#mana_cost').on('change', function() {
+        mana = this.value;
+        if(mana == '') $('.costs').show();
+        else {
+            $('.costs').hide();
+            $('.cost_' + mana).show();
+        }
+    });
+
+    $('#collection').on('change', function() {
+        collection = this.value;
+        if(collection == '') $('.card').show();
+        else {
+            $('.card').hide();
+            $('.card.' + collection.split(' ').join('_')).show();
+        }
     });
 });

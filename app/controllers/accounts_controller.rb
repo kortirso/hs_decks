@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
     before_action :get_access
 
     def index
-        @cards = Card.not_heroes.to_a
+        @cards = Card.not_heroes.includes(:collection).to_a
         @packs = current_user.packs.collect_ids
         @checks = current_user.checks.includes(:deck).order(success: :desc)
         @decks = Deck.all.includes(:user).order(playerClass: :asc)

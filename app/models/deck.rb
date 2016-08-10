@@ -1,8 +1,7 @@
 class Deck < ApplicationRecord
-    belongs_to :user
+    include Positionable
     
-    has_many :positions
-    has_many :cards, through: :positions
+    belongs_to :user
 
     has_many :checks, dependent: :destroy
 
@@ -17,14 +16,16 @@ class Deck < ApplicationRecord
         data = Deck.remove_params(params)
         deck_params, positions_params, decks = data[0..5], data[6..-1], []
         return false unless Deck.good_params?(deck_params, positions_params)
-        deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], formats: deck_params[2][1], link: deck_params[3][1], caption: deck_params[4][1], user_id: user_id
-        positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i if pos[1].to_i > 0 }
-
-        ## todo: add removing cards
-
-        decks << deck
-        Deck.import decks, recursive: true
+        deck = Deck.create name: deck_params[0][1], playerClass: deck_params[1][1], formats: deck_params[2][1], link: deck_params[3][1], caption: deck_params[4][1], user_id: user_id
+        deck.build_positions(positions_params)
         return true
+    end
+
+    def build_positions(positions_params)
+        positions, t = [], Time.current
+        positions_params.each { |pos| positions.push "(#{pos[0].to_i}, '#{self.id}', 'Deck', '#{pos[1].to_i}', '#{t}', '#{t}')" if pos[1].to_i > 0 }
+        Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, created_at, updated_at) VALUES #{positions.join(", ")}"
+        ## todo: add removing cards
     end
 
     def refresh(params)
@@ -33,9 +34,7 @@ class Deck < ApplicationRecord
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
         self.update name: deck_params[0][1], link: deck_params[1][1], caption: deck_params[2][1]
         self.update_positions(positions_params)
-
         ## todo: check all cards for format changing
-
         return true
     end
 

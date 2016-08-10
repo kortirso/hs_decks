@@ -213,13 +213,13 @@ body {
     .check {
         float: left;
         width: 33%;
-        .full {
+        .amount_2 {
             background: #2199e8;
         }
-        .half {
+        .amount_1 {
             background: yellow;
         }
-        .none {
+        .amount_0 {
             color: #BBB;
         }
     }

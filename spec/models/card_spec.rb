@@ -8,12 +8,10 @@ RSpec.describe Card, type: :model do
     it { should validate_inclusion_of(:type).in_array(%w(Hero Spell Minion Weapon)) }
     it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)).allow_nil }
     it { should validate_inclusion_of(:rarity).in_array(%w(Free Common Rare Epic Legendary)) }
-    it { should have_many :packs }
-    it { should have_many(:users).through(:packs) }
     it { should have_many :positions }
     it { should have_many(:decks).through(:positions) }
-    it { should have_many :lines }
-    it { should have_many(:checks).through(:lines) }
+    it { should have_many(:users).through(:positions) }
+    it { should have_many(:checks).through(:positions) }
     it { should validate_presence_of :formats }
     it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
 

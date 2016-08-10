@@ -8,7 +8,8 @@ $(function() {
                     $('#checks table tbody').append(this.renderMessage(data));
                 }
                 else {
-                    $('#checks table tbody tr:nth-of-type(' + data.order + ')').before(this.renderMessage(data));
+                    if(data.order == 0) $('#checks table tbody tr:nth-of-type(1)').before(this.renderMessage(data));
+                    else $('#checks table tbody tr:nth-of-type(' + data.order + ')').after(this.renderMessage(data));
                 }
             },
 

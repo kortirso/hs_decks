@@ -9,7 +9,7 @@ RSpec.describe AccountsController, type: :controller do
         context 'When user logged in' do
             sign_in_user
             let!(:cards) { create_list(:card, 2) }
-            let!(:pack) { create :pack, user: @current_user, card: cards.first }
+            let!(:position) { create :position_for_user, positionable: @current_user, card: cards.first }
             before { get :index }
 
             it 'renders account page' do
@@ -17,11 +17,11 @@ RSpec.describe AccountsController, type: :controller do
             end
 
             it 'and collects an array of cards' do
-                expect(assigns(:cards)).to match_array(cards.to_a)
+                expect(assigns(:cards)).to match_array(cards)
             end
 
             it 'and collects an array of packs with card ids' do
-                expect(assigns(:packs)).to match_array([[pack.card_id, pack.amount]])
+                expect(assigns(:packs)).to match_array([[position.card_id, position.amount]])
             end
         end
     end

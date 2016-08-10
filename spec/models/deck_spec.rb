@@ -21,6 +21,10 @@ RSpec.describe Deck, type: :model do
 
         end
 
+        context '.build_positions' do
+
+        end
+
         context '.refresh' do
 
         end

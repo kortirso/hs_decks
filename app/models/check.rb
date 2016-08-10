@@ -1,6 +1,5 @@
 class Check < ApplicationRecord
-    has_many :lines, dependent: :destroy
-    has_many :cards, through: :lines
+    include Positionable
 
     belongs_to :user
     belongs_to :deck
@@ -12,12 +11,12 @@ class Check < ApplicationRecord
     def self.build(user_id, params)
         params, user, checks = Check.getting_params(params), User.find(user_id), []
         user.checks.destroy_all
-        cards_ids = user.packs.collect_ids
+        cards_ids = user.positions.collect_ids
         Check.getting_decks(params).each do |deck|
             check = Check.check_deck(cards_ids, deck.positions.collect_ids, user_id, deck.id)
             if params['success'].empty? || !params['success'].empty? && check.success >= params['success'].to_i
                 checks.push check.success
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success) + 1, username: check.deck.user.email, size: checks.size
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.email, size: checks.size
             else
                 check.destroy
             end
@@ -44,18 +43,18 @@ class Check < ApplicationRecord
             if cards_ids.include?(pos)
                 if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
                     result += positions[pos_ids.index(pos)][1]
-                    success = 'full'
+                    success = 2
                 else
                     result += 1
-                    success = 'half'
+                    success = 1
                 end
             else
-                success = 'none'
+                success = 0
             end
-            lines.push "(#{check.id}, '#{pos}', '#{success}', '#{t}', '#{t}')"
+            lines.push "('#{pos}', #{check.id}, 'Check', '#{success}', '#{t}', '#{t}')"
         end
         check.update(success: (result * 100) / 30)
-        Line.connection.execute "INSERT INTO lines (check_id, card_id, success, created_at, updated_at) VALUES #{lines.join(", ")}"
+        Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, created_at, updated_at) VALUES #{lines.join(", ")}"
         check
     end
 end

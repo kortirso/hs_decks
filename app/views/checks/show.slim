@@ -19,7 +19,7 @@
         .check
             h5 Deck with only your cards
             - @check.cards.order(cost: :asc, name: :asc).each do |card|
-                p class="#{@lines.find_by(card_id: card.id).success}"
+                p class="amount_#{@lines.find_by(card_id: card.id).amount}"
                     = card.cost
                     = card.name
         .check

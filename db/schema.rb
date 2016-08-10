@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809143706) do
+ActiveRecord::Schema.define(version: 20160810160020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,34 +59,15 @@ ActiveRecord::Schema.define(version: 20160809143706) do
     t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
   end
 
-  create_table "lines", force: :cascade do |t|
-    t.integer  "check_id"
-    t.integer  "card_id"
-    t.string   "success",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["card_id"], name: "index_lines_on_card_id", using: :btree
-    t.index ["check_id"], name: "index_lines_on_check_id", using: :btree
-  end
-
-  create_table "packs", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "card_id"
-    t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["card_id"], name: "index_packs_on_card_id", using: :btree
-    t.index ["user_id"], name: "index_packs_on_user_id", using: :btree
-  end
-
   create_table "positions", force: :cascade do |t|
-    t.integer  "deck_id"
+    t.integer  "amount",            null: false
+    t.integer  "positionable_id"
+    t.string   "positionable_type"
     t.integer  "card_id"
-    t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["card_id"], name: "index_positions_on_card_id", using: :btree
-    t.index ["deck_id"], name: "index_positions_on_deck_id", using: :btree
+    t.index ["positionable_id", "positionable_type"], name: "index_positions_on_positionable_id_and_positionable_type", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

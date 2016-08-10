@@ -2,8 +2,8 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :email }
     it { should validate_presence_of :password }
     it { should validate_presence_of :role }
-    it { should have_many :packs }
-    it { should have_many(:cards).through(:packs) }
+    it { should have_many :positions }
+    it { should have_many(:cards).through(:positions) }
     it { should have_many :decks }
     it { should have_many :checks }
     it { should validate_inclusion_of(:role).in_array(%w(user deck_master)) }
@@ -32,6 +32,18 @@ RSpec.describe User, type: :model do
             it 'should return true if user is deck_master' do
                 expect(user_2.deck_master?).to eq true
             end
+        end
+
+        context '.build_collection' do
+
+        end
+
+        context '.update_collection' do
+
+        end
+        
+        context '.adding_to_collection' do
+
         end
     end
 end

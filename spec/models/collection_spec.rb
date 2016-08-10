@@ -13,7 +13,16 @@ RSpec.describe Collection, type: :model do
 
     context 'Methods' do
         context '.wild_format?' do
-            
+            let!(:collection_1) { create :collection }
+            let!(:collection_2) { create :collection, :wild_collection }
+
+            it 'should return false if card is not wild' do
+                expect(collection_1.wild_format?).to eq false
+            end
+
+            it 'should return true if card is wild' do
+                expect(collection_2.wild_format?).to eq true
+            end
         end
     end
 end

@@ -29,7 +29,11 @@ class Card < ApplicationRecord
         return cost < 7 ? where(cost: cost) : where('cost >= 7')
     end
 
+    def wild_format?
+        self.formats == 'wild'
+    end
+
     def self.check_cards_format
-        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.each { |card| card.update(formats: 'wild') } }
+        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.each { |card| card.update(formats: 'wild') unless card.wild_format? } }
     end
 end

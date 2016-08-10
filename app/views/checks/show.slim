@@ -1,27 +1,26 @@
 - provide(:title, 'Deck check')
-.inside
+/.inside
     .shadow
 .row
-    .columns.small-12
-        #check
-            = link_to 'Back', root_path, class: 'button', 'data-turbolinks': 'false'
-            h4 At this page you can see checking your cards with deck
-            p= "Deck name - #{@deck.name}"
-            p= "Deck success rating - #{@check.success}%"
-            p= "Deck creator - #{@deck.user.email}"
-            p= "Deck format - #{@deck.formats}"
-            p= "Deck caption - #{@deck.caption}"
-            .check
-                h5 Initial deck
-                - @deck.cards.order(cost: :asc, name: :asc).each do |card|
-                    p
-                        = card.cost
-                        = card.name
-            .check
-                h5 Deck with only your cards
-                - @check.cards.order(cost: :asc, name: :asc).each do |card|
-                    p class="#{@lines.find_by(card_id: card.id).success}"
-                        = card.cost
-                        = card.name
-            .check
-                h5 Deck with substitution cards
+    #check
+        = link_to 'Back', root_path, class: 'button', 'data-turbolinks': 'false'
+        h4 At this page you can see checking your cards with deck
+        p= "Deck name - #{@deck.name}"
+        p= "Deck success rating - #{@check.success}%"
+        p= "Deck creator - #{@deck.user.email}"
+        p= "Deck format - #{@deck.formats}"
+        p= "Deck caption - #{@deck.caption}"
+        .check
+            h5 Initial deck
+            - @deck.cards.order(cost: :asc, name: :asc).each do |card|
+                p
+                    = card.cost
+                    = card.name
+        .check
+            h5 Deck with only your cards
+            - @check.cards.order(cost: :asc, name: :asc).each do |card|
+                p class="#{@lines.find_by(card_id: card.id).success}"
+                    = card.cost
+                    = card.name
+        .check
+            h5 Deck with substitution cards

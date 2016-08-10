@@ -1,16 +1,15 @@
 - provide(:title, 'Decks')
-.inside
+/.inside
     .shadow
 .row
-    .columns.small-12
-        #decks
-            h4 At this page you can view and edit all your decks and create new one.
-            p= link_to 'New Deck', new_deck_path, class: 'button', 'data-turbolinks': 'false'
-            - @decks.each do |deck|
-                .deck
-                    p= "Deck's name - #{deck.name}"
-                    p= "Player Class - #{deck.playerClass}"
-                    p
-                        = link_to 'View', deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
-                        = link_to 'Edit', edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
-                        = link_to 'Delete', deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'
+    #decks
+        h4 At this page you can view and edit all your decks and create new one.
+        p= link_to 'New Deck', new_deck_path, class: 'button', 'data-turbolinks': 'false'
+        - @decks.each do |deck|
+            .deck
+                p= "Deck's name - #{deck.name}"
+                p= "Player Class - #{deck.playerClass}"
+                p
+                    = link_to 'View', deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                    = link_to 'Edit', edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                    = link_to 'Delete', deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'

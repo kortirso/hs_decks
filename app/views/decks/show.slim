@@ -1,17 +1,16 @@
 - provide(:title, 'Deck')
-.inside
+/.inside
     .shadow
 .row
-    .columns.small-12
-        #deck
-            = link_to 'Back', root_path, class: 'button', 'data-turbolinks': 'false'
-            h4 At this page you can see spesific deck.
-            p= "Deck name - #{@deck.name}"
-            p= "Deck creator - #{@deck.user.email}"
-            p= "Deck format - #{@deck.formats}"
-            p= "Deck caption - #{@deck.caption}"
-            - positions_ids = @positions.collect { |p| p[0] }
-            - @deck.cards.order(cost: :asc).each do |card|
-                .card
-                    p= image_tag card.image
-                    p= @positions[positions_ids.index card.id][1]
+    #deck
+        = link_to 'Back', root_path, class: 'button', 'data-turbolinks': 'false'
+        h4 At this page you can see spesific deck.
+        p= "Deck name - #{@deck.name}"
+        p= "Deck creator - #{@deck.user.email}"
+        p= "Deck format - #{@deck.formats}"
+        p= "Deck caption - #{@deck.caption}"
+        - positions_ids = @positions.collect { |p| p[0] }
+        - @deck.cards.order(cost: :asc).each do |card|
+            .card
+                p= image_tag card.image
+                p= @positions[positions_ids.index card.id][1]

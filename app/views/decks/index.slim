@@ -4,7 +4,9 @@
 .row
     #decks
         h4 At this page you can view and edit all your decks and create new one.
-        p= link_to 'New Deck', new_deck_path, class: 'button', 'data-turbolinks': 'false'
+        p
+            = link_to 'New Deck', new_deck_path, class: 'button', 'data-turbolinks': 'false'
+            = link_to 'Main Page', root_path, class: 'button', 'data-turbolinks': 'false'
         - @decks.each do |deck|
             .deck
                 p= "Deck's name - #{deck.name}"

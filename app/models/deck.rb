@@ -19,7 +19,9 @@ class Deck < ApplicationRecord
         return false unless Deck.good_params?(deck_params, positions_params)
         deck = Deck.new name: deck_params[0][1], playerClass: deck_params[1][1], formats: deck_params[2][1], link: deck_params[3][1], caption: deck_params[4][1], user_id: user_id
         positions_params.each { |pos| deck.positions.build card_id: pos[0].to_i, amount: pos[1].to_i if pos[1].to_i > 0 }
+
         ## todo: add removing cards
+
         decks << deck
         Deck.import decks, recursive: true
         return true
@@ -31,6 +33,9 @@ class Deck < ApplicationRecord
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
         self.update name: deck_params[0][1], link: deck_params[1][1], caption: deck_params[2][1]
         self.update_positions(positions_params)
+
+        ## todo: check all cards for format changing
+
         return true
     end
 
@@ -70,6 +75,7 @@ class Deck < ApplicationRecord
         return false if Deck.check_30_cards(positions_params)
         return false if Deck.check_dublicates(positions_params)
         return false if Deck.check_cards_class(positions_params, playerClass.nil? ? deck_params[1][1] : playerClass)
+        ## todo: check card format
         return true
     end
 
@@ -90,7 +96,7 @@ class Deck < ApplicationRecord
 
     def self.check_cards_class(cards, playerClass)
         ids = cards.collect { |pos| pos[0].strip.to_i }
-        allowed_cards_ids = Card.for_all_classes.or(Card.not_heroes.of_player_class(playerClass)).to_a.collect { |x| x.id }
+        allowed_cards_ids = Card.for_all_classes.or(Card.not_heroes.of_player_class(playerClass)).collect { |x| x.id }
         errors = 0
         ids.each { |pos| errors += 1 unless allowed_cards_ids.include? pos }
         errors != 0

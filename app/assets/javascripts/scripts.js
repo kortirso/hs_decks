@@ -68,13 +68,13 @@ $(function() {
         $('#new-tabs-content #' + $('#new-cards-tabs li.' + this.value + ' a').attr('aria-controls')).attr('aria-hidden', false).addClass('is-active');
 
         $('#new-tabs-content .tabs-panel label').removeClass('single').removeClass('double').removeClass('none').addClass('none');
-        $('#new-tabs-content .tabs-panel input').val(0).prop('checked', false);
+        $('#new-tabs-content .tabs-panel input').val(0);
     });
 
     $('select#formats').on('change', function() {
         $('#card_amount').html('0');
         $('#new-tabs-content .tabs-panel label').removeClass('single').removeClass('double').removeClass('none').addClass('none');
-        $('#new-tabs-content .tabs-panel input').val(0).prop('checked', false);
+        $('#new-tabs-content .tabs-panel input').val(0);
         
         if(this.value == 'standard') $('.costs .wild').hide();
         else $('.costs .wild').show();
@@ -96,5 +96,10 @@ $(function() {
             $('.card').hide();
             $('.card.' + collection.split(' ').join('_')).show();
         }
+    });
+
+    $('#free_existed').on('click', function() {
+        $('.card.Free input').val(2).prop('checked', true);
+        $('.card.Free label').addClass('double');
     });
 });

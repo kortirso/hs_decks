@@ -140,4 +140,64 @@ RSpec.describe DecksController, type: :controller do
             post :create, params: {}
         end
     end
+
+    describe 'GET #edit' do
+        it_behaves_like 'Check access'
+
+        context 'When user logged in' do
+            let!(:deck) { create :deck }
+            sign_in_user
+            it_behaves_like 'Check role'
+
+            it 'should render 404 if deck does not exist' do
+                get :edit, params: { id: 1 }
+
+                expect(response).to render_template 'layouts/404'
+            end
+
+            it 'should render 404 if deck does not belong to user' do
+                get :edit, params: { id: deck.id }
+
+                expect(response).to render_template 'layouts/404'
+            end
+
+            context 'if user is deck master and deck belongs to him' do
+                let!(:users_deck) { create :deck, user: @current_user }
+                let!(:card_1) { create :card, playerClass: users_deck.playerClass }
+                let!(:card_2) { create :card, playerClass: nil }
+                let!(:card_3) { create :card, playerClass: 'Priest' }
+                let!(:position) { create :position_for_deck, positionable: users_deck, card: card_1 }
+                before do
+                    @current_user.update(role: 'deck_master')
+                    get :edit, params: { id: users_deck.id }
+                end
+
+                it 'assigns the requested deck to @deck' do
+                    expect(assigns(:deck)).to eq users_deck
+                end
+
+                it 'and assigns cards available for playerClass to @cards' do
+                    expect(assigns(:cards).size).to eq 2
+                    expect(assigns(:cards).first).to eq card_1
+                    expect(assigns(:cards).last).to eq card_2
+                end
+
+                it 'and assigns positions card_id and amount to @positions' do
+                    expect(assigns(:positions)).to eq [[position.card_id, position.amount]]
+                end
+
+                it 'and renders edit deck page' do
+                    expect(response).to render_template :edit
+                end
+            end
+        end
+
+        def do_request
+            get :edit, params: { id: 1 }
+        end
+
+        def do_request_for_role
+            get :edit, params: { id: 1 }
+        end
+    end
 end

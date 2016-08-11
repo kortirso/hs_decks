@@ -44,4 +44,3 @@
                                             = check_box_tag card.id, value = "#{checks ? @positions[ids.index(card.id)][1] : 0}", checked = checks
                                             = label_tag card.id, card.name, class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"
                 = submit_tag 'Update', class: 'button', 'data-turbolinks': 'false'
-                = link_to 'Back', decks_path, class: 'button', 'data-turbolinks': 'false'

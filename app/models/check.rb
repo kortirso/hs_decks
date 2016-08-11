@@ -40,6 +40,7 @@ class Check < ApplicationRecord
         result, cards_ids, pos_ids, lines, t = 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], Time.current
         check = Check.create deck_id: deck_id, user_id: user_id, success: 0
         pos_ids.each do |pos|
+            success = 0
             if cards_ids.include?(pos)
                 if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
                     result += positions[pos_ids.index(pos)][1]
@@ -48,8 +49,6 @@ class Check < ApplicationRecord
                     result += 1
                     success = 1
                 end
-            else
-                success = 0
             end
             lines.push "('#{pos}', #{check.id}, 'Check', '#{success}', '#{t}', '#{t}')"
         end

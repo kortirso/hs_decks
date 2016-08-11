@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
     def build_collection(params)
         old = self.positions.collect_ids
-        cards = Deck.remove_params(params)[0].map { |elem| elem.map { |x| x.to_i } }
+        cards = Deck.remove_params(params)[1].map { |elem| elem.map { |x| x.to_i } }
         if cards.size > 0
             cards_ids = cards.collect { |i| i[0] }
             old_ids = old.collect { |i| i[0] }

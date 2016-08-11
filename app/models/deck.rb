@@ -79,6 +79,7 @@ class Deck < ApplicationRecord
         return false if Deck.check_dublicates(positions_params)
         return false if Deck.check_cards_class(positions_params, playerClass.nil? ? deck_params['playerClass'] : playerClass)
         ## todo: check card format
+        ## todo: check 1 legendary
         return true
     end
 

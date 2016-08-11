@@ -3,24 +3,34 @@
     .shadow
 .row
     #check
-        = link_to 'Back', root_path, class: 'button', 'data-turbolinks': 'false'
-        h4 At this page you can see checking your cards with deck
-        p= "Deck name - #{@deck.name}"
-        p= "Deck success rating - #{@check.success}%"
-        p= "Deck creator - #{@deck.user.email}"
-        p= "Deck format - #{@deck.formats}"
-        p= "Deck caption - #{@deck.caption}"
+        h4
+            = "At this page you can see checking your cards with deck '#{@deck.name}' from #{@deck.user.email}"
+        .info_block
+            p= "Deck success rating - #{@check.success}%"
+            p= "Deck format - #{@deck.formats}"
+            p= "Deck caption - #{@deck.caption}"
         .check
-            h5 Initial deck
+            h5 Expert deck
+            - deck_ids = @positions.collect { |elem| elem[0] }
             - @deck.cards.order(cost: :asc, name: :asc).each do |card|
-                p
-                    = card.cost
-                    = card.name
+                .card class="#{card.rarity}"
+                    .image style="background-image: url('#{card.image}');"
+                        .card-shadow
+                    .inner
+                        .lab class="#{@positions[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'}"
+                            = card.name
         .check
-            h5 Deck with only your cards
+            h5 Deck with your cards
+            - check_ids = @lines.collect { |elem| elem[0] }
             - @check.cards.order(cost: :asc, name: :asc).each do |card|
-                p class="amount_#{@lines.find_by(card_id: card.id).amount}"
-                    = card.cost
-                    = card.name
+                - amount = @lines[check_ids.index(card.id)][1]
+                - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
+                .card class="#{card.rarity}" class="#{card_class}"
+                    .image style="background-image: url('#{card.image}');"
+                        .card-shadow
+                    .inner
+                        - card_class = 'single' if @positions[deck_ids.index(card.id)][1] == 1 && card_class == 'double'
+                        .lab class="#{card_class}"
+                            = card.name
         .check
-            h5 Deck with substitution cards
+            h5 Deck with substitutions

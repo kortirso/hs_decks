@@ -5,7 +5,8 @@ class ChecksController < ApplicationController
 
     def show
         @deck = @check.deck
-        @lines = @check.positions
+        @positions = @deck.positions.collect_ids
+        @lines = @check.positions.collect_ids
     end
 
     def create

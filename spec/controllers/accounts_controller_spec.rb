@@ -10,19 +10,19 @@ RSpec.describe AccountsController, type: :controller do
             let!(:checks) { create_list(:check, 2, user: @current_user, deck: decks.first) }
             before { get :index }
 
-            it 'collects an array of cards' do
+            it 'collects an array of cards in @cards' do
                 expect(assigns(:cards)).to match_array(cards)
             end
 
-            it 'and collects an array of packs with card ids' do
+            it 'and collects an array of packs with card ids in @packs' do
                 expect(assigns(:packs)).to match_array([[position.card_id, position.amount]])
             end
 
-            it 'and collects an array of checks' do
+            it 'and collects an array of checks in @checks' do
                 expect(assigns(:checks)).to match_array(checks)
             end
 
-            it 'and collects an array of expert decks' do
+            it 'and assigns the requested decks to @decks' do
                 expect(assigns(:decks)).to eq decks
             end
 

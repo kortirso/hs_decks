@@ -13,12 +13,12 @@ RSpec.describe DecksController, type: :controller do
                     get :index
                 end
 
-                it 'renders decks page' do
-                    expect(response).to render_template :index
+                it 'collects an array of decks in @decks' do
+                    expect(assigns(:decks)).to match_array(decks)
                 end
 
-                it 'and collects an array of decks' do
-                    expect(assigns(:decks)).to match_array(decks)
+                it 'and renders decks page' do
+                    expect(response).to render_template :index
                 end
             end
         end
@@ -39,7 +39,6 @@ RSpec.describe DecksController, type: :controller do
             sign_in_user
 
             it 'should render 404 if deck does not exist' do
-                @current_user.update(role: 'deck_master')
                 get :show, params: { id: 1 }
 
                 expect(response).to render_template 'layouts/404'

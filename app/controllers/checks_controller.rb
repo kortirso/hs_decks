@@ -10,6 +10,7 @@ class ChecksController < ApplicationController
 
     def create
         Check.build(current_user.id, params)
+        head :ok
     end
 
     private

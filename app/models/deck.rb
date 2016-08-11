@@ -14,9 +14,9 @@ class Deck < ApplicationRecord
 
     def self.build(params, user_id)
         data = Deck.remove_params(params)
-        deck_params, positions_params, decks = data[0..5], data[6..-1], []
+        deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params)
-        deck = Deck.create name: deck_params[0][1], playerClass: deck_params[1][1], formats: deck_params[2][1], link: deck_params[3][1], caption: deck_params[4][1], user_id: user_id
+        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], user_id: user_id
         deck.build_positions(positions_params)
         return true
     end
@@ -30,9 +30,9 @@ class Deck < ApplicationRecord
 
     def refresh(params)
         data = Deck.remove_params(params)
-        deck_params, positions_params = data[0..3], data[4..-1]
+        deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
-        self.update name: deck_params[0][1], link: deck_params[1][1], caption: deck_params[2][1]
+        self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption']
         self.update_positions(positions_params)
         ## todo: check all cards for format changing
         return true
@@ -66,20 +66,24 @@ class Deck < ApplicationRecord
     private
 
     def self.remove_params(params)
-        return params.permit!.to_h.to_a.delete_if { |elem| elem[0] == 'utf8' || elem[0] == 'commit' || elem[0] == 'authenticity_token' || elem[0] == 'controller' || elem[0] == 'action' || elem[0] == 'id' || elem[0] == '_method' }
+        data = params.permit!.to_h.to_a.delete_if { |elem| elem[0] == 'utf8' || elem[0] == 'commit' || elem[0] == 'authenticity_token' || elem[0] == 'controller' || elem[0] == 'action' || elem[0] == 'id' || elem[0] == '_method' || elem[0] == 'mana_cost' }
+        deck_params, positions_params = [], []
+        data.each { |d| d[0] == 'name' || d[0] == 'playerClass' || d[0] == 'formats' || d[0] == 'link' || d[0] == 'caption' || d[0] == 'success' ? deck_params.push(d) : positions_params.push(d) }
+        return [deck_params, positions_params]
     end
 
     def self.good_params?(deck_params, positions_params, playerClass = nil)
+        return false if deck_params.size != 3 && deck_params.size != 5 || positions_params.size == 0
         return false if Deck.check_deck_params(deck_params)
         return false if Deck.check_30_cards(positions_params)
         return false if Deck.check_dublicates(positions_params)
-        return false if Deck.check_cards_class(positions_params, playerClass.nil? ? deck_params[1][1] : playerClass)
+        return false if Deck.check_cards_class(positions_params, playerClass.nil? ? deck_params['playerClass'] : playerClass)
         ## todo: check card format
         return true
     end
 
     def self.check_deck_params(deck)
-        deck[0][1].empty? 
+        deck['name'].empty? || deck['playerClass'].empty? || deck['formats'].empty?
     end
 
     def self.check_30_cards(cards)

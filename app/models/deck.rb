@@ -74,7 +74,7 @@ class Deck < ApplicationRecord
 
     def self.good_params?(deck_params, positions_params, playerClass = nil)
         return false if deck_params.size != 3 && deck_params.size != 5 || positions_params.size == 0
-        return false if Deck.check_deck_params(deck_params)
+        return false if Deck.check_deck_params(deck_params, playerClass.nil? ? 1 : 0)
         return false if Deck.check_30_cards(positions_params)
         return false if Deck.check_dublicates(positions_params)
         return false if Deck.check_cards_class(positions_params, playerClass.nil? ? deck_params['playerClass'] : playerClass)
@@ -82,8 +82,12 @@ class Deck < ApplicationRecord
         return true
     end
 
-    def self.check_deck_params(deck)
-        deck['name'].empty? || deck['playerClass'].empty? || deck['formats'].empty?
+    def self.check_deck_params(deck, met)
+        if met == 1
+            return deck['name'].empty? || deck['playerClass'].empty? || deck['formats'].empty?
+        else
+            return deck['name'].empty?
+        end
     end
 
     def self.check_30_cards(cards)

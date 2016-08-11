@@ -200,4 +200,64 @@ RSpec.describe DecksController, type: :controller do
             get :edit, params: { id: 1 }
         end
     end
+
+    describe 'POST #update' do
+        it_behaves_like 'Check access'
+
+        context 'When user logged in' do
+            let!(:deck) { create :deck }
+            sign_in_user
+            it_behaves_like 'Check role'
+
+            it 'should render 404 if deck does not exist' do
+                post :update, params: { id: 1 }
+
+                expect(response).to render_template 'layouts/404'
+            end
+
+            it 'should render 404 if deck does not belong to user' do
+                post :update, params: { id: deck.id }
+
+                expect(response).to render_template 'layouts/404'
+            end
+
+            context 'if user is deck master' do
+                let!(:users_deck) { create :deck, user: @current_user }
+                let!(:cards) { create_list(:card, 15) }
+                before { @current_user.update(role: 'deck_master') }
+
+                it 'assigns the requested deck to @deck' do
+                    post :update, params: { id: users_deck.id }
+
+                    expect(assigns(:deck)).to eq users_deck
+                end
+
+                it 'and should call Decks refresh method on @deck' do
+                    expect_any_instance_of(Deck).to receive(:refresh)
+
+                    post :update, params: { id: users_deck.id }
+                end
+
+                it 'should redirect to decks_path if Deck.build returns true' do
+                    post :update, params: { id: users_deck.id, name: 'Updated deck', link: '', caption: '', "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}
+
+                    expect(response).to redirect_to decks_path
+                end
+
+                it 'should redirect to new_deck_path if Deck.build returns false' do
+                    post :update, params: { id: users_deck.id }
+
+                    expect(response).to redirect_to edit_deck_path(users_deck)
+                end
+            end
+        end
+
+        def do_request
+            post :update, params: { id: 1 }
+        end
+
+        def do_request_for_role
+            post :update, params: { id: 1 }
+        end
+    end
 end

@@ -10,5 +10,6 @@ class AccountsController < ApplicationController
 
     def create
         current_user.build_collection(params)
+        head :ok
     end
 end

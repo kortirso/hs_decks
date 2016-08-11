@@ -16,10 +16,12 @@ class User < ApplicationRecord
     def build_collection(params)
         old = self.positions.collect_ids
         cards = Deck.remove_params(params).map { |elem| elem.map { |x| x.to_i } }
-        cards_ids = cards.collect { |i| i[0] }
-        old_ids = old.collect { |i| i[0] }
-        self.update_collection(old_ids, cards_ids, cards, old)
-        self.adding_to_collection(old_ids, cards_ids, cards)
+        if cards.size > 0
+            cards_ids = cards.collect { |i| i[0] }
+            old_ids = old.collect { |i| i[0] }
+            self.update_collection(old_ids, cards_ids, cards, old)
+            self.adding_to_collection(old_ids, cards_ids, cards)
+        end
     end
 
     def update_collection(old_ids, cards_ids, cards, old)

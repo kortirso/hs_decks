@@ -1,22 +1,22 @@
-h4 Current cards analyzer
-p At this page you can start analyze your cards and look on best decks for you
-p In addition you can select minimal success rating of decks, spesific player class and deck format.
+h4= t('general.tabs_4.head')
+p= t('general.tabs_4.p_1')
+p= t('general.tabs_4.p_2')
 = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
     .columns.small-4= text_field_tag :success, nil, placeholder: 'Minimal success rating'
     .columns.small-4= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)), prompt: 'All or spesific class'
     .columns.small-4= select_tag :formats, options_for_select(%w(standard wild))
-    = submit_tag 'Check Decks', class: 'button', 'data-turbolinks': 'false'
+    = submit_tag t('buttons.check_decks'), class: 'button', 'data-turbolinks': 'false'
 #checks
-    h5 Last deck checks
+    h5= t('general.tabs_4.last_checks')
     table
         thead
             tr
-                th Success
-                th Deck name
-                th Deck class
-                th Deck format
-                th Deck creator
-                th Controls
+                th= t('general.tabs_4.success')
+                th= t('general.tabs_3.name')
+                th= t('general.tabs_3.class')
+                th= t('general.tabs_3.format')
+                th= t('general.tabs_3.expert')
+                th
         tbody
             - @checks.each do |check|
                 tr
@@ -26,5 +26,5 @@ p In addition you can select minimal success rating of decks, spesific player cl
                     td= check.deck.formats
                     td= check.deck.user.email
                     td
-                        = link_to 'View Check', check_path(check), class: 'button small', 'data-turbolinks': 'false'
-                        = link_to 'View Deck', deck_path(check.deck), class: 'button small', 'data-turbolinks': 'false'
+                        = link_to t('buttons.view_check'), check_path(check), class: 'button small', 'data-turbolinks': 'false'
+                        = link_to t('buttons.view_deck'), deck_path(check.deck), class: 'button small', 'data-turbolinks': 'false'

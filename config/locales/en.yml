@@ -1,2 +1,65 @@
 en:
-  hello: "Hello world"
+  buttons:
+    save: 'Save'
+    update: 'Update'
+    set_free: 'Set all free cards as existed'
+    view_deck: 'View Deck'
+    view_check: 'View Check'
+    view: 'View'
+    edit: 'Edit'
+    delete: 'Delete'
+    new_deck: 'New Deck'
+    main_page: 'Main Page'
+    check_decks: 'Check Decks'
+  auth:
+    auth: 'Authorization'
+    reg: 'Registration'
+    pass: 'Password'
+    confirm: 'Password confirmation'
+    enter: 'Sign In'
+  general:
+    tabs_1:
+      tab: 'General info'
+      head: 'This is your personal page with cards and decks.'
+      first_p: "At 'Cards Collection' page you can choose cards in your library."
+      second_p: "At 'Deck Analyzer' page you can check existed decks and choose deck better for you."
+      master_header: 'Ohh! You are deck master'
+      p_1: 'You can '
+      p_2: 'visit'
+      p_3: ' decks page, build new one or edit your old deck.'
+    tabs_2:
+      tab: 'Your cards collection'
+      head: 'At this section you can choose cards from your collection.'
+      p_1: 'Click to card to change amount from 0 to 2 and then click to Save.'
+      filters: 'Filters'
+      mana_cost: 'Mana cost'
+      collection: 'Collection'
+    tabs_3:
+      tab: "Expert's decks"
+      head: 'All decks existed in system.'
+      p_1: 'At this page you can view all decks of our experts.'
+      name: 'Deck name'
+      class: 'Deck class'
+      format: 'Deck format'
+      expert: 'Deck expert'
+    tabs_4:
+      tab: 'Decks analyzer'
+      head: 'Current cards analyzer'
+      p_1: 'At this page you can start analyze your cards and look on best decks for you.'
+      p_2: 'In addition you can select minimal success rating of decks, spesific player class and deck format.'
+      last_checks: 'Last deck checks'
+      success: 'Success'
+  check:
+    h4_1: 'At this page you can see checking your cards with deck '
+    h4_2: ' from expert '
+    p_1: 'Deck success rating - '
+    p_2: 'Deck format - '
+    p_3: 'Deck caption - '
+    h5_1: 'Expert deck'
+    h5_2: 'Deck with your cards'
+    h5_3: 'Deck with substitutions'
+  deck:
+    h4_1: 'At this page you can see deck '
+    h4_2: ' from expert '
+    p_1: 'Deck format - '
+    p_2: 'Deck caption - '

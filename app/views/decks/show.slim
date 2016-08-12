@@ -3,10 +3,18 @@
     .shadow
 .row
     #deck
-        h4= "At this page you can see deck '#{@deck.name}' from #{@deck.user.email}"
+        h4
+            = t('deck.h4_1')
+            = @deck.name
+            = t('deck.h4_2')
+            =@deck.user.email
         .info_block
-            p= "Deck format - #{@deck.formats}"
-            p= "Deck caption - #{@deck.caption}"
+            p
+                = t('deck.p_1')
+                = @deck.formats
+            p
+                = t('deck.p_2')
+                = @deck.caption
         - positions_ids = @positions.collect { |p| p[0] }
         - @deck.cards.order(cost: :asc, name: :asc).each do |card|
             .card

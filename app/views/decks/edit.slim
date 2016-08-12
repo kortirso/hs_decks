@@ -21,7 +21,7 @@
                                 - amount = @positions[ids.index(card.id)][1]
                                 = check_box_tag card.id, value = "#{amount}", checked = true
                                 = label_tag card.id, card.name, class: "#{amount == 1 ? 'single' : 'double'}"
-                = submit_tag 'Update', class: 'button', 'data-turbolinks': 'false'
+                = submit_tag t('buttons.update'), class: 'button', 'data-turbolinks': 'false'
             .right_side
                 p Click to cards to change amount from 0 to 2
                 .columns.small-3= text_field_tag :name, nil, placeholder: 'Deck Name', value: @deck.name

@@ -8,24 +8,24 @@
                 .row
                     = simple_form_for(User.new, as: :user, url: session_path(:user)) do |f|
                         .small-12.columns
-                            p= 'Авторизация'
+                            p= t('auth.auth')
                         .small-12.columns
                             = f.input :email, autofocus: true, label: false, placeholder: 'Email'
                         .small-8.columns
-                            = f.input :password, autocomplete: 'off', label: false, placeholder: 'Пароль'
+                            = f.input :password, autocomplete: 'off', label: false, placeholder: t('auth.pass')
                         .small-4.columns
-                            = f.button :submit, 'Войти', class: 'button', id: 'authorization'
+                            = f.button :submit, t('auth.enter'), class: 'button', id: 'authorization'
         .small-12.small-6.small-offset-3.medium-4.medium-offset-8.columns
             .block#signup
                 .row
                     = simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f|
                         .small-12.columns
-                            p= 'Регистрация'
+                            p= t('auth.reg')
                         .small-12.columns
                             = f.input :email, required: true, label: false, placeholder: 'Email'
                         .small-12.columns
-                            = f.input :password, required: true, label: false, placeholder: 'Пароль'
+                            = f.input :password, required: true, label: false, placeholder: t('auth.pass')
                         .small-12.columns
-                            = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: 'Подтверждение пароля'
+                            = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: t('auth.confirm')
                         .small-12.small-5.small-offset-7.columns
-                            =  f.button :submit, 'Регистрация', class: 'button', id: 'registration'
+                            =  f.button :submit, t('auth.reg'), class: 'button', id: 'registration'

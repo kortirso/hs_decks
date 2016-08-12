@@ -5,13 +5,12 @@
     #decks
         h4 At this page you can view and edit all your decks and create new one.
         p
-            = link_to 'New Deck', new_deck_path, class: 'button', 'data-turbolinks': 'false'
-            = link_to 'Main Page', root_path, class: 'button', 'data-turbolinks': 'false'
+            = link_to t('buttons.new_deck'), new_deck_path, class: 'button', 'data-turbolinks': 'false'
+            = link_to t('buttons.main_page'), root_path, class: 'button', 'data-turbolinks': 'false'
         - @decks.each do |deck|
             .deck
                 p= "Deck's name - #{deck.name}"
                 p= "Player Class - #{deck.playerClass}"
-                p
-                    = link_to 'View', deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
-                    = link_to 'Edit', edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
-                    = link_to 'Delete', deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'
+                p= link_to t('buttons.view'), deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                p= link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                p= link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'

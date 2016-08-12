@@ -1,9 +1,9 @@
-h4 This is your personal page with cards and decks
-p At 'Cards Collection' page you can choose cards in your library.
-p At 'Deck Analyzer' page you can check existed decks and choose deck better for you.
+h4= t('general.tabs_1.head')
+p= t('general.tabs_1.first_p')
+p= t('general.tabs_1.second_p')
 - if current_user.deck_master?
-    h5 Ohh! You are deck master
+    h5= t('general.tabs_1.master_header')
     p
-        = 'You can '
-        = link_to 'visit', decks_path, 'data-turbolinks': 'false'
-        = ' decks page, build new one or edit your old deck'
+        = t('general.tabs_1.p_1')
+        = link_to t('general.tabs_1.p_2'), decks_path, 'data-turbolinks': 'false'
+        = t('general.tabs_1.p_3')

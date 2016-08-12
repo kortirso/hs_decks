@@ -12,7 +12,7 @@
                     = 'Cards amount in the deck - '
                     span#card_amount= '0'
                 #cards_list
-                = submit_tag 'Save', class: 'button', 'data-turbolinks': 'false'
+                = submit_tag t('buttons.save'), class: 'button', 'data-turbolinks': 'false'
             .right_side
                 p Click to cards to change amount from 0 to 2
                 .columns.small-3= text_field_tag :name, nil, placeholder: 'Deck Name'

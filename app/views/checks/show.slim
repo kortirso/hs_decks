@@ -4,13 +4,22 @@
 .row
     #check
         h4
-            = "At this page you can see checking your cards with deck '#{@deck.name}' from #{@deck.user.email}"
+            = t('check.h4_1')
+            = @deck.name
+            = t('check.h4_2')
+            = @deck.user.email
         .info_block
-            p= "Deck success rating - #{@check.success}%"
-            p= "Deck format - #{@deck.formats}"
-            p= "Deck caption - #{@deck.caption}"
+            p
+                = t('check.p_1')
+                = "#{@check.success}%"
+            p
+                = t('check.p_2')
+                = @deck.formats
+            p
+                = t('check.p_3')
+                = @deck.caption
         .check
-            h5 Expert deck
+            h5= t('check.h5_1')
             - deck_ids = @positions.collect { |elem| elem[0] }
             - @deck.cards.order(cost: :asc, name: :asc).each do |card|
                 .card class="#{card.rarity}"
@@ -20,7 +29,7 @@
                         .lab class="#{@positions[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'}"
                             = card.name
         .check
-            h5 Deck with your cards
+            h5= t('check.h5_2')
             - check_ids = @lines.collect { |elem| elem[0] }
             - @check.cards.order(cost: :asc, name: :asc).each do |card|
                 - amount = @lines[check_ids.index(card.id)][1]
@@ -33,4 +42,4 @@
                         .lab class="#{card_class}"
                             = card.name
         .check
-            h5 Deck with substitutions
+            h5= t('check.h5_3')

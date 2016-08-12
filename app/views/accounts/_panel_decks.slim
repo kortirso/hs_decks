@@ -1,15 +1,15 @@
-h4 All decks existed in system
-p At this page you can view all decks of our experts
+h4= t('general.tabs_3.head')
+p= t('general.tabs_3.p_1')
 #decks
     table
         thead
             tr
                 th #
-                th Deck name
-                th Deck class
-                th Deck format
-                th Deck creator
-                th Controls
+                th= t('general.tabs_3.name')
+                th= t('general.tabs_3.class')
+                th= t('general.tabs_3.format')
+                th= t('general.tabs_3.expert')
+                th
         tbody
             - @decks.each_with_index do |deck, index|
                 tr
@@ -18,4 +18,4 @@ p At this page you can view all decks of our experts
                     td= deck.playerClass
                     td= deck.formats
                     td= deck.user.email
-                    td= link_to 'View Deck', deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                    td= link_to t('buttons.view_deck'), deck_path(deck), class: 'button small', 'data-turbolinks': 'false'

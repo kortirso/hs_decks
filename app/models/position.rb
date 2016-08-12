@@ -10,4 +10,10 @@ class Position < ApplicationRecord
         all.order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount] }
         return ids
     end
+
+    def self.with_sorted_cards
+        cards = []
+        all.each { |pos| cards.push pos.card }
+        return cards.sort_by { |card| [card.cost, card.name] }
+    end
 end

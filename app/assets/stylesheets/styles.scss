@@ -83,6 +83,7 @@ body {
 }
 
 #new_deck {
+    position: relative;
     background: #FFF;
     padding: 10px;
     margin: 0;
@@ -92,6 +93,15 @@ body {
     }
     .button {
         margin: 0 10px 0 0;
+    }
+    .left_side {
+        position: absolute;
+        width: 300px;
+        top: 10px;
+        left: 10px;
+    }
+    .right_side {
+        margin-left: 300px;
     }
 }
 
@@ -207,7 +217,7 @@ body {
     }
 }
 
-.costs, .check {
+.costs, .check, #cards_list {
     .card {
         display: inline-block;
         width: 200px;

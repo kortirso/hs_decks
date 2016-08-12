@@ -10,6 +10,28 @@ $(function() {
                 $(this).removeClass('none').addClass('single');
                 $(this).closest('div').children('input').val(1).attr('checked', true);
                 $('#card_amount').html(amount + 1);
+
+                cloned = $(this).closest('.card').clone();
+                current_mana_cost = parseInt($(cloned).attr('class').split(' ')[1].split('_')[1]);
+                current_name = $(cloned).attr('class').split(' ').pop();
+                if($('#cards_list .card').size() == 0) $('#cards_list').append(cloned);
+                else {
+                    i = 0;
+                    $('#cards_list .card').each(function() {
+                        mana_cost = parseInt($(this).attr('class').split(' ')[1].split('_')[1]);
+                        name = $(this).attr('class').split(' ').pop();
+                        if(current_mana_cost < mana_cost) {
+                            $(this).before($(cloned));
+                            return false;
+                        }
+                        else if(current_mana_cost == mana_cost && current_name < name) {
+                            $(this).before($(cloned));
+                            return false;
+                        }
+                        i += 1;
+                    });
+                    if($('#cards_list .card').size() == i) $('#cards_list').append(cloned);
+                }
             }
         }
         else if($(this).hasClass('single')) {
@@ -17,17 +39,26 @@ $(function() {
                 $(this).removeClass('single').addClass('none');
                 $(this).closest('div').children('input').val(0);
                 $('#card_amount').html(amount - 1);
+
+                lastClass = $(this).closest('.card').attr('class').split(' ').pop();
+                $('#cards_list .' + lastClass).remove();
             }
             else {
                 $(this).removeClass('single').addClass('double');
                 $(this).closest('div').children('input').val(2);
                 $('#card_amount').html(amount + 1);
+
+                lastClass = $(this).closest('.card').attr('class').split(' ').pop();
+                $('#cards_list .' + lastClass + ' label').addClass('double');
             }
         }
         else if($(this).hasClass('double')) {
             $(this).removeClass('double').addClass('none');
             $(this).closest('div').children('input').val(0);
             $('#card_amount').html(amount - 2);
+
+            lastClass = $(this).closest('.card').attr('class').split(' ').pop();
+            $('#cards_list .' + lastClass).remove();
         }
     });
 
@@ -78,6 +109,8 @@ $(function() {
         
         if(this.value == 'standard') $('.costs .wild').hide();
         else $('.costs .wild').show();
+
+        $('#cards_list .card').remove();
     });
 
     $('#mana_cost').on('change', function() {

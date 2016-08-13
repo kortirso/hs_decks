@@ -16,6 +16,7 @@ gem 'slim'
 gem 'devise'
 gem 'simple_form'
 gem 'http_accept_language'
+gem 'activerecord-import'
 
 group :development, :test do
     gem 'rspec-rails'

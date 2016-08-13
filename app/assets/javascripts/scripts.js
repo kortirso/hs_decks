@@ -13,13 +13,13 @@ $(function() {
 
                 cloned = $(this).closest('.card').clone();
                 current_mana_cost = parseInt($(cloned).attr('class').split(' ')[1].split('_')[1]);
-                current_name = $(cloned).attr('class').split(' ').pop();
+                current_name = $(cloned).data('card_name');
                 if($('#cards_list .card').size() == 0) $('#cards_list').append(cloned);
                 else {
                     i = 0;
                     $('#cards_list .card').each(function() {
                         mana_cost = parseInt($(this).attr('class').split(' ')[1].split('_')[1]);
-                        name = $(this).attr('class').split(' ').pop();
+                        name = $(this).data('card_name');
                         if(current_mana_cost < mana_cost) {
                             $(this).before($(cloned));
                             return false;

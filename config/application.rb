@@ -16,5 +16,6 @@ module HsDecks
         end
         config.active_record.raise_in_transactional_callbacks = true
         config.autoload_paths += %W(#{config.root}/lib)
+        config.action_cable.allowed_request_origins = [ 'http://46.101.217.59:3005' ]
     end
 end

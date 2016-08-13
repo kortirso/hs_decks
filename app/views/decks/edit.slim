@@ -14,7 +14,7 @@
                     span#card_amount= '30'
                 #cards_list
                     - @deck.positions.includes(:card).with_sorted_cards.each do |card|
-                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.name.split(' ').join('_')}"
+                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card.name.split(' ').join('_')}" }
                             .image style="background-image: url('#{card.image}');"
                                 .card-shadow
                             .inner
@@ -49,7 +49,7 @@
                                     p= "Mana cost - #{cost}"
                                     - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
                                     - cards_with_cost.sort_by{ |card| card.name }.each do |card|
-                                        .card class="mana_#{cost} #{card.rarity} #{card.formats} #{card.name.split(' ').join('_')}"
+                                        .card class="mana_#{cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card.name.split(' ').join('_')}" }
                                             .image style="background-image: url('#{card.image}');"
                                                 .card-shadow
                                             .inner

@@ -3,14 +3,14 @@
     .shadow
 .row
     #decks
-        h4 At this page you can view and edit all your decks and create new one.
+        h4= t('decks.head')
         p
             = link_to t('buttons.new_deck'), new_deck_path, class: 'button', 'data-turbolinks': 'false'
             = link_to t('buttons.main_page'), root_path, class: 'button', 'data-turbolinks': 'false'
         - @decks.each do |deck|
             .deck
-                p= "Deck's name - #{deck.name}"
-                p= "Player Class - #{deck.playerClass}"
+                p= "#{t('decks.deck_name')} - #{deck.name}"
+                p= "#{t('decks.class')} - #{deck.playerClass}"
                 p= link_to t('buttons.view'), deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
                 p= link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
                 p= link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'

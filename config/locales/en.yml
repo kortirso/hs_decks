@@ -59,7 +59,22 @@ en:
     h5_2: 'Deck with your cards'
     h5_3: 'Deck with substitutions'
   deck:
-    h4_1: 'At this page you can see deck '
+    h4_1: 'Deck '
     h4_2: ' from expert '
     p_1: 'Deck format - '
     p_2: 'Deck caption - '
+  new_deck:
+    head: 'New Deck creating'
+    p_1: 'Here you can see selected cards and their amount'
+    p_2: 'Cards amount in the deck - '
+    change_click: 'Click to cards to change amount from 0 to 2'
+    deck_name: 'Deck Name'
+    link: 'Link'
+    caption: 'Caption'
+  edit_deck:
+    head: 'Deck Editing'
+  decks:
+    head: 'At this page you can view and edit all your decks and create new one.'
+    deck_name: "Deck's name"
+    class: 'Player Class'
+

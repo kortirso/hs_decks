@@ -21,25 +21,25 @@
         .check
             h5= t('check.h5_1')
             - deck_ids = @positions.collect { |elem| elem[0] }
-            - @deck.cards.order(cost: :asc, name: :asc).each do |card|
+            - @deck.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
                 .card class="#{card.rarity}"
-                    .image style="background-image: url('#{card.image}');"
+                    .image style="background-image: url('#{card.image_en}');"
                         .card-shadow
                     .inner
                         .lab class="#{@positions[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'}"
-                            = card.name
+                            = card["name_#{@locale}"]
         .check
             h5= t('check.h5_2')
             - check_ids = @lines.collect { |elem| elem[0] }
-            - @check.cards.order(cost: :asc, name: :asc).each do |card|
+            - @check.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
                 - amount = @lines[check_ids.index(card.id)][1]
                 - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
                 .card class="#{card.rarity}" class="#{card_class}"
-                    .image style="background-image: url('#{card.image}');"
+                    .image style="background-image: url('#{card.image_en}');"
                         .card-shadow
                     .inner
                         - card_class = 'single' if @positions[deck_ids.index(card.id)][1] == 1 && card_class == 'double'
                         .lab class="#{card_class}"
-                            = card.name
+                            = card["name_#{@locale}"]
         .check
             h5= t('check.h5_3')

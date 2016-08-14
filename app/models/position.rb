@@ -11,9 +11,9 @@ class Position < ApplicationRecord
         return ids
     end
 
-    def self.with_sorted_cards
+    def self.with_sorted_cards(locale)
         cards = []
         all.each { |pos| cards.push pos.card }
-        return cards.sort_by { |card| [card.cost, card.name] }
+        return cards.sort_by { |card| [card.cost, card["name_#{locale}"]] }
     end
 end

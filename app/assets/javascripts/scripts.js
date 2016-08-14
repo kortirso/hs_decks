@@ -100,6 +100,8 @@ $(function() {
 
         $('#new-tabs-content .tabs-panel label').removeClass('single').removeClass('double').removeClass('none').addClass('none');
         $('#new-tabs-content .tabs-panel input').val(0);
+
+        $('#cards_list .card').remove();
     });
 
     $('select#formats').on('change', function() {

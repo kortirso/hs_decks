@@ -25,12 +25,12 @@
                         .costs class="cost_#{cost}"
                             p= "Mana cost - #{cost}"
                             - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
-                            - cards_with_cost.sort_by{ |card| card.name }.each do |card|
+                            - cards_with_cost.sort_by{ |card| card["name_#{@locale}"] }.each do |card|
                                 .card class="#{card.collection.name.split(' ').join('_')}" class="#{card.rarity}"
-                                    .image style="background-image: url('#{card.image}');"
+                                    .image style="background-image: url('#{card.image_en}');"
                                         .card-shadow
                                     .inner
                                         - checks = ids.include?(card.id)
                                         = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
-                                        = label_tag card.id, card.name, class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"
+                                        = label_tag card.id, card["name_#{@locale}"], class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"
             = submit_tag t('buttons.save'), class: 'button', 'data-turbolinks': 'false'

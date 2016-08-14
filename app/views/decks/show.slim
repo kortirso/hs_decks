@@ -16,7 +16,7 @@
                 = t('deck.p_2')
                 = @deck.caption
         - positions_ids = @positions.collect { |p| p[0] }
-        - @deck.cards.order(cost: :asc, name: :asc).each do |card|
+        - @deck.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
             .card
-                p= image_tag card.image
+                p= image_tag card.image_en
                 p= @positions[positions_ids.index card.id][1]

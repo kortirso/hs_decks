@@ -1,8 +1,8 @@
 require 'net/http'
 
 class Message
-    def initialize
-        @uri = URI('https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1')
+    def initialize(locale = 'enUS')
+        @uri = URI("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1&locale=#{locale}")
     end
 
     def get_request

@@ -8,7 +8,7 @@ class Card < ApplicationRecord
     has_many :users, through: :positions, source: :positionable, source_type: 'User'
     has_many :checks, through: :positions, source: :positionable, source_type: 'Check'
 
-    validates :cardId, :name, :type, :rarity, :collection_id, :formats, presence: true
+    validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true
     validates :rarity, inclusion: { in: %w(Free Common Rare Epic Legendary) }
@@ -30,6 +30,14 @@ class Card < ApplicationRecord
     end
 
     def self.check_cards_format
-        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.each { |card| card.update(formats: 'wild') unless card.wild_format? } }
+        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') }
+    end
+
+    def self.check_locale(locale)
+        locale_short = locale[0] + locale[1]
+        result = Message.new(locale).get_request
+        Collection.all.includes(:cards).each do |collection|
+            result[collection.name].each { |card| collection.cards.find_by(cardId: card['cardId']).update_columns("name_#{locale_short}" => card['name']) }
+        end
     end
 end

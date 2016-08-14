@@ -13,14 +13,15 @@
                     = 'Cards amount in the deck - '
                     span#card_amount= '30'
                 #cards_list
-                    - @deck.positions.includes(:card).with_sorted_cards.each do |card|
-                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card.name.split(' ').join('_')}" }
-                            .image style="background-image: url('#{card.image}');"
+                    - @deck.positions.includes(:card).with_sorted_cards(@locale).each do |card|
+                        - card_name = card["name_#{@locale}"]
+                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
+                            .image style="background-image: url('#{card.image_en}');"
                                 .card-shadow
                             .inner
                                 - amount = @positions[ids.index(card.id)][1]
                                 = check_box_tag card.id, value = "#{amount}", checked = true
-                                = label_tag card.id, card.name, class: "#{amount == 1 ? 'single' : 'double'}"
+                                = label_tag card.id, card["name_#{@locale}"], class: "#{amount == 1 ? 'single' : 'double'}"
                 = submit_tag t('buttons.update'), class: 'button', 'data-turbolinks': 'false'
             .right_side
                 p Click to cards to change amount from 0 to 2
@@ -48,11 +49,12 @@
                                 .costs class="cost_#{cost}"
                                     p= "Mana cost - #{cost}"
                                     - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
-                                    - cards_with_cost.sort_by{ |card| card.name }.each do |card|
-                                        .card class="mana_#{cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card.name.split(' ').join('_')}" }
-                                            .image style="background-image: url('#{card.image}');"
+                                    - cards_with_cost.sort_by{ |card| card["name_#{@locale}"] }.each do |card|
+                                        - card_name = card["name_#{@locale}"]
+                                        .card class="mana_#{cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
+                                            .image style="background-image: url('#{card.image_en}');"
                                                 .card-shadow
                                             .inner
                                                 - checks = ids.include?(card.id)
                                                 = check_box_tag card.id, value = "#{checks ? @positions[ids.index(card.id)][1] : 0}", checked = checks
-                                                = label_tag card.id, card.name, class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"
+                                                = label_tag card.id, card["name_#{@locale}"], class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}"

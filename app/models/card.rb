@@ -34,10 +34,9 @@ class Card < ApplicationRecord
     end
 
     def self.check_locale(locale)
-        locale_short = locale[0] + locale[1]
-        result = Message.new(locale).get_request
+        result = Message.new(locale + locale.upcase).get_request
         Collection.all.includes(:cards).each do |collection|
-            result[collection.name].each { |card| collection.cards.find_by(cardId: card['cardId']).update_columns("name_#{locale_short}" => card['name']) }
+            result[collection.name].each { |card| collection.cards.find_by(cardId: card['cardId']).update_columns("name_#{locale}" => card['name']) }
         end
     end
 end

@@ -18,6 +18,7 @@ class Deck < ApplicationRecord
         return false unless Deck.good_params?(deck_params, positions_params)
         deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id
         deck.build_positions(positions_params)
+        deck.calc_price
         return true
     end
 
@@ -34,6 +35,7 @@ class Deck < ApplicationRecord
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
         self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption']
         self.update_positions(positions_params)
+        self.calc_price
         ## todo: check all cards for format changing
         return true
     end
@@ -51,6 +53,20 @@ class Deck < ApplicationRecord
             end
         end
         cards_ids.each { |pos| self.positions.create card_id: pos, amount: cards[cards_ids.index(pos)][1] unless old_ids.include?(pos) }
+    end
+
+    def calc_price
+        price = 0
+        self.positions.each do |pos|
+            price += case pos.card.rarity
+                when 'Free'then 0
+                when 'Common' then 40 * pos.amount
+                when 'Rare' then 100 * pos.amount
+                when 'Epic' then 400 * pos.amount
+                when 'Legendary' then 1600
+            end
+        end
+        self.update(price: price)
     end
 
     def self.check_format

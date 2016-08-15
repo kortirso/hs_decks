@@ -44,6 +44,7 @@ en:
       class: 'Deck class'
       format: 'Deck format'
       expert: 'Deck expert'
+      price: 'Deck price'
     tabs_4:
       tab: 'Decks analyzer'
       head: 'Current cards analyzer'
@@ -58,6 +59,7 @@ en:
     p_2: 'Deck format - '
     p_3: 'Deck caption - '
     p_4: 'Deck author - '
+    p_5: 'Deck price - '
     h5_1: 'Expert deck'
     h5_2: 'Deck with your cards'
     h5_3: 'Deck with substitutions'
@@ -67,6 +69,7 @@ en:
     p_1: 'Deck format - '
     p_2: 'Deck caption - '
     p_3: 'Deck author - '
+    p_4: 'Deck price - '
   new_deck:
     head: 'New Deck creating'
     p_1: 'Here you can see selected cards and their amount'

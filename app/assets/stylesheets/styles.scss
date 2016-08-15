@@ -222,7 +222,7 @@ body {
     .card {
         display: inline-block;
         width: 235px;
-        margin: 1px 3px 3px 1px;
+        margin: 1px 0 0 1px;
         background: #111;
         box-shadow: 0 0 0 1px #000;
         position: relative;
@@ -265,22 +265,69 @@ body {
                 width: 0;
             }
             label, .lab {
+                position: relative;
                 font-size: 13px;
                 width: 100%;
                 margin: 0;
                 padding: 3px 10px 3px 35px;
                 background-position: 0 0;
-                &.none {
-                    background-image: image-url('uncheck.png');
+                background-repeat: no-repeat;
+                &.mana_0 {
+                    background-image: image-url('mana_0.png');
+                }
+                &.mana_1 {
+                    background-image: image-url('mana_1.png');
+                }
+                &.mana_2 {
+                    background-image: image-url('mana_2.png');
+                }
+                &.mana_3 {
+                    background-image: image-url('mana_3.png');
+                }
+                &.mana_4 {
+                    background-image: image-url('mana_4.png');
+                }
+                &.mana_5 {
+                    background-image: image-url('mana_5.png');
+                }
+                &.mana_6 {
+                    background-image: image-url('mana_6.png');
+                }
+                &.mana_7 {
+                    background-image: image-url('mana_7.png');
+                }
+                &.mana_8 {
+                    background-image: image-url('mana_8.png');
+                }
+                &.mana_9 {
+                    background-image: image-url('mana_9.png');
+                }
+                &.mana_10 {
+                    background-image: image-url('mana_10.png');
+                }
+                &.mana_12 {
+                    background-image: image-url('mana_12.png');
+                }
+                &.mana_25 {
+                    background-image: image-url('mana_25.png');
+                }
+                &:after {
+                    position: absolute;
+                    content: '';
+                    width: 29px;
+                    height: 29px;
+                    top: 0;
+                    right: 0;
                     background-repeat: no-repeat;
                 }
-                &.single {
+                &.none:after {
+                    background-image: none;
+                }
+                &.single:after {
                     background-image: image-url('single.png');
-                    background-repeat: no-repeat;
                 }
-                &.double {
+                &.double:after {
                     background-image: image-url('double.png');
-                    background-repeat: no-repeat;
                 }
             }
         }

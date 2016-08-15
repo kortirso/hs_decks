@@ -26,7 +26,7 @@
                     .image style="background-image: url('#{card.image_en}');"
                         .card-shadow
                     .inner
-                        .lab class="#{@positions[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'}"
+                        .lab class="#{@positions[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'} mana_#{card.cost}"
                             = card["name_#{@locale}"]
         .check
             h5= t('check.h5_2')
@@ -39,7 +39,7 @@
                         .card-shadow
                     .inner
                         - card_class = 'single' if @positions[deck_ids.index(card.id)][1] == 1 && card_class == 'double'
-                        .lab class="#{card_class}"
+                        .lab class="#{card_class} mana_#{card.cost}"
                             = card["name_#{@locale}"]
         .check
             h5= t('check.h5_3')

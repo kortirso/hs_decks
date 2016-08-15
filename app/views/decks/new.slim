@@ -40,7 +40,7 @@
                                     - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
                                     - cards_with_cost.sort_by{ |card| [card.cost, card["name_#{@locale}"]] }.each do |card|
                                         - card_name = card["name_#{@locale}"]
-                                        .card class="mana_#{cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
+                                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
                                             .image style="background-image: url('#{card.image_en}');"
                                                 .card-shadow
                                             .inner

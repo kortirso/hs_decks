@@ -13,6 +13,9 @@
                 = t('deck.p_1')
                 = @deck.formats
             p
+                = t('deck.p_3')
+                = @deck.author
+            p
                 = t('deck.p_2')
                 = @deck.caption
         - positions_ids = @positions.collect { |p| p[0] }

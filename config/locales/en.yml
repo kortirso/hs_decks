@@ -57,6 +57,7 @@ en:
     p_1: 'Deck success rating - '
     p_2: 'Deck format - '
     p_3: 'Deck caption - '
+    p_4: 'Deck author - '
     h5_1: 'Expert deck'
     h5_2: 'Deck with your cards'
     h5_3: 'Deck with substitutions'
@@ -65,6 +66,7 @@ en:
     h4_2: ' from expert '
     p_1: 'Deck format - '
     p_2: 'Deck caption - '
+    p_3: 'Deck author - '
   new_deck:
     head: 'New Deck creating'
     p_1: 'Here you can see selected cards and their amount'
@@ -73,6 +75,7 @@ en:
     deck_name: 'Deck Name'
     link: 'Link'
     caption: 'Caption'
+    author: 'Author'
   edit_deck:
     head: 'Deck Editing'
   decks:

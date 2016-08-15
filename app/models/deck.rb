@@ -16,7 +16,7 @@ class Deck < ApplicationRecord
         data = Deck.remove_params(params)
         deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params)
-        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], user_id: user_id
+        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id
         deck.build_positions(positions_params)
         return true
     end
@@ -68,12 +68,12 @@ class Deck < ApplicationRecord
     def self.remove_params(params)
         data = params.permit!.to_h.to_a.delete_if { |elem| elem[0] == 'utf8' || elem[0] == 'commit' || elem[0] == 'authenticity_token' || elem[0] == 'controller' || elem[0] == 'action' || elem[0] == 'id' || elem[0] == '_method' || elem[0] == 'mana_cost' }
         deck_params, positions_params = [], []
-        data.each { |d| d[0] == 'name' || d[0] == 'playerClass' || d[0] == 'formats' || d[0] == 'link' || d[0] == 'caption' || d[0] == 'success' ? deck_params.push(d) : positions_params.push(d) }
+        data.each { |d| d[0] == 'name' || d[0] == 'playerClass' || d[0] == 'formats' || d[0] == 'link' || d[0] == 'caption' || d[0] == 'success' || d[0] == 'author' ? deck_params.push(d) : positions_params.push(d) }
         return [deck_params, positions_params]
     end
 
     def self.good_params?(deck_params, positions_params, playerClass = nil)
-        return false if deck_params.size != 3 && deck_params.size != 5 || positions_params.size == 0
+        return false if deck_params.size != 4 && deck_params.size != 6 || positions_params.size == 0
         return false if Deck.check_deck_params(deck_params, playerClass.nil? ? 1 : 0)
         return false if Deck.check_30_cards(positions_params)
         return false if Deck.check_dublicates(positions_params)

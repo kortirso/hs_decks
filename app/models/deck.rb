@@ -57,15 +57,7 @@ class Deck < ApplicationRecord
 
     def calc_price
         price = 0
-        self.positions.each do |pos|
-            price += case pos.card.rarity
-                when 'Free'then 0
-                when 'Common' then 40 * pos.amount
-                when 'Rare' then 100 * pos.amount
-                when 'Epic' then 400 * pos.amount
-                when 'Legendary' then 1600
-            end
-        end
+        self.positions.each { |pos| price += Position.dust_card_price(pos.card.rarity, pos.amount) }
         self.update(price: price)
     end
 

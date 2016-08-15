@@ -14,7 +14,7 @@ $(function() {
             },
 
             renderMessage: function(data) {
-                return '<tr><td>' + data.check.success + '%</td><td>' + data.deck.name + '</td><td>' + data.deck.playerClass + '</td><td>' + data.deck.formats + '</td><td>' + data.username + '</td><td><a class="button small" data-turbolinks="false" href="/checks/' + data.check.id + '">View Check</a><a class="button small" data-turbolinks="false" href="/decks/' + data.deck.id + '">View Deck</a></td></tr>';
+                return '<tr><td>' + data.check.success + '%</td><td>' + data.check.dust + '</td><td>' + data.deck.name + '</td><td>' + data.deck.playerClass + '</td><td>' + data.deck.formats + '</td><td>' + data.username + '</td><td><a class="button small" data-turbolinks="false" href="/checks/' + data.check.id + '">View Check</a><a class="button small" data-turbolinks="false" href="/decks/' + data.deck.id + '">View Deck</a></td></tr>';
             }
         });
     }

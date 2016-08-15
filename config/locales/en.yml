@@ -34,6 +34,8 @@ en:
       filters: 'Filters'
       mana_cost: 'Mana cost'
       collection: 'Collection'
+      existed: 'All class cards are existed'
+      unexisted: 'All class cards are unexisted'
     tabs_3:
       tab: "Expert's decks"
       head: 'All decks existed in system.'

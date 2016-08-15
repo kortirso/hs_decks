@@ -9,7 +9,7 @@
         span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: 'All'
         span= t('general.tabs_2.collection')
         span= select_tag :collection, options_for_select(Collection.all.order(id: :asc).collect { |c| c.name }), prompt: 'All'
-        span= link_to t('buttons.set_free'), '#', id: 'free_existed', class: 'button small', 'data-turbolinks': 'false'
+        span= link_to t('buttons.set_free'), '', id: 'free_existed', class: 'button small', 'data-turbolinks': 'false'
     ul#cards-tabs.tabs data-tabs=''
         - classes_list.each_with_index do |name, index|
             li.tabs-title class="#{'is-active' if index == 0}"
@@ -18,7 +18,10 @@
         = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
             - ids = @packs.collect { |elem| elem[0] }
             - classes_list.each_with_index do |name, index|
-                .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
+                .tabs-panel class="#{'is-active' if index == 0} class_#{name}" id="cards#{index}"
+                    p
+                        = link_to t('general.tabs_2.existed'), '', class: "button small class_existed class_#{name}", 'data-turbolinks': 'false'
+                        = link_to t('general.tabs_2.unexisted'), '', class: "button small class_unexisted class_#{name}", 'data-turbolinks': 'false'
                     - name = nil if name == 'Common'
                     - cards = @cards.select { |card| card.playerClass == name }
                     - (0..7).each do |cost|

@@ -15,8 +15,10 @@ en:
     auth: 'Authorization'
     reg: 'Registration'
     pass: 'Password'
+    username: 'Username'
     confirm: 'Password confirmation'
     enter: 'Sign In'
+    minimal: 'Minimal password length - 6 symbols'
   general:
     tabs_1:
       tab: 'General info'

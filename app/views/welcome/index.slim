@@ -22,6 +22,8 @@
                         .small-12.columns
                             p= t('auth.reg')
                         .small-12.columns
+                            = f.input :username, required: true, label: false, placeholder: t('auth.username')
+                        .small-12.columns
                             = f.input :email, required: true, label: false, placeholder: 'Email'
                         .small-12.columns
                             = f.input :password, required: true, label: false, placeholder: t('auth.pass')

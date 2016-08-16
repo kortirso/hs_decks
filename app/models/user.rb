@@ -6,8 +6,9 @@ class User < ApplicationRecord
     has_many :decks
     has_many :checks
 
-    validates :role, presence: true
+    validates :role, :username, presence: true
     validates :role, inclusion: { in: %w(user deck_master) }
+    validates :username, uniqueness: true, length: { in: 1..20 }
 
     def deck_master?
         self.role == 'deck_master'

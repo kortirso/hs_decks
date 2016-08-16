@@ -33,7 +33,7 @@ class Deck < ApplicationRecord
         data = Deck.remove_params(params)
         deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
-        self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption']
+        self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author']
         self.update_positions(positions_params)
         self.calc_price
         ## todo: check all cards for format changing

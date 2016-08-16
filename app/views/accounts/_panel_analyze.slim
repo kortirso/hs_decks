@@ -27,7 +27,7 @@ p= t('general.tabs_4.p_2')
                     td= check.deck.name
                     td= check.deck.playerClass
                     td= check.deck.formats
-                    td= check.deck.user.email
+                    td= check.deck.user.username
                     td
                         = link_to t('buttons.view_check'), check_path(check), class: 'button small', 'data-turbolinks': 'false'
                         = link_to t('buttons.view_deck'), deck_path(check.deck), class: 'button small', 'data-turbolinks': 'false'

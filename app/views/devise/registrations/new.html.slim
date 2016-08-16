@@ -1,0 +1,14 @@
+/.inside
+    .shadow
+.row
+    #auth
+        .columns.medium-8
+            h2= t('auth.reg')
+            = simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f|
+                .columns.medium-7= f.input :username, required: true, autofocus: true, label: t('auth.username')
+                .columns.medium-7= f.input :email, required: true, autofocus: true, label: t('auth.email')
+                .columns.medium-7= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable), label: t('auth.pass')
+                .columns.medium-7= f.input :password_confirmation, required: true, label: t('auth.confirm')
+                .clearfix
+                p= t('auth.minimal')
+                = f.button :submit, t('auth.reg'), class: 'button', id: 'registration'

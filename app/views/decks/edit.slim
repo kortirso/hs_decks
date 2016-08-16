@@ -30,7 +30,7 @@
                 .columns.small-3= text_field_tag :formats, nil, value: @deck.formats, disabled: true
                 .columns.small-6= text_field_tag :author, nil, placeholder: t('new_deck.author'), value: @deck.author
                 .columns.small-6= text_field_tag :link, nil, placeholder: t('new_deck.link'), value: @deck.link
-                .columns.small-12= text_area_tag :caption, nil, placeholder: t('new_deck.caption'), value: @deck.caption, rows: 6
+                .columns.small-12= text_area_tag :caption, @deck.caption, placeholder: t('new_deck.caption'), rows: 6
                 .clearfix
                 #filters
                     span

@@ -9,6 +9,7 @@ class DecksController < ApplicationController
     end
 
     def show
+        @packs = current_user.positions.collect_ids
         @positions = @deck.positions.collect_ids
     end
 

@@ -135,19 +135,73 @@ body {
 }
 
 #deck {
-    .card {
-        float: left;
-        width: 12.5%;
-        p {
-            margin: 0;
-        }
-        p:nth-of-type(2) {
-            text-align: center;
-            color: #FFF;
-            background: #2199e8;
-            padding: 5px 0;
-            margin: 0 auto 10px;
-            width: 50%;
+    .left_side {
+        position: absolute;
+        width: 300px;
+        top: 10px;
+        left: 10px;
+    }
+    .right_side {
+        margin-left: 300px;
+        .cards {
+            margin-bottom: 10px;
+            &:before, &:after {
+                content: " ";
+                display: table;
+            }
+            &:after {
+                clear: both;
+            }
+            .card {
+                float: left;
+                width: 16.5%;
+                position: relative;
+                text-align: center;
+                input[type="checkbox"] {
+                    position: absolute;
+                    opacity: 0;
+                    width: 0;
+                }
+                label, .lab {
+                    position: relative;
+                    font-size: 13px;
+                    width: 50%;
+                    margin: 0;
+                    padding: 3px 29px 3px 0;
+                    background: #2199e8;
+                    color: #FFF;
+                    &:after {
+                        position: absolute;
+                        content: '';
+                        width: 29px;
+                        height: 29px;
+                        bottom: 0;
+                        right: 0;
+                        background-repeat: no-repeat;
+                    }
+                    &.none:after {
+                        background-image: none;
+                        background: #333;
+                    }
+                    &.single:after {
+                        background-image: image-url('single.png');
+                    }
+                    &.double:after {
+                        background-image: image-url('double.png');
+                    }
+                }
+                p {
+                    margin: 0;
+                }
+                p:nth-of-type(2) {
+                    text-align: center;
+                    color: #FFF;
+                    background: #2199e8;
+                    padding: 5px 0;
+                    margin: 0 auto 10px;
+                    width: 50%;
+                }
+            }
         }
     }
 }

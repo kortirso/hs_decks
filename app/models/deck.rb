@@ -76,7 +76,7 @@ class Deck < ApplicationRecord
     def self.remove_params(params)
         data = params.permit!.to_h.to_a.delete_if { |elem| elem[0] == 'utf8' || elem[0] == 'commit' || elem[0] == 'authenticity_token' || elem[0] == 'controller' || elem[0] == 'action' || elem[0] == 'id' || elem[0] == '_method' || elem[0] == 'mana_cost' }
         deck_params, positions_params = [], []
-        data.each { |d| d[0] == 'name' || d[0] == 'playerClass' || d[0] == 'formats' || d[0] == 'link' || d[0] == 'caption' || d[0] == 'success' || d[0] == 'author' ? deck_params.push(d) : positions_params.push(d) }
+        data.each { |d| d[0] == 'name' || d[0] == 'playerClass' || d[0] == 'formats' || d[0] == 'link' || d[0] == 'caption' || d[0] == 'success' || d[0] == 'author'|| d[0] == 'direction' ? deck_params.push(d) : positions_params.push(d) }
         return [deck_params, positions_params]
     end
 

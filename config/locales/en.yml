@@ -72,10 +72,12 @@ en:
   deck:
     h4_1: 'Deck '
     h4_2: ' from expert '
+    h4_3: 'Deck Information'
     p_1: 'Deck format - '
-    p_2: 'Deck caption - '
+    p_2: 'Deck caption: '
     p_3: 'Deck author - '
     p_4: 'Deck price - '
+    p_5: 'Clicking on cards amount cause changing amount of this cards in your collection.'
   new_deck:
     head: 'New Deck creating'
     p_1: 'Here you can see selected cards and their amount'

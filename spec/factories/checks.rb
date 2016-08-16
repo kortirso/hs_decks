@@ -1,6 +1,6 @@
 FactoryGirl.define do
     factory :check do
-        success 90
+        success 0
         association :user
         association :deck
     end

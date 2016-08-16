@@ -4,6 +4,7 @@ FactoryGirl.define do
         playerClass 'Shaman'
         formats 'standard'
         author ''
+        price 5000
         association :user
     end
 end

@@ -57,7 +57,7 @@ class Deck < ApplicationRecord
 
     def calc_price
         price = 0
-        self.positions.each { |pos| price += Position.dust_card_price(pos.card.rarity, pos.amount) }
+        self.positions.each { |pos| price += DustPrice.calc(pos.card.rarity, pos.amount) }
         self.update(price: price)
     end
 

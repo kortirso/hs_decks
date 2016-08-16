@@ -22,14 +22,4 @@ class Position < ApplicationRecord
         all.each { |pos| cards.push pos.card }
         return cards.sort_by { |card| [card.cost, card["name_#{locale}"]] }
     end
-
-    def self.dust_card_price(rarity, amount)
-        return case rarity
-            when 'Free'then 0
-            when 'Common' then 40 * amount
-            when 'Rare' then 100 * amount
-            when 'Epic' then 400 * amount
-            when 'Legendary' then 1600
-        end
-    end
 end

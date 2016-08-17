@@ -26,8 +26,9 @@ RSpec.describe Position, type: :model do
     end
 
     context 'methods' do
+        let!(:user) { create :user }
+
         context '.collect_ids' do
-            let!(:user) { create :user }
             let!(:positions) { create_list(:position_for_user, 2, positionable: user) }
 
             it 'should return cards id and amount in users collection' do
@@ -36,7 +37,6 @@ RSpec.describe Position, type: :model do
         end
 
         context '.collect_ids_with_rarity' do
-            let!(:user) { create :user }
             let!(:positions) { create_list(:position_for_user, 2, positionable: user) }
 
             it 'should return cards id and amount in users collection' do
@@ -45,7 +45,6 @@ RSpec.describe Position, type: :model do
         end
 
         context '.with_sorted_cards' do
-            let!(:user) { create :user }
             let!(:card_1) { create :card, cost: 8, name_en: 'A' }
             let!(:card_2) { create :card, cost: 4, name_en: 'A' }
             let!(:card_3) { create :card, cost: 4, name_en: 'B' }

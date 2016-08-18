@@ -11,6 +11,7 @@
                 p
                     = t('new_deck.p_2')
                     span#card_amount= '0'
+                = render 'shared/mana_curve', by_mana: nil
                 #cards_list
                 = submit_tag t('buttons.save'), class: 'button', 'data-turbolinks': 'false'
             .right_side

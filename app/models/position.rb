@@ -22,4 +22,10 @@ class Position < ApplicationRecord
         all.each { |pos| cards.push pos.card }
         return cards.sort_by { |card| [card.cost, card["name_#{locale}"]] }
     end
+
+    def self.amount_by_mana
+        result = [0, 0, 0, 0, 0, 0, 0, 0]
+        all.includes(:card).each { |pos| result[pos.card.cost < 7 ? pos.card.cost : 7] += pos.amount }
+        result
+    end
 end

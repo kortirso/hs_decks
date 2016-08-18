@@ -15,10 +15,9 @@
                 p
                     = t('deck.p_4')
                     = @deck.price
+                = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
                 p= t('deck.p_2')
                 p= @deck.caption
-            .mana_curve_block
-
             = link_to t('buttons.main_page'), root_path, class: 'button', 'data-turbolinks': 'false'
         .right_side
             h4

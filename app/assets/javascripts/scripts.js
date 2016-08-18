@@ -1,3 +1,24 @@
+$.fn.mana_curve = function (amount) {
+    mana_curve = $('#mana_curve #' + this.attr('class').split(' ')[0] + ' .count')
+    $(mana_curve).html(parseInt($(mana_curve).html()) + amount);
+
+    array = [];
+    $('#mana_curve .col').each(function() {
+        array.push(parseInt($(this).children('.count').html()));
+    });
+    max_amount = Math.max.apply(Math, array);
+    if(max_amount != 0) {
+        $('#mana_curve .col').each(function() {
+            $(this).children('.inner_col').children('.filled').css('height', (parseInt($(this).children('.count').html()) * 100 / max_amount) + 'px');
+        });
+    }
+    else {
+        $('#mana_curve .col').each(function() {
+            $(this).children('.inner_col').children('.filled').css('height', '0');
+        });
+    }
+}
+
 $(function() {
     $('#new-cards-tabs li:nth-of-type(n+2)').hide();
     $('#new-cards-tabs li.Common').show();
@@ -10,6 +31,8 @@ $(function() {
                 $(this).removeClass('none').addClass('single');
                 $(this).closest('div').children('input').val(1).attr('checked', true);
                 $('#card_amount').html(amount + 1);
+
+                $(this).mana_curve(1)
 
                 cloned = $(this).closest('.card').clone();
                 current_mana_cost = parseInt($(cloned).attr('class').split(' ')[1].split('_')[1]);
@@ -40,6 +63,8 @@ $(function() {
                 $(this).closest('div').children('input').val(0);
                 $('#card_amount').html(amount - 1);
 
+                $(this).mana_curve(-1)
+
                 lastClass = $(this).closest('.card').attr('class').split(' ').pop();
                 $('#cards_list .' + lastClass).remove();
             }
@@ -47,6 +72,8 @@ $(function() {
                 $(this).removeClass('single').addClass('double');
                 $(this).closest('div').children('input').val(2);
                 $('#card_amount').html(amount + 1);
+
+                $(this).mana_curve(1)
 
                 lastClass = $(this).closest('.card').attr('class').split(' ').pop();
                 $('#cards_list .' + lastClass + ' label').addClass('double');
@@ -56,6 +83,8 @@ $(function() {
             $(this).removeClass('double').addClass('none');
             $(this).closest('div').children('input').val(0);
             $('#card_amount').html(amount - 2);
+
+            $(this).mana_curve(-2)
 
             lastClass = $(this).closest('.card').attr('class').split(' ').pop();
             $('#cards_list .' + lastClass).remove();

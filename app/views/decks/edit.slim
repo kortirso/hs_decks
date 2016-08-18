@@ -12,6 +12,7 @@
                 p
                     = t('new_deck.p_2')
                     span#card_amount= '30'
+                = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
                 #cards_list
                     - @deck.positions.includes(:card).with_sorted_cards(@locale).each do |card|
                         - card_name = card["name_#{@locale}"]

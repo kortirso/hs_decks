@@ -9,24 +9,27 @@
             = t('check.h4_2')
             = @deck.user.username
         .info_block
-            p
-                = t('check.p_1')
-                = "#{@check.success}%"
-            p
-                = t('check.p_2')
-                = @deck.formats
-            p
-                = t('check.p_4')
-                = @deck.author
-            p
-                = t('check.p_5')
-                = @deck.price
-            p
-                = t('check.p_6')
-                = @check.dust
-            p
-                = t('check.p_3')
-                = @deck.caption
+            .left_side
+                = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
+            .right_side
+                p
+                    = t('check.p_1')
+                    = "#{@check.success}%"
+                p
+                    = t('check.p_2')
+                    = @deck.formats
+                p
+                    = t('check.p_4')
+                    = @deck.author
+                p
+                    = t('check.p_5')
+                    = @deck.price
+                p
+                    = t('check.p_6')
+                    = @check.dust
+                p
+                    = t('check.p_3')
+                    = @deck.caption
         .check
             h5= t('check.h5_1')
             - deck_ids = @positions.collect { |elem| elem[0] }

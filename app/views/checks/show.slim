@@ -8,6 +8,7 @@
             = @deck.name
             = t('check.h4_2')
             = @deck.user.username
+        = link_to t('buttons.main_page'), root_path, class: 'button', 'data-turbolinks': 'false'
         .info_block
             .left_side
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
@@ -46,7 +47,7 @@
             - @check.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
                 - amount = @lines[check_ids.index(card.id)][1]
                 - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
-                .card class="#{card.rarity}" class="#{card_class}"
+                .card class="#{card.rarity} #{card_class}"
                     .image style="background-image: url('#{card.image_en}');"
                         .card-shadow
                     .inner

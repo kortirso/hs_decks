@@ -22,12 +22,14 @@ class Check < ApplicationRecord
     end
 
     def verify_deck(cards, positions, params)
-        dust, cards_ids, pos_ids, lines, t = 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], Time.current
+        result, dust, cards_ids, pos_ids, lines, t = 0, 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], Time.current
         pos_ids.each do |pos|
             if cards_ids.include?(pos)
                 if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
+                    result += positions[pos_ids.index(pos)][1]
                     success = 2
                 else
+                    result += 1
                     dust += DustPrice.calc(positions[pos_ids.index(pos)][2])
                     success = 1
                 end
@@ -37,12 +39,11 @@ class Check < ApplicationRecord
             end
             lines.push "('#{pos}', #{self.id}, 'Check', '#{success}', '#{t}', '#{t}')"
         end
-        return self.limitations(params, dust, lines)
+        return self.limitations(params, result, dust, lines)
     end
 
-    def limitations(params, dust, lines)
-        deck_price = self.deck.price
-        success = (deck_price - dust) * 100 / deck_price
+    def limitations(params, success, dust, lines)
+        success = success * 100 / 30
         if (params['success'].empty? || !params['success'].empty? && success >= params['success'].to_i) && (params['dust'].empty? || !params['dust'].empty? && dust <= params['dust'].to_i)
             self.update(success: success, dust: dust)
             Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, created_at, updated_at) VALUES #{lines.join(", ")}"

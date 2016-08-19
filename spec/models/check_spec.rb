@@ -33,40 +33,42 @@ RSpec.describe Check, type: :model do
 
             context 'without limits' do
                 let(:new_params) { Check.getting_params(empty_params) }
+                let(:success) { 10 }
                 let(:dust) { 1000 }
 
                 it 'returns updated success rate' do
-                    expect { check.limitations(new_params, dust, lines) }.to change(check, :success).from(0).to(80)
+                    expect { check.limitations(new_params, success, dust, lines) }.to change(check, :success).from(0).to(33)
                 end
 
                 it 'and returns updated dust rate' do
-                    expect { check.limitations(new_params, dust, lines) }.to change(check, :dust).from(0).to(dust)
+                    expect { check.limitations(new_params, success, dust, lines) }.to change(check, :dust).from(0).to(dust)
                 end
 
                 it 'and creates new position for check' do
-                    expect { check.limitations(new_params, dust, lines) }.to change(check.positions, :count).from(0).to(1)
+                    expect { check.limitations(new_params, success, dust, lines) }.to change(check.positions, :count).from(0).to(1)
                 end
 
                 it 'and returns self' do
-                    expect(check.limitations(new_params, dust, lines)).to eq check
+                    expect(check.limitations(new_params, success, dust, lines)).to eq check
                 end
             end
 
             context 'with limits' do
                 let(:params) { ActionController::Parameters.new({ success: '', dust: '1000', playerClass: '', formats: 'wild', something: '' }) }
                 let(:new_params) { new_params = Check.getting_params(params) }
+                let(:success) { 10 }
                 let(:dust) { 2500 }
 
                 it 'destroy check' do
-                    expect { check.limitations(new_params, dust, lines) }.to change(Check, :count).by(-1)
+                    expect { check.limitations(new_params, success, dust, lines) }.to change(Check, :count).by(-1)
                 end
 
                 it 'and does not create new check positions' do
-                    expect { check.limitations(new_params, dust, lines) }.to_not change(Position, :count)
+                    expect { check.limitations(new_params, success, dust, lines) }.to_not change(Position, :count)
                 end
 
                 it 'and returns nil' do
-                    expect(check.limitations(new_params, dust, lines)).to eq nil
+                    expect(check.limitations(new_params, success, dust, lines)).to eq nil
                 end
             end
         end

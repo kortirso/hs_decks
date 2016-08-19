@@ -11,7 +11,7 @@ class Check < ApplicationRecord
     scope :of_user, -> (user_id) { where user_id: user_id }
 
     def self.build(user_id, params)
-        params, user, checks = Check.getting_params(params), User.find(user_id), []
+        params, user, checks = Parametrize.check_getting_params(params), User.find(user_id), []
         user.checks.destroy_all
         Check.getting_decks(params).each do |deck|
             check = user.checks.create deck_id: deck.id, success: 0
@@ -89,10 +89,6 @@ class Check < ApplicationRecord
     end
 
     private
-
-    def self.getting_params(params)
-        return params.permit(:success, :dust, :playerClass, :formats).to_h
-    end
 
     def self.getting_decks(params)
         decks = Deck.all.includes(:positions)

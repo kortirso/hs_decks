@@ -38,6 +38,13 @@ class Card < ApplicationRecord
 
     def self.check_locale(locale)
         result = Message.new(locale + locale.upcase).get_request
-        Collection.all.includes(:cards).each { |collection| result[collection.name].each { |card| collection.cards.find_by(cardId: card['cardId']).update_columns("name_#{locale}" => card['name']) } }
+        Collection.all.includes(:cards).each do |collection|
+            result[collection.name].each do |card|
+                current = collection.cards.find_by(cardId: card['cardId'])
+                current["name_#{locale}"] = card['name']
+                current["image_#{locale}"] = card['img']
+                current.save
+            end
+        end
     end
 end

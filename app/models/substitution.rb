@@ -11,6 +11,6 @@ class Substitution < ApplicationRecord
             return [shift.change.id, amount] if (shift.change.playerClass.nil? || shift.change.playerClass == playerClass) && !pos_ids.include?(shift.change.id) && !subs_ids.include?(shift.change.id)
         end
         cards_for_random = Card.for_all_classes.of_rarity('Free').with_cost(exchanged.cost).or(Card.not_heroes.of_player_class(playerClass).of_rarity('Free').with_cost(exchanged.cost)).to_a.delete_if { |card| pos_ids.include?(card.id) || subs_ids.include?(card.id) || card.id == card_id }
-        return cards_for_random.size > 0 ? [cards_for_random.sample.id, amount] : [card_id, amount]
+        cards_for_random.size > 0 ? [cards_for_random.sample.id, amount] : [card_id, amount]
     end
 end

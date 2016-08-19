@@ -8,6 +8,9 @@ class Card < ApplicationRecord
     has_many :users, through: :positions, source: :positionable, source_type: 'User'
     has_many :checks, through: :positions, source: :positionable, source_type: 'Check'
 
+    has_many :shifts, dependent: :destroy
+    has_many :exchanges, through: :shifts, source: :change
+
     validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true

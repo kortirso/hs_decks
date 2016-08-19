@@ -25,7 +25,9 @@ RSpec.describe ChecksController, type: :controller do
 
             context 'for correct data' do
                 let!(:check) { create :check, user: @current_user }
+                let!(:sub) { create :substitution, check: check }
                 let!(:lines) { create :position_for_check, positionable: check }
+                let!(:subs) { create :position_for_subs, positionable: sub }
                 before { get :show, params: { id: check.id } }
 
                 it 'assigns the requested check to @check' do
@@ -38,6 +40,10 @@ RSpec.describe ChecksController, type: :controller do
 
                 it 'and assigns the checks positions to @lines' do
                     expect(assigns(:lines)).to eq [[lines.card_id, lines.amount]]
+                end
+
+                it 'and assigns the substitution positions to @subs' do
+                    expect(assigns(:subs)).to eq [[subs.card_id, subs.amount]]
                 end
 
                 it 'and renders decks page' do

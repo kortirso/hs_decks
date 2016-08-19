@@ -4,6 +4,8 @@ class Check < ApplicationRecord
     belongs_to :user
     belongs_to :deck
 
+    has_one :substitution, dependent: :destroy
+
     validates :user_id, :deck_id, :success, presence: true
 
     scope :of_user, -> (user_id) { where user_id: user_id }
@@ -22,20 +24,33 @@ class Check < ApplicationRecord
     end
 
     def verify_deck(cards, positions, params)
-        result, dust, cards_ids, pos_ids, lines, t = 0, 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], Time.current
+        result, dust, cards_ids, pos_ids, lines, subs_ids, t = 0, 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], [], Time.current
+        substitution = Substitution.create check_id: self.id
         pos_ids.each do |pos|
             if cards_ids.include?(pos)
                 if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
                     result += positions[pos_ids.index(pos)][1]
                     success = 2
+                    lines.push "('#{pos}', #{substitution.id}, 'Substitution', '#{positions[pos_ids.index(pos)][1]}', '#{t}', '#{t}')"
                 else
                     result += 1
                     dust += DustPrice.calc(positions[pos_ids.index(pos)][2])
                     success = 1
+                    exchange = Substitution.find_exchange(pos, 1, self.deck.playerClass, pos_ids, subs_ids)
+                    if exchange[0] != pos
+                        lines.push "('#{pos}', #{substitution.id}, 'Substitution', '1', '#{t}', '#{t}')"
+                        lines.push "('#{exchange[0]}', #{substitution.id}, 'Substitution', '1', '#{t}', '#{t}')"
+                        subs_ids.push exchange[0]
+                    else
+                        lines.push("('#{pos}', #{substitution.id}, 'Substitution', '2', '#{t}', '#{t}')")
+                    end
                 end
             else
                 success = 0
                 dust += DustPrice.calc(positions[pos_ids.index(pos)][2], positions[pos_ids.index(pos)][1])
+                exchange = Substitution.find_exchange(pos, positions[pos_ids.index(pos)][1], self.deck.playerClass, pos_ids, subs_ids)
+                lines.push "('#{exchange[0]}', #{substitution.id}, 'Substitution', '#{exchange[1]}', '#{t}', '#{t}')"
+                subs_ids.push exchange[0]
             end
             lines.push "('#{pos}', #{self.id}, 'Check', '#{success}', '#{t}', '#{t}')"
         end

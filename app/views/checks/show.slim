@@ -13,6 +13,7 @@
             .left_side
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
             .right_side
+                p WARNING! TEST MODE FOR SUBSTITUTION DECK
                 p
                     = t('check.p_1')
                     = "#{@check.success}%"
@@ -56,3 +57,11 @@
                             = card["name_#{@locale}"]
         .check
             h5= t('check.h5_3')
+            - deck_ids = @subs.collect { |elem| elem[0] }
+            - @check.substitution.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
+                .card class="#{card.rarity}"
+                    .image style="background-image: url('#{card.image_en}');"
+                        .card-shadow
+                    .inner
+                        .lab class="#{@subs[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'} mana_#{card.cost}"
+                            = card["name_#{@locale}"]

@@ -32,7 +32,7 @@ RSpec.describe Check, type: :model do
             let(:lines) { ["('#{position.card_id}', '#{check.id}', 'Check', '#{0}', '#{Time.current}', '#{Time.current}')"] }
 
             context 'without limits' do
-                let(:new_params) { Check.getting_params(empty_params) }
+                let(:new_params) { Parametrize.check_getting_params(empty_params) }
                 let(:success) { 10 }
                 let(:dust) { 1000 }
 
@@ -55,7 +55,7 @@ RSpec.describe Check, type: :model do
 
             context 'with limits' do
                 let(:params) { ActionController::Parameters.new({ success: '', dust: '1000', playerClass: '', formats: 'wild', something: '' }) }
-                let(:new_params) { new_params = Check.getting_params(params) }
+                let(:new_params) { new_params = Parametrize.check_getting_params(params) }
                 let(:success) { 10 }
                 let(:dust) { 2500 }
 
@@ -73,35 +73,19 @@ RSpec.describe Check, type: :model do
             end
         end
 
-        context '.getting_params' do
-            let(:params) { Check.getting_params(empty_params) }
-
-            it 'should returns hash with 4 params' do
-                expect(params.kind_of? Hash).to eq true
-                expect(params.size).to eq 4
-            end
-
-            it 'and all 4 params are not nil' do
-                expect(params['success']).to_not eq nil
-                expect(params['dust']).to_not eq nil
-                expect(params['playerClass']).to_not eq nil
-                expect(params['formats']).to_not eq nil
-            end
-        end
-
         context '.getting_decks' do
             let!(:shaman_deck) { create :deck, playerClass: 'Shaman', formats: 'wild' }
             let!(:hunter_deck) { create :deck, playerClass: 'Hunter', formats: 'wild' }
             let!(:standard_mage_deck) { create :deck, playerClass: 'Mage', formats: 'standard' }
 
             it 'should returns all 3 decks if conditions are empty' do
-                params = Check.getting_params(empty_params)
+                params = Parametrize.check_getting_params(empty_params)
 
                 expect(Check.getting_decks(params).size).to eq 3
             end
 
             it 'should returns shaman deck if conditions are with shamans limit' do
-                params = Check.getting_params(ActionController::Parameters.new({ success: '', dust: '', playerClass: 'Shaman', formats: 'wild', something: '' }))
+                params = Parametrize.check_getting_params(ActionController::Parameters.new({ success: '', dust: '', playerClass: 'Shaman', formats: 'wild', something: '' }))
                 decks = Check.getting_decks(params)
 
                 expect(decks.size).to eq 1
@@ -109,7 +93,7 @@ RSpec.describe Check, type: :model do
             end
 
             it 'should returns standard deck if conditions are with standard format limit' do
-                params = Check.getting_params(ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'standard', something: '' }))
+                params = Parametrize.check_getting_params(ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'standard', something: '' }))
                 decks = Check.getting_decks(params)
 
                 expect(decks.size).to eq 1

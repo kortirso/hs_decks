@@ -14,4 +14,9 @@ FactoryGirl.define do
         association :card
         association :positionable, factory: :check
     end
+    factory :position_for_subs, class: 'Position' do
+        amount 1
+        association :card
+        association :positionable, factory: :substitution
+    end
 end

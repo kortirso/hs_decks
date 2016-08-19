@@ -33,10 +33,6 @@ RSpec.describe Deck, type: :model do
 
         end
 
-        context '.remove_params' do
-
-        end
-
         context '.check_deck_format' do
 
         end

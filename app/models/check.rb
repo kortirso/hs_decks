@@ -4,12 +4,14 @@ class Check < ApplicationRecord
     belongs_to :user
     belongs_to :deck
 
+    has_one :substitution, dependent: :destroy
+
     validates :user_id, :deck_id, :success, presence: true
 
     scope :of_user, -> (user_id) { where user_id: user_id }
 
     def self.build(user_id, params)
-        params, user, checks = Check.getting_params(params), User.find(user_id), []
+        params, user, checks = Parametrize.check_getting_params(params), User.find(user_id), []
         user.checks.destroy_all
         Check.getting_decks(params).each do |deck|
             check = user.checks.create deck_id: deck.id, success: 0
@@ -22,7 +24,14 @@ class Check < ApplicationRecord
     end
 
     def verify_deck(cards, positions, params)
-        result, dust, cards_ids, pos_ids, lines, t = 0, 0, cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, [], Time.current
+        cards_ids, pos_ids, t = cards.collect { |i| i[0] }, positions.collect { |i| i[0] }, Time.current
+        successed = self.calc_success(positions, pos_ids, cards, cards_ids, t)
+        subs = self.calc_subs(positions, pos_ids, cards, cards_ids, t)
+        self.limitations(params, successed[0], successed[1], successed[2] + subs)
+    end
+
+    def calc_success(positions, pos_ids, cards, cards_ids, t)
+        result, dust, lines = 0, 0, []
         pos_ids.each do |pos|
             if cards_ids.include?(pos)
                 if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
@@ -39,7 +48,32 @@ class Check < ApplicationRecord
             end
             lines.push "('#{pos}', #{self.id}, 'Check', '#{success}', '#{t}', '#{t}')"
         end
-        return self.limitations(params, result, dust, lines)
+        [result, dust, lines]
+    end
+
+    def calc_subs(positions, pos_ids, cards, cards_ids, t)
+        substitution, lines, subs_ids = Substitution.create(check_id: self.id), [], []
+        pos_ids.each do |pos|
+            if cards_ids.include?(pos)
+                if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
+                    lines.push "('#{pos}', #{substitution.id}, 'Substitution', '#{positions[pos_ids.index(pos)][1]}', '#{t}', '#{t}')"
+                else
+                    exchange = Substitution.find_exchange(pos, 1, self.deck.playerClass, pos_ids, subs_ids)
+                    if exchange[0] != pos
+                        lines.push "('#{pos}', #{substitution.id}, 'Substitution', '1', '#{t}', '#{t}')"
+                        lines.push "('#{exchange[0]}', #{substitution.id}, 'Substitution', '1', '#{t}', '#{t}')"
+                        subs_ids.push exchange[0]
+                    else
+                        lines.push "('#{pos}', #{substitution.id}, 'Substitution', '2', '#{t}', '#{t}')"
+                    end
+                end
+            else
+                exchange = Substitution.find_exchange(pos, positions[pos_ids.index(pos)][1], self.deck.playerClass, pos_ids, subs_ids)
+                lines.push "('#{exchange[0]}', #{substitution.id}, 'Substitution', '#{exchange[1]}', '#{t}', '#{t}')"
+                subs_ids.push exchange[0]
+            end
+        end
+        lines
     end
 
     def limitations(params, success, dust, lines)
@@ -55,10 +89,6 @@ class Check < ApplicationRecord
     end
 
     private
-
-    def self.getting_params(params)
-        return params.permit(:success, :dust, :playerClass, :formats).to_h
-    end
 
     def self.getting_decks(params)
         decks = Deck.all.includes(:positions)

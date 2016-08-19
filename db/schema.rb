@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816074820) do
+ActiveRecord::Schema.define(version: 20160819081344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,23 @@ ActiveRecord::Schema.define(version: 20160816074820) do
     t.datetime "updated_at",        null: false
     t.index ["card_id"], name: "index_positions_on_card_id", using: :btree
     t.index ["positionable_id", "positionable_type"], name: "index_positions_on_positionable_id_and_positionable_type", using: :btree
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.integer  "card_id",    null: false
+    t.integer  "change_id",  null: false
+    t.integer  "priority",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_shifts_on_card_id", using: :btree
+    t.index ["change_id"], name: "index_shifts_on_change_id", using: :btree
+  end
+
+  create_table "substitutions", force: :cascade do |t|
+    t.integer  "check_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["check_id"], name: "index_substitutions_on_check_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

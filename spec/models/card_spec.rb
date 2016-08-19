@@ -9,6 +9,8 @@ RSpec.describe Card, type: :model do
     it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)).allow_nil }
     it { should validate_inclusion_of(:rarity).in_array(%w(Free Common Rare Epic Legendary)) }
     it { should have_many :positions }
+    it { should have_many :shifts }
+    it { should have_many(:exchanges).through(:shifts) }
     it { should have_many(:decks).through(:positions) }
     it { should have_many(:users).through(:positions) }
     it { should have_many(:checks).through(:positions) }

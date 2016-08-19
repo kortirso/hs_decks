@@ -8,6 +8,9 @@ class Card < ApplicationRecord
     has_many :users, through: :positions, source: :positionable, source_type: 'User'
     has_many :checks, through: :positions, source: :positionable, source_type: 'Check'
 
+    has_many :shifts, dependent: :destroy
+    has_many :exchanges, through: :shifts, source: :change
+
     validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true
@@ -35,6 +38,13 @@ class Card < ApplicationRecord
 
     def self.check_locale(locale)
         result = Message.new(locale + locale.upcase).get_request
-        Collection.all.includes(:cards).each { |collection| result[collection.name].each { |card| collection.cards.find_by(cardId: card['cardId']).update_columns("name_#{locale}" => card['name']) } }
+        Collection.all.includes(:cards).each do |collection|
+            result[collection.name].each do |card|
+                current = collection.cards.find_by(cardId: card['cardId'])
+                current["name_#{locale}"] = card['name']
+                current["image_#{locale}"] = card['img']
+                current.save
+            end
+        end
     end
 end

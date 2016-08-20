@@ -29,8 +29,9 @@ en:
       p_1: 'You can '
       p_2: 'visit'
       p_3: ' decks page, build new one or edit your old deck.'
+      p_4: "At 'Expert Decks' you can view all expert decks and select cards you have in your collection."
     tabs_2:
-      tab: 'Your cards collection'
+      tab: 'Cards collection'
       head: 'At this section you can choose cards from your collection.'
       p_1: 'Click to card to change amount from 0 to 2 and then click to Save.'
       filters: 'Filters'
@@ -58,6 +59,23 @@ en:
       last_checks: 'Last deck checks'
       success: 'Success'
       dust: 'Needs dust to success'
+    tabs_5:
+      tab: 'About System'
+      head: 'System HS_DECKS'
+      p_1: 'The system is designed to automatically determine the best expert decks for playing HearthStone based on existing user cards, as well as to automatically determine the best replacements of missing cards.'
+      p_2: 'The user only need to define the parameters of the analysis (for example, select a specific Hero class or to analyze all decks), and the system displayed the results of analysis with grouping them by success.'
+      logs: 'Realized functions'
+      _1:
+        from: 'Version - 0.2, 20.08.2016'
+        p_1: "Selecting cards in the collection is carried out on the 'Cards collection', or a specific page with deck (at the moment there is no technical possibility to automatically download a collection of players cards)."
+        p_2: 'Additional filters in the collection of maps to facilitate the search.'
+        p_3: 'View expert decks with description, mana curve and images of all the cards.'
+        p_4: 'Analyzing the decks for the successful filling of the existing collection cards with automatic calculation of the replacement of the missing cards.'
+        p_5: 'Additional filters for more targeted analysis of the decks.'
+        p_6: 'Viewing deck check, displays the data on the source deck for the missing cards and a deck with a view of a replacement card.'
+        p_7: 'The interface for creating, editing and deleting of expert decks.'
+        p_8: 'Russian and English localizations.'
+        p_9: 'Test version of replacement system.'
   check:
     h4_1: 'At this page you can see checking your cards with deck '
     h4_2: ' from expert '

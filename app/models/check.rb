@@ -18,7 +18,7 @@ class Check < ApplicationRecord
             check = check.verify_deck(user.positions.collect_ids, deck.positions.collect_ids_with_rarity, params)
             unless check.nil?
                 checks.push check.success
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.email, size: checks.size
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), button_2: I18n.t('buttons.view_deck')
             end
         end
     end

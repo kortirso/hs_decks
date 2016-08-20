@@ -9,6 +9,7 @@ p= t('general.tabs_3.p_1')
                 th= t('general.tabs_3.class')
                 th= t('general.tabs_3.price')
                 th= t('general.tabs_3.format')
+                th= t('general.tabs_3.author')
                 th= t('general.tabs_3.expert')
                 th
         tbody
@@ -19,5 +20,6 @@ p= t('general.tabs_3.p_1')
                     td= deck.playerClass
                     td= deck.price
                     td= deck.formats
+                    td= deck.author
                     td= deck.user.username
                     td= link_to t('buttons.view_deck'), deck_path(deck), class: 'button small', 'data-turbolinks': 'false'

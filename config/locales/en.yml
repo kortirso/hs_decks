@@ -47,6 +47,7 @@ en:
       format: 'Deck format'
       expert: 'Deck expert'
       price: 'Deck price'
+      author: 'Author'
     tabs_4:
       tab: 'Decks analyzer'
       head: 'Current cards analyzer'

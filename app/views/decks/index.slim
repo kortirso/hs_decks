@@ -7,10 +7,20 @@
         p
             = link_to t('buttons.new_deck'), new_deck_path, class: 'button', 'data-turbolinks': 'false'
             = link_to t('buttons.main_page'), root_path, class: 'button', 'data-turbolinks': 'false'
-        - @decks.each do |deck|
-            .deck
-                p= "#{t('decks.deck_name')} - #{deck.name}"
-                p= "#{t('decks.class')} - #{deck.playerClass}"
-                p= link_to t('buttons.view'), deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
-                p= link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
-                p= link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'
+        table
+            thead
+                tr
+                    th= t('decks.deck_name')
+                    th= t('decks.class')
+                    th= t('general.tabs_3.format')
+                    th
+            tbody
+                - @decks.order(playerClass: :asc).each do |deck|
+                    tr
+                        td= deck.name
+                        td= deck.playerClass
+                        td= deck.formats
+                        td
+                            = link_to t('buttons.view'), deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                            = link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small', 'data-turbolinks': 'false'
+                            = link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small', 'data-turbolinks': 'false'

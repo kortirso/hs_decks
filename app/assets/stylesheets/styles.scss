@@ -124,20 +124,10 @@ body {
     &:after {
         clear: both;
     }
-    .deck {
-        float: left;
-        width: 20%;
-        padding: 10px;
-        p {
-            margin: 0;
-            .button {
-                margin: 0 10px 5px 0;
-            }
-        }
-    }
 }
 
 #deck {
+    position: relative;
     .left_side {
         position: absolute;
         width: 300px;

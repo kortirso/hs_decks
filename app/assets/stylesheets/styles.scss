@@ -1,5 +1,15 @@
 @import 'https://fonts.googleapis.com/css?family=Lora';
 
+@mixin before-after-mixin {
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
 * {
     font-family: 'Lora', sans-serif !important;
     font-size: 16px;
@@ -59,13 +69,7 @@ body {
 
 #cards_collection, #new_deck {
     .tabs-panel {
-        &:before, &:after {
-            content: " ";
-            display: table;
-        }
-        &:after {
-            clear: both;
-        }
+        @include before-after-mixin;
         .costs {
             margin-bottom: 10px;
             p:nth-of-type(1) {
@@ -117,13 +121,7 @@ body {
     background: #FFF;
     padding: 10px;
     margin: 10px 0;
-    &:before, &:after {
-        content: " ";
-        display: table;
-    }
-    &:after {
-        clear: both;
-    }
+    @include before-after-mixin;
 }
 
 #deck {
@@ -138,13 +136,7 @@ body {
         margin-left: 300px;
         .cards {
             margin-bottom: 10px;
-            &:before, &:after {
-                content: " ";
-                display: table;
-            }
-            &:after {
-                clear: both;
-            }
+            @include before-after-mixin;
             .card {
                 float: left;
                 width: 16.5%;

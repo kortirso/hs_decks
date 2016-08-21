@@ -19,6 +19,7 @@ class Deck < ApplicationRecord
         deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id
         deck.build_positions(positions_params)
         deck.calc_price
+        deck.check_deck_format
         return true
     end
 
@@ -26,7 +27,6 @@ class Deck < ApplicationRecord
         positions, t = [], Time.current
         positions_params.each { |pos| positions.push "(#{pos[0].to_i}, '#{self.id}', 'Deck', '#{pos[1].to_i}', '#{t}', '#{t}')" if pos[1].to_i > 0 }
         Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, created_at, updated_at) VALUES #{positions.join(", ")}"
-        ## todo: add removing cards
     end
 
     def refresh(params)
@@ -36,7 +36,7 @@ class Deck < ApplicationRecord
         self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author']
         self.update_positions(positions_params)
         self.calc_price
-        ## todo: check all cards for format changing
+        self.check_deck_format
         return true
     end
 
@@ -44,7 +44,6 @@ class Deck < ApplicationRecord
         cards = cards.collect { |pos| [pos[0].strip.to_i, pos[1].strip.to_i] }
         cards_ids = cards.collect { |pos| pos[0] }
         old_ids = self.positions.collect_ids.collect { |pos| pos[0] }
-
         old_ids.each do |pos|
             if cards_ids.include?(pos) && cards[cards_ids.index(pos)][1] > 0
                 self.positions.find_by(card_id: pos).update(amount: cards[cards_ids.index(pos)][1])
@@ -67,7 +66,7 @@ class Deck < ApplicationRecord
 
     def check_deck_format
         free_cards = 0
-        self.cards.includes(:collection).each { |card| free_cards += 1 if card.collection.wild_format? }
+        self.cards.each { |card| free_cards += 1 if card.wild_format? }
         self.update(formats: 'wild') if free_cards > 0
     end
 

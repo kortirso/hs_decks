@@ -19,6 +19,7 @@ gem 'http_accept_language'
 gem 'activerecord-import'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
+gem 'whenever'
 
 group :development, :test do
     gem 'rspec-rails'

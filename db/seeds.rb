@@ -8,7 +8,7 @@ if Collection.all.size == 0
         collection = Collection.new name: collection_name
         set_cards = result[collection_name]
         set_cards.each do |card|
-            collection.cards.build cardId: card['cardId'], name: card['name'], type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], image: card['img']
+            collection.cards.build cardId: card['cardId'], name_en: card['name'], type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], image_en: card['img']
         end
         collections << collection
     end

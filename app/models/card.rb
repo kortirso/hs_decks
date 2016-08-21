@@ -33,18 +33,26 @@ class Card < ApplicationRecord
     end
 
     def self.check_cards_format
-        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') }
+        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') unless collection.cards.last.wild_format? }
     end
 
     def self.check_locale(locale)
-        result = Message.new(locale + locale.upcase).get_request
+        result = Message.new(locale).get_request
         Collection.all.includes(:cards).each do |collection|
             result[collection.name].each do |card|
                 current = collection.cards.find_by(cardId: card['cardId'])
-                current["name_#{locale}"] = card['name']
-                current["image_#{locale}"] = card['img']
-                current.save
+                current.refresh_params(locale, card) if current
             end
         end
+    end
+
+    def refresh_params(locale, card)
+        self["name_#{locale}"] = card['name']
+        self["image_#{locale}"] = card['img']
+        self.type = card['type']
+        self.cost = card['cost']
+        self.playerClass = card['playerClass']
+        self.rarity = card['rarity']
+        self.save if self.changed?
     end
 end

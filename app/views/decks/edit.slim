@@ -41,7 +41,7 @@
                 ul#new-cards-tabs.tabs data-tabs=''
                     - classes_list.each_with_index do |name, index|
                         li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
-                            = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
                 .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"

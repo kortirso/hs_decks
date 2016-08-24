@@ -13,7 +13,7 @@
     ul#cards-tabs.tabs data-tabs=''
         - classes_list.each_with_index do |name, index|
             li.tabs-title class="#{'is-active' if index == 0}"
-                = link_to name, "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+                = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
     .tabs-content#tabs-content data-tabs-content='cards-tabs'
         = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
             = hidden_field_tag :direction, 0

@@ -459,3 +459,14 @@ body {
         }
     }
 }
+
+#cards-tabs, #new-cards-tabs {
+    .tabs-title {
+        a {
+            padding: 2px;
+        }
+        &.is-active a {
+            box-shadow: inset 0 0 0 2px #2199e8;
+        }
+    }
+}

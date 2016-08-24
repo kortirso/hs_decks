@@ -10,6 +10,7 @@
         span= t('general.tabs_2.collection')
         span= select_tag :collection, options_for_select(Collection.all.order(id: :asc).collect { |c| c.name }), prompt: 'All'
         span= link_to t('buttons.set_free'), '', id: 'free_existed', class: 'button small', 'data-turbolinks': 'false'
+    = submit_tag t('buttons.save'), class: 'button', 'data-turbolinks': 'false'
     ul#cards-tabs.tabs data-tabs=''
         - classes_list.each_with_index do |name, index|
             li.tabs-title class="#{'is-active' if index == 0}"

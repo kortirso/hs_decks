@@ -13,10 +13,15 @@ $.fn.mana_curve = function (amount) {
         });
     }
     else {
-        $('#mana_curve .col').each(function() {
-            $(this).children('.inner_col').children('.filled').css('height', '0');
-        });
+        mana_curve_reset();
     }
+}
+
+function mana_curve_reset() {
+    $('#mana_curve .col').each(function() {
+        $(this).children('.count').html('0');
+        $(this).children('.inner_col').children('.filled').css('height', '0');
+    });
 }
 
 $(function() {
@@ -137,6 +142,7 @@ $(function() {
 
     $('select#playerClass').on('change', function() {
         $('#card_amount').html('0');
+        mana_curve_reset();
 
         $('#new-cards-tabs li.is-active a').attr('aria-selected', false);
         $('#new-cards-tabs li.is-active').removeClass('is-active');
@@ -157,6 +163,8 @@ $(function() {
 
     $('select#formats').on('change', function() {
         $('#card_amount').html('0');
+        mana_curve_reset();
+        
         $('#new-tabs-content .tabs-panel label').removeClass('single').removeClass('double').removeClass('none').addClass('none');
         $('#new-tabs-content .tabs-panel input').val(0);
         

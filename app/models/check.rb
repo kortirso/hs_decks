@@ -77,7 +77,6 @@ class Check < ApplicationRecord
     end
 
     def limitations(params, success, dust, lines)
-        success = success * 100 / 30
         if (params['success'].empty? || !params['success'].empty? && success >= params['success'].to_i) && (params['dust'].empty? || !params['dust'].empty? && dust <= params['dust'].to_i)
             self.update(success: success, dust: dust)
             Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, created_at, updated_at) VALUES #{lines.join(", ")}"

@@ -23,7 +23,7 @@ p= t('general.tabs_4.p_2')
         tbody
             - @checks.each do |check|
                 tr
-                    td= "#{check.success}%"
+                    td= "#{check.success}/30"
                     td= check.dust
                     td= check.deck.name
                     td= check.deck.playerClass

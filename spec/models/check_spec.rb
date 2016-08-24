@@ -37,7 +37,7 @@ RSpec.describe Check, type: :model do
                 let(:dust) { 1000 }
 
                 it 'returns updated success rate' do
-                    expect { check.limitations(new_params, success, dust, lines) }.to change(check, :success).from(0).to(33)
+                    expect { check.limitations(new_params, success, dust, lines) }.to change(check, :success).from(0).to(10)
                 end
 
                 it 'and returns updated dust rate' do

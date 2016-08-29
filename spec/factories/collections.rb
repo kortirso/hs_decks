@@ -1,6 +1,7 @@
 FactoryGirl.define do
     factory :collection do
-        name 'Basic'
+        name_en 'Basic'
+        name_ru 'Базовый набор'
         formats 'standard'
 
         trait :wild_collection do

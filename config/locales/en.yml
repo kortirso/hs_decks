@@ -20,6 +20,7 @@ en:
     enter: 'Sign In'
     minimal: 'Minimal password length - 6 symbols'
   general:
+    all: 'All'
     tabs_1:
       tab: 'General info'
       head: 'This is your personal page with cards and decks.'

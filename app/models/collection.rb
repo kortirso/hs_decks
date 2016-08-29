@@ -1,7 +1,7 @@
 class Collection < ApplicationRecord
     has_many :cards, dependent: :destroy
     
-    validates :name, :formats, presence: true
+    validates :name_en, :name_ru, :formats, presence: true
     validates :formats, inclusion: { in: %w(standard wild) }
 
     scope :of_format, -> (format) { where formats: format }
@@ -19,7 +19,7 @@ class Collection < ApplicationRecord
     end
 
     def add_new_cards
-        Message.new.get_request[self.name].each do |card|
+        Message.new.get_request[self.name_en].each do |card|
             self.cards.create cardId: card['cardId'], name_en: card['name'], type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], image_en: card['img']
         end
     end

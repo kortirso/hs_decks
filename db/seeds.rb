@@ -4,9 +4,9 @@ if Collection.all.size == 0
 
     Collection.all.destroy_all
     Deck.all.destroy_all
-    %w(Basic Classic Promo Reward Naxxramas Goblins\ vs\ Gnomes Blackrock\ Mountain The\ Grand\ Tournament The\ League\ of\ Explorers Whispers\ of\ the\ Old\ Gods Karazhan).each do |collection_name|
-        collection = Collection.new name: collection_name
-        set_cards = result[collection_name]
+    [['Basic', 'Базовый набор'], ['Classic', 'Классический набор'], ['Promo', 'Награды'], ['Reward', 'Призовые карты'], ['Naxxramas', 'Наксрамас'], ['Goblins vs Gnomes', 'Гоблины и Гномы'], ['Blackrock Mountain', 'Черная Гора'], ['The Grand Tournament', 'Большой Турнир'], ['The League of Explorers', 'Лига Исследователей'], ['Whispers of the Old Gods', 'Древние Боги'], ['Karazhan', 'Каражан']].each do |collection_name|
+        collection = Collection.new name_en: collection_name[0], name_ru: collection_name[1]
+        set_cards = result[collection_name[0]]
         set_cards.each do |card|
             collection.cards.build cardId: card['cardId'], name_en: card['name'], type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], image_en: card['img']
         end
@@ -14,7 +14,7 @@ if Collection.all.size == 0
     end
     Collection.import collections, recursive: true
 
-    %w(Promo Reward Naxxramas Goblins\ vs\ Gnomes).each { |collection_name| Collection.find_by(name: collection_name).update(formats: 'wild') }
+    %w(Promo Reward Naxxramas Goblins\ vs\ Gnomes).each { |collection_name| Collection.find_by(name_en: collection_name).update(formats: 'wild') }
     Card.check_cards_format
     Deck.check_format
 end

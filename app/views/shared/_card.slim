@@ -5,7 +5,8 @@
             - checks = ids.include?(card.id)
             - amount = checks ? positions[ids.index(card.id)][1] : 0
             - card_name = card["name_#{locale}"]
-            .card class="mana_#{card.cost} #{card.collection.name.split(' ').join('_')} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
+            - collection_name = card.collection["name_#{locale}"]
+            .card class="mana_#{card.cost} #{collection_name.split(' ').join('_')} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
                 .image style="background-image: url('#{card.image_en}');"
                     .card-shadow
                 .inner

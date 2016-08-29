@@ -1,6 +1,7 @@
 RSpec.describe Collection, type: :model do
     it { should have_many :cards }
-    it { should validate_presence_of :name }
+    it { should validate_presence_of :name_en }
+    it { should validate_presence_of :name_ru }
     it { should validate_presence_of :formats }
     it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
 

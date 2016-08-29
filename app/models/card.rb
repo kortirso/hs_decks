@@ -39,7 +39,7 @@ class Card < ApplicationRecord
     def self.check_locale(locale)
         result = Message.new(locale).get_request
         Collection.all.includes(:cards).each do |collection|
-            result[collection.name].each do |card|
+            result[collection.name_en].each do |card|
                 current = collection.cards.find_by(cardId: card['cardId'])
                 current.refresh_params(locale, card) if current
             end

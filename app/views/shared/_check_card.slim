@@ -1,5 +1,5 @@
 - ids = positions.collect { |elem| elem[0] }
-- cards.each do |card|
+- cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
     - amount = positions[ids.index(card.id)][1]
     - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
     .card class="#{card.rarity} #{card_class unless deck_ids.nil?}"

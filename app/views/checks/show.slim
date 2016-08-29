@@ -34,34 +34,10 @@
                     = @deck.caption
         .check
             h5= t('check.h5_1')
-            - deck_ids = @positions.collect { |elem| elem[0] }
-            - @deck.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
-                .card class="#{card.rarity}"
-                    .image style="background-image: url('#{card.image_en}');"
-                        .card-shadow
-                    .inner
-                        .lab class="#{@positions[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'} mana_#{card.cost}"
-                            = card["name_#{@locale}"]
+            = render 'shared/check_card', cards: @deck.cards, locale: @locale, positions: @positions, deck_ids: nil
         .check
             h5= t('check.h5_2')
-            - check_ids = @lines.collect { |elem| elem[0] }
-            - @check.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
-                - amount = @lines[check_ids.index(card.id)][1]
-                - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
-                .card class="#{card.rarity} #{card_class}"
-                    .image style="background-image: url('#{card.image_en}');"
-                        .card-shadow
-                    .inner
-                        - card_class = 'single' if @positions[deck_ids.index(card.id)][1] == 1 && card_class == 'double'
-                        .lab class="#{card_class} mana_#{card.cost}"
-                            = card["name_#{@locale}"]
+            = render 'shared/check_card', cards: @check.cards, locale: @locale, positions: @lines, deck_ids: @positions.collect { |elem| elem[0] }
         .check
             h5= t('check.h5_3')
-            - deck_ids = @subs.collect { |elem| elem[0] }
-            - @check.substitution.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
-                .card class="#{card.rarity}"
-                    .image style="background-image: url('#{card.image_en}');"
-                        .card-shadow
-                    .inner
-                        .lab class="#{@subs[deck_ids.index(card.id)][1] == 1 ? 'single' : 'double'} mana_#{card.cost}"
-                            = card["name_#{@locale}"]
+            = render 'shared/check_card', cards: @check.substitution.cards, locale: @locale, positions: @subs, deck_ids: nil

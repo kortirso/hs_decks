@@ -1,0 +1,10 @@
+- cards.each do |card|
+    - card_name = card["name_#{locale}"]
+    - checks = ids.include?(card.id)
+    - amount = (checks ? positions[ids.index(card.id)][1] : 0)
+    .card class="mana_#{card.cost} #{card.rarity} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
+        .image style="background-image: url('#{card.image_en}');"
+            .card-shadow
+        .inner
+            = check_box_tag card.id, value = "#{checks ? amount : 0}", checked = checks
+            = label_tag card.id, card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}"

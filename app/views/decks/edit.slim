@@ -13,16 +13,8 @@
                     = t('new_deck.p_2')
                     span#card_amount= '30'
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
-                #cards_list
-                    - @deck.positions.includes(:card).with_sorted_cards(@locale).each do |card|
-                        - card_name = card["name_#{@locale}"]
-                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
-                            .image style="background-image: url('#{card.image_en}');"
-                                .card-shadow
-                            .inner
-                                - amount = @positions[ids.index(card.id)][1]
-                                = check_box_tag card.id, value = "#{amount}", checked = true
-                                = label_tag card.id, card["name_#{@locale}"], class: "#{amount == 1 ? 'single' : 'double'} mana_#{card.cost}"
+                #cards_list                        
+                    = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
                 = submit_tag t('buttons.update'), class: 'button', 'data-turbolinks': 'false'
             .right_side
                 p= t('new_deck.change_click')
@@ -46,16 +38,4 @@
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
                             - name = nil if name == 'Common'
-                            - cards = @cards.select { |card| card.playerClass == name }
-                            - (0..7).each do |cost|
-                                .costs class="cost_#{cost}"
-                                    - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
-                                    - cards_with_cost.sort_by{ |card| [card.cost, card["name_#{@locale}"]] }.each do |card|
-                                        - card_name = card["name_#{@locale}"]
-                                        .card class="mana_#{card.cost} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
-                                            .image style="background-image: url('#{card.image_en}');"
-                                                .card-shadow
-                                            .inner
-                                                - checks = ids.include?(card.id)
-                                                = check_box_tag card.id, value = "#{checks ? @positions[ids.index(card.id)][1] : 0}", checked = checks
-                                                = label_tag card.id, card["name_#{@locale}"], class: "#{checks ? (@positions[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'}  mana_#{card.cost}"
+                            = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @positions, ids: ids

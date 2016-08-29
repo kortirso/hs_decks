@@ -1,0 +1,13 @@
+- (0..7).each do |cost|
+    .costs class="cost_#{cost}"
+        - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
+        - cards_with_cost.sort_by{ |card| [card.cost, card["name_#{locale}"]] }.each do |card|
+            - checks = ids.include?(card.id)
+            - amount = checks ? positions[ids.index(card.id)][1] : 0
+            - card_name = card["name_#{locale}"]
+            .card class="mana_#{card.cost} #{card.collection.name.split(' ').join('_')} #{card.rarity} #{card.formats} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
+                .image style="background-image: url('#{card.image_en}');"
+                    .card-shadow
+                .inner
+                    = check_box_tag card.id, value = "#{checks ? amount : 0}", checked = checks
+                    = label_tag card.id, card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}"

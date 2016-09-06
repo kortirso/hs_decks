@@ -1,33 +1,36 @@
 - provide(:title, 'Welcome')
 .inside
     .shadow
-.container
-    .row
-        .small-12.small-6.small-offset-3.medium-4.medium-offset-8.columns
-            .block#login
-                .row
-                    = simple_form_for(User.new, as: :user, url: session_path(:user)) do |f|
-                        .small-12.columns
-                            p= t('auth.auth')
-                        .small-12.columns
-                            = f.input :email, autofocus: true, label: false, placeholder: 'Email'
-                        .small-8.columns
-                            = f.input :password, autocomplete: 'off', label: false, placeholder: t('auth.pass')
-                        .small-4.columns
-                            = f.button :submit, t('auth.enter'), class: 'button', id: 'authorization'
-        .small-12.small-6.small-offset-3.medium-4.medium-offset-8.columns
-            .block#signup
-                .row
-                    = simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f|
-                        .small-12.columns
-                            p= t('auth.reg')
-                        .small-12.columns
-                            = f.input :username, required: true, label: false, placeholder: t('auth.username')
-                        .small-12.columns
-                            = f.input :email, required: true, label: false, placeholder: 'Email'
-                        .small-12.columns
-                            = f.input :password, required: true, label: false, placeholder: t('auth.pass')
-                        .small-12.columns
-                            = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: t('auth.confirm')
-                        .small-12.small-5.small-offset-7.columns
-                            =  f.button :submit, t('auth.reg'), class: 'button', id: 'registration'
+.row
+    .medium-6.columns
+        #caption
+            h3 HS_DECKS - приложение для подбора наиболее подходящих колод для игры в HearthStone на основе имеющихся у игрока карт.
+            h4 Версия приложения - 0.2 (alpha 2).
+            p В данной версии приложения реализованы основные функции для сохранения коллекции карт и для анализа колод, которые доступны после регистрации. Регистрация (подтверждение почты не требуется) необходима для сохранения коллекции карт пользователя, в последующем часть функционала будет доступна и для незарегистрированных пользователей.
+    .small-12.small-6.small-offset-3.medium-4.medium-offset-2.columns
+        .block#login
+            .row
+                = simple_form_for(User.new, as: :user, url: session_path(:user)) do |f|
+                    .small-12.columns
+                        p= t('auth.auth')
+                    .small-12.columns
+                        = f.input :email, autofocus: true, label: false, placeholder: 'Email'
+                    .small-8.columns
+                        = f.input :password, autocomplete: 'off', label: false, placeholder: t('auth.pass')
+                    .small-4.columns
+                        = f.button :submit, t('auth.enter'), class: 'button', id: 'authorization'
+        .block#signup
+            .row
+                = simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f|
+                    .small-12.columns
+                        p= t('auth.reg')
+                    .small-12.columns
+                        = f.input :username, required: true, label: false, placeholder: t('auth.username')
+                    .small-12.columns
+                        = f.input :email, required: true, label: false, placeholder: 'Email'
+                    .small-12.columns
+                        = f.input :password, required: true, label: false, placeholder: t('auth.pass')
+                    .small-12.columns
+                        = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: t('auth.confirm')
+                    .small-12.small-5.small-offset-7.columns
+                        =  f.button :submit, t('auth.reg'), class: 'button', id: 'registration'

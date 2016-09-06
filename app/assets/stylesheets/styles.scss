@@ -54,7 +54,7 @@ body {
         background-position: center;
         .shadow {
             position: fixed;
-            //background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.5);
             top: 0;
             left: 0;
             width: 100%;
@@ -69,6 +69,10 @@ body {
     .row {
         max-width: 87.5rem;
     }
+}
+
+#caption {
+    color: #FFF;
 }
 
 #cards_collection, #new_deck {

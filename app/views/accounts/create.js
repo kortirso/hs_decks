@@ -1,0 +1,3 @@
+$(function() {
+    $('#saveModal').foundation('open');
+});

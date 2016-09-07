@@ -7,7 +7,7 @@
         = form_tag({ controller: 'decks', action: 'create' }, method: 'post') do
             .left_side
                 h4= t('new_deck.head')
-                p= t('new_deck.p_1')
+                /p= t('new_deck.p_1')
                 p
                     = t('new_deck.p_2')
                     span#card_amount= '0'

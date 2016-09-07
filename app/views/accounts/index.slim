@@ -14,8 +14,4 @@
         #panel3.tabs-panel= render 'panel_decks'
         #panel4.tabs-panel= render 'panel_analyze'
         #panel5.tabs-panel= render 'panel_about'
-    #saveModal.reveal data-reveal=''
-        h1 Карты сохранены!
-        p Отлично, ваша коллекция карт обновлена.
-        button.close-button aria-label=('Close modal') data-close='' type='button'
-            span aria-hidden='true' &times;
+= render 'shared/save_modal'

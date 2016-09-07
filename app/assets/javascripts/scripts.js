@@ -200,9 +200,11 @@ $(function() {
 
     $('.class_existed').on('click', function(e) {
         e.preventDefault();
-        name = $(this).attr('class').split(' ').pop()
+        name = $(this).attr('class').split(' ').pop();
         $('.' + name + ' input').val(2).prop('checked', true);
         $('.' + name + ' label').removeClass('none').removeClass('single').removeClass('double').addClass('double');
+        $('.' + name + ' .Legendary input').val(1).prop('checked', true);
+        $('.' + name + ' .Legendary label').removeClass('none').removeClass('single').removeClass('double').addClass('single');
     });
 
     $('.class_unexisted').on('click', function(e) {

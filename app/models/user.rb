@@ -21,7 +21,7 @@ class User < ApplicationRecord
         if cards.size > 0
             cards_ids = cards.collect { |i| i[0] }
             old_ids = old.collect { |i| i[0] }
-            self.update_collection(old_ids, cards_ids, cards, old, params[0][0][1].to_i)
+            self.update_collection(old_ids, cards_ids, cards, old, params[0][0][1].to_i) unless params[0][0].nil?
             self.adding_to_collection(old_ids, cards_ids, cards)
             ## todo removing from collection if amount -> 0
         end

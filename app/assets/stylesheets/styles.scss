@@ -202,6 +202,31 @@ body {
                         background-image: image-url('double.png');
                     }
                 }
+                label {
+                    width: 100%;
+                    height: 230px;
+                    background-size: 100% !important;
+                    background-position-y: -30px !important;
+                    &:before {
+                        position: absolute;
+                        content: '';
+                        top: 0;
+                        right: 29px;
+                        width: 29px;
+                        height: 29px;
+                    }
+                    &.base_1:before {
+                        background-image: image-url('mana_1.png');
+                    }
+                    &.base_2:before {
+                        background-image: image-url('mana_2.png');
+                    }
+                    &:after {
+                        top: 0;
+                        right: 0;
+                        background-repeat: no-repeat;
+                    }
+                }
                 p {
                     margin: 0;
                 }

@@ -20,7 +20,7 @@
                 = f.input :password, autocomplete: 'off', label: false, placeholder: t('auth.pass')
             .small-12.columns
                 = f.button :submit, t('auth.enter'), class: 'button', id: 'authorization'
-        button.close-button aria-label=('Close modal') data-close="" type='button'
+        button.close-button aria-label=('Close modal') data-close='' type='button'
             span aria-hidden='true' &times;
     #signup.reveal data-reveal=''
         = simple_form_for(User.new, as: :user, url: registration_path(:user)) do |f|
@@ -36,5 +36,5 @@
                 = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: t('auth.confirm')
             .small-12.small-5.small-offset-7.columns
                 =  f.button :submit, t('auth.reg'), class: 'button', id: 'registration'
-        button.close-button aria-label=('Close modal') data-close="" type='button'
+        button.close-button aria-label=('Close modal') data-close='' type='button'
             span aria-hidden='true' &times;

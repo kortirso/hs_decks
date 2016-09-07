@@ -73,6 +73,23 @@ body {
 
 #caption {
     color: #FFF;
+    padding: 20px;
+    position: relative;
+    .inner {
+        margin-top: 40px;
+    }
+    .buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        a {
+            margin-left: 10px;
+        }
+    }
+}
+
+.reveal-overlay {
+    @include scroll-bar;
 }
 
 #cards_collection, #new_deck {

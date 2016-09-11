@@ -4,7 +4,7 @@ p= t('general.tabs_4.p_2')
 = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
     .columns.small-3= text_field_tag :success, nil, placeholder: t('general.tabs_4.p_3')
     .columns.small-3= text_field_tag :dust, nil, placeholder: t('general.tabs_4.p_4')
-    .columns.small-3= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)), prompt: 'All or spesific class'
+    .columns.small-3= select_tag :playerClass, options_for_select(Player.names(@locale)), prompt: 'All or spesific class'
     .columns.small-3= select_tag :formats, options_for_select(%w(standard wild))
     = submit_tag t('buttons.check_decks'), class: 'button', 'data-turbolinks': 'false'
 #checks
@@ -26,7 +26,7 @@ p= t('general.tabs_4.p_2')
                     td= "#{check.success}/30"
                     td= check.dust
                     td= check.deck.name
-                    td= check.deck.playerClass
+                    td= check.deck.player.name(@locale)
                     td= check.deck.formats
                     td= check.deck.author
                     td= check.deck.user.username

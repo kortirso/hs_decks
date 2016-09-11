@@ -2,6 +2,7 @@ class Card < ApplicationRecord
     self.inheritance_column = nil
 
     belongs_to :collection
+    belongs_to :player
 
     has_many :positions, dependent: :destroy
     has_many :decks, through: :positions, source: :positionable, source_type: 'Deck'
@@ -52,6 +53,7 @@ class Card < ApplicationRecord
         self.type = card['type']
         self.cost = card['cost']
         self.playerClass = card['playerClass']
+        self.player_id = Player.find_by(name_en: card['playerClass']) unless card['playerClass'].nil?
         self.rarity = card['rarity']
         self.save if self.changed?
     end

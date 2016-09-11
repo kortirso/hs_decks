@@ -2,10 +2,11 @@ class Deck < ApplicationRecord
     include Positionable
     
     belongs_to :user
+    belongs_to :player
 
     has_many :checks, dependent: :destroy
 
-    validates :name, :playerClass, :user_id, :formats, presence: true
+    validates :name, :playerClass, :user_id, :formats, :player_id, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
     validates :formats, inclusion: { in: %w(standard wild) }
 
@@ -16,7 +17,7 @@ class Deck < ApplicationRecord
         data = Parametrize.deck_getting_params(params)
         deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params)
-        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id
+        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id, player_id: Player.find_by(name_en: deck_params['playerClass']).id
         deck.build_positions(positions_params)
         deck.calc_price
         deck.check_deck_format

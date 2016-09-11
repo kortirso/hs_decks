@@ -6,5 +6,6 @@ FactoryGirl.define do
         author ''
         price 5000
         association :user
+        association :player
     end
 end

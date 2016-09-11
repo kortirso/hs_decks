@@ -1,5 +1,6 @@
 RSpec.describe Deck, type: :model do
     it { should belong_to :user }
+    it { should belong_to :player }
     it { should have_many :positions }
     it { should have_many(:cards).through(:positions) }
     it { should have_many :checks }
@@ -7,6 +8,7 @@ RSpec.describe Deck, type: :model do
     it { should validate_presence_of :playerClass }
     it { should validate_presence_of :user_id }
     it { should validate_presence_of :formats }
+    it { should validate_presence_of :player_id }
     it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)) }
     it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
 

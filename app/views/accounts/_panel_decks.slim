@@ -17,7 +17,7 @@ p= t('general.tabs_3.p_1')
                 tr
                     td= index + 1
                     td= deck.name
-                    td= deck.playerClass
+                    td= deck.player.name(@locale)
                     td= deck.price
                     td= deck.formats
                     td= deck.author

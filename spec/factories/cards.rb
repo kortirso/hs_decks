@@ -8,6 +8,7 @@ FactoryGirl.define do
         rarity 'Free'
         formats 'standard'
         association :collection
+        association :player
 
         trait :wild_card do
             formats 'wild'

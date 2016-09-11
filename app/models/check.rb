@@ -10,7 +10,7 @@ class Check < ApplicationRecord
 
     scope :of_user, -> (user_id) { where user_id: user_id }
 
-    def self.build(user_id, params)
+    def self.build(user_id, params, locale)
         params, user, checks = Parametrize.check_getting_params(params), User.find(user_id), []
         user.checks.destroy_all
         Check.getting_decks(params).each do |deck|
@@ -18,7 +18,7 @@ class Check < ApplicationRecord
             check = check.verify_deck(user.positions.collect_ids, deck.positions.collect_ids_with_rarity, params)
             unless check.nil?
                 checks.push check.success
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), button_2: I18n.t('buttons.view_deck')
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), button_2: I18n.t('buttons.view_deck'), player: check.deck.player.name(locale)
             end
         end
     end
@@ -91,7 +91,7 @@ class Check < ApplicationRecord
 
     def self.getting_decks(params)
         decks = Deck.all.includes(:positions)
-        decks = decks.of_player_class(params['playerClass']) unless params['playerClass'].empty?
+        decks = decks.of_player_class(Player.return_en(params['playerClass'])) unless params['playerClass'].empty?
         decks = decks.of_format('standard') if params['formats'] == 'standard'
         decks
     end

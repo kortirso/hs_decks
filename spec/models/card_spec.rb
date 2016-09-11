@@ -1,5 +1,6 @@
 RSpec.describe Card, type: :model do
     it { should belong_to :collection }
+    it { should belong_to :player }
     it { should validate_presence_of :cardId }
     it { should validate_presence_of :name_en }
     it { should validate_presence_of :type }

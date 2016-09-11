@@ -11,7 +11,7 @@ class ChecksController < ApplicationController
     end
 
     def create
-        Check.build(current_user.id, params)
+        Check.build(current_user.id, params, @locale)
         head :ok
     end
 

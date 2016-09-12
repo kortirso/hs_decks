@@ -262,6 +262,12 @@ body {
             display: block;
             &.none {
                 opacity: 0.5;
+                &.uncrafted {
+                    opacity: 0.75;
+                    .inner {
+                        background: rgba(0, 0, 255, 1);
+                    }
+                }
             }
             &.single {
                 opacity: 0.5;

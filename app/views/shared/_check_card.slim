@@ -2,7 +2,7 @@
 - cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
     - amount = positions[ids.index(card.id)][1]
     - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
-    .card class="#{card.rarity} #{card_class unless deck_ids.nil?}"
+    .card class="#{card.rarity} #{card_class unless deck_ids.nil?} #{'uncrafted' unless card.is_crafted?}"
         .image style="background-image: url('#{card.image_en}');"
             .card-shadow
         .inner

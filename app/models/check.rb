@@ -39,12 +39,12 @@ class Check < ApplicationRecord
                     success = 2
                 else
                     result += 1
-                    dust += DustPrice.calc(positions[pos_ids.index(pos)][2])
+                    dust += DustPrice.calc(positions[pos_ids.index(pos)][2]) if positions[pos_ids.index(pos)][3]
                     success = 1
                 end
             else
                 success = 0
-                dust += DustPrice.calc(positions[pos_ids.index(pos)][2], positions[pos_ids.index(pos)][1])
+                dust += DustPrice.calc(positions[pos_ids.index(pos)][2], positions[pos_ids.index(pos)][1]) if positions[pos_ids.index(pos)][3]
             end
             lines.push "('#{pos}', #{self.id}, 'Check', '#{success}', '#{t}', '#{t}')"
         end

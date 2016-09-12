@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911120142) do
+ActiveRecord::Schema.define(version: 20160912124029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160911120142) do
     t.string   "name_ru"
     t.string   "image_ru"
     t.integer  "player_id"
+    t.boolean  "craft",         default: true
     t.index ["collection_id"], name: "index_cards_on_collection_id", using: :btree
     t.index ["player_id"], name: "index_cards_on_player_id", using: :btree
   end
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20160911120142) do
     t.datetime "updated_at",                      null: false
     t.string   "formats",    default: "standard", null: false
     t.string   "name_ru"
+    t.boolean  "adventure",  default: false
   end
 
   create_table "decks", force: :cascade do |t|

@@ -3,6 +3,7 @@ FactoryGirl.define do
         name_en 'Basic'
         name_ru 'Базовый набор'
         formats 'standard'
+        adventure false
 
         trait :wild_collection do
             formats 'wild'

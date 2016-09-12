@@ -52,6 +52,19 @@ RSpec.describe Card, type: :model do
             end
         end
 
+        context '.is_crafted?' do
+            let!(:card_1) { create :card }
+            let!(:card_2) { create :card, craft: false }
+
+            it 'should return true if it is crafted' do
+                expect(card_1.is_crafted?).to eq true
+            end
+
+            it 'should return false if it is not crafted' do
+                expect(card_2.is_crafted?).to eq false
+            end
+        end
+
         context '.check_cards_format' do
             let!(:collection) { create :collection }
             let!(:cards) { create_list(:card, 3, collection: collection) }

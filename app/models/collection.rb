@@ -5,9 +5,18 @@ class Collection < ApplicationRecord
     validates :formats, inclusion: { in: %w(standard wild) }
 
     scope :of_format, -> (format) { where formats: format }
+    scope :adventures, -> { where adventure: true }
+
+    def name(locale)
+        self["name_#{locale}"]
+    end
 
     def wild_format?
         self.formats == 'wild'
+    end
+
+    def is_adventure?
+        self.adventure
     end
 
     def self.added

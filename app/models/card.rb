@@ -24,6 +24,7 @@ class Card < ApplicationRecord
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_rarity, -> (rarity) { where rarity: rarity }
     scope :of_format, -> (format) { where formats: format }
+    scope :crafted, -> { where craft: true }
 
     def self.with_cost(cost)
         return cost < 7 ? where(cost: cost) : where('cost >= 7')
@@ -33,8 +34,16 @@ class Card < ApplicationRecord
         self.formats == 'wild'
     end
 
+    def is_crafted?
+        self.craft
+    end
+
     def self.check_cards_format
         Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') unless collection.cards.last.wild_format? }
+    end
+
+    def self.check_cards_crafted
+        Collection.adventures.includes(:cards).each { |collection| collection.cards.update_all(craft: false) if collection.cards.last.is_crafted? }
     end
 
     def self.check_locale(locale)

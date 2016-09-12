@@ -9,6 +9,7 @@ FactoryGirl.define do
         formats 'standard'
         association :collection
         association :player
+        craft true
 
         trait :wild_card do
             formats 'wild'

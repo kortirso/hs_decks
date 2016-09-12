@@ -40,7 +40,7 @@ RSpec.describe Position, type: :model do
             let!(:positions) { create_list(:position_for_user, 2, positionable: user) }
 
             it 'should return cards id and amount in users collection' do
-                expect(user.positions.collect_ids_with_rarity).to eq [[positions.first.card_id, positions.first.amount, positions.first.card.rarity], [positions.last.card_id, positions.last.amount, positions.last.card.rarity]]
+                expect(user.positions.collect_ids_with_rarity).to eq [[positions.first.card_id, positions.first.amount, positions.first.card.rarity, positions.first.card.is_crafted?], [positions.last.card_id, positions.last.amount, positions.last.card.rarity, positions.first.card.is_crafted?]]
             end
         end
 

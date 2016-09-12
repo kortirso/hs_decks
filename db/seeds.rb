@@ -15,6 +15,7 @@ if Collection.all.size == 0
     Collection.import collections, recursive: true
 
     %w(Promo Reward Naxxramas Goblins\ vs\ Gnomes).each { |collection_name| Collection.find_by(name_en: collection_name).update(formats: 'wild') }
+    %w(Naxxramas Blackrock\ Mountain The\ League\ of\ Explorers Karazhan).each { |collection_name| Collection.find_by(name_en: collection_name).update(adventure: true) }
     Card.check_cards_format
     Deck.check_format
 end

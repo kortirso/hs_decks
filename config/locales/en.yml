@@ -89,6 +89,8 @@ en:
     h5_1: 'Expert deck'
     h5_2: 'Deck with your cards'
     h5_3: 'Deck with substitutions'
+    caption_1: 'You can craft this card for a few dust - '
+    caption_2: 'You can not craft this card, it is from adventure - '
   deck:
     h4_1: 'Deck '
     h4_2: ' from expert '

@@ -39,7 +39,7 @@ RSpec.describe ChecksController, type: :controller do
                 end
 
                 it 'and assigns the checks positions to @lines' do
-                    expect(assigns(:lines)).to eq [[lines.card_id, lines.amount]]
+                    expect(assigns(:lines)).to eq [[lines.card_id, lines.amount, lines.caption]]
                 end
 
                 it 'and assigns the substitution positions to @subs' do

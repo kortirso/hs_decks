@@ -213,4 +213,10 @@ $(function() {
         $('.' + name + ' input').val(0);
         $('.' + name + ' label').removeClass('none').removeClass('single').removeClass('double').addClass('none');
     });
+
+    $('.card').mouseenter(function() {
+        $(this).children('.card_caption').show();
+    }).mouseleave(function() {
+        $(this).children('.card_caption').hide();
+    });
 });

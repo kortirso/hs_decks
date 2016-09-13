@@ -256,7 +256,7 @@ body {
     }
     .check {
         float: left;
-        width: 300px;
+        width: 400px;
         margin-top: 10px;
         .card {
             display: block;
@@ -276,6 +276,17 @@ body {
                 .lab {
                     padding: 5px 10px 5px 35px;
                 }
+            }
+            .card_caption {
+                padding: 5px;
+                display: none;
+                position: absolute;
+                left: 100%;
+                top: 0;
+                font-size: 13px;
+                background: #000;
+                color: #FFF;
+                width: 150px;
             }
         }
     }

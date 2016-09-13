@@ -9,3 +9,6 @@
             - card_class = 'single' if !deck_ids.nil? && card_class == 'double' && positions[deck_ids.index(card.id)][1] == 1
             .lab class="#{card_class} mana_#{card.cost}"
                 = card["name_#{locale}"]
+        - if positions[ids.index(card.id)][2] && !positions[ids.index(card.id)][2].empty?
+            .card_caption
+                = positions[ids.index(card.id)][2]

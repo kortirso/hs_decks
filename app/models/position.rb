@@ -11,6 +11,12 @@ class Position < ApplicationRecord
         return ids
     end
 
+    def self.collect_ids_with_caption
+        ids = []
+        all.order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount, pos.caption] }
+        return ids
+    end
+
     def self.collect_ids_with_rarity
         ids = []
         all.includes(:card).order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount, pos.card.rarity, pos.card.is_crafted?] }

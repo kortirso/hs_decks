@@ -6,7 +6,7 @@ class ChecksController < ApplicationController
     def show
         @deck = @check.deck
         @positions = @deck.positions.collect_ids
-        @lines = @check.positions.collect_ids
+        @lines = @check.positions.collect_ids_with_caption
         @subs = @check.substitution.positions.collect_ids
     end
 

@@ -29,7 +29,7 @@ RSpec.describe Check, type: :model do
             let!(:deck) { create :deck, price: 5000 }
             let!(:position) { create :position_for_deck, positionable: deck }
             let!(:check) { create :check, user: user, deck: deck }
-            let(:lines) { ["('#{position.card_id}', '#{check.id}', 'Check', '#{0}', '#{Time.current}', '#{Time.current}')"] }
+            let(:lines) { ["('#{position.card_id}', '#{check.id}', 'Check', '#{0}', '', '#{Time.current}', '#{Time.current}')"] }
 
             context 'without limits' do
                 let(:new_params) { Parametrize.check_getting_params(empty_params) }

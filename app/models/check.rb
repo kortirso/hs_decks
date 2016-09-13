@@ -18,7 +18,7 @@ class Check < ApplicationRecord
             check = check.verify_deck(user.positions.collect_ids, deck.positions.collect_ids_with_rarity, params, locale)
             unless check.nil?
                 checks.push check.success
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), button_2: I18n.t('buttons.view_deck'), player: check.deck.player.name(locale)
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), button_2: I18n.t('buttons.view_deck'), player: check.deck.player.locale_name(locale)
             end
         end
     end
@@ -45,7 +45,7 @@ class Check < ApplicationRecord
                         dust += add_dust
                         caption = "#{I18n.t('check.caption_1')}#{add_dust}"
                     else
-                        caption = "#{I18n.t('check.caption_2')}#{Card.find(positions[pos_ids.index(pos)][0]).collection.name(locale)}"
+                        caption = "#{I18n.t('check.caption_2')}#{Card.find(positions[pos_ids.index(pos)][0]).collection.locale_name(locale)}"
                     end
                     success = 1
                 end
@@ -55,7 +55,7 @@ class Check < ApplicationRecord
                     dust += add_dust
                     caption = "#{I18n.t('check.caption_1')}#{add_dust}"
                 else
-                    caption = "#{I18n.t('check.caption_2')}#{Card.find(positions[pos_ids.index(pos)][0]).collection.name(locale)}"
+                    caption = "#{I18n.t('check.caption_2')}#{Card.find(positions[pos_ids.index(pos)][0]).collection.locale_name(locale)}"
                 end
             end
             lines.push "('#{pos}', #{self.id}, 'Check', '#{success}', '#{caption}', '#{t}', '#{t}')"

@@ -4,7 +4,7 @@ class Player < ApplicationRecord
 
     validates :name_en, :name_ru, presence: true
 
-    def name(locale)
+    def locale_name(locale)
         self["name_#{locale}"]
     end
 

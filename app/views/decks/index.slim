@@ -20,7 +20,7 @@
                 - @decks.order(playerClass: :asc).each do |deck|
                     tr
                         td= deck.name
-                        td= deck.player.name(@locale)
+                        td= deck.player.locale_name(@locale)
                         td= deck.price
                         td= deck.formats
                         td= deck.author

@@ -7,7 +7,7 @@ class Collection < ApplicationRecord
     scope :of_format, -> (format) { where formats: format }
     scope :adventures, -> { where adventure: true }
 
-    def name(locale)
+    def locale_name(locale)
         self["name_#{locale}"]
     end
 

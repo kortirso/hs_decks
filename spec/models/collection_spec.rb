@@ -14,13 +14,13 @@ RSpec.describe Collection, type: :model do
     context 'Methods' do
         let!(:collection) { create :collection }
 
-        context '.name' do
+        context '.locale_name' do
             it 'should return name_en if en locale' do
-                expect(collection.name('en')).to eq collection.name_en
+                expect(collection.locale_name('en')).to eq collection.name_en
             end
 
             it 'should return name_ru if ru locale' do
-                expect(collection.name('ru')).to eq collection.name_ru
+                expect(collection.locale_name('ru')).to eq collection.name_ru
             end
         end
 

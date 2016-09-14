@@ -1,4 +1,26 @@
 RSpec.describe ChecksController, type: :controller do
+    describe 'GET #index' do
+        it_behaves_like 'Check access'
+
+        context 'When user logged in' do
+            sign_in_user
+            let!(:checks) { create_list(:check, 2, user: @current_user) }
+            before { get :index }
+
+            it 'collects an array of checks in @checks' do
+                expect(assigns(:checks)).to match_array(checks)
+            end
+
+            it 'and renders account page' do
+                expect(response).to render_template :index
+            end
+        end
+
+        def do_request
+            get :index
+        end
+    end
+
     describe 'GET #show' do
         it_behaves_like 'Check access'
 

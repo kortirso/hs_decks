@@ -1,0 +1,17 @@
+nav
+    ul.menu
+        li= link_to t('nav.main_page'), root_path
+        - if current_user
+            - if current_user.deck_master?
+                li= link_to t('nav.deck_builder'), decks_path
+            li= link_to t('nav.collection'), collection_path
+        li= link_to t('nav.expert_decks'), expert_decks_path
+        - if current_user
+            li= link_to t('nav.analyze'), checks_path
+        li= link_to t('nav.about'), about_path
+    .buttons
+        - if current_user
+            = link_to t('nav.logout'), destroy_user_session_path, method: :delete, class: 'button'
+        - else
+            a class='button' data-open='login'= t('nav.login')
+            a class='button' data-open='signup'= t('nav.signup')

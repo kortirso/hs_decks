@@ -1,7 +1,5 @@
-- provide(:title, 'Edit deck')
-/.inside
-    .shadow
-.row
+- provide(:title, 'HS_DECKS | Edit Deck Page')
+.page_inner
     #new_deck
         - classes_list = [@deck.playerClass, 'Common']
         = form_tag({ controller: 'decks', action: 'update' }, method: 'patch') do
@@ -15,7 +13,7 @@
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
                 #cards_list                        
                     = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
-                = submit_tag t('buttons.update'), class: 'button', 'data-turbolinks': 'false'
+                = submit_tag t('buttons.update'), class: 'button'
             .right_side
                 p= t('new_deck.change_click')
                 .columns.small-6= text_field_tag :name, nil, placeholder: t('new_deck.deck_name'), value: @deck.name
@@ -33,7 +31,7 @@
                 ul#new-cards-tabs.tabs data-tabs=''
                     - classes_list.each_with_index do |name, index|
                         li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
-                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
                 .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"

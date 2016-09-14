@@ -3,6 +3,11 @@ class ChecksController < ApplicationController
     before_action :find_check, only: :show
     before_action :check_author, only: :show
 
+    def index
+        @checks = current_user.checks.includes(:deck).order(success: :desc)
+        @player_classes = Player.names(@locale)
+    end
+
     def show
         @deck = @check.deck
         @positions = @deck.positions.collect_ids

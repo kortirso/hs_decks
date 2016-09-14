@@ -1,4 +1,14 @@
 en:
+  nav:
+    main_page: 'Main Page'
+    deck_builder: 'Deck Builder'
+    collection: 'Collection'
+    expert_decks: 'Expert Decks'
+    analyze: 'Card Analyze'
+    about: 'About System'
+    login: 'Login'
+    logout: 'Logout'
+    signup: 'SignIn'
   buttons:
     save: 'Save'
     update: 'Update'

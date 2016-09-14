@@ -1,5 +1,5 @@
 class DecksController < ApplicationController
-    before_action :get_access
+    before_action :get_access, except: :show
     before_action :check_user_role, except: :show
     before_action :find_deck, only: [:show, :edit, :update, :destroy]
     before_action :check_deck_author, only: [:edit, :update, :destroy]
@@ -9,7 +9,7 @@ class DecksController < ApplicationController
     end
 
     def show
-        @packs = current_user.positions.collect_ids
+        @packs = current_user.positions.collect_ids if current_user
         @positions = @deck.positions.collect_ids
     end
 

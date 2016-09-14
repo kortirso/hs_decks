@@ -33,38 +33,28 @@ RSpec.describe DecksController, type: :controller do
     end
 
     describe 'GET #show' do
-        it_behaves_like 'Check access'
+        it 'should render 404 if deck does not exist' do
+            get :show, params: { id: 1 }
 
-        context 'When user logged in' do
-            sign_in_user
-
-            it 'should render 404 if deck does not exist' do
-                get :show, params: { id: 1 }
-
-                expect(response).to render_template 'layouts/404'
-            end
-
-            context 'if deck exist' do
-                let!(:deck) { create :deck }
-                let!(:position) { create :position_for_deck, positionable: deck }
-                before { get :show, params: { id: deck.id } }
-
-                it 'assigns the requested deck to @deck' do
-                    expect(assigns(:deck)).to eq deck
-                end
-
-                it 'assigns positions card_id and amount to @positions' do
-                    expect(assigns(:positions)).to eq [[position.card_id, position.amount]]
-                end
-
-                it 'and renders deck page' do
-                    expect(response).to render_template :show
-                end
-            end
+            expect(response).to render_template 'layouts/404'
         end
 
-        def do_request
-            get :show, params: { id: 1 }
+        context 'if deck exist' do
+            let!(:deck) { create :deck }
+            let!(:position) { create :position_for_deck, positionable: deck }
+            before { get :show, params: { id: deck.id } }
+
+            it 'assigns the requested deck to @deck' do
+                expect(assigns(:deck)).to eq deck
+            end
+
+            it 'assigns positions card_id and amount to @positions' do
+                expect(assigns(:positions)).to eq [[position.card_id, position.amount]]
+            end
+
+            it 'and renders deck page' do
+                expect(response).to render_template :show
+            end
         end
     end
 

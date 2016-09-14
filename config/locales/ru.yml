@@ -1,4 +1,14 @@
 ru:
+  nav:
+    main_page: 'Главная'
+    deck_builder: 'Конструктор колод'
+    collection: 'Коллекция'
+    expert_decks: 'Экспертные колоды'
+    analyze: 'Анализ карт'
+    about: 'О системе'
+    login: 'Вход'
+    logout: 'Выход'
+    signup: 'Регистрация'
   buttons:
     save: 'Сохранить'
     update: 'Обновить'

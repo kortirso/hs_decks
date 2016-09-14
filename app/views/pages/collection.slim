@@ -1,0 +1,32 @@
+- provide(:title, 'HS_DECKS | Card Collection')
+.page_inner
+    #cards_collection
+        - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
+        h4= t('general.tabs_2.head')
+        p= t('general.tabs_2.p_1')
+        #filters
+            span
+                strong= t('general.tabs_2.filters')
+            span= t('general.tabs_2.mana_cost')
+            span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('general.all')
+            span= t('general.tabs_2.collection')
+            span= select_tag :collection, options_for_select(Collection.all.order(id: :asc).collect { |c| c.locale_name(@locale) }), prompt: t('general.all')
+            span= link_to t('buttons.set_free'), '', id: 'free_existed', class: 'button small'
+        ul#cards-tabs.tabs data-tabs=''
+            - classes_list.each_with_index do |name, index|
+                li.tabs-title class="#{'is-active' if index == 0}"
+                    = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
+        .tabs-content#tabs-content data-tabs-content='cards-tabs'
+            = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
+                = submit_tag t('buttons.save'), class: 'button'
+                = hidden_field_tag :direction, 0
+                - ids = @packs.collect { |elem| elem[0] }
+                - classes_list.each_with_index do |name, index|
+                    .tabs-panel class="#{'is-active' if index == 0} class_#{name}" id="cards#{index}"
+                        p
+                            = link_to t('general.tabs_2.existed'), '', class: "button small class_existed class_#{name}"
+                            = link_to t('general.tabs_2.unexisted'), '', class: "button small class_unexisted class_#{name}"
+                        - name = nil if name == 'Common'
+                        = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @packs, ids: ids
+                = submit_tag t('buttons.save'), class: 'button'
+= render 'shared/save_modal'

@@ -1,0 +1,37 @@
+- provide(:title, 'HS_DECKS | Checks Page')
+.page_inner#user data={ owner: "#{current_user.id}" }
+    h4= t('general.tabs_4.head')
+    p= t('general.tabs_4.p_1')
+    p= t('general.tabs_4.p_2')
+    = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
+        .columns.small-3= text_field_tag :success, nil, placeholder: t('general.tabs_4.p_3')
+        .columns.small-3= text_field_tag :dust, nil, placeholder: t('general.tabs_4.p_4')
+        .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: 'All or spesific class'
+        .columns.small-3= select_tag :formats, options_for_select(%w(standard wild))
+        = submit_tag t('buttons.check_decks'), class: 'button'
+    #checks
+        h5= t('general.tabs_4.last_checks')
+        table
+            thead
+                tr
+                    th= t('general.tabs_4.success')
+                    th= t('general.tabs_4.dust')
+                    th= t('general.tabs_3.name')
+                    th= t('general.tabs_3.class')
+                    th= t('general.tabs_3.format')
+                    th= t('general.tabs_3.author')
+                    th= t('general.tabs_3.expert')
+                    th
+            tbody
+                - @checks.each do |check|
+                    tr
+                        td= "#{check.success}/30"
+                        td= check.dust
+                        td= check.deck.name
+                        td= check.deck.player.locale_name(@locale)
+                        td= check.deck.formats
+                        td= check.deck.author
+                        td= check.deck.user.username
+                        td
+                            = link_to t('buttons.view_check'), check_path(check), class: 'button small'
+                            = link_to t('buttons.view_deck'), deck_path(check.deck), class: 'button small'

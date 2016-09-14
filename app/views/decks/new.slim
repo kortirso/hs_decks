@@ -1,7 +1,5 @@
-- provide(:title, 'New deck')
-/.inside
-    .shadow
-.row
+- provide(:title, 'HS_DECKS | New Deck Page')
+.page_inner
     #new_deck
         - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
         = form_tag({ controller: 'decks', action: 'create' }, method: 'post') do
@@ -14,7 +12,7 @@
                 = render 'shared/mana_curve', by_mana: nil
                 = render 'shared/card_type', by_type: nil
                 #cards_list
-                = submit_tag t('buttons.save'), class: 'button', 'data-turbolinks': 'false'
+                = submit_tag t('buttons.save'), class: 'button'
             .right_side
                 p= t('new_deck.change_click')
                 .columns.small-6= text_field_tag :name, nil, placeholder: t('new_deck.deck_name')
@@ -32,7 +30,7 @@
                 ul#new-cards-tabs.tabs data-tabs=''
                     - classes_list.each_with_index do |name, index|
                         li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
-                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", 'data-turbolinks': 'false'
+                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
                 .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"

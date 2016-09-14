@@ -1,8 +1,6 @@
-- provide(:title, 'Deck')
-/.inside
-    .shadow
-- cache @deck do
-    .row
+- provide(:title, 'HS_DECKS | Deck Page')
+.page_inner
+    - cache @deck do
         #deck
             .left_side
                 .info_block
@@ -19,7 +17,6 @@
                     = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
                     p= t('deck.p_2')
                     p= @deck.caption
-                = link_to t('buttons.main_page'), root_path, class: 'button', 'data-turbolinks': 'false'
             .right_side
                 h4
                     = t('deck.h4_1')
@@ -30,12 +27,12 @@
                 = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
                     = hidden_field_tag :direction, 1
                     .cards
-                        - ids = @packs.collect { |elem| elem[0] }
+                        - ids = @packs.collect { |elem| elem[0] } if current_user
                         - positions_ids = @positions.collect { |p| p[0] }
                         - @deck.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
                             .card class="#{card.rarity}"
-                                - checks = ids.include?(card.id)
+                                - checks = current_user ? ids.include?(card.id) : false
                                 = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
                                 = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background: url(#{card["image_#{@locale}"]})"
-                    p= submit_tag t('buttons.save'), class: 'button', 'data-turbolinks': 'false'
+                    p= submit_tag t('buttons.save'), class: 'button'
 = render 'shared/save_modal'

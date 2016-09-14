@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
     
     def get_access
-        render template: 'welcome/index' unless current_user
+        render template: 'pages/index' unless current_user
     end
 
     def render_404

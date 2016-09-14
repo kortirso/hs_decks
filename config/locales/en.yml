@@ -60,6 +60,7 @@ en:
       expert: 'Deck expert'
       price: 'Deck price'
       author: 'Author'
+      power: 'Deck power'
     tabs_4:
       tab: 'Decks analyzer'
       head: 'Current cards analyzer'

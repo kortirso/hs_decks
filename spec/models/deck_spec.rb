@@ -9,8 +9,10 @@ RSpec.describe Deck, type: :model do
     it { should validate_presence_of :user_id }
     it { should validate_presence_of :formats }
     it { should validate_presence_of :player_id }
+    it { should validate_presence_of :power }
     it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)) }
     it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
+    it { should validate_inclusion_of(:power).in_range(1..10) }
 
     it 'should be valid' do
         deck = create :deck

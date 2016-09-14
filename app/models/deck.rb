@@ -6,9 +6,10 @@ class Deck < ApplicationRecord
 
     has_many :checks, dependent: :destroy
 
-    validates :name, :playerClass, :user_id, :formats, :player_id, presence: true
+    validates :name, :playerClass, :user_id, :formats, :player_id, :power, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
     validates :formats, inclusion: { in: %w(standard wild) }
+    validates :power, inclusion: { in: 1..10 }
 
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_format, -> (format) { where formats: format }

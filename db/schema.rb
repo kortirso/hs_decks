@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913121256) do
+ActiveRecord::Schema.define(version: 20160914135239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160913121256) do
     t.string   "author"
     t.integer  "price",       default: 0
     t.integer  "player_id"
+    t.integer  "power",       default: 1
     t.index ["player_id"], name: "index_decks_on_player_id", using: :btree
     t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
   end

@@ -11,6 +11,7 @@
                     th= t('decks.class')
                     th= t('general.tabs_3.price')
                     th= t('general.tabs_3.format')
+                    th= t('general.tabs_3.power')
                     th= t('general.tabs_3.author')
                     th
             tbody
@@ -20,6 +21,7 @@
                         td= deck.player.locale_name(@locale)
                         td= deck.price
                         td= deck.formats
+                        td= deck.power
                         td= deck.author
                         td
                             = link_to t('buttons.view'), deck_path(deck), class: 'button small'

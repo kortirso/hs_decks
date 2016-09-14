@@ -1,17 +1,16 @@
 - provide(:title, 'HS_DECKS | Main Page')
 #index_caption
-    .small-12.columns
-        h3 HS_DECKS - приложение для подбора наиболее подходящих колод для игры в HearthStone на основе имеющихся у игрока карт.
-        h4 Версия приложения - 0.2 (alpha 2).
-        p В данной версии приложения реализованы основные функции для сохранения коллекции карт и для анализа колод, которые доступны после регистрации. Регистрация (подтверждение почты не требуется) необходима для сохранения коллекции карт пользователя, в последующем часть функционала будет доступна и для незарегистрированных пользователей.
-        - if current_user
-            h4= t('general.tabs_1.head')
-            p= t('general.tabs_1.first_p')
-            p= t('general.tabs_1.p_4')
-            p= t('general.tabs_1.second_p')
-            - if current_user.deck_master?
-                h5= t('general.tabs_1.master_header')
-                p
-                    = t('general.tabs_1.p_1')
-                    = link_to t('general.tabs_1.p_2'), decks_path
-                    = t('general.tabs_1.p_3')
+    h3 HS_DECKS - приложение для подбора наиболее подходящих колод для игры в HearthStone на основе имеющихся у игрока карт.
+    h4 Версия приложения - 0.3 (alpha 3).
+    p В данной версии приложения реализованы основные функции для сохранения коллекции карт и для анализа колод, которые доступны после регистрации. Регистрация (подтверждение почты не требуется) необходима для сохранения коллекции карт пользователя, в последующем часть функционала будет доступна и для незарегистрированных пользователей.
+    - if current_user
+        h4= t('general.tabs_1.head')
+        p= t('general.tabs_1.first_p')
+        p= t('general.tabs_1.p_4')
+        p= t('general.tabs_1.second_p')
+        - if current_user.deck_master?
+            h5= t('general.tabs_1.master_header')
+            p
+                = t('general.tabs_1.p_1')
+                = link_to t('general.tabs_1.p_2'), decks_path
+                = t('general.tabs_1.p_3')

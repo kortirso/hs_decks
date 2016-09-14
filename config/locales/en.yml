@@ -88,6 +88,14 @@ en:
         p_7: 'The interface for creating, editing and deleting of expert decks.'
         p_8: 'Russian and English localizations.'
         p_9: 'Test version of replacement system.'
+      _2:
+        from: 'Version - 0.3, 14.09.2016'
+        p_1: 'Slightly redesigned interface for easy navigation between pages.'
+        p_2: 'Name and classes are now displayed in Russian.'
+        p_3: 'Added displaying the description for the check card in the deck.'
+        p_4: 'Added parameter showing the strength of deck.'
+        p_5: 'You can add cards to the collection by clicking on the map on page viewing decks.'
+        p_6: 'Bug fixnig.'
   check:
     h4_1: 'At this page you can see checking your cards with deck '
     h4_2: ' from expert '

@@ -59,11 +59,8 @@ class Card < ApplicationRecord
     def refresh_params(locale, card)
         self["name_#{locale}"] = card['name']
         self["image_#{locale}"] = card['img']
-        self.type = card['type']
-        self.cost = card['cost']
-        self.playerClass = card['playerClass']
+        %w(type cost playerClass rarity).each { |param| self[param] = card[param] }
         self.player_id = Player.find_by(name_en: card['playerClass']) unless card['playerClass'].nil?
-        self.rarity = card['rarity']
         self.save if self.changed?
     end
 end

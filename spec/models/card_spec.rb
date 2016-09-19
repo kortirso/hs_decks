@@ -88,5 +88,29 @@ RSpec.describe Card, type: :model do
                 expect(another_card.formats).to eq 'standard'
             end
         end
+
+        context '.check_cards_crafted' do
+            let!(:collection) { create :collection }
+            let!(:cards) { create_list(:card, 3, collection: collection) }
+            let!(:another_card) { create :card }
+            before do
+                collection.update(adventure: true)
+                Card.check_cards_crafted
+            end
+
+            it 'should change cards crafting if collection is adventure' do
+                cards.each do |card|
+                    card.reload
+
+                    expect(card.is_crafted?).to eq false
+                end
+            end
+
+            it 'and should not change card crafting from another collection' do
+                another_card.reload
+
+                expect(another_card.is_crafted?).to eq true
+            end
+        end
     end
 end

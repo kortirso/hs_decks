@@ -31,10 +31,10 @@
                     = @deck.caption
         .check
             h5= t('check.h5_1')
-            = render 'shared/check_card', cards: @deck.cards, locale: @locale, positions: @positions, deck_ids: nil
+            = render 'shared/check_card', cards: @deck.cards, locale: @locale, positions: @positions, decks: nil
         .check
             h5= t('check.h5_2')
-            = render 'shared/check_card', cards: @check.cards, locale: @locale, positions: @lines, deck_ids: @positions.collect { |elem| elem[0] }
+            = render 'shared/check_card', cards: @check.cards, locale: @locale, positions: @lines, decks: @positions , deck_ids: @positions.map { |elem| elem[0] }
         .check
             h5= t('check.h5_3')
-            = render 'shared/check_card', cards: @check.substitution.cards, locale: @locale, positions: @subs, deck_ids: nil
+            = render 'shared/check_card', cards: @check.substitution.cards, locale: @locale, positions: @subs, decks: nil

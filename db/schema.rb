@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914135239) do
+ActiveRecord::Schema.define(version: 20160923144511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160914135239) do
     t.string   "image_ru"
     t.integer  "player_id"
     t.boolean  "craft",         default: true
+    t.integer  "usable",        default: 0
     t.index ["collection_id"], name: "index_cards_on_collection_id", using: :btree
     t.index ["player_id"], name: "index_cards_on_player_id", using: :btree
   end

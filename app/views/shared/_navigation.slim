@@ -5,6 +5,7 @@ nav
             - if current_user.deck_master?
                 li= link_to t('nav.deck_builder'), decks_path
             li= link_to t('nav.collection'), collection_path
+            li= link_to t('nav.unusable'), unusable_path
         li= link_to t('nav.expert_decks'), expert_decks_path
         - if current_user
             li= link_to t('nav.analyze'), checks_path

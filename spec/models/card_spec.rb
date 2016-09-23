@@ -6,6 +6,7 @@ RSpec.describe Card, type: :model do
     it { should validate_presence_of :type }
     it { should validate_presence_of :rarity }
     it { should validate_presence_of :collection_id }
+    it { should validate_presence_of :usable }
     it { should validate_inclusion_of(:type).in_array(%w(Hero Spell Minion Weapon)) }
     it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)).allow_nil }
     it { should validate_inclusion_of(:rarity).in_array(%w(Free Common Rare Epic Legendary)) }

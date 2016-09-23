@@ -3,6 +3,7 @@ ru:
     main_page: 'Главная'
     deck_builder: 'Конструктор колод'
     collection: 'Коллекция'
+    unusable: 'Распыление'
     expert_decks: 'Экспертные колоды'
     analyze: 'Анализ карт'
     about: 'О системе'

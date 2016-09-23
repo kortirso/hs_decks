@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         get 'decks' => :decks, as: 'expert_decks'
         get 'about' => :about, as: 'about'
         get 'collection' => :collection, as: 'collection'
+        get 'unusable' => :unusable, as: 'unusable'
     end
     root 'pages#index'
 end

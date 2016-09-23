@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-    before_action :get_access, only: :collection
+    before_action :get_access, only: [:collection, :unusable]
 
     def index
 
@@ -16,5 +16,9 @@ class PagesController < ApplicationController
     def collection
         @cards = Card.not_heroes.includes(:collection)
         @packs = current_user.positions.collect_ids
+    end
+
+    def unusable
+        @unusable_cards = current_user.get_unusable_cards.sort_by { |elem| elem.cost }
     end
 end

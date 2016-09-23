@@ -44,4 +44,12 @@ class User < ApplicationRecord
         cards_ids.each { |id| positions.push "(#{id}, '#{self.id}', 'User', '#{cards[cards_ids.index(id)][1]}', '#{t}', '#{t}')" unless old_ids.include?(id) }
         Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, created_at, updated_at) VALUES #{positions.join(", ")}" if positions.size > 0
     end
+
+    def get_unusable_cards
+        cards_for_destroy, unused_cards = [], Card.not_heroes.not_free.unusable.to_a
+        self.cards.not_free.to_a.each do |user_card|
+            cards_for_destroy.push(user_card) if unused_cards.include?(user_card)
+        end
+        cards_for_destroy
+    end
 end

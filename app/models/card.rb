@@ -12,7 +12,7 @@ class Card < ApplicationRecord
     has_many :shifts, dependent: :destroy
     has_many :exchanges, through: :shifts, source: :change
 
-    validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, presence: true
+    validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, :usable, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true
     validates :rarity, inclusion: { in: %w(Free Common Rare Epic Legendary) }
@@ -23,8 +23,10 @@ class Card < ApplicationRecord
     scope :for_all_classes, -> { where playerClass: nil }
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_rarity, -> (rarity) { where rarity: rarity }
+    scope :not_free, -> { where.not(rarity: 'Free') }
     scope :of_format, -> (format) { where formats: format }
     scope :crafted, -> { where craft: true }
+    scope :unusable, -> { where usable: 0 }
 
     def self.with_cost(cost)
         return cost < 7 ? where(cost: cost) : where('cost >= 7')
@@ -62,5 +64,15 @@ class Card < ApplicationRecord
         %w(type cost playerClass rarity).each { |param| self[param] = card[param] }
         self.player_id = Player.find_by(name_en: card['playerClass']) unless card['playerClass'].nil?
         self.save if self.changed?
+    end
+
+    def self.calc_usability
+        all.update_all(usable: 0)
+        Deck.all.includes(:cards).each do |deck|
+            deck.cards.each do |card|
+                updated_card = Card.find(card.id)
+                updated_card.update(usable: updated_card.usable + 1)
+            end
+        end
     end
 end

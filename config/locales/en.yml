@@ -3,6 +3,7 @@ en:
     main_page: 'Main Page'
     deck_builder: 'Deck Builder'
     collection: 'Collection'
+    unusable: 'Unusable cards'
     expert_decks: 'Expert Decks'
     analyze: 'Card Analyze'
     about: 'About System'

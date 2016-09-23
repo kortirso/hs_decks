@@ -4,4 +4,5 @@ every :day, at: '1am' do
     runner "Card.check_locale('ru')"
     runner "Card.check_cards_format"
     runner "Deck.check_format"
+    runner "Card.calc_usability"
 end

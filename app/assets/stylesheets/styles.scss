@@ -554,3 +554,11 @@ nav {
         width: 12.5%;
     }
 }
+
+#filters {
+    select, #power {
+        float: right;
+        width: 50%;
+        margin-top: -6px;
+    }
+}

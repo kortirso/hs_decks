@@ -14,6 +14,18 @@ class Deck < ApplicationRecord
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_format, -> (format) { where formats: format }
 
+    def self.filtered(params)
+        decks = all
+        return decks if params[:playerClass].nil?
+        unless params[:playerClass].empty?
+            player = Player.return_by_name(params[:playerClass])
+            decks = player.decks if player
+        end
+        decks = decks.where('power >= ?', params[:power].to_i) unless params[:power].empty?
+        decks = decks.of_format(params[:formats]) if %w(standard wild).include?(params[:formats])
+        decks
+    end
+
     def self.build(params, user_id)
         data = Parametrize.deck_getting_params(params)
         deck_params, positions_params = data[0].to_h, data[1]

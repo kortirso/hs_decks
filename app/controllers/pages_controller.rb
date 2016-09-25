@@ -6,7 +6,8 @@ class PagesController < ApplicationController
     end
 
     def decks
-        @decks = Deck.all.includes(:user).order(playerClass: :asc)
+        @decks = Deck.filtered(filter_params).includes(:user).order(playerClass: :asc)
+        @playerClasses = Player.all.map { |elem| elem.locale_name(@locale) }
     end
 
     def about
@@ -20,5 +21,11 @@ class PagesController < ApplicationController
 
     def unusable
         @unusable_cards = current_user.get_unusable_cards.sort_by { |elem| elem.cost }
+    end
+
+    private
+
+    def filter_params
+        params.permit(:playerClass, :power, :formats)
     end
 end

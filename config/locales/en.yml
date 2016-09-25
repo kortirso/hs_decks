@@ -22,6 +22,7 @@ en:
     new_deck: 'New Deck'
     main_page: 'Main Page'
     check_decks: 'Check Decks'
+    submit: 'Submit'
   auth:
     auth: 'Authorization'
     reg: 'Registration'

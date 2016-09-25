@@ -2,6 +2,8 @@
 .page_inner
     h4= t('general.tabs_3.head')
     p= t('general.tabs_3.p_1')
+    p
+        a class='button' data-open='filters'= t('general.tabs_2.filters')
     #decks
         table
             thead
@@ -14,16 +16,30 @@
                     th= t('general.tabs_3.power')
                     th= t('general.tabs_3.author')
                     th= t('general.tabs_3.expert')
-                    th
             tbody
                 - @decks.each_with_index do |deck, index|
                     tr
                         td= index + 1
-                        td= deck.name
+                        td= link_to deck.name, deck_path(deck)
                         td= deck.player.locale_name(@locale)
                         td= deck.price
                         td= deck.formats
                         td= deck.power
                         td= deck.author
                         td= deck.user.username
-                        td= link_to t('buttons.view_deck'), deck_path(deck), class: 'button small'
+#filters.reveal.tiny data-reveal=''
+    = form_tag({ controller: 'pages', action: 'decks' }, method: 'get') do
+        h4= t('general.tabs_2.filters')
+        .small-12.columns
+            span= t('general.tabs_3.class')
+            span= select_tag :playerClass, options_for_select(@playerClasses), prompt: t('general.all')
+        .small-12.columns
+            span= t('general.tabs_3.power')
+            span= text_field_tag :power, nil
+        .small-12.columns
+            span= t('general.tabs_3.format')
+            span= select_tag :formats, options_for_select(%w(wild standard)), prompt: t('general.all')
+        .small-12.columns
+            = submit_tag t('buttons.submit'), class: 'button'
+    button.close-button aria-label=('Close modal') data-close='' type='button'
+        span aria-hidden='true' &times;

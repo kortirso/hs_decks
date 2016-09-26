@@ -3,7 +3,7 @@
     h4= t('general.tabs_3.head')
     p= t('general.tabs_3.p_1')
     p
-        a class='button' data-open='filters'= t('general.tabs_2.filters')
+        a class='button' data-open='decks_filters'= t('general.tabs_2.filters')
     #decks
         table
             thead
@@ -27,7 +27,7 @@
                         td= deck.power
                         td= deck.author
                         td= deck.user.username
-#filters.reveal.tiny data-reveal=''
+#decks_filters.reveal.tiny data-reveal=''
     = form_tag({ controller: 'pages', action: 'decks' }, method: 'get') do
         h4= t('general.tabs_2.filters')
         .small-12.columns

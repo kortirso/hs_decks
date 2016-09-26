@@ -11,7 +11,7 @@ class Check < ApplicationRecord
     scope :of_user, -> (user_id) { where user_id: user_id }
 
     def self.build(user_id, params, locale)
-        params, user, checks = Parametrize.check_getting_params(params), User.find(user_id), []
+        user, checks = User.find(user_id), []
         user.checks.destroy_all
         Check.getting_decks(params).each do |deck|
             check = user.checks.create deck_id: deck.id, success: 0

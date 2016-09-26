@@ -16,7 +16,7 @@ class ChecksController < ApplicationController
     end
 
     def create
-        Check.build(current_user.id, params, @locale)
+        Check.build(current_user.id, check_params, @locale)
         head :ok
     end
 
@@ -29,5 +29,9 @@ class ChecksController < ApplicationController
 
     def check_author
         render_404 if current_user.id != @check.user_id
+    end
+
+    def check_params
+        params.permit(:success, :dust, :playerClass, :formats)
     end
 end

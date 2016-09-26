@@ -32,43 +32,41 @@ RSpec.describe Check, type: :model do
             let(:lines) { ["('#{position.card_id}', '#{check.id}', 'Check', '#{0}', '', '#{Time.current}', '#{Time.current}')"] }
 
             context 'without limits' do
-                let(:new_params) { Parametrize.check_getting_params(empty_params) }
                 let(:success) { 10 }
                 let(:dust) { 1000 }
 
                 it 'returns updated success rate' do
-                    expect { check.limitations(new_params, success, dust, lines) }.to change(check, :success).from(0).to(10)
+                    expect { check.limitations(empty_params, success, dust, lines) }.to change(check, :success).from(0).to(10)
                 end
 
                 it 'and returns updated dust rate' do
-                    expect { check.limitations(new_params, success, dust, lines) }.to change(check, :dust).from(0).to(dust)
+                    expect { check.limitations(empty_params, success, dust, lines) }.to change(check, :dust).from(0).to(dust)
                 end
 
                 it 'and creates new position for check' do
-                    expect { check.limitations(new_params, success, dust, lines) }.to change(check.positions, :count).from(0).to(1)
+                    expect { check.limitations(empty_params, success, dust, lines) }.to change(check.positions, :count).from(0).to(1)
                 end
 
                 it 'and returns self' do
-                    expect(check.limitations(new_params, success, dust, lines)).to eq check
+                    expect(check.limitations(empty_params, success, dust, lines)).to eq check
                 end
             end
 
             context 'with limits' do
                 let(:params) { ActionController::Parameters.new({ success: '', dust: '1000', playerClass: '', formats: 'wild', something: '' }) }
-                let(:new_params) { new_params = Parametrize.check_getting_params(params) }
                 let(:success) { 10 }
                 let(:dust) { 2500 }
 
                 it 'destroy check' do
-                    expect { check.limitations(new_params, success, dust, lines) }.to change(Check, :count).by(-1)
+                    expect { check.limitations(params, success, dust, lines) }.to change(Check, :count).by(-1)
                 end
 
                 it 'and does not create new check positions' do
-                    expect { check.limitations(new_params, success, dust, lines) }.to_not change(Position, :count)
+                    expect { check.limitations(params, success, dust, lines) }.to_not change(Position, :count)
                 end
 
                 it 'and returns nil' do
-                    expect(check.limitations(new_params, success, dust, lines)).to eq nil
+                    expect(check.limitations(params, success, dust, lines)).to eq nil
                 end
             end
         end
@@ -79,13 +77,11 @@ RSpec.describe Check, type: :model do
             let!(:standard_mage_deck) { create :deck, playerClass: 'Mage', formats: 'standard' }
 
             it 'should returns all 3 decks if conditions are empty' do
-                params = Parametrize.check_getting_params(empty_params)
-
-                expect(Check.getting_decks(params).size).to eq 3
+                expect(Check.getting_decks(empty_params).size).to eq 3
             end
 
             it 'should returns shaman deck if conditions are with shamans limit' do
-                params = Parametrize.check_getting_params(ActionController::Parameters.new({ success: '', dust: '', playerClass: 'Shaman', formats: 'wild', something: '' }))
+                params = ActionController::Parameters.new({ success: '', dust: '', playerClass: 'Shaman', formats: 'wild', something: '' })
                 decks = Check.getting_decks(params)
 
                 expect(decks.size).to eq 1
@@ -93,7 +89,7 @@ RSpec.describe Check, type: :model do
             end
 
             it 'should returns standard deck if conditions are with standard format limit' do
-                params = Parametrize.check_getting_params(ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'standard', something: '' }))
+                params = ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'standard', something: '' })
                 decks = Check.getting_decks(params)
 
                 expect(decks.size).to eq 1

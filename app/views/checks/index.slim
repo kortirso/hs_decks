@@ -28,7 +28,7 @@
                     tr
                         td= "#{check.success}/30"
                         td= check.dust
-                        td= check.deck.name
+                        td= link_to check.deck.name, deck_path(check.deck)
                         td= check.deck.player.locale_name(@locale)
                         td= check.deck.formats
                         td= check.deck.power
@@ -36,4 +36,3 @@
                         td= check.deck.user.username
                         td
                             = link_to t('buttons.view_check'), check_path(check), class: 'button small'
-                            = link_to t('buttons.view_deck'), deck_path(check.deck), class: 'button small'

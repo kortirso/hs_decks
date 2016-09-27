@@ -34,7 +34,7 @@
                         - positions_ids = @positions.collect { |p| p[0] }
                         - @deck.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
                             .card class="#{card.rarity}"
-                                - checks = current_user ? ids.include?(card.id) : false
+                                - checks = current_user.nil? ? false : ids.include?(card.id)
                                 = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
                                 = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background: url(#{card["image_#{@locale}"]})"
                     - if current_user

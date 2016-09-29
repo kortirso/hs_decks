@@ -2,7 +2,7 @@ class PagesController < ApplicationController
     before_action :get_access, only: [:collection, :unusable]
 
     def index
-
+        @news = News.all.order(id: :desc)
     end
 
     def decks

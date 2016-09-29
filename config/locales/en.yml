@@ -33,16 +33,10 @@ en:
     minimal: 'Minimal password length - 6 symbols'
   general:
     all: 'All'
-    tabs_1:
-      tab: 'General info'
-      head: 'This is your personal page with cards and decks.'
-      first_p: "At 'Cards Collection' page you can choose cards in your library."
-      second_p: "At 'Deck Analyzer' page you can check existed decks and choose deck better for you."
-      master_header: 'Ohh! You are deck master'
-      p_1: 'You can '
-      p_2: 'visit'
-      p_3: ' decks page, build new one or edit your old deck.'
-      p_4: "At 'Expert Decks' you can view all expert decks and select cards you have in your collection."
+    index:
+      head: 'HS DECKS - application for the selection of the most appropriate decks for playing HearthStone on the basis of available player cards.'
+      version: 'Application version - 0.3 (alpha 3).'
+      caption: 'In this version implemented basic functions to preserve the collection of cards and to analyze the decks which are available after registration. Registration (confirmation is not required) is necessary for the preservation of the collection of user cards.'
     tabs_2:
       tab: 'Cards collection'
       head: 'At this section you can choose cards from your collection.'

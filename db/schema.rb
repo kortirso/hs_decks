@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923144511) do
+ActiveRecord::Schema.define(version: 20160929074733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(version: 20160923144511) do
     t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
   end
 
+  create_table "news", force: :cascade do |t|
+    t.string   "url_label",                                     null: false
+    t.string   "label",                                         null: false
+    t.string   "caption",                                       null: false
+    t.string   "image",      default: "news-default-image.jpg", null: false
+    t.string   "link"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
   create_table "players", force: :cascade do |t|
     t.string   "name_en"
     t.string   "name_ru"
@@ -126,6 +136,7 @@ ActiveRecord::Schema.define(version: 20160923144511) do
     t.datetime "updated_at",                              null: false
     t.string   "role",                   default: "user"
     t.string   "username",               default: "",     null: false
+    t.boolean  "get_news",               default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

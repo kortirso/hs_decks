@@ -562,3 +562,19 @@ nav {
         margin-top: -6px;
     }
 }
+
+.news {
+    background: #FFF;
+    padding: 20px;
+    color: #000;
+    min-height: 230px;
+    p, a {
+        margin-bottom: 5px;
+    }
+    .header {
+        font-weight: 600;
+    }
+    .caption {
+        min-height: 75px;
+    }
+}

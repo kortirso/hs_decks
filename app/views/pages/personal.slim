@@ -1,0 +1,11 @@
+- provide(:title, 'HS_DECKS | Personal Page')
+.page_inner
+    h3= t('personal.head')
+    p= t('personal.about')
+    #subscribe
+        - if @user.get_news
+            p= t('personal.subscribe')
+            = link_to t('buttons.unsubscribe'), news_unsubscribe_path, class: 'button', method: :post, remote: true
+        - else
+            p= t('personal.unsubscribe')
+            = link_to t('buttons.subscribe'), news_subscribe_path, class: 'button', method: :post, remote: true

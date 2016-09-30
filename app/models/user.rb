@@ -52,4 +52,12 @@ class User < ApplicationRecord
         end
         cards_for_destroy
     end
+
+    def subscribe_for_news
+        self.update(get_news: true) unless self.get_news
+    end
+
+    def unsubscribe_from_news
+        self.update(get_news: false) if self.get_news
+    end
 end

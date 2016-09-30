@@ -10,6 +10,7 @@ en:
     login: 'Login'
     logout: 'Logout'
     signup: 'SignIn'
+    personal: 'Personal Page'
   buttons:
     save: 'Save'
     update: 'Update'
@@ -23,6 +24,8 @@ en:
     main_page: 'Main Page'
     check_decks: 'Check Decks'
     submit: 'Submit'
+    subscribe: 'Subscribe'
+    unsubscribe: 'Unsubscribe'
   auth:
     auth: 'Authorization'
     reg: 'Registration'
@@ -130,4 +133,8 @@ en:
     head: 'At this page you can view and edit all your decks and create new one.'
     deck_name: "Deck's name"
     class: 'Player Class'
-
+  personal:
+    head: 'Personal Page'
+    about: 'At this page you can subscribe (or unsubscribe) for news from projects about new decks or other news about HearthStone game.'
+    subscribe: 'You subscribe for getting news.'
+    unsubscribe: 'You unsubscribe for getting news.'

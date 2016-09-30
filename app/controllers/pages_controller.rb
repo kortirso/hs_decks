@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
-    before_action :get_access, only: [:collection, :unusable]
+    include SubscribeController
+    before_action :get_access, except: [:index, :decks, :about]
 
     def index
         @news = News.all.order(id: :desc)
@@ -21,6 +22,10 @@ class PagesController < ApplicationController
 
     def unusable
         @unusable_cards = current_user.get_unusable_cards.sort_by { |elem| elem.cost }
+    end
+
+    def personal
+        @user = current_user
     end
 
     private

@@ -9,6 +9,7 @@ nav
         li= link_to t('nav.expert_decks'), expert_decks_path
         - if current_user
             li= link_to t('nav.analyze'), checks_path
+            li= link_to t('nav.personal'), personal_path
         li= link_to t('nav.about'), about_path
     .buttons
         - if current_user

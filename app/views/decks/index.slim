@@ -17,13 +17,12 @@
             tbody
                 - @decks.order(playerClass: :asc).each do |deck|
                     tr
-                        td= deck.name
+                        td= link_to deck.name, deck_path(deck)
                         td= deck.player.locale_name(@locale)
                         td= deck.price
                         td= deck.formats
                         td= deck.power
                         td= deck.author
                         td
-                            = link_to t('buttons.view'), deck_path(deck), class: 'button small'
                             = link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small'
                             = link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small'

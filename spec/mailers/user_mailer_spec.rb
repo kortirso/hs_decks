@@ -1,3 +1,3 @@
-RSpec.describe UserMailerMailer, type: :mailer do
+RSpec.describe UserMailer, type: :mailer do
     
 end

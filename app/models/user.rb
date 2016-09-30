@@ -10,6 +10,8 @@ class User < ApplicationRecord
     validates :role, inclusion: { in: %w(user deck_master) }
     validates :username, uniqueness: true, length: { in: 1..20 }
 
+    after_create :welcome_notify
+
     def deck_master?
         self.role == 'deck_master'
     end
@@ -59,5 +61,11 @@ class User < ApplicationRecord
 
     def unsubscribe_from_news
         self.update(get_news: false) if self.get_news
+    end
+
+    private
+
+    def welcome_notify
+        UserMailer.welcome_email(self).deliver_now
     end
 end

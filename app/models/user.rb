@@ -10,6 +10,8 @@ class User < ApplicationRecord
     validates :role, inclusion: { in: %w(user deck_master) }
     validates :username, uniqueness: true, length: { in: 1..20 }
 
+    scope :news_subscribers, -> { where get_news: true }
+
     after_create :welcome_notify
 
     def deck_master?

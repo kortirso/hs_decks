@@ -1,0 +1,11 @@
+Привет, <%= @user.username %>
+
+==============================
+
+Внимание! Новые новости от проекта HearthStone Deck Builder.
+
+<%= @news.label %>
+<%= @news.caption %>
+<% unless @news.link.empty? %>
+<%= "Подробности по ссылке - #{@news.link}" %>
+<% end %>

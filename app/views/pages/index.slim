@@ -9,7 +9,7 @@
             .columns.small-4.end
                 .news
                     p.header= article.label
-                    p.caption= article.caption
                     p= article.created_at.strftime("%Y.%m.%d")
-                    - if article.link
+                    p.caption= article.caption
+                    - unless article.link.nil?
                         p= link_to 'Подробности...', article.link, class: 'button'

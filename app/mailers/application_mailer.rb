@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-    default from: 'notifications@hs-construct.ru'
+    default from: 'hs.constructed@gmail.com'
     layout 'mailer'
 end

@@ -66,6 +66,6 @@ class User < ApplicationRecord
     private
 
     def welcome_notify
-        UserMailer.welcome_email(self).deliver_later
+        UserMailer.welcome_email(self).deliver
     end
 end

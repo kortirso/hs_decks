@@ -20,6 +20,7 @@ gem 'activerecord-import'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 gem 'whenever'
+gem 'sidekiq'
 
 group :development, :test do
     gem 'rspec-rails'
@@ -35,6 +36,7 @@ group :development do
     gem 'capistrano-bundler', require: false
     gem 'capistrano-rails', require: false
     gem 'capistrano-rvm', require: false
+    gem 'capistrano-sidekiq', require: false
 end
 
 group :test do

@@ -20,7 +20,7 @@ gem 'activerecord-import'
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 gem 'whenever'
-gem 'sidekiq'
+gem 'sidekiq', '~> 4.2.2'
 
 group :development, :test do
     gem 'rspec-rails'

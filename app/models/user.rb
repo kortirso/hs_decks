@@ -68,6 +68,7 @@ class User < ApplicationRecord
     private
 
     def welcome_notify
-        WelcomeletterJob.perform_later(self)
+        UserMailer.welcome_email(self).deliver_now!
+        #WelcomeletterJob.perform_later(self)
     end
 end

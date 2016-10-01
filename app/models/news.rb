@@ -6,6 +6,9 @@ class News < ApplicationRecord
     private
 
     def news_notify
-        NewsletterJob.perform_later(self)
+        User.news_subscribers.each do |user|
+             UserMailer.news_email(self, user).deliver_now!
+        end
+        #NewsletterJob.perform_later(self)
     end
 end

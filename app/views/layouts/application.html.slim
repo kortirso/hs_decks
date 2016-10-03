@@ -3,11 +3,14 @@ html lang='en'
     head
         meta charset='utf-8'
         meta name='viewport' content='width=device-width, initial-scale=1.0'
+        meta name='yandex-verification' content='6a85a828fe897252'
+        meta name='google-site-verification' content='Ah9od-8nYyP_TvEfVq6n1pwiKbShKAfjH0SUUm8PY1Q'
         title == content_for?(:title) ? yield(:title) : 'HearthStone Decks'
         = stylesheet_link_tag 'application', media: 'all'
         = javascript_include_tag 'application'
         = csrf_meta_tag
     body
+        = render 'shared/metrics'
         = render 'shared/navigation'
         = render 'shared/logins'
         .inside

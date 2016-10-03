@@ -21,7 +21,6 @@ gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
 gem 'whenever'
 gem 'sidekiq', '~> 4.2.2'
-gem 'mailjet', git: 'https://github.com/mailjet/mailjet-gem.git'
 
 group :development, :test do
     gem 'rspec-rails'

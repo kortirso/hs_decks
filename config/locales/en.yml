@@ -72,7 +72,7 @@ en:
       dust: 'Needs dust to success'
     tabs_5:
       tab: 'About System'
-      head: 'System HS_DECKS'
+      head: 'Deck Hunter'
       p_1: 'The system is designed to automatically determine the best expert decks for playing HearthStone based on existing user cards, as well as to automatically determine the best replacements of missing cards.'
       p_2: 'The user only need to define the parameters of the analysis (for example, select a specific Hero class or to analyze all decks), and the system displayed the results of analysis with grouping them by success.'
       logs: 'Realized functions'

@@ -39,6 +39,10 @@ html, body {
     height: 100%;
 }
 
+#error {
+    color: #FFF;
+}
+
 body {
     @include scroll-bar;
     color: #000;

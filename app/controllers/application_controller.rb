@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-    protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
-    before_filter :set_locale
+    before_action :set_locale
+    protect_from_forgery with: :exception
 
     private
 
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
     
     def get_access
-        render template: 'pages/index' unless current_user
+        render_404 unless current_user
     end
 
     def render_404

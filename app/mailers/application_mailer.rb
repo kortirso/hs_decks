@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-    default from: 'hs.constructed@gmail.com'
+    default from: 'postmaster@deckhunter.ru'
     layout 'mailer'
 end

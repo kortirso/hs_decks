@@ -2,6 +2,8 @@ class Position < ApplicationRecord
     belongs_to :positionable, polymorphic: true
     belongs_to :card
 
+    has_many :exchanges
+
     validates :amount, :positionable_id, :positionable_type, :card_id, presence: true
     validates :amount, inclusion: { in: 0..2 }
 

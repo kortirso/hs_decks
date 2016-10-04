@@ -16,6 +16,7 @@ RSpec.describe Card, type: :model do
     it { should have_many(:decks).through(:positions) }
     it { should have_many(:users).through(:positions) }
     it { should have_many(:checks).through(:positions) }
+    it { should have_many :exchanges }
     it { should validate_presence_of :formats }
     it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
 

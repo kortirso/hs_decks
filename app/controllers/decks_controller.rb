@@ -1,8 +1,8 @@
 class DecksController < ApplicationController
     before_action :get_access, except: :show
     before_action :check_user_role, except: :show
-    before_action :find_deck, only: [:show, :edit, :update, :destroy]
-    before_action :check_deck_author, only: [:edit, :update, :destroy]
+    before_action :find_deck, only: [:show, :edit, :update, :destroy, :exchanges]
+    before_action :check_deck_author, only: [:edit, :update, :destroy, :exchanges]
 
     def index
         @decks = current_user.decks
@@ -41,6 +41,10 @@ class DecksController < ApplicationController
     def destroy
         @deck.destroy
         redirect_to decks_path
+    end
+
+    def exchanges
+
     end
 
     private

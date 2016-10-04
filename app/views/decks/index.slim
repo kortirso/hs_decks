@@ -25,4 +25,5 @@
                         td= deck.author
                         td
                             = link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small'
+                            = link_to t('buttons.exchanges'), deck_exchanges_path(deck), class: 'button small'
                             = link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small'

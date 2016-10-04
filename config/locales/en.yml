@@ -26,6 +26,7 @@ en:
     submit: 'Submit'
     subscribe: 'Subscribe'
     unsubscribe: 'Unsubscribe'
+    exchanges: 'Exchanges'
   auth:
     auth: 'Authorization'
     reg: 'Registration'

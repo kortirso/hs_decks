@@ -349,7 +349,7 @@ nav {
     }
 }
 
-.costs, .check, #cards_list {
+.costs, .check, #cards_list, #exchanges {
     .card {
         display: inline-block;
         width: 230px;
@@ -581,5 +581,15 @@ nav {
     }
     .caption {
         min-height: 75px;
+    }
+}
+
+#exchanges {
+    .card {
+        .inner {
+            .lab {
+                padding: 5px 10px 5px 35px;
+            }
+        }
     }
 }

@@ -5,10 +5,12 @@ Rails.application.routes.draw do
     devise_for :users
 
     resources :accounts, only: [:create]
+    resources :exchanges, only: [:show, :create] do
+        get :autocomplete_card_name_ru, on: :collection
+        get :autocomplete_card_name_en, on: :collection
+    end
     resources :checks, only: [:index, :show, :create]
-
     resources :decks
-    get 'decks/:id/exchanges' => 'decks#exchanges', as: 'deck_exchanges'
 
     scope path: '/pages', controller: :pages do
         get 'index' => :index

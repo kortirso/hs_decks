@@ -2,28 +2,31 @@
 .page_inner
     #exchanges
         = simple_form_for :exchanges, url: exchanges_path, method: :post, remote: true do |f|
-            h2 Замены для определенных карт
-            p= submit_tag t('buttons.save'), class: 'button'
+            h4 Замены для определенных карт
+            = submit_tag t('buttons.save'), class: 'button'
             = f.hidden_field :deck_id, value: @deck.id
-            - @positions.each_with_index do |pos, index|
-                .card class="mana_#{pos.card.cost} #{pos.card.rarity}"
-                    .image style="background-image: url('#{pos.card.image_en}');"
-                        .card-shadow
-                    .inner
-                        - card_class = pos.amount == 1 ? 'single' : 'double'
-                        .lab class="#{card_class} mana_#{pos.card.cost}"
-                            = pos.card["name_en"]
-                .row.position data={ position: index }
-                    = f.simple_fields_for "pos_#{pos.id}" do |y|
-                        .pos
-                            - if "#{@locale}" == 'ru'
-                                .columns.small-2= y.input "card_#{index}", url: autocomplete_card_name_ru_exchanges_path, as: :autocomplete, label: false
-                            - elsif "#{@locale}" == 'en'
-                                .columns.small-2= y.input "card_#{index}", url: autocomplete_card_name_en_exchanges_path, as: :autocomplete, label: false
-                            .columns.small-1= y.input "priority_#{index}", label: false, placeholder: 'priority'
-                            .columns.small-1.end= y.input "max_#{index}", label: false, placeholder: 'max amount'
+            - @positions.each do |pos|
+                .position
+                    .card class="mana_#{pos.card.cost} #{pos.card.rarity}"
+                        .image style="background-image: url('#{pos.card.image_en}');"
+                            .card-shadow
+                        .inner
+                            - card_class = pos.amount == 1 ? 'single' : 'double'
+                            .lab class="#{card_class} mana_#{pos.card.cost}"
+                                = pos.card["name_#{@locale}"]
+                    .exchanges
+                        = f.simple_fields_for "pos_#{pos.id}" do |y|
+                            .pos data={ position: 0 }
+                                - if "#{@locale}" == 'ru'
+                                    .long-input.inputs= y.input "card_0", url: autocomplete_card_name_ru_exchanges_path, as: :autocomplete, label: false, wrapper_options: { }
+                                - elsif "#{@locale}" == 'en'
+                                    .long-input.inputs= y.input "card_0", url: autocomplete_card_name_en_exchanges_path, as: :autocomplete, label: false, wrapper_options: { }
+                                .small-input.inputs= y.input "priority_0", label: false, placeholder: 'priority', wrapper_options: { }
+                                .small-input.inputs= y.input "max_0", label: false, placeholder: 'max amount', wrapper_options: { }
+                                = link_to 'x', '', class: 'remove_exchange button', remote: true
+                            = link_to 'Добавить замену', '', class: 'duplicate_exchange button'
                 - pos.exchanges.order(priority: :asc).each do |exchange|
                     .columns.small-2= exchange.card.name_en
                     .columns.small-1= exchange.priority
                     .columns.small-1= exchange.max_amount
-            p= submit_tag t('buttons.save'), class: 'button'
+            = submit_tag t('buttons.save'), class: 'button'

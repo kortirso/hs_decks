@@ -585,10 +585,43 @@ nav {
 }
 
 #exchanges {
+    width: 50%;
+    padding: 0 10px;
     .card {
         .inner {
             .lab {
                 padding: 5px 10px 5px 35px;
+            }
+        }
+    }
+    .position {
+        padding-top: 10px;
+        border-bottom: 1px solid #000;
+        .exchanges {
+            padding: 10px 0;
+            .pos {
+                .remove_exchange {
+                    position: relative;
+                    top: -2px;
+                    margin: 0;
+                    padding: 11px 15px;
+                }
+                .inputs {
+                    display: inline-block;
+                    margin-right: 10px;
+                    input {
+                        margin: 0;
+                    }
+                    &.long-input {
+                        width: 250px;
+                    }
+                    &.small-input {
+                        width: 120px;
+                    }
+                }
+            }
+            .duplicate_exchange {
+                margin: 0;
             }
         }
     }

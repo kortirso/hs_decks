@@ -15,7 +15,7 @@
                             .lab class="#{card_class} mana_#{pos.card.cost}"
                                 = pos.card["name_#{@locale}"]
                     .exchanges
-                        = f.simple_fields_for "pos_#{pos.id}" do |y|
+                        = f.simple_fields_for "#{pos.id}" do |y|
                             .pos data={ position: 0 }
                                 - if "#{@locale}" == 'ru'
                                     .long-input.inputs= y.input "card_0", url: autocomplete_card_name_ru_exchanges_path, as: :autocomplete, label: false, wrapper_options: { }
@@ -25,8 +25,9 @@
                                 .small-input.inputs= y.input "max_0", label: false, placeholder: 'max amount', wrapper_options: { }
                                 = link_to 'x', '', class: 'remove_exchange button', remote: true
                             = link_to 'Добавить замену', '', class: 'duplicate_exchange button'
-                - pos.exchanges.order(priority: :asc).each do |exchange|
-                    .columns.small-2= exchange.card.name_en
-                    .columns.small-1= exchange.priority
-                    .columns.small-1= exchange.max_amount
+                        - pos.exchanges.order(priority: :asc).each do |exchange|
+                            .long-input.inputs= exchange.card["name_#{@locale}"]
+                            .small-input.inputs= exchange.priority
+                            .small-input.inputs= exchange.max_amount
             = submit_tag t('buttons.save'), class: 'button'
+= render 'shared/exchange_modal'

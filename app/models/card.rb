@@ -30,6 +30,10 @@ class Card < ApplicationRecord
     scope :crafted, -> { where craft: true }
     scope :unusable, -> { where usable: 0 }
 
+    def self.return_by_name(name)
+        find_by(name_en: name) || find_by(name_ru: name)
+    end
+
     def self.with_cost(cost)
         return cost < 7 ? where(cost: cost) : where('cost >= 7')
     end

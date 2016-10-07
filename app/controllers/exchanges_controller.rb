@@ -11,7 +11,7 @@ class ExchangesController < ApplicationController
     end
 
     def create
-
+        Exchange.build(exchange_params)
     end
 
     private
@@ -29,7 +29,7 @@ class ExchangesController < ApplicationController
         render_404 if current_user.id != @deck.user_id
     end
 
-    def collection_params
-        params.permit!.to_h
+    def exchange_params
+        params.require(:exchanges).permit!
     end
 end

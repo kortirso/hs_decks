@@ -44,7 +44,7 @@ html, body {
 }
 
 body {
-    @include scroll-bar;
+    //@include scroll-bar;
     color: #000;
     .inside {
         position: fixed;

@@ -44,7 +44,7 @@ html, body {
 }
 
 body {
-    //@include scroll-bar;
+    @include scroll-bar;
     color: #000;
     .inside {
         position: fixed;
@@ -623,6 +623,37 @@ nav {
             .duplicate_exchange {
                 margin: 0;
             }
+            table.with_exchanges {
+                width: auto;
+                td {
+                    padding: 0;
+                }
+                thead, tbody {
+                    border: none;
+                }
+                thead {
+                    th {
+                        padding: 0 10px;
+                        font-weight: 400;
+                        font-size: 14px;
+                        &:nth-of-type(n+2) {
+                            text-align: center;
+                        }
+                    }
+                }
+                tbody {
+                    td:nth-of-type(n+2) {
+                        text-align: center;
+                    }
+                }
+            }
         }
+    }
+    .priority {
+        display: inline-block;
+        text-align: center;
+        padding: 2px 10px;
+        min-width: 35px;
+        background: #2199e8;
     }
 }

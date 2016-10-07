@@ -24,10 +24,27 @@
                                 .small-input.inputs= y.input "priority_0", label: false, placeholder: 'priority', wrapper_options: { }
                                 .small-input.inputs= y.input "max_0", label: false, placeholder: 'max amount', wrapper_options: { }
                                 = link_to 'x', '', class: 'remove_exchange button', remote: true
-                            = link_to 'Добавить замену', '', class: 'duplicate_exchange button'
-                        - pos.exchanges.order(priority: :asc).each do |exchange|
-                            .long-input.inputs= exchange.card["name_#{@locale}"]
-                            .small-input.inputs= exchange.priority
-                            .small-input.inputs= exchange.max_amount
+                            p= link_to 'Добавить замену', '', class: 'duplicate_exchange button'
+                        - if pos.exchanges.size > 0
+                            table.with_exchanges
+                                thead
+                                    tr
+                                        th Замены
+                                        th Приоритет
+                                        th Кол-во
+                                tbody
+                                    - pos.exchanges.order(priority: :desc).each do |exchange|
+                                        tr
+                                            td
+                                                .card class="mana_#{exchange.card.cost} #{exchange.card.rarity}"
+                                                    .image style="background-image: url('#{exchange.card.image_en}');"
+                                                        .card-shadow
+                                                    .inner
+                                                        .lab class="mana_#{exchange.card.cost}"
+                                                            = exchange.card["name_#{@locale}"]
+                                            td
+                                                span.priority= exchange.priority
+                                            td
+                                                span.priority= exchange.max_amount
             = submit_tag t('buttons.save'), class: 'button'
 = render 'shared/exchange_modal'

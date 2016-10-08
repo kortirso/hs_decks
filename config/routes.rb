@@ -9,6 +9,10 @@ Rails.application.routes.draw do
         get :autocomplete_card_name_ru, on: :collection
         get :autocomplete_card_name_en, on: :collection
     end
+    resources :lines, only: :create do
+        get :autocomplete_card_name_ru, on: :collection
+        get :autocomplete_card_name_en, on: :collection
+    end
     resources :checks, only: [:index, :show, :create]
     resources :decks
 

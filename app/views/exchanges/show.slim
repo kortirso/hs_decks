@@ -1,5 +1,9 @@
 - provide(:title, 'Deck Hunter | Exchanges Page')
 .page_inner
+    #lines
+        = simple_form_for :lines, url: lines_path, method: :post, remote: true do |f|
+            h4 Очередь замен для колоды
+            = submit_tag t('buttons.save'), class: 'button'
     #exchanges
         = simple_form_for :exchanges, url: exchanges_path, method: :post, remote: true do |f|
             h4 Замены для определенных карт

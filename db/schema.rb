@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004173301) do
+ActiveRecord::Schema.define(version: 20161008082809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,19 @@ ActiveRecord::Schema.define(version: 20161004173301) do
     t.datetime "updated_at",  null: false
     t.index ["card_id"], name: "index_exchanges_on_card_id", using: :btree
     t.index ["position_id"], name: "index_exchanges_on_position_id", using: :btree
+  end
+
+  create_table "lines", force: :cascade do |t|
+    t.integer  "deck_id",    null: false
+    t.integer  "card_id",    null: false
+    t.integer  "max_amount", null: false
+    t.integer  "priority",   null: false
+    t.integer  "min_mana"
+    t.integer  "max_mana"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_lines_on_card_id", using: :btree
+    t.index ["deck_id"], name: "index_lines_on_deck_id", using: :btree
   end
 
   create_table "news", force: :cascade do |t|

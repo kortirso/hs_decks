@@ -5,6 +5,7 @@ class Deck < ApplicationRecord
     belongs_to :player
 
     has_many :checks, dependent: :destroy
+    has_many :lines, dependent: :destroy
 
     validates :name, :playerClass, :user_id, :formats, :player_id, :power, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }

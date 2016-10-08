@@ -11,8 +11,6 @@
 }
 
 @mixin scroll-bar {
-    overflow: hidden;
-    overflow-y: scroll;
     &::-webkit-scrollbar {
         width: 6px;
     }

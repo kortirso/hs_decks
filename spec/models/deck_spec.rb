@@ -4,6 +4,7 @@ RSpec.describe Deck, type: :model do
     it { should have_many :positions }
     it { should have_many(:cards).through(:positions) }
     it { should have_many :checks }
+    it { should have_many :lines }
     it { should validate_presence_of :name }
     it { should validate_presence_of :playerClass }
     it { should validate_presence_of :user_id }

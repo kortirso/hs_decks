@@ -1,11 +1,9 @@
 class LinesController < ApplicationController
     before_action :get_access
     before_action :check_user_role
-    autocomplete :card, :name_ru
-    autocomplete :card, :name_en
 
     def create
-
+        Line.build(lines_params)
     end
 
     private
@@ -15,6 +13,6 @@ class LinesController < ApplicationController
     end
 
     def lines_params
-
+        params.require(:lines).permit!
     end
 end

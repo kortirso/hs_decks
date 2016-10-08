@@ -8,7 +8,7 @@ class ExchangesController < ApplicationController
 
     def show
         @positions = @deck.positions.includes(:card, :exchanges).to_a.sort_by { |elem| [elem.card.cost, elem.card["name_#{@locale}"]] }
-        @lines = @deck.lines.order(priority: :desc)
+        @lines = @deck.lines
     end
 
     def create

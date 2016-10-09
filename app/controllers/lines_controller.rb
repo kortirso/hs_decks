@@ -6,6 +6,11 @@ class LinesController < ApplicationController
         Line.build(lines_params)
     end
 
+    def destroy
+        @line = Line.find_by(id: params[:id])
+        @line.destroy
+    end
+
     private
 
     def check_user_role

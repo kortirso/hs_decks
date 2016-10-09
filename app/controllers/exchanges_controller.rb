@@ -15,6 +15,11 @@ class ExchangesController < ApplicationController
         Exchange.build(exchange_params)
     end
 
+    def destroy
+        @exchange = Exchange.find_by(id: params[:id])
+        @exchange.destroy
+    end
+
     private
 
     def check_user_role

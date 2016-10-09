@@ -5,11 +5,11 @@ Rails.application.routes.draw do
     devise_for :users
 
     resources :accounts, only: [:create]
-    resources :exchanges, only: [:show, :create] do
+    resources :exchanges, only: [:show, :create, :destroy] do
         get :autocomplete_card_name_ru, on: :collection
         get :autocomplete_card_name_en, on: :collection
     end
-    resources :lines, only: :create
+    resources :lines, only: [:create, :destroy]
     resources :checks, only: [:index, :show, :create]
     resources :decks
 

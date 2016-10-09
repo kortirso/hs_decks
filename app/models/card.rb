@@ -47,6 +47,10 @@ class Card < ApplicationRecord
         self.craft
     end
 
+    def is_legendary?
+        self.rarity == 'Legendary'
+    end
+
     def self.check_cards_format
         Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') unless collection.cards.last.wild_format? }
     end

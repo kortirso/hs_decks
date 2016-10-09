@@ -64,28 +64,17 @@ class Check < ApplicationRecord
     end
 
     def calc_subs(positions, pos_ids, cards, cards_ids, t)
-        substitution, lines, subs_ids = Substitution.create(check_id: self.id), [], []
-        search_engine = SearchSubs.new(self.deck.playerClass)
+        substitution, lines, caption = Substitution.create(check_id: self.id), [], nil
+        search_engine = SearchSubs.new(self.deck, positions)
         pos_ids.each do |pos|
-            caption = nil
             if cards_ids.include?(pos)
-                if cards[cards_ids.index(pos)][1] >= positions[pos_ids.index(pos)][1]
-                    lines.push "('#{pos}', #{substitution.id}, 'Substitution', '#{positions[pos_ids.index(pos)][1]}', '#{caption}', '#{t}', '#{t}')"
-                else
-                    exchange = search_engine.find_exchange(pos, 1, pos_ids, subs_ids)
-                    if exchange[0] != pos
-                        lines.push "('#{pos}', #{substitution.id}, 'Substitution', '1', '#{caption}', '#{t}', '#{t}')"
-                        lines.push "('#{exchange[0]}', #{substitution.id}, 'Substitution', '1', '#{caption}', '#{t}', '#{t}')"
-                        subs_ids.push exchange[0]
-                    else
-                        lines.push "('#{pos}', #{substitution.id}, 'Substitution', '2', '#{caption}', '#{t}', '#{t}')"
-                    end
-                end
+                search_engine.find_exchange(pos, 1) if cards[cards_ids.index(pos)][1] < positions[pos_ids.index(pos)][1]
             else
-                exchange = search_engine.find_exchange(pos, positions[pos_ids.index(pos)][1], pos_ids, subs_ids)
-                lines.push "('#{exchange[0]}', #{substitution.id}, 'Substitution', '#{exchange[1]}', '#{caption}', '#{t}', '#{t}')"
-                subs_ids.push exchange[0]
+                search_engine.find_exchange(pos, positions[pos_ids.index(pos)][1])
             end
+        end
+        search_engine.cards_in_deck.each do |key, value|
+            lines.push "('#{key}', #{substitution.id}, 'Substitution', '#{value}', '#{caption}', '#{t}', '#{t}')" unless value.nil?
         end
         lines
     end

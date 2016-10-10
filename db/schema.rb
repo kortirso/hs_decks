@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008082809) do
+ActiveRecord::Schema.define(version: 20161010091054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(version: 20161008082809) do
   create_table "exchanges", force: :cascade do |t|
     t.integer  "position_id"
     t.integer  "card_id"
-    t.boolean  "must_have"
     t.integer  "priority"
     t.integer  "max_amount"
     t.datetime "created_at",  null: false

@@ -38,7 +38,7 @@ en:
   general:
     all: 'All'
     index:
-      head: 'HS DECKS - application for the selection of the most appropriate decks for playing HearthStone on the basis of available player cards.'
+      head: 'Deck Hunter - application for the selection of the most appropriate decks for playing HearthStone on the basis of available player cards.'
       version: 'Application version - 0.3 (alpha 3).'
       caption: 'In this version implemented basic functions to preserve the collection of cards and to analyze the decks which are available after registration. Registration (confirmation is not required) is necessary for the preservation of the collection of user cards.'
     tabs_2:
@@ -95,6 +95,14 @@ en:
         p_3: 'Added displaying the description for the check card in the deck.'
         p_4: 'Added parameter showing the strength of deck.'
         p_5: 'You can add cards to the collection by clicking on the map on page viewing decks.'
+        p_6: 'Bug fixnig.'
+      _3:
+        from: 'Version - 0.4, 10.10.2016'
+        p_1: 'Relocation to deckhunter.ru.'
+        p_2: 'Added multilevel exchange system.'
+        p_3: 'Added mailers for new users and newsletters.'
+        p_4: 'Added filters for expert decks.'
+        p_5: 'Added list of unused cards for dust.'
         p_6: 'Bug fixnig.'
   check:
     h4_1: 'At this page you can see checking your cards with deck '

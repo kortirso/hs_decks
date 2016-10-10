@@ -219,4 +219,58 @@ $(function() {
     }).mouseleave(function() {
         $(this).children('.card_caption').hide();
     });
+
+    $('.duplicate_exchange').click(function(e) {
+        var formsOnPage, newNestedForm;
+        e.preventDefault();
+        nestedExchange = $(this).closest('.exchanges').children('.pos').last();
+        newNestedForm = $(nestedExchange).clone();
+        formsOnPage = $(nestedExchange).data("position") + 1;
+        $(newNestedForm).attr('data-position', formsOnPage);    
+        $(newNestedForm).find('input').each(function() {
+            var newId, newName, oldId, oldName;
+            oldId = $(this).attr('id');
+            newId = oldId.replace(oldId.split('_').pop(), formsOnPage);
+            $(this).attr('id', newId);
+            oldName = $(this).attr('name');
+            newName = oldName.replace(oldName.split('_').pop(), formsOnPage + "]");
+            $(this).attr('name', newName);
+            $(this).val('');
+        });
+        $(newNestedForm).insertAfter(nestedExchange);
+    });
+
+    $('#exchanges').on('click', '.remove_exchange', function(e) {
+        e.preventDefault();
+        if($(this).closest('.exchanges').children('.pos').length != 1) {
+            $(this).closest('.pos').remove();
+        }
+    });
+
+    $('.duplicate_line').click(function(e) {
+        var formsOnPage, newNestedForm;
+        e.preventDefault();
+        nestedExchange = $(this).closest('.lines').children('.pos').last();
+        newNestedForm = $(nestedExchange).clone();
+        formsOnPage = $(nestedExchange).data('position') + 1;
+        $(newNestedForm).attr('data-position', formsOnPage);    
+        $(newNestedForm).find('input').each(function() {
+            var newId, newName, oldId, oldName;
+            oldId = $(this).attr('id');
+            newId = oldId.replace(oldId.split('_').pop(), formsOnPage);
+            $(this).attr('id', newId);
+            oldName = $(this).attr('name');
+            newName = oldName.replace(oldName.split('_').pop(), formsOnPage + "]");
+            $(this).attr('name', newName);
+            $(this).val('');
+        });
+        $(newNestedForm).insertAfter(nestedExchange);
+    });
+
+    $('#lines').on('click', '.remove_line', function(e) {
+        e.preventDefault();
+        if($(this).closest('.lines').children('.pos').length != 1) {
+            $(this).closest('.pos').remove();
+        }
+    });
 });

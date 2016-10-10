@@ -9,6 +9,9 @@ class Card < ApplicationRecord
     has_many :users, through: :positions, source: :positionable, source_type: 'User'
     has_many :checks, through: :positions, source: :positionable, source_type: 'Check'
 
+    has_many :exchanges
+    has_many :lines
+
     has_many :shifts, dependent: :destroy
     has_many :exchanges, through: :shifts, source: :change
 
@@ -28,6 +31,10 @@ class Card < ApplicationRecord
     scope :crafted, -> { where craft: true }
     scope :unusable, -> { where usable: 0 }
 
+    def self.return_by_name(name)
+        find_by(name_en: name) || find_by(name_ru: name)
+    end
+
     def self.with_cost(cost)
         return cost < 7 ? where(cost: cost) : where('cost >= 7')
     end
@@ -38,6 +45,10 @@ class Card < ApplicationRecord
 
     def is_crafted?
         self.craft
+    end
+
+    def is_legendary?
+        self.rarity == 'Legendary'
     end
 
     def self.check_cards_format

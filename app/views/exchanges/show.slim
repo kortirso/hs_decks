@@ -1,0 +1,98 @@
+- provide(:title, 'Deck Hunter | Exchanges Page')
+.page_inner
+    #lines
+        = simple_form_for :lines, url: lines_path, method: :post, remote: true do |f|
+            h4 Очередь замен для колоды
+            p В данном блоке можно указать замены для колоды, если замена не будет найдена для определенной карты, то следующая возможная замена будет браться из этого списка.
+            = submit_tag t('buttons.save'), class: 'button'
+            = f.hidden_field :deck_id, value: @deck.id
+            - if @lines.size > 0
+                table.with_lines
+                    thead
+                        tr
+                            th Замены
+                            th Приоритет
+                            th Кол-во
+                            th Мин мана
+                            th Макс мана
+                            th
+                    tbody
+                        - @lines.order(priority: :desc).each do |line|
+                            tr id="line_#{line.id}"
+                                td
+                                    .card class="mana_#{line.card.cost} #{line.card.rarity}"
+                                        .image style="background-image: url('#{line.card.image_en}');"
+                                            .card-shadow
+                                        .inner
+                                            .lab class="mana_#{line.card.cost}"
+                                                = line.card["name_#{@locale}"]
+                                td
+                                    span.priority= line.priority
+                                td
+                                    span.priority= line.max_amount
+                                td
+                                    span.priority= line.min_mana
+                                td
+                                    span.priority= line.max_mana
+                                td
+                                    = link_to 'x', line_path(line), method: :delete, remote: true
+            .lines
+                = f.simple_fields_for 'line' do |y|
+                    .pos data={ position: 0 }
+                        .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
+                        .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
+                        .small-input.inputs= y.input 'max_0', label: false, placeholder: 'max amount'
+                        .small-input.inputs= y.input 'min_mana_0', label: false, placeholder: 'min mana'
+                        .small-input.inputs= y.input 'max_mana_0', label: false, placeholder: 'max mana'
+                        = link_to 'x', '', class: 'remove_line button', remote: true
+                    p= link_to 'Добавить замену', '', class: 'duplicate_line button'
+            = submit_tag t('buttons.save'), class: 'button'
+    #exchanges
+        = simple_form_for :exchanges, url: exchanges_path, method: :post, remote: true do |f|
+            h4 Замены для определенных карт
+            p В данном блоке указываются возможные замены для определенных карт в колоде.
+            = submit_tag t('buttons.save'), class: 'button'
+            = f.hidden_field :deck_id, value: @deck.id
+            - @positions.each do |pos|
+                .position
+                    .card class="mana_#{pos.card.cost} #{pos.card.rarity}"
+                        .image style="background-image: url('#{pos.card.image_en}');"
+                            .card-shadow
+                        .inner
+                            - card_class = pos.amount == 1 ? 'single' : 'double'
+                            .lab class="#{card_class} mana_#{pos.card.cost}"
+                                = pos.card["name_#{@locale}"]
+                    .exchanges
+                        - if pos.exchanges.size > 0
+                            table.with_exchanges
+                                thead
+                                    tr
+                                        th Замены
+                                        th Приоритет
+                                        th Кол-во
+                                        th
+                                tbody
+                                    - pos.exchanges.order(priority: :desc).each do |exchange|
+                                        tr id="exchange_#{exchange.id}"
+                                            td
+                                                .card class="mana_#{exchange.card.cost} #{exchange.card.rarity}"
+                                                    .image style="background-image: url('#{exchange.card.image_en}');"
+                                                        .card-shadow
+                                                    .inner
+                                                        .lab class="mana_#{exchange.card.cost}"
+                                                            = exchange.card["name_#{@locale}"]
+                                            td
+                                                span.priority= exchange.priority
+                                            td
+                                                span.priority= exchange.max_amount
+                                            td
+                                                = link_to 'x', exchange_path(exchange), method: :delete, remote: true
+                        = f.simple_fields_for "#{pos.id}" do |y|
+                            .pos data={ position: 0 }
+                                .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
+                                .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
+                                .small-input.inputs= y.input 'max_0', label: false, placeholder: 'max amount'
+                                = link_to 'x', '', class: 'remove_exchange button', remote: true
+                            p= link_to 'Добавить замену', '', class: 'duplicate_exchange button'
+            = submit_tag t('buttons.save'), class: 'button'
+= render 'shared/exchange_modal'

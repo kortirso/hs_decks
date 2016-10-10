@@ -26,6 +26,7 @@ ru:
     submit: 'Применить'
     subscribe: 'Подписаться'
     unsubscribe: 'Отписаться'
+    exchanges: 'Замены'
   auth:
     auth: 'Авторизация'
     reg: 'Регистрация'

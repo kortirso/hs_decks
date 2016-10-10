@@ -1,6 +1,7 @@
 RSpec.describe Position, type: :model do
     it { should belong_to :positionable }
     it { should belong_to :card }
+    it { should have_many :exchanges }
     it { should validate_presence_of :positionable_id }
     it { should validate_presence_of :positionable_type }
     it { should validate_presence_of :card_id }

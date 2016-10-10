@@ -3,7 +3,7 @@ shared_examples_for 'Check access' do
         it 'render welcome page' do
             do_request
 
-            expect(response).to render_template 'pages/index'
+            expect(response).to render_template 'layouts/404'
         end
     end
 end

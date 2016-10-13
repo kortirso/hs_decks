@@ -53,7 +53,7 @@ class SearchSubs
         card_for_sub = Card.find_by(id: card_id)
         card_for_sub.shifts.includes(:card, :change).order(priority: :desc).each do |ex|
             return 0 if amount.zero?
-            amount = check_cards_in_deck(card_id, ex.card_id, ex.max_amount, amount) if is_sub_approached?(shift)
+            amount = check_cards_in_deck(card_id, ex.card_id, ex.max_amount, amount) if is_sub_approached?(ex)
         end
         amount
     end

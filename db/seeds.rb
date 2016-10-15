@@ -1,4 +1,4 @@
-if Collection.all.size == 0
+if Collection.all.size.zero?
     collections = []
     result = Message.new.get_request
 
@@ -20,7 +20,7 @@ if Collection.all.size == 0
     Deck.check_format
 end
 
-if Player.all.size == 0
+if Player.all.size.zero?
     # create players
     [['Priest', 'Жрец'], ['Warrior', 'Воин'], ['Warlock', 'Чернокнижник'], ['Mage', 'Маг'], ['Druid', 'Друид'], ['Hunter', 'Охотник'], ['Shaman', 'Шаман'], ['Paladin', 'Паладин'], ['Rogue', 'Разбойник']].each do |player|
         Player.create name_en: player[0], name_ru: player[1]
@@ -33,7 +33,13 @@ if Player.all.size == 0
     end
 end
 
-if Shift.all.size == 0
+if Style.all.size.zero?
+    [['Aggro', 'Агро'], ['Control', 'Контроль'], ['Midrange', 'Мидрейндж'], ['Tempo', 'Темпо'], ['Combo', 'Комбо'], ['Token', 'Токен'], ['Ramp', 'Рамп'], ['Fatique', 'Фатиг'], ['Mill', 'Милл']].each do |style|
+        Style.create name_en: style[0], name_ru: style[1]
+    end
+end
+
+if Shift.all.size.zero?
     #substitutions for legendaries
     card_id = Card.find_by(cardId: 'OG_131').id # Twin Emperor Vek'lor
     Shift.create card_id: card_id, change_id: Card.find_by(cardId: 'EX1_032').id, priority: 9 # for Sunwalker

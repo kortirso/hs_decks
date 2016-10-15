@@ -31,7 +31,7 @@ class Deck < ApplicationRecord
         data = Parametrize.deck_getting_params(params)
         deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params)
-        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id, player_id: Player.find_by(name_en: deck_params['playerClass']).id
+        deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id, player_id: Player.find_by(name_en: deck_params['playerClass']).id, power: deck_params['power']
         deck.build_positions(positions_params)
         deck.calc_price
         deck.check_deck_format
@@ -48,7 +48,7 @@ class Deck < ApplicationRecord
         data = Parametrize.deck_getting_params(params)
         deck_params, positions_params = data[0].to_h, data[1]
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
-        self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author']
+        self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], power: deck_params['power']
         self.update_positions(positions_params)
         self.calc_price
         self.check_deck_format
@@ -88,7 +88,7 @@ class Deck < ApplicationRecord
     private
 
     def self.good_params?(deck_params, positions_params, playerClass = nil)
-        return false if deck_params.size != 4 && deck_params.size != 6 || positions_params.size == 0
+        return false if deck_params.size != 5 && deck_params.size != 7 || positions_params.size == 0
         return false if Deck.check_deck_params(deck_params, playerClass.nil? ? 1 : 0)
         return false if Deck.check_30_cards(positions_params)
         return false if Deck.check_dublicates(positions_params)

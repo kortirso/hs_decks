@@ -20,6 +20,7 @@
                 .columns.small-3= select_tag :formats, options_for_select(%w(wild standard)), include_blank: false
                 .columns.small-6= text_field_tag :author, nil, placeholder: t('new_deck.author')
                 .columns.small-6= text_field_tag :link, nil, placeholder: t('new_deck.link')
+                .columns.small-2= text_field_tag :power, nil, placeholder: t('new_deck.deck_power')
                 .columns.small-12= text_area_tag :caption, nil, placeholder: t('new_deck.caption'), rows: 6
                 .clearfix
                 #filters

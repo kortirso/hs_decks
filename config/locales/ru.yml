@@ -136,6 +136,7 @@ ru:
     link: 'Ссылка'
     caption: 'Описание'
     author: 'Автор колоды'
+    deck_power: 'Сила колоды'
   edit_deck:
     head: 'Редактирование колоды'
   decks:

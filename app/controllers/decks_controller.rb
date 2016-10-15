@@ -18,7 +18,7 @@ class DecksController < ApplicationController
     end
 
     def create
-        if Deck.build(params, current_user.id)
+        if Deck.build(deck_params, current_user.id)
             redirect_to decks_path
         else
             redirect_to new_deck_path
@@ -31,7 +31,7 @@ class DecksController < ApplicationController
     end
 
     def update
-        if @deck.refresh(params)
+        if @deck.refresh(deck_params)
             redirect_to decks_path
         else
             redirect_to edit_deck_path(@deck)
@@ -56,5 +56,9 @@ class DecksController < ApplicationController
 
     def check_deck_author
         render_404 if current_user.id != @deck.user_id
+    end
+
+    def deck_params
+        params.permit!
     end
 end

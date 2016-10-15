@@ -5,6 +5,7 @@ FactoryGirl.define do
         formats 'standard'
         author ''
         price 5000
+        power 1
         association :user
         association :player
     end

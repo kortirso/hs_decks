@@ -136,6 +136,7 @@ en:
     link: 'Link'
     caption: 'Caption'
     author: 'Author'
+    deck_power: 'Deck power'
   edit_deck:
     head: 'Deck Editing'
   decks:

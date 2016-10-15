@@ -127,6 +127,7 @@ en:
     p_3: 'Deck author - '
     p_4: 'Deck price - '
     p_5: 'Clicking on cards amount cause changing amount of this cards in your collection.'
+    p_6: 'Deck type - '
   new_deck:
     head: 'New Deck creating'
     p_1: 'Here you can see selected cards and their amount'

@@ -22,6 +22,7 @@
                 .columns.small-6= text_field_tag :author, nil, placeholder: t('new_deck.author'), value: @deck.author
                 .columns.small-6= text_field_tag :link, nil, placeholder: t('new_deck.link'), value: @deck.link
                 .columns.small-2= text_field_tag :power, nil, placeholder: t('new_deck.deck_power'), value: @deck.power
+                .columns.small-3= select_tag :style, options_for_select(@styles, (@deck.style_id.nil? ? nil : @deck.style.locale_name(@locale))), prompt: 'Nil or speсific style'
                 .columns.small-12= text_area_tag :caption, @deck.caption, placeholder: t('new_deck.caption'), rows: 6
                 .clearfix
                 #filters

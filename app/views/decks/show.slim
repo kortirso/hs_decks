@@ -8,6 +8,9 @@
                     = t('deck.p_1')
                     = @deck.formats
                 p
+                    = t('deck.p_6')
+                    = @deck.style.locale_name(@locale) unless @deck.style_id.nil?
+                p
                     = "#{t('general.tabs_3.power')} - "
                     = @deck.power
                 p

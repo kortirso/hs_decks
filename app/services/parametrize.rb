@@ -1,7 +1,7 @@
 class Parametrize
 
     PARAMS_HEADERS = %w(utf8 commit authenticity_token controller action id _method mana_cost)
-    DECK_HEADERS = %w(name playerClass formats link caption success author direction power)
+    DECK_HEADERS = %w(name playerClass formats link caption success author direction power style)
 
     def self.deck_getting_params(params)
         data = params.to_h.to_a.delete_if { |elem| PARAMS_HEADERS.include? elem[0] }

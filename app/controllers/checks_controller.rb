@@ -6,6 +6,7 @@ class ChecksController < ApplicationController
     def index
         @checks = current_user.checks.includes(:deck).order(success: :desc)
         @player_classes = Player.names(@locale)
+        @styles = Style.get_names(@locale)
     end
 
     def show
@@ -32,6 +33,6 @@ class ChecksController < ApplicationController
     end
 
     def check_params
-        params.permit(:success, :dust, :playerClass, :formats)
+        params.permit(:success, :dust, :playerClass, :formats, :power, :style)
     end
 end

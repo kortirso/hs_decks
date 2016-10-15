@@ -14,7 +14,7 @@ RSpec.describe Check, type: :model do
     end
 
     context 'Methods' do
-        let(:empty_params) { ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'wild', something: '' }) }
+        let(:empty_params) { ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'wild', something: '', power: '', style: '' }) }
 
         context '.build' do
             
@@ -53,7 +53,7 @@ RSpec.describe Check, type: :model do
             end
 
             context 'with limits' do
-                let(:params) { ActionController::Parameters.new({ success: '', dust: '1000', playerClass: '', formats: 'wild', something: '' }) }
+                let(:params) { ActionController::Parameters.new({ success: '', dust: '1000', playerClass: '', formats: 'wild', something: '', power: '', style: '' }) }
                 let(:success) { 10 }
                 let(:dust) { 2500 }
 
@@ -81,7 +81,7 @@ RSpec.describe Check, type: :model do
             end
 
             it 'should returns shaman deck if conditions are with shamans limit' do
-                params = ActionController::Parameters.new({ success: '', dust: '', playerClass: 'Shaman', formats: 'wild', something: '' })
+                params = ActionController::Parameters.new({ success: '', dust: '', playerClass: 'Shaman', formats: 'wild', something: '', power: '', style: '' })
                 decks = Check.getting_decks(params)
 
                 expect(decks.size).to eq 1
@@ -89,7 +89,7 @@ RSpec.describe Check, type: :model do
             end
 
             it 'should returns standard deck if conditions are with standard format limit' do
-                params = ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'standard', something: '' })
+                params = ActionController::Parameters.new({ success: '', dust: '', playerClass: '', formats: 'standard', something: '', power: '', style: '' })
                 decks = Check.getting_decks(params)
 
                 expect(decks.size).to eq 1

@@ -6,8 +6,10 @@
     = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
         .columns.small-3= text_field_tag :success, nil, placeholder: t('general.tabs_4.p_3')
         .columns.small-3= text_field_tag :dust, nil, placeholder: t('general.tabs_4.p_4')
-        .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: 'All or spesific class'
+        .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: t('general.tabs_4.p_6')
         .columns.small-3= select_tag :formats, options_for_select(%w(standard wild))
+        .columns.small-2= text_field_tag :power, nil, placeholder: t('general.tabs_3.power')
+        .columns.small-3= select_tag :style, options_for_select(@styles), prompt: t('general.tabs_4.p_5')
         = submit_tag t('buttons.check_decks'), class: 'button'
     #checks
         h5= t('general.tabs_4.last_checks')

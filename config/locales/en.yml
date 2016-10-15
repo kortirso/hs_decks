@@ -68,6 +68,8 @@ en:
       p_2: 'In addition you can select minimal success rating of decks, maximum dust amount you can spend for crafting cards, spesific player class and deck format.'
       p_3: 'Minimal success rating in %'
       p_4: 'Max dust needs for crafting'
+      p_5: 'Deck type'
+      p_6: 'Player Hero'
       last_checks: 'Last deck checks'
       success: 'Success'
       dust: 'Needs dust to success'

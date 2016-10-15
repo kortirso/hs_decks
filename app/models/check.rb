@@ -96,6 +96,8 @@ class Check < ApplicationRecord
         decks = Deck.all.includes(:positions)
         decks = decks.of_player_class(Player.return_en(params['playerClass'])) unless params['playerClass'].empty?
         decks = decks.of_format('standard') if params['formats'] == 'standard'
+        decks = decks.of_power(params['power']) if !params['power'].empty? && params['power'].to_i.between?(1, 10)
+        decks = decks.of_style(params['style']) unless params['style'].empty?
         decks
     end
 end

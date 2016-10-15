@@ -8,5 +8,6 @@ FactoryGirl.define do
         power 1
         association :user
         association :player
+        association :style
     end
 end

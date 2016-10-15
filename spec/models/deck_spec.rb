@@ -1,6 +1,7 @@
 RSpec.describe Deck, type: :model do
     it { should belong_to :user }
     it { should belong_to :player }
+    it { should belong_to :style }
     it { should have_many :positions }
     it { should have_many(:cards).through(:positions) }
     it { should have_many :checks }

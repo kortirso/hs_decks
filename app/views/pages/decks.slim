@@ -13,9 +13,10 @@
                     th= t('general.tabs_3.class')
                     th= t('general.tabs_3.price')
                     th= t('general.tabs_3.format')
+                    th= t('general.tabs_3.style')
                     th= t('general.tabs_3.power')
                     th= t('general.tabs_3.author')
-                    th= t('general.tabs_3.expert')
+                    /th= t('general.tabs_3.expert')
             tbody
                 - @decks.each_with_index do |deck, index|
                     tr
@@ -24,9 +25,10 @@
                         td= deck.player.locale_name(@locale)
                         td= deck.price
                         td= deck.formats
+                        td= deck.style.locale_name(@locale) unless deck.style.nil?
                         td= deck.power
                         td= deck.author
-                        td= deck.user.username
+                        /td= deck.user.username
 #decks_filters.reveal.tiny data-reveal=''
     = form_tag({ controller: 'pages', action: 'decks' }, method: 'get') do
         h4= t('general.tabs_2.filters')

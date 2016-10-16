@@ -11,8 +11,9 @@
                     th= t('decks.class')
                     th= t('general.tabs_3.price')
                     th= t('general.tabs_3.format')
+                    th= t('general.tabs_3.style')
                     th= t('general.tabs_3.power')
-                    th= t('general.tabs_3.author')
+                    /th= t('general.tabs_3.author')
                     th
             tbody
                 - @decks.order(playerClass: :asc).each do |deck|
@@ -21,8 +22,9 @@
                         td= deck.player.locale_name(@locale)
                         td= deck.price
                         td= deck.formats
+                        td= deck.style.locale_name(@locale) unless deck.style.nil?
                         td= deck.power
-                        td= deck.author
+                        /td= deck.author
                         td
                             = link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small'
                             = link_to t('buttons.exchanges'), exchange_path(deck.id), class: 'button small'

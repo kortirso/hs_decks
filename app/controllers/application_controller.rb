@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
         render_404 unless current_user
     end
 
+    def check_user_role
+        render_404 unless current_user.deck_master?
+    end
+
     def render_404
         render template: 'layouts/404', status: 404
     end

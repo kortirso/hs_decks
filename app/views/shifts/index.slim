@@ -1,0 +1,43 @@
+- provide(:title, 'Deck Hunter | Shifts Builder Page')
+.page_inner
+    #exchanges
+        h4= 'На этой странице вы можете создать, модифицировать и удалять замены для карт в независимости от колод.'
+        = simple_form_for :shifts, url: shifts_path, method: :post, remote: true do |f|
+            = submit_tag t('buttons.save'), class: 'button'
+            - @shifted_cards.each do |card|
+                .position
+                    .card class="mana_#{card.cost} #{card.rarity}"
+                        .image style="background-image: url('#{card.image_en}');"
+                            .card-shadow
+                        .inner
+                            .lab class="mana_#{card.cost}"
+                                = card["name_#{@locale}"]
+                    .exchanges
+                        table.with_exchanges
+                            thead
+                                tr
+                                    th Замены
+                                    th Приоритет
+                                    th Кол-во
+                                    th
+                            tbody
+                                - card.shifts.order(priority: :desc).each do |shift|
+                                    tr id="shift_#{shift.id}"
+                                        td
+                                            .card class="mana_#{shift.change.cost} #{shift.change.rarity}"
+                                                .image style="background-image: url('#{shift.change.image_en}');"
+                                                    .card-shadow
+                                                .inner
+                                                    .lab class="mana_#{shift.change.cost}"
+                                                        = shift.change["name_#{@locale}"]
+                                        td
+                                            span.priority= shift.priority
+                                        td
+                                            = link_to 'x', shift_path(shift), method: :delete, remote: true
+                        = f.simple_fields_for "#{card.id}" do |y|
+                            .pos data={ position: 0 }
+                                .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
+                                .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
+                                = link_to 'x', '', class: 'remove_exchange button', remote: true
+                            p= link_to 'Добавить замену', '', class: 'duplicate_exchange button'
+= render 'shared/exchange_modal'

@@ -22,10 +22,6 @@ class ExchangesController < ApplicationController
 
     private
 
-    def check_user_role
-        render_404 unless current_user.deck_master?
-    end
-
     def find_deck
         @deck = Deck.find_by(id: params[:id])
         render_404 if @deck.nil? 

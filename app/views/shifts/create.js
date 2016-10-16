@@ -1,0 +1,3 @@
+$(function() {
+    $('#exchangeModal').foundation('open');
+});

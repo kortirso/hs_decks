@@ -51,6 +51,14 @@ class Card < ApplicationRecord
         self.rarity == 'Legendary'
     end
 
+    def self.with_shifts
+        cards = []
+        Shift.pluck(:card_id).uniq.each do |id|
+            cards.push Card.find(id)
+        end
+        cards
+    end
+
     def self.check_cards_format
         Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') unless collection.cards.last.wild_format? }
     end

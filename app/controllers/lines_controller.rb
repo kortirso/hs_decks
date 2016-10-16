@@ -13,10 +13,6 @@ class LinesController < ApplicationController
 
     private
 
-    def check_user_role
-        render_404 unless current_user.deck_master?
-    end
-
     def lines_params
         params.require(:lines).permit!
     end

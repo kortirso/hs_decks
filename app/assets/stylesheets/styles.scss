@@ -137,9 +137,11 @@ nav {
     }
     .left_side {
         @include scroll-bar;
+        overflow: hidden;
+        overflow-y: scroll;
         position: absolute;
         width: 290px;
-        height: 98%;
+        height: 100%;
         top: 0;
         left: 0;
         .button {

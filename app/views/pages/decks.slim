@@ -40,6 +40,9 @@
             span= t('general.tabs_3.format')
             span= select_tag :formats, options_for_select(%w(wild standard)), prompt: t('general.all')
         .small-12.columns
+            span= t('general.tabs_3.style')
+            span= select_tag :style, options_for_select(@styles), prompt: t('general.all')
+        .small-12.columns
             = submit_tag t('buttons.submit'), class: 'button'
     button.close-button aria-label=('Close modal') data-close='' type='button'
         span aria-hidden='true' &times;

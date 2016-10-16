@@ -25,8 +25,9 @@ class Deck < ApplicationRecord
             player = Player.return_by_name(params[:playerClass])
             decks = player.decks if player
         end
-        decks = decks.where('power >= ?', params[:power].to_i) unless params[:power].empty?
+        decks = decks.of_power(params[:power]) unless params[:power].empty?
         decks = decks.of_format(params[:formats]) if %w(standard wild).include?(params[:formats])
+        decks = decks.of_style(params[:style]) unless params[:style].empty?
         decks
     end
 

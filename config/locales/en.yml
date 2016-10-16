@@ -61,6 +61,7 @@ en:
       price: 'Deck price'
       author: 'Author'
       power: 'Deck power'
+      style: 'Deck style'
     tabs_4:
       tab: 'Decks analyzer'
       head: 'Current cards analyzer'

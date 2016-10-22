@@ -3,7 +3,7 @@ class NewsletterJob < ApplicationJob
 
     def perform(news)
         User.news_subscribers.each do |user|
-            UserMailer.news_email(news, user).deliver_later
+            UserMailer.news_email(news, user).deliver
         end
     end
 end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     resources :shifts, only: [:index, :create, :destroy]
     resources :lines, only: [:create, :destroy]
+    resources :collections, only: [:create]
     resources :checks, only: [:index, :show, :create]
     resources :decks
 

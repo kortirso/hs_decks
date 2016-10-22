@@ -22,6 +22,7 @@ gem 'rails_admin', '>= 1.0.0.rc'
 gem 'whenever'
 gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
+gem 'nokogiri'
 
 group :development, :test do
     gem 'rspec-rails'

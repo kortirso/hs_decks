@@ -4,6 +4,10 @@
         - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
         h4= t('general.tabs_2.head')
         p= t('general.tabs_2.p_1')
+        p
+            = 'Коллекцию карт можно '
+            = link_to 'синхронизировать', personal_path
+            = ' с коллекцией на ресурсе Hearthpwn'
         #filters
             span
                 strong= t('general.tabs_2.filters')

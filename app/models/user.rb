@@ -65,10 +65,13 @@ class User < ApplicationRecord
         self.update(get_news: false) if self.get_news
     end
 
+    def hearthpwn_collection(params)
+        UploadCollectionJob.perform_later(self, params[:username])
+    end
+
     private
 
     def welcome_notify
-        UserMailer.welcome_email(self).deliver
-        #WelcomeletterJob.perform_later(self)
+        WelcomeletterJob.perform_later(self)
     end
 end

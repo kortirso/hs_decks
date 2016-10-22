@@ -9,3 +9,22 @@
         - else
             p= t('personal.unsubscribe')
             = link_to t('buttons.subscribe'), news_subscribe_path, class: 'button', method: :post, remote: true
+    #hearthpwn
+        h4 Загрузка коллекции карт с Hearthpwn
+        p Если у вас есть аккаунт на ресурсе hearthpwn.com, то вы можете загрузить коллекцию карт с этого ресурса.
+        p= link_to 'Инструкция по работе с Hearthpwn', '#', 'data-open': "instructionModal"
+        = form_tag({ controller: 'collections', action: 'create' }, method: 'post', remote: true) do
+            .columns.small-2= text_field_tag :username, nil, placeholder: 'Username'
+            = submit_tag 'Upload', class: 'button'
+= render 'shared/upload_modal'
+#instructionModal.reveal data-reveal=''
+    h4 Инструкция по работе с Hearthpwn!
+    p
+        = '1. Создайте аккаунт на '
+        = link_to 'hearthpwn.', 'http://hearthpwn.com'
+    p
+        = '2. Установите программу '
+        = link_to 'Innkeeper.', 'http://www.innkeeper.com/'
+    p 3. Запустите Innkeeper и HearthStone, коллекция карт будет синхронизирована с ресурсом Hearthpwn.
+    button.close-button aria-label=('Close modal') data-close='' type='button'
+        span aria-hidden='true' &times;

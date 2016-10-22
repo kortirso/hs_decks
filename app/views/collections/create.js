@@ -1,0 +1,3 @@
+$(function() {
+    $('#uploadModal').foundation('open');
+});

@@ -11,6 +11,14 @@ RSpec.describe ChecksController, type: :controller do
                 expect(assigns(:checks)).to match_array(checks)
             end
 
+            it 'and collects an array of Heroes Names in @players' do
+                expect(assigns(:player_classes)).to match_array([Player.first.name_en, Player.last.name_en])
+            end
+
+            it 'and collects an array of deck styles in @styles' do
+                expect(assigns(:styles)).to match_array([Style.first.name_en, Style.last.name_en])
+            end
+
             it 'and renders account page' do
                 expect(response).to render_template :index
             end
@@ -50,6 +58,7 @@ RSpec.describe ChecksController, type: :controller do
                 let!(:sub) { create :substitution, check: check }
                 let!(:lines) { create :position_for_check, positionable: check }
                 let!(:subs) { create :position_for_subs, positionable: sub }
+                let!(:pos) { create :position_for_subs, positionable: check.deck }
                 before { get :show, params: { id: check.id } }
 
                 it 'assigns the requested check to @check' do
@@ -66,6 +75,10 @@ RSpec.describe ChecksController, type: :controller do
 
                 it 'and assigns the substitution positions to @subs' do
                     expect(assigns(:subs)).to eq [[subs.card_id, subs.amount]]
+                end
+
+                it 'and assigns the decks positions to @positions' do
+                    expect(assigns(:positions)).to eq [[pos.card_id, pos.amount]]
                 end
 
                 it 'and renders decks page' do

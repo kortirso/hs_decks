@@ -4,16 +4,16 @@ class Player < ApplicationRecord
 
     validates :name_en, :name_ru, presence: true
 
+    def self.names(locale)
+        all.collect { |player| player.locale_name(locale) }.sort
+    end
+
     def locale_name(locale)
         self["name_#{locale}"]
     end
 
-    def self.names(locale)
-        all.to_a.collect { |player| player["name_#{locale}"] }.sort
-    end
-
     def self.return_en(name)
-        (find_by(name_en: name) || find_by(name_ru: name)).name_en
+        return_by_name(name).name_en
     end
 
     def self.return_by_name(name)

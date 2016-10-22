@@ -42,5 +42,15 @@ RSpec.describe Player, type: :model do
                 expect(Player.return_en('Шаман')).to eq player.name_en
             end
         end
+
+        context '.return_by_name' do
+            it 'should return player object if en name' do
+                expect(Player.return_by_name('Shaman')).to eq player
+            end
+
+            it 'should return player object if ru name' do
+                expect(Player.return_by_name('Шаман')).to eq player
+            end
+        end
     end
 end

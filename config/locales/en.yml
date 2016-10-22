@@ -112,7 +112,7 @@ en:
         from: 'Version - 0.4.1, 22.10.2106'
         p_1: 'Import card collection from Hearthpwn.'
         p_2: 'Add forms for shifts creation for experts.'
-        p_2: 'Bug fixing.'
+        p_3: 'Bug fixing.'
   check:
     h4_1: 'At this page you can see checking your cards with deck '
     h4_2: ' from expert '

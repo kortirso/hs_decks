@@ -23,7 +23,6 @@
         .tabs-content#tabs-content data-tabs-content='cards-tabs'
             = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
                 = submit_tag t('buttons.save'), class: 'button'
-                = hidden_field_tag :direction, 0
                 - ids = @packs.collect { |elem| elem[0] }
                 - classes_list.each_with_index do |name, index|
                     .tabs-panel class="#{'is-active' if index == 0} class_#{name}" id="cards#{index}"

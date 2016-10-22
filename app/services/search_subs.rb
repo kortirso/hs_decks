@@ -86,7 +86,8 @@ class SearchSubs
         card_for_sub = Card.find_by(id: card_id)
         cards_for_random = cards.select { |card| card.cost == card_for_sub.cost }.delete_if { |card| is_card_in_deck?(card.id, card_id) }
         if cards_for_random.size > 0
-            cards_in_deck[card_id] = nil
+            cards_in_deck[card_id] -= amount
+            cards_in_deck[card_id] = nil if cards_in_deck[card_id].zero?
             cards_in_deck[cards_for_random.sample.id] = amount
         end
     end

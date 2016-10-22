@@ -23,6 +23,7 @@ gem 'whenever'
 gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem 'nokogiri'
+gem 'sidekiq', '>= 4.2.3'
 
 group :development, :test do
     gem 'rspec-rails'
@@ -38,6 +39,7 @@ group :development do
     gem 'capistrano-bundler', require: false
     gem 'capistrano-rails', require: false
     gem 'capistrano-rvm', require: false
+    gem 'capistrano-sidekiq', require: false
 end
 
 group :test do

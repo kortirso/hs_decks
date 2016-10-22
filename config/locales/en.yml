@@ -27,6 +27,7 @@ en:
     subscribe: 'Subscribe'
     unsubscribe: 'Unsubscribe'
     exchanges: 'Exchanges'
+    upload: 'Upload'
   auth:
     auth: 'Authorization'
     reg: 'Registration'
@@ -39,7 +40,7 @@ en:
     all: 'All'
     index:
       head: 'Deck Hunter - application for the selection of the most appropriate decks for playing HearthStone on the basis of available player cards.'
-      version: 'Application version - 0.3 (alpha 3).'
+      version: 'Application version - 0.4.1 (alpha 4.1).'
       caption: 'In this version implemented basic functions to preserve the collection of cards and to analyze the decks which are available after registration. Registration (confirmation is not required) is necessary for the preservation of the collection of user cards.'
     tabs_2:
       tab: 'Cards collection'
@@ -107,6 +108,11 @@ en:
         p_4: 'Added filters for expert decks.'
         p_5: 'Added list of unused cards for dust.'
         p_6: 'Bug fixnig.'
+      _4:
+        from: 'Version - 0.4.1, 22.10.2106'
+        p_1: 'Import card collection from Hearthpwn.'
+        p_2: 'Add forms for shifts creation for experts.'
+        p_2: 'Bug fixing.'
   check:
     h4_1: 'At this page you can see checking your cards with deck '
     h4_2: ' from expert '

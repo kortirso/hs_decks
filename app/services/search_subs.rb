@@ -29,7 +29,7 @@ class SearchSubs
     def check_shifts_in_deck(card_id, amount)
         @deck.positions.find_by(card_id: card_id).exchanges.includes(:card).order(priority: :desc).each do |ex|
             return 0 if amount.zero?
-            amount = check_cards_in_deck(card_id, ex.card_id, ex.max_amount, amount)
+            amount = check_cards_in_deck(card_id, ex.change_id, ex.max_amount, amount)
         end
         amount
     end
@@ -39,7 +39,7 @@ class SearchSubs
             return 0 if amount.zero?
             card = Card.find(card_id)
             if ex.min_mana <= card.cost && ex.max_mana >= card.cost
-                amount = check_cards_in_deck(card_id, ex.card_id, ex.max_amount, amount)
+                amount = check_cards_in_deck(card_id, ex.change_id, ex.max_amount, amount)
             end
         end
         amount
@@ -53,7 +53,7 @@ class SearchSubs
         card_for_sub = Card.find_by(id: card_id)
         card_for_sub.shifts.includes(:card, :change).order(priority: :desc).each do |ex|
             return 0 if amount.zero?
-            amount = check_cards_in_deck(card_id, ex.card_id, amount, amount) if is_sub_approached?(ex)
+            amount = check_cards_in_deck(card_id, ex.change_id, amount, amount) if is_sub_approached?(ex)
         end
         amount
     end

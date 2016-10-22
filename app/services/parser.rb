@@ -22,6 +22,7 @@ module Parser
                     list[card['data-card-name']] = card.at_css('.inline-card-count')['data-card-count'].to_i
                 else
                     list[card['data-card-name']] += card.at_css('.inline-card-count')['data-card-count'].to_i
+                    list[card['data-card-name']] = 2 if list[card['data-card-name']] > 2
                 end
             end
             list

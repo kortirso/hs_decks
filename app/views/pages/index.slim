@@ -12,4 +12,4 @@
                     p= article.created_at.strftime("%Y.%m.%d")
                     p.caption= article.caption
                     - unless article.link.nil? || article.link.empty?
-                        p= link_to 'Подробности...', article.link, class: 'button'
+                        p= link_to 'Подробности...', article.link, class: 'button', target: '_blank'

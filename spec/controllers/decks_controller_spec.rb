@@ -105,17 +105,17 @@ RSpec.describe DecksController, type: :controller do
                 it 'should call Decks build method' do
                     expect(Deck).to receive(:build)
 
-                    post :create, params: {}
+                    post :create, params: { deck: { name: 'Deck' } }
                 end
 
                 it 'should redirect to decks_path if Deck.build returns true' do
-                    post :create, params: { name: 'Deck', playerClass: 'Shaman', formats: 'standard', link: '', caption: '', author: '', power: 1, style: 'Aggro', "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2',}
+                    post :create, params: { deck: { name: 'Deck', playerClass: 'Shaman', formats: 'standard', link: '', caption: '', author: '', power: 1, style: 'Aggro' }, "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2',}
 
                     expect(response).to redirect_to decks_path
                 end
 
                 it 'should redirect to new_deck_path if Deck.build returns false' do
-                    post :create, params: {}
+                    post :create, params: { deck: { name: 'Deck' } }
 
                     expect(response).to redirect_to new_deck_path
                 end
@@ -123,11 +123,11 @@ RSpec.describe DecksController, type: :controller do
         end
 
         def do_request
-            post :create, params: {}
+            post :create, params: { deck: { name: 'Deck' } }
         end
 
         def do_request_for_role
-            post :create, params: {}
+            post :create, params: { deck: { name: 'Deck' } }
         end
     end
 
@@ -200,13 +200,13 @@ RSpec.describe DecksController, type: :controller do
             it_behaves_like 'Check role'
 
             it 'should render 404 if deck does not exist' do
-                patch :update, params: { id: 1 }
+                patch :update, params: { id: 1, deck: { name: 'Deck' } }
 
                 expect(response).to render_template 'layouts/404'
             end
 
             it 'should render 404 if deck does not belong to user' do
-                patch :update, params: { id: deck.id }
+                patch :update, params: { id: deck.id, deck: { name: 'Deck' } }
 
                 expect(response).to render_template 'layouts/404'
             end
@@ -217,7 +217,7 @@ RSpec.describe DecksController, type: :controller do
                 before { @current_user.update(role: 'deck_master') }
 
                 it 'assigns the requested deck to @deck' do
-                    patch :update, params: { id: users_deck.id }
+                    patch :update, params: { id: users_deck.id, deck: { name: 'Deck' } }
 
                     expect(assigns(:deck)).to eq users_deck
                 end
@@ -225,17 +225,17 @@ RSpec.describe DecksController, type: :controller do
                 it 'and should call Decks refresh method on @deck' do
                     expect_any_instance_of(Deck).to receive(:refresh)
 
-                    patch :update, params: { id: users_deck.id }
+                    patch :update, params: { id: users_deck.id, deck: { name: 'Deck' } }
                 end
 
                 it 'should redirect to decks_path if Deck.build returns true' do
-                    patch :update, params: { id: users_deck.id, name: 'Updated deck', link: '', caption: '', author: '', power: 1, style: 'Aggro', "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}
+                    patch :update, params: { id: users_deck.id, deck: { name: 'Updated deck', link: '', caption: '', author: '', power: 1, style: 'Aggro' }, "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}
 
                     expect(response).to redirect_to decks_path
                 end
 
                 it 'should redirect to new_deck_path if Deck.build returns false' do
-                    patch :update, params: { id: users_deck.id }
+                    patch :update, params: { id: users_deck.id, deck: { name: 'Deck' } }
 
                     expect(response).to redirect_to edit_deck_path(users_deck)
                 end
@@ -243,11 +243,11 @@ RSpec.describe DecksController, type: :controller do
         end
 
         def do_request
-            patch :update, params: { id: 1 }
+            patch :update, params: { id: 1, deck: { name: 'Deck' } }
         end
 
         def do_request_for_role
-            patch :update, params: { id: 1 }
+            patch :update, params: { id: 1, deck: { name: 'Deck' } }
         end
     end
 

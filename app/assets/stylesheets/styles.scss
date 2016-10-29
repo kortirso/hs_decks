@@ -124,9 +124,8 @@ nav {
 }
 
 #new_deck {
-    position: relative;
     background: #FFF;
-    padding: 10px;
+    padding: 0;
     margin: 0;
     input, select {
         font-size: 0.8rem;
@@ -136,20 +135,17 @@ nav {
         margin: 0 10px 0 0;
     }
     .left_side {
-        @include scroll-bar;
-        overflow: hidden;
-        overflow-y: scroll;
-        position: absolute;
-        width: 290px;
+        float: left;
+        width: 22%;
         height: 100%;
-        top: 0;
-        left: 0;
         .button {
             margin-top: 10px;
         }
     }
     .right_side {
-        margin-left: 300px;
+        float: left;
+        width: 76%;
+        margin-left: 2%;
     }
 }
 
@@ -157,7 +153,7 @@ nav {
     font-size: 0.8rem !important;
 }
 
-#decks, #deck, #check {
+#decks, #deck, #check, #new_deck {
     background: #FFF;
     @include before-after-mixin;
 }
@@ -166,13 +162,12 @@ nav {
     position: relative;
     .left_side {
         float: left;
-        width: 25%;
-        top: 0;
-        left: 0;
+        width: 27%;
     }
     .right_side {
         float: left;
-        width: 75%;
+        margin-left: 3%;
+        width: 70%;
         .cards {
             margin-bottom: 10px;
             @include before-after-mixin;
@@ -219,6 +214,7 @@ nav {
                     height: 215px;
                     background-size: 100% !important;
                     background-position-y: -15px !important;
+                    background-repeat: no-repeat !important;
                     &:before {
                         position: absolute;
                         content: '';
@@ -730,4 +726,9 @@ nav {
         min-width: 35px;
         background: #2199e8;
     }
+}
+
+trix-editor {
+    min-height: 150px !important;
+    margin-bottom: 10px !important;
 }

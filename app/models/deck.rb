@@ -33,7 +33,7 @@ class Deck < ApplicationRecord
 
     def self.build(params, user_id)
         data = Parametrize.deck_getting_params(params)
-        deck_params, positions_params = data[0].to_h, data[1]
+        deck_params, positions_params = data[0][1], data[1]
         return false unless Deck.good_params?(deck_params, positions_params)
         deck = Deck.create name: deck_params['name'], playerClass: deck_params['playerClass'], formats: deck_params['formats'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], user_id: user_id, player_id: Player.find_by(name_en: deck_params['playerClass']).id, power: deck_params['power'], style_id: Style.return_id_by_name(deck_params['style'])
         deck.build_positions(positions_params)
@@ -50,7 +50,7 @@ class Deck < ApplicationRecord
 
     def refresh(params)
         data = Parametrize.deck_getting_params(params)
-        deck_params, positions_params = data[0].to_h, data[1]
+        deck_params, positions_params = data[0][1], data[1]
         return false unless Deck.good_params?(deck_params, positions_params, self.playerClass)
         self.update name: deck_params['name'], link: deck_params['link'], caption: deck_params['caption'], author: deck_params['author'], power: deck_params['power'], style_id: Style.return_id_by_name(deck_params['style'])
         self.update_positions(positions_params)

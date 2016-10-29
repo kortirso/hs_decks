@@ -21,7 +21,7 @@
                     = @deck.price
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
                 p= t('deck.p_2')
-                p= @deck.caption
+                = raw(@deck.caption)
         .right_side
             h4
                 = t('deck.h4_1')

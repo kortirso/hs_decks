@@ -140,7 +140,7 @@ $(function() {
         }
     });
 
-    $('select#playerClass').on('change', function() {
+    $('select#deck_playerClass').on('change', function() {
         $('#card_amount').html('0');
         mana_curve_reset();
 
@@ -161,7 +161,7 @@ $(function() {
         $('#cards_list .card').remove();
     });
 
-    $('select#formats').on('change', function() {
+    $('select#deck_formats').on('change', function() {
         $('#card_amount').html('0');
         mana_curve_reset();
         

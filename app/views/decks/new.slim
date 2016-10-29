@@ -2,7 +2,7 @@
 .page_inner
     #new_deck
         - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
-        = form_tag({ controller: 'decks', action: 'create' }, method: 'post') do
+        = form_for Deck.new, controller: 'decks', action: 'create', method: 'post' do |f|
             .left_side
                 h4= t('new_deck.head')
                 /p= t('new_deck.p_1')
@@ -12,17 +12,17 @@
                 = render 'shared/mana_curve', by_mana: nil
                 = render 'shared/card_type', by_type: nil
                 #cards_list
-                = submit_tag t('buttons.save'), class: 'button'
+                = f.submit t('buttons.save'), class: 'button'
             .right_side
                 p= t('new_deck.change_click')
-                .columns.small-6= text_field_tag :name, nil, placeholder: t('new_deck.deck_name')
-                .columns.small-3= select_tag :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
-                .columns.small-3= select_tag :formats, options_for_select(%w(wild standard)), include_blank: false
-                .columns.small-6= text_field_tag :author, nil, placeholder: t('new_deck.author')
-                .columns.small-6= text_field_tag :link, nil, placeholder: t('new_deck.link')
-                .columns.small-2= text_field_tag :power, nil, placeholder: t('new_deck.deck_power')
-                .columns.small-3= select_tag :style, options_for_select(@styles), prompt: t('general.tabs_4.p_5')
-                .columns.small-12= text_area_tag :caption, nil, placeholder: t('new_deck.caption'), rows: 6
+                .columns.small-6= f.text_field :name, placeholder: t('new_deck.deck_name')
+                .columns.small-3= f.select :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
+                .columns.small-3= f.select :formats, options_for_select(%w(wild standard)), include_blank: false
+                .columns.small-6= f.text_field :author, placeholder: t('new_deck.author')
+                .columns.small-6= f.text_field :link, placeholder: t('new_deck.link')
+                .columns.small-2= f.text_field :power, placeholder: t('new_deck.deck_power')
+                .columns.small-3= f.select :style, options_for_select(@styles), prompt: t('general.tabs_4.p_5')
+                .columns.small-12= f.trix_editor :caption, value: nil, placeholder: t('new_deck.caption')
                 .clearfix
                 #filters
                     span

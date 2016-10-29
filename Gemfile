@@ -24,6 +24,7 @@ gem 'jquery-ui-rails'
 gem 'rails4-autocomplete'
 gem 'nokogiri'
 gem 'sidekiq', '>= 4.2.3'
+gem 'trix'
 
 group :development, :test do
     gem 'rspec-rails'

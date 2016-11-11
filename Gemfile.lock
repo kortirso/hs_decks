@@ -30,6 +30,11 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_model_serializers (0.10.1)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      jsonapi (~> 0.1.1.beta2)
+      railties (>= 4.1, < 6)
     activejob (5.0.0)
       activesupport (= 5.0.0)
       globalid (>= 0.3.6)
@@ -48,6 +53,8 @@ GEM
       tzinfo (~> 1.1)
     airbrussh (1.0.2)
       sshkit (>= 1.6.1, != 1.7.0)
+    apipie-rails (0.3.6)
+      json
     arel (7.1.1)
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
@@ -91,6 +98,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    doorkeeper (3.1.0)
+      railties (>= 3.2)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -119,6 +128,9 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+    json (1.8.3)
+    jsonapi (0.1.1.beta2)
+      json (~> 1.8)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -144,6 +156,8 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    oj (2.16.1)
+    oj_mimic_json (1.0.1)
     orm_adapter (0.5.0)
     pg (0.18.4)
     pkg-config (1.1.7)
@@ -286,13 +300,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   activerecord-import
+  apipie-rails
   capistrano
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq
   devise
+  doorkeeper
   factory_girl_rails
   figaro
   foundation-rails
@@ -301,6 +318,8 @@ DEPENDENCIES
   jquery-ui-rails
   listen (~> 3.0.5)
   nokogiri
+  oj
+  oj_mimic_json
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0)

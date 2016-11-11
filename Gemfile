@@ -7,7 +7,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
-#gem 'turbolinks', '~> 5'
 gem 'redis', '~> 3.0'
 
 gem 'figaro'
@@ -25,6 +24,11 @@ gem 'rails4-autocomplete'
 gem 'nokogiri'
 gem 'sidekiq', '>= 4.2.3'
 gem 'trix'
+gem 'active_model_serializers'
+gem 'doorkeeper'
+gem 'oj'
+gem 'oj_mimic_json'
+gem 'apipie-rails'
 
 group :development, :test do
     gem 'rspec-rails'

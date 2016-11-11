@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+    use_doorkeeper
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
     mount ActionCable.server => '/cable'
 
@@ -24,6 +25,14 @@ Rails.application.routes.draw do
         get 'personal' => :personal, as: 'personal'
         post 'subscribe' => :subscribe, as: 'news_subscribe'
         post 'unsubscribe' => :unsubscribe, as: 'news_unsubscribe'
+    end
+
+    namespace :api do
+        namespace :v1 do
+            scope path: '/public', controller: :public do
+                get 'all' => :all
+            end
+        end
     end
     
     root 'pages#index'

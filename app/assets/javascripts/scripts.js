@@ -230,10 +230,10 @@ $(function() {
         $(newNestedForm).find('input').each(function() {
             var newId, newName, oldId, oldName;
             oldId = $(this).attr('id');
-            newId = oldId.replace(oldId.split('_').pop(), formsOnPage);
+            newId = oldId.split('_').slice(0, -1).join('_') + '_' +formsOnPage;
             $(this).attr('id', newId);
             oldName = $(this).attr('name');
-            newName = oldName.replace(oldName.split('_').pop(), formsOnPage + "]");
+            newName = oldName.split('_')[0] + '_' + formsOnPage + ']';
             $(this).attr('name', newName);
             $(this).val('');
         });
@@ -257,10 +257,10 @@ $(function() {
         $(newNestedForm).find('input').each(function() {
             var newId, newName, oldId, oldName;
             oldId = $(this).attr('id');
-            newId = oldId.replace(oldId.split('_').pop(), formsOnPage);
+            newId = oldId.split('_').slice(0, -1).join('_') + '_' +formsOnPage;
             $(this).attr('id', newId);
             oldName = $(this).attr('name');
-            newName = oldName.replace(oldName.split('_').pop(), formsOnPage + "]");
+            newName = oldName.split('_')[0] + '_' + formsOnPage + ']';
             $(this).attr('name', newName);
             $(this).val('');
         });

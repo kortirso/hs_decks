@@ -88,6 +88,9 @@
                                             td
                                                 = link_to 'x', exchange_path(exchange), method: :delete, remote: true
                         = f.simple_fields_for "#{pos.id}" do |y|
+                            - checks = pos.must_have
+                            = y.check_box "must_have_#{pos.id}", value: "#{checks ? 1 : 0}", checked: checks
+                            = y.label "must_have_#{pos.id}", 'Must Have'
                             .pos data={ position: 0 }
                                 .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
                                 .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'

@@ -36,4 +36,8 @@ class Position < ApplicationRecord
         all.includes(:card).each { |pos| result[pos.card.cost < 7 ? pos.card.cost : 7] += pos.amount }
         result
     end
+
+    def set_musthave(value)
+        self.update(must_have: value)
+    end
 end

@@ -17,16 +17,18 @@ class Exchange < ApplicationRecord
 
     def self.check_position(key, value)
         position = value.to_h.to_a
-        (1..(position.size / NUMBER_OF_PARAMS)).each do |index|
-            card_name = position[NUMBER_OF_PARAMS * (index - 1)][1]
-            Exchange.check_card(position, Position.find(key.to_i).id, card_name, index) unless card_name.empty?
+        pos = Position.find(key.to_i)
+        (1..((position.size - 1) / NUMBER_OF_PARAMS)).each do |index|
+            card_name = position[NUMBER_OF_PARAMS * (index - 1) + 1][1]
+            Exchange.check_card(position, pos.id, card_name, index) unless card_name.empty?
         end
+        pos.set_musthave(position[0][1] == '1' ? true : false)
     end
 
     def self.check_card(position, position_id, card_name, index)
         card = Card.return_by_name(card_name)
-        priority = position[NUMBER_OF_PARAMS * (index - 1) + 1][1].to_i
-        max_amount = card.is_legendary? ? 1 : position[NUMBER_OF_PARAMS * (index - 1) + 2][1].to_i
+        priority = position[NUMBER_OF_PARAMS * (index - 1) + 2][1].to_i
+        max_amount = card.is_legendary? ? 1 : position[NUMBER_OF_PARAMS * (index - 1) + 3][1].to_i
         if card && Exchange.check_parameters(priority, max_amount)
             Exchange.creation(priority, max_amount, position_id, card.id)
         end

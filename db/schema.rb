@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015065124) do
+ActiveRecord::Schema.define(version: 20161111084651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,13 +117,14 @@ ActiveRecord::Schema.define(version: 20161015065124) do
   end
 
   create_table "positions", force: :cascade do |t|
-    t.integer  "amount",            null: false
+    t.integer  "amount",                            null: false
     t.integer  "positionable_id"
     t.string   "positionable_type"
     t.integer  "card_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "caption"
+    t.boolean  "must_have",         default: false
     t.index ["card_id"], name: "index_positions_on_card_id", using: :btree
     t.index ["positionable_id", "positionable_type"], name: "index_positions_on_positionable_id_and_positionable_type", using: :btree
   end

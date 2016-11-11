@@ -11,9 +11,10 @@ class SearchSubs
     end
 
     def find_exchange(card_id, amount)
-        return nil if (amount = check_shifts_in_deck(card_id, amount)).zero? # 1. todo: Looking for substitutions in decks shifts
-        return nil if (amount = check_shifts_in_lines(card_id, amount)).zero? # 2. todo: Looking for substitutions in decks lines
-        return nil if (amount = check_shifts_in_class(amount)).zero? # 3. todo: Looking for substitutions in other class decks
+        return nil if (amount = check_must_have(card_id, amount)).zero? # 0. Check must_have field for position
+        return nil if (amount = check_shifts_in_deck(card_id, amount)).zero? # 1. Looking for substitutions in decks shifts
+        return nil if (amount = check_shifts_in_lines(card_id, amount)).zero? # 2. Looking for substitutions in decks lines
+        return nil if (amount = check_shifts_in_class(amount)).zero? # 3. Looking for substitutions in other class decks
         return nil if (amount = check_all_shifts(card_id, amount)).zero? # 4. Looking for substitutions in all shifts
         check_random_shifts(card_id, amount) # 5. Looking last chance substitutions
     end
@@ -24,6 +25,12 @@ class SearchSubs
         result = {}
         cards_list.each { |pos| result[pos[0]] = pos[1] }
         result
+    end
+
+    def check_must_have(card_id, amount)
+        pos = @deck.positions.find_by(card_id: card_id)
+        amount = 0 if pos.must_have
+        amount
     end
 
     def check_shifts_in_deck(card_id, amount)

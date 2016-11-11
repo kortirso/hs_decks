@@ -13,4 +13,14 @@ class Api::V1::PublicController < Api::V1::BaseController
         }
         render json: info
     end
+
+    api :POST, '/v1/public/all_post.json', 'Returns all public information'
+    def all_post
+        info = {
+            news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc), each_serializer: NewsSerializer),
+            decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all, each_serializer: DeckSerializer),
+            version: '0.4.1'
+        }
+        render json: info, status: 200
+    end
 end

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         namespace :v1 do
             scope path: '/public', controller: :public do
                 get 'all' => :all
+                post 'all_post' => :all_post
             end
         end
     end

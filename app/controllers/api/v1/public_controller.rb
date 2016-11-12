@@ -9,7 +9,8 @@ class Api::V1::PublicController < Api::V1::BaseController
         data = {
             news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc), each_serializer: NewsSerializer),
             decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all.includes(:player, :style, :user, :positions), each_serializer: DeckSerializer),
-            version: '0.4.1'
+            about: ActiveModel::Serializer::CollectionSerializer.new(About.order(id: :desc).includes(:fixes), each_serializer: AboutSerializer),
+            version: About.last.version
         }
         render json: data
     end
@@ -19,7 +20,8 @@ class Api::V1::PublicController < Api::V1::BaseController
         data = {
             news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc), each_serializer: NewsSerializer),
             decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all.includes(:player, :style, :user, :positions), each_serializer: DeckSerializer),
-            version: '0.4.1'
+            about: ActiveModel::Serializer::CollectionSerializer.new(About.order(id: :desc).includes(:fixes), each_serializer: AboutSerializer),
+            version: About.last.version
         }
         render json: data, status: 200
     end

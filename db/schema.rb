@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111124816) do
+ActiveRecord::Schema.define(version: 20161112151149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "abouts", force: :cascade do |t|
+    t.string   "version",    null: false
+    t.string   "label_en",   null: false
+    t.string   "label_ru",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cards", force: :cascade do |t|
     t.string   "cardId",                             null: false
@@ -84,6 +92,15 @@ ActiveRecord::Schema.define(version: 20161111124816) do
     t.datetime "updated_at",  null: false
     t.index ["card_id"], name: "index_exchanges_on_card_id", using: :btree
     t.index ["position_id"], name: "index_exchanges_on_position_id", using: :btree
+  end
+
+  create_table "fixes", force: :cascade do |t|
+    t.string   "body_en",    null: false
+    t.string   "body_ru",    null: false
+    t.integer  "about_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_fixes_on_about_id", using: :btree
   end
 
   create_table "lines", force: :cascade do |t|

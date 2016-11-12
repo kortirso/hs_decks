@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     end
 
     def about
-
+        @about = About.order(id: :desc)
     end
 
     def collection

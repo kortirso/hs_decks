@@ -81,38 +81,6 @@ en:
       p_1: 'The system is designed to automatically determine the best expert decks for playing HearthStone based on existing user cards, as well as to automatically determine the best replacements of missing cards.'
       p_2: 'The user only need to define the parameters of the analysis (for example, select a specific Hero class or to analyze all decks), and the system displayed the results of analysis with grouping them by success.'
       logs: 'Realized functions'
-      _1:
-        from: 'Version - 0.2, 20.08.2016'
-        p_1: "Selecting cards in the collection is carried out on the 'Cards collection', or a specific page with deck (at the moment there is no technical possibility to automatically download a collection of players cards)."
-        p_2: 'Additional filters in the collection of maps to facilitate the search.'
-        p_3: 'View expert decks with description, mana curve and images of all the cards.'
-        p_4: 'Analyzing the decks for the successful filling of the existing collection cards with automatic calculation of the replacement of the missing cards.'
-        p_5: 'Additional filters for more targeted analysis of the decks.'
-        p_6: 'Viewing deck check, displays the data on the source deck for the missing cards and a deck with a view of a replacement card.'
-        p_7: 'The interface for creating, editing and deleting of expert decks.'
-        p_8: 'Russian and English localizations.'
-        p_9: 'Test version of replacement system.'
-      _2:
-        from: 'Version - 0.3, 14.09.2016'
-        p_1: 'Slightly redesigned interface for easy navigation between pages.'
-        p_2: 'Name and classes are now displayed in Russian.'
-        p_3: 'Added displaying the description for the check card in the deck.'
-        p_4: 'Added parameter showing the strength of deck.'
-        p_5: 'You can add cards to the collection by clicking on the map on page viewing decks.'
-        p_6: 'Bug fixnig.'
-      _3:
-        from: 'Version - 0.4, 10.10.2016'
-        p_1: 'Relocation to deckhunter.ru.'
-        p_2: 'Added multilevel exchange system.'
-        p_3: 'Added mailers for new users and newsletters.'
-        p_4: 'Added filters for expert decks.'
-        p_5: 'Added list of unused cards for dust.'
-        p_6: 'Bug fixnig.'
-      _4:
-        from: 'Version - 0.4.1, 22.10.2106'
-        p_1: 'Import card collection from Hearthpwn.'
-        p_2: 'Add forms for shifts creation for experts.'
-        p_3: 'Bug fixing.'
   check:
     h4_1: 'At this page you can see checking your cards with deck '
     h4_2: ' from expert '

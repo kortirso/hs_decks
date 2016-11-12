@@ -1,3 +1,34 @@
+if About.all.size.zero?
+    about_1 = About.create version: '0.2', label_en: 'Version - 0.2, 20.08.2016', label_ru: 'Версия - 0.2 от 20.08.2016'
+    Fix.create about: about_1, body_en: "Selecting cards in the collection is carried out on the 'Cards collection', or a specific page with deck (at the moment there is no technical possibility to automatically download a collection of players cards).", body_ru: "Выбор карт в коллекцию осуществляется на странице 'Коллекция карт' или на странице определенной колоды (на данный момент нет технической возможности для автоматической загрузки коллекции карт игроков)."
+    Fix.create about: about_1, body_en: 'Additional filters in the collection of maps to facilitate the search.', body_ru: 'Дополнительные фильтры в коллекции карт для упрощения поиска.'
+    Fix.create about: about_1, body_en: 'View expert decks with description, mana curve and images of all the cards.', body_ru: 'Просмотр экспертных колод с описанием, кривой маны и изображениями всех карт.'
+    Fix.create about: about_1, body_en: 'Analyzing the decks for the successful filling of the existing collection cards with automatic calculation of the replacement of the missing cards.', body_ru: 'Анализирование колод на успешное заполнение существующими в коллекции картами с автоматическим расчетом карт на замену отсутствующих.'
+    Fix.create about: about_1, body_en: 'Additional filters for more targeted analysis of the decks.', body_ru: 'Дополнительные фильтры для более узконаправленного анализа колод.'
+    Fix.create about: about_1, body_en: 'Viewing deck check, displays the data on the source deck for the missing cards and a deck with a view of a replacement card.', body_ru: 'Просмотр проверки колоды, выводятся данные по исходной колоде, по отсутствующим картам и по колоде с учетом замен карт.'
+    Fix.create about: about_1, body_en: 'The interface for creating, editing and deleting of expert decks.', body_ru: 'Интерфейс для создания, редактирования и удаления экспертных колод.'
+    Fix.create about: about_1, body_en: 'Russian and English localizations.', body_ru: 'Русская и английская локализации.'
+    Fix.create about: about_1, body_en: 'Test version of replacement system.', body_ru: 'Тестовая версия системы поиска замен карт.'
+    about_2 = About.create version: '0.3', label_en: 'Version - 0.3, 14.09.2016', label_ru: 'Версия - 0.3 от 14.09.2016'
+    Fix.create about: about_2, body_en: 'Slightly redesigned interface for easy navigation between pages.', body_ru: 'Немного переработан интерфейс для упрощения навигации по страницам.'
+    Fix.create about: about_2, body_en: 'Name and classes are now displayed in Russian.', body_ru: 'Названия коллекций и классов теперь выводятся на русском языке.'
+    Fix.create about: about_2, body_en: 'Added displaying the description for the check card in the deck.', body_ru: 'Добавлен вывод описания для карт в проверочной колоде.'
+    Fix.create about: about_2, body_en: 'Added parameter showing the strength of deck.', body_ru: 'Добавлен параметр, указывающий силу колод.'
+    Fix.create about: about_2, body_en: 'You can add cards to the collection by clicking on the map on page viewing decks.', body_ru: 'Можно добавлять карты в коллекцию, кликом на карту, на странице просмотра колод.'
+    Fix.create about: about_2, body_en: 'Bug fixnig.', body_ru: 'Исправление ошибок.'
+    about_3 = About.create version: '0.4', label_en: 'Version - 0.4, 10.10.2016', label_ru: 'Версия - 0.4 от 10.10.2016'
+    Fix.create about: about_3, body_en: 'Relocation to deckhunter.ru.', body_ru: 'Переезд на домен deckhunter.ru.'
+    Fix.create about: about_3, body_en: 'Added multilevel exchange system.', body_ru: 'Добавлена многоуровневая система подбора замен для карт.'
+    Fix.create about: about_3, body_en: 'Added mailers for new users and newsletters.', body_ru: 'Добавлена почтовая рассылка для новых пользователей и новостей.'
+    Fix.create about: about_3, body_en: 'Added filters for expert decks.', body_ru: 'Добавлен фильтр экспертных колод.'
+    Fix.create about: about_3, body_en: 'Added list of unused cards for dust.', body_ru: 'Добавлен список неиспользуемых карт для распыления.'
+    Fix.create about: about_3, body_en: 'Bug fixnig.', body_ru: 'Исправление ошибок.'
+    about_4 = About.create version: '0.4.1', label_en: 'Version - 0.4.1, 22.10.2106', label_ru: 'Версия - 0.4.1 от 22.10.2106'
+    Fix.create about: about_4, body_en: 'Import card collection from Hearthpwn.', body_ru: 'Импорт коллекции карт с Hearthpwn.'
+    Fix.create about: about_4, body_en: 'Add forms for shifts creation for experts.', body_ru: 'Добавлены формы создания замен для экспертов.'
+    Fix.create about: about_4, body_en: 'Bug fixing.', body_ru: 'Исправление ошибок.'
+end
+
 if Collection.all.size.zero?
     collections = []
     result = Message.new.get_request

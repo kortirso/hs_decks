@@ -6,21 +6,21 @@ class Api::V1::PublicController < Api::V1::BaseController
 
     api :GET, '/v1/public/all.json', 'Returns all public information'
     def all
-        info = {
+        data = {
             news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc), each_serializer: NewsSerializer),
-            decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all, each_serializer: DeckSerializer),
+            decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all.includes(:player, :style, :user, :positions), each_serializer: DeckSerializer),
             version: '0.4.1'
         }
-        render json: info
+        render json: data
     end
 
     api :POST, '/v1/public/all_post.json', 'Returns all public information'
     def all_post
-        info = {
+        data = {
             news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc), each_serializer: NewsSerializer),
-            decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all, each_serializer: DeckSerializer),
+            decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.all.includes(:player, :style, :user, :positions), each_serializer: DeckSerializer),
             version: '0.4.1'
         }
-        render json: info, status: 200
+        render json: data, status: 200
     end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+    apipie
     use_doorkeeper
     mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
     mount ActionCable.server => '/cable'

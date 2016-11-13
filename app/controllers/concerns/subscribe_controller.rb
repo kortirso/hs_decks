@@ -1,4 +1,4 @@
-module Concerns::SubscribeController
+module SubscribeController
     extend ActiveSupport::Concern
 
     def subscribe

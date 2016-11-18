@@ -16,6 +16,8 @@
 //= require trix
 //= require autocomplete-rails
 //= require foundation
+//= require vendors/react.min
+//= require vendors/react-dom.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

@@ -30,6 +30,9 @@ gem 'oj'
 gem 'oj_mimic_json'
 gem 'apipie-rails'
 
+gem 'sprockets-es6'
+gem 'babel-transpiler', github: 'babel/ruby-babel-transpiler'
+
 group :development, :test do
     gem 'rspec-rails'
     gem 'factory_girl_rails'

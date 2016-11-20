@@ -31,7 +31,7 @@ gem 'oj_mimic_json'
 gem 'apipie-rails'
 
 gem 'sprockets-es6'
-gem 'babel-transpiler', github: 'babel/ruby-babel-transpiler'
+gem 'react-rails', '>= 1.9.0'
 
 group :development, :test do
     gem 'rspec-rails'

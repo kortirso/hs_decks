@@ -35,6 +35,7 @@ Rails.application.routes.draw do
                 post 'all_post' => :all_post
             end
             resources :decks, only: [:index, :show]
+            resources :about, only: :index
         end
     end
     

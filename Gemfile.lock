@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/babel/ruby-babel-transpiler.git
-  revision: 6878f6edb4e717066bbe344c25b05055cd2d914f
-  specs:
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
-
-GIT
   remote: git://github.com/mshibuya/remotipart.git
   revision: cd653ddc43bb09767b8f2802d6e27b3e00ef992f
   specs:
@@ -65,6 +57,9 @@ GEM
       json
     arel (7.1.4)
     babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     builder (3.2.2)
     capistrano (3.6.1)
@@ -222,6 +217,13 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    react-rails (1.9.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redis (3.3.1)
     ref (2.0.0)
     responders (2.3.0)
@@ -310,7 +312,6 @@ DEPENDENCIES
   active_model_serializers
   activerecord-import
   apipie-rails
-  babel-transpiler!
   capistrano
   capistrano-bundler
   capistrano-rails
@@ -334,6 +335,7 @@ DEPENDENCIES
   rails-controller-testing
   rails4-autocomplete
   rails_admin (>= 1.0.0.rc)
+  react-rails (>= 1.9.0)
   redis (~> 3.0)
   remotipart!
   rspec-rails

@@ -4,8 +4,4 @@
     p= t('general.tabs_5.p_1')
     p= t('general.tabs_5.p_2')
     h4= t('general.tabs_5.logs')
-    ul
-        - @about.each do |about|
-            h5= about.locale_label(@locale)
-            - about.fixes.order(id: :asc).each do |fix|
-                li= fix.locale_body(@locale)
+    ul= react_component('AboutBox', locale: @locale)

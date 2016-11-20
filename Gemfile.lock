@@ -217,6 +217,13 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    react-rails (1.9.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     redis (3.3.1)
     ref (2.0.0)
     responders (2.3.0)
@@ -328,6 +335,7 @@ DEPENDENCIES
   rails-controller-testing
   rails4-autocomplete
   rails_admin (>= 1.0.0.rc)
+  react-rails (>= 1.9.0)
   redis (~> 3.0)
   remotipart!
   rspec-rails
@@ -338,6 +346,7 @@ DEPENDENCIES
   slim
   spring
   spring-watcher-listen (~> 2.0.0)
+  sprockets-es6
   therubyracer
   trix
   tzinfo-data

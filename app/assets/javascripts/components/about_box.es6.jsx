@@ -24,7 +24,7 @@ class AboutBox extends React.Component {
     _prepareAboutList() {
         return this.state.aboutList.map((about) => {
             return (
-                <About label={about.label_ru} fixes={about.fixes} key={about.id} />
+                <About label={about[`label_${this.props.locale}`]} fixes={about.fixes} locale={this.props.locale} key={about.id} />
             );
         });
     }

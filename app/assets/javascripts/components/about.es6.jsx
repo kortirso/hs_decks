@@ -18,7 +18,7 @@ class About extends React.Component {
     _prepareFixList() {
         return this.state.fixList.map((fix) => {
             return (
-                <li key={fix.id}>{ fix.body_ru }</li>
+                <li key={fix.id}>{ fix[`body_${this.props.locale}`] }</li>
             );
         });
     }

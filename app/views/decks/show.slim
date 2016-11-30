@@ -37,7 +37,7 @@
                         .card class="#{card.rarity}"
                             - checks = current_user.nil? ? false : ids.include?(card.id)
                             = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
-                            = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background: url(#{card["image_#{@locale}"]})"
+                            = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background-image: url('/cards/en/#{card.cardId}.png');"
                 - if current_user
                     p= submit_tag t('buttons.save'), class: 'button'
 = render 'shared/save_modal'

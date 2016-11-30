@@ -5,4 +5,4 @@
     .unusable_cards
         - @unusable_cards.each do |card|
             .card
-                = image_tag card["image_#{@locale}"]
+                = image_tag("/cards/#{@locale}/#{card.cardId}.png")

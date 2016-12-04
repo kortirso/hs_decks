@@ -1,7 +1,7 @@
 - provide(:title, 'Deck Hunter | Edit Deck Page')
 .page_inner
     #new_deck
-        - classes_list = [@deck.playerClass, 'Common']
+        - classes_list = [@deck.playerClass, 'Neutral']
         = form_for @deck, controller: 'decks', action: 'update', method: 'patch' do |f|
             - ids = @positions.collect { |elem| elem[0] }
             .left_side
@@ -37,5 +37,4 @@
                 .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
-                            - name = nil if name == 'Common'
                             = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @positions, ids: ids

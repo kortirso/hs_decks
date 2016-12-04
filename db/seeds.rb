@@ -30,16 +30,32 @@ if About.all.size.zero?
 end
 
 if Collection.all.size.zero?
+    Card.destroy_all
+    Deck.destroy_all
+    Player.destroy_all
+    MultiClass.destroy_all
+
     collections = []
     result = Message.new.get_request
 
-    Collection.all.destroy_all
-    Deck.all.destroy_all
-    [['Basic', 'Базовый набор'], ['Classic', 'Классический набор'], ['Promo', 'Награды'], ['Reward', 'Призовые карты'], ['Naxxramas', 'Наксрамас'], ['Goblins vs Gnomes', 'Гоблины и Гномы'], ['Blackrock Mountain', 'Черная Гора'], ['The Grand Tournament', 'Большой Турнир'], ['The League of Explorers', 'Лига Исследователей'], ['Whispers of the Old Gods', 'Древние Боги'], ['Karazhan', 'Каражан']].each do |collection_name|
+    [['Priest', 'Жрец'], ['Warrior', 'Воин'], ['Warlock', 'Чернокнижник'], ['Mage', 'Маг'], ['Druid', 'Друид'], ['Hunter', 'Охотник'], ['Shaman', 'Шаман'], ['Paladin', 'Паладин'], ['Rogue', 'Разбойник'], ['Neutral', 'Нейтральный']].each do |player|
+        Player.create name_en: player[0], name_ru: player[1]
+    end
+
+    [['Grimy Goons', 'Ржавые Бугаи', ['Warrior', 'Hunter', 'Paladin']], ['Jade Lotus', 'Нефритовый Лотус', ['Druid', 'Shaman', 'Rogue']], ['Kabal', 'Кабал', ['Priest', 'Warlock', 'Mage']]].each do |multi|
+        multi_class = MultiClass.create name_en: multi[0], name_ru: multi[1]
+        multi[2].each { |m| Player.find_by(name_en: m).update(multi_class_id: multi_class.id) }
+    end
+
+    players = Player.all.to_a.collect { |p| [p.id, p.name_en] }.flatten
+    multies = MultiClass.all.to_a.collect { |p| [p.id, p.name_en] }.flatten
+
+    [['Basic', 'Базовый набор'], ['Classic', 'Классический набор'], ['Promo', 'Награды'], ['Reward', 'Призовые карты'], ['Naxxramas', 'Наксрамас'], ['Goblins vs Gnomes', 'Гоблины и Гномы'], ['Blackrock Mountain', 'Черная Гора'], ['The Grand Tournament', 'Большой Турнир'], ['The League of Explorers', 'Лига Исследователей'], ['Whispers of the Old Gods', 'Древние Боги'], ['Karazhan', 'Каражан'], ['Mean Streets of Gadgetzan', 'Злачный город Прибамбасск']].each do |collection_name|
         collection = Collection.new name_en: collection_name[0], name_ru: collection_name[1]
-        set_cards = result[collection_name[0]]
-        set_cards.each do |card|
-            collection.cards.build cardId: card['cardId'], name_en: card['name'], type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], image_en: card['img']
+        result[collection_name[0]].each do |card|
+            player_id = players[players.index(card['playerClass']) - 1]
+            multi_class_id = card['multiClassGroup'] ? multies[multies.index(card['multiClassGroup']) - 1] : nil
+            collection.cards.build cardId: card['cardId'], name_en: card['name'], type: card['type'], cost: card['cost'], rarity: card['rarity'], image_en: card['img'], player_id: player_id, multi_class_id: multi_class_id, playerClass: card['playerClass'], multiClassGroup: card['multiClassGroup']
         end
         collections << collection
     end
@@ -49,19 +65,6 @@ if Collection.all.size.zero?
     %w(Naxxramas Blackrock\ Mountain The\ League\ of\ Explorers Karazhan).each { |collection_name| Collection.find_by(name_en: collection_name).update(adventure: true) }
     Card.check_cards_format
     Deck.check_format
-end
-
-if Player.all.size.zero?
-    # create players
-    [['Priest', 'Жрец'], ['Warrior', 'Воин'], ['Warlock', 'Чернокнижник'], ['Mage', 'Маг'], ['Druid', 'Друид'], ['Hunter', 'Охотник'], ['Shaman', 'Шаман'], ['Paladin', 'Паладин'], ['Rogue', 'Разбойник']].each do |player|
-        Player.create name_en: player[0], name_ru: player[1]
-    end
-
-    # set players for cards and decks
-    Player.all.each do |player|
-        Card.of_player_class(player.name_en).update_all(player_id: player.id)
-        Deck.of_player_class(player.name_en).update_all(player_id: player.id)
-    end
 end
 
 if Style.all.size.zero?

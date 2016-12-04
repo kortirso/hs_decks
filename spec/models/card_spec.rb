@@ -1,6 +1,7 @@
 RSpec.describe Card, type: :model do
     it { should belong_to :collection }
     it { should belong_to :player }
+    it { should belong_to :multi_class }
     it { should validate_presence_of :cardId }
     it { should validate_presence_of :name_en }
     it { should validate_presence_of :type }
@@ -8,7 +9,7 @@ RSpec.describe Card, type: :model do
     it { should validate_presence_of :collection_id }
     it { should validate_presence_of :usable }
     it { should validate_inclusion_of(:type).in_array(%w(Hero Spell Minion Weapon)) }
-    it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)).allow_nil }
+    it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)) }
     it { should validate_inclusion_of(:rarity).in_array(%w(Free Common Rare Epic Legendary)) }
     it { should have_many :positions }
     it { should have_many :shifts }

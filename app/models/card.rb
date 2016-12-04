@@ -3,6 +3,7 @@ class Card < ApplicationRecord
 
     belongs_to :collection
     belongs_to :player
+    belongs_to :multi_class
 
     has_many :positions, dependent: :destroy
     has_many :decks, through: :positions, source: :positionable, source_type: 'Deck'
@@ -17,17 +18,18 @@ class Card < ApplicationRecord
 
     validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, :usable, presence: true
     validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
-    validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }, allow_nil: true
+    validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral) }
+    validates :multiClassGroup, inclusion: { in: %w(Grimy\ Goons Jade\ Lotus Kabal) }, allow_nil: true
     validates :rarity, inclusion: { in: %w(Free Common Rare Epic Legendary) }
     validates :formats, inclusion: { in: %w(standard wild) }
 
     scope :not_heroes, -> { where.not(cost: nil) }
     scope :of_type, -> (type) { where type: type }
-    scope :for_all_classes, -> { where playerClass: nil }
+    scope :for_all_classes, -> { where playerClass: 'Neutral' }
     scope :of_player_class, -> (player_class) { where playerClass: player_class }
     scope :of_rarity, -> (rarity) { where rarity: rarity }
     scope :not_free, -> { where.not(rarity: 'Free') }
-    scope :of_format, -> (format) { where formats: format }
+    scope :of_format, -> (formats) { where formats: formats }
     scope :crafted, -> { where craft: true }
     scope :unusable, -> { where usable: 0 }
 
@@ -80,8 +82,9 @@ class Card < ApplicationRecord
     def refresh_params(locale, card)
         self["name_#{locale}"] = card['name']
         self["image_#{locale}"] = card['img']
-        %w(type cost playerClass rarity).each { |param| self[param] = card[param] }
-        self.player_id = Player.find_by(name_en: card['playerClass']) unless card['playerClass'].nil?
+        %w(type cost playerClass multiClassGroup rarity).each { |param| self[param] = card[param] }
+        self.player_id = Player.find_by(name_en: card['playerClass']).id unless card['playerClass'].nil?
+        self.multi_class_id = MultiClass.find_by(name_en: card['multiClassGroup']).id unless card['multiClassGroup'].nil?
         self.save if self.changed?
     end
 

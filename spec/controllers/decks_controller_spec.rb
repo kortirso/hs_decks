@@ -154,7 +154,7 @@ RSpec.describe DecksController, type: :controller do
             context 'if user is deck master and deck belongs to him' do
                 let!(:users_deck) { create :deck, user: @current_user }
                 let!(:card_1) { create :card, playerClass: users_deck.playerClass }
-                let!(:card_2) { create :card, playerClass: nil }
+                let!(:card_2) { create :card, playerClass: 'Neutral' }
                 let!(:card_3) { create :card, playerClass: 'Priest' }
                 let!(:position) { create :position_for_deck, positionable: users_deck, card: card_1 }
                 before do

@@ -26,7 +26,24 @@ function mana_curve_reset() {
 
 $(function() {
     $('#new-cards-tabs li:nth-of-type(n+2)').hide();
-    $('#new-cards-tabs li.Common').show();
+    $('#new-cards-tabs li.Neutral').show();
+
+    select_value = $('#deck_playerClass').val();
+    if(select_value == 'Warrior' || select_value == 'Hunter' || select_value == 'Paladin') {
+        $('.card.Grimy_Goons').show();
+        $('.card.Jade_Lotus').hide();
+        $('.card.Kabal').hide();
+    }
+    else if(select_value == 'Shaman' || select_value == 'Druid' || select_value == 'Rogue') {
+        $('.card.Grimy_Goons').hide();
+        $('.card.Jade_Lotus').show();
+        $('.card.Kabal').hide();
+    }
+    else if(select_value == 'Mage' || select_value == 'Warlock' || select_value == 'Priest') {
+        $('.card.Grimy_Goons').hide();
+        $('.card.Jade_Lotus').hide();
+        $('.card.Kabal').show();
+    }
 
     $('#new-tabs-content .costs label').click(function(e) {
         e.preventDefault();
@@ -159,6 +176,22 @@ $(function() {
         $('#new-tabs-content .tabs-panel input').val(0);
 
         $('#cards_list .card').remove();
+
+        if(this.value == 'Warrior' || this.value == 'Hunter' || this.value == 'Paladin') {
+            $('#cards9 .card.Grimy_Goons').show();
+            $('#cards9 .card.Jade_Lotus').hide();
+            $('#cards9 .card.Kabal').hide();
+        }
+        else if(this.value == 'Shaman' || this.value == 'Druid' || this.value == 'Rogue') {
+            $('#cards9 .card.Grimy_Goons').hide();
+            $('#cards9 .card.Jade_Lotus').show();
+            $('#cards9 .card.Kabal').hide();
+        }
+        else if(this.value == 'Mage' || this.value == 'Warlock' || this.value == 'Priest') {
+            $('#cards9 .card.Grimy_Goons').hide();
+            $('#cards9 .card.Jade_Lotus').hide();
+            $('#cards9 .card.Kabal').show();
+        }
     });
 
     $('select#deck_formats').on('change', function() {

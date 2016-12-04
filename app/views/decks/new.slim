@@ -1,7 +1,7 @@
 - provide(:title, 'Deck Hunter | New Deck Page')
 .page_inner
     #new_deck
-        - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Common)
+        - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
         = form_for Deck.new, controller: 'decks', action: 'create', method: 'post' do |f|
             .left_side
                 h4= t('new_deck.head')
@@ -36,5 +36,4 @@
                 .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
-                            - name = nil if name == 'Common'
                             = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: nil, ids: []

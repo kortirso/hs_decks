@@ -1,4 +1,5 @@
 RSpec.describe Player, type: :model do
+    it { should belong_to :multi_class }
     it { should have_many :cards }
     it { should have_many :decks }
     it { should validate_presence_of :name_en }

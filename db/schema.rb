@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112151149) do
+ActiveRecord::Schema.define(version: 20161204050557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,23 +24,26 @@ ActiveRecord::Schema.define(version: 20161112151149) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.string   "cardId",                             null: false
-    t.string   "name_en",                            null: false
-    t.string   "type",                               null: false
+    t.string   "cardId",                               null: false
+    t.string   "name_en",                              null: false
+    t.string   "type",                                 null: false
     t.integer  "cost"
     t.string   "playerClass"
-    t.string   "rarity",                             null: false
-    t.integer  "collection_id",                      null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "formats",       default: "standard", null: false
+    t.string   "rarity",                               null: false
+    t.integer  "collection_id",                        null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "formats",         default: "standard", null: false
     t.string   "image_en"
     t.string   "name_ru"
     t.string   "image_ru"
     t.integer  "player_id"
-    t.boolean  "craft",         default: true
-    t.integer  "usable",        default: 0
+    t.boolean  "craft",           default: true
+    t.integer  "usable",          default: 0
+    t.integer  "multi_class_id"
+    t.string   "multiClassGroup"
     t.index ["collection_id"], name: "index_cards_on_collection_id", using: :btree
+    t.index ["multi_class_id"], name: "index_cards_on_multi_class_id", using: :btree
     t.index ["player_id"], name: "index_cards_on_player_id", using: :btree
   end
 
@@ -116,6 +119,13 @@ ActiveRecord::Schema.define(version: 20161112151149) do
     t.index ["deck_id"], name: "index_lines_on_deck_id", using: :btree
   end
 
+  create_table "multi_classes", force: :cascade do |t|
+    t.string   "name_en"
+    t.string   "name_ru"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "news", force: :cascade do |t|
     t.string   "url_label",                                     null: false
     t.string   "label",                                         null: false
@@ -166,8 +176,10 @@ ActiveRecord::Schema.define(version: 20161112151149) do
   create_table "players", force: :cascade do |t|
     t.string   "name_en"
     t.string   "name_ru"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "multi_class_id"
+    t.index ["multi_class_id"], name: "index_players_on_multi_class_id", using: :btree
   end
 
   create_table "positions", force: :cascade do |t|

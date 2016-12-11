@@ -28,7 +28,7 @@
                     = @check.dust
                 p
                     = t('check.p_3')
-                    = @deck.caption
+                    = raw(@deck.caption)
         .check
             h5= t('check.h5_1')
             = render 'shared/check_card', cards: @deck.cards, locale: @locale, positions: @positions, decks: nil

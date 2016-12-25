@@ -1,5 +1,7 @@
 $.fn.mana_curve = function (amount) {
-    mana_curve = $('#mana_curve #' + this.attr('class').split(' ')[0] + ' .count')
+    mana = this.data('mana');
+    if(mana > 7) mana = 7;
+    mana_curve = $('#mana_curve #mana_' + mana + ' .count');
     $(mana_curve).html(parseInt($(mana_curve).html()) + amount);
 
     array = [];
@@ -54,7 +56,7 @@ $(function() {
                 $(this).closest('div').children('input').val(1).attr('checked', true);
                 $('#card_amount').html(amount + 1);
 
-                $(this).mana_curve(1)
+                $(this).mana_curve(1);
 
                 cloned = $(this).closest('.card').clone();
                 current_mana_cost = parseInt($(cloned).attr('class').split(' ')[1].split('_')[1]);
@@ -85,7 +87,7 @@ $(function() {
                 $(this).closest('div').children('input').val(0);
                 $('#card_amount').html(amount - 1);
 
-                $(this).mana_curve(-1)
+                $(this).mana_curve(-1);
 
                 lastClass = $(this).closest('.card').attr('class').split(' ').pop();
                 $('#cards_list .' + lastClass).remove();
@@ -95,7 +97,7 @@ $(function() {
                 $(this).closest('div').children('input').val(2);
                 $('#card_amount').html(amount + 1);
 
-                $(this).mana_curve(1)
+                $(this).mana_curve(1);
 
                 lastClass = $(this).closest('.card').attr('class').split(' ').pop();
                 $('#cards_list .' + lastClass + ' label').addClass('double');
@@ -106,7 +108,7 @@ $(function() {
             $(this).closest('div').children('input').val(0);
             $('#card_amount').html(amount - 2);
 
-            $(this).mana_curve(-2)
+            $(this).mana_curve(-2);
 
             lastClass = $(this).closest('.card').attr('class').split(' ').pop();
             $('#cards_list .' + lastClass).remove();

@@ -96,5 +96,17 @@ class Card < ApplicationRecord
                 updated_card.update(usable: updated_card.usable + 1)
             end
         end
+        Exchange.all.each do |ex|
+            updated_card = Card.find(ex.card_id)
+            updated_card.update(usable: updated_card.usable + 1)
+        end
+        Line.all.each do |line|
+            updated_card = Card.find(line.card_id)
+            updated_card.update(usable: updated_card.usable + 1)
+        end
+        Shift.all.each do |shift|
+            updated_card = Card.find(shift.change_id)
+            updated_card.update(usable: updated_card.usable + 1)
+        end
     end
 end

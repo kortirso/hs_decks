@@ -23,6 +23,7 @@
                 .columns.small-6= f.text_field :link, placeholder: t('new_deck.link'), value: @deck.link
                 .columns.small-2= f.text_field :power, placeholder: t('new_deck.deck_power'), value: @deck.power
                 .columns.small-3= f.select :style, options_for_select(@styles, (@deck.style_id.nil? ? nil : @deck.style.locale_name(@locale))), prompt: t('general.tabs_4.p_5')
+                .columns.small-3= f.text_field :reno_type, value: @deck.is_reno_type? ? t('new_deck.reno_type') : t('new_deck.typical'), disabled: true
                 .columns.small-12= f.trix_editor :caption, value: @deck.caption, placeholder: t('new_deck.caption')
                 .clearfix
                 #filters

@@ -115,6 +115,8 @@ ru:
     caption: 'Описание'
     author: 'Автор колоды'
     deck_power: 'Сила колоды'
+    reno_type: 'Рено колода'
+    typical: 'Обычная колода'
   edit_deck:
     head: 'Редактирование колоды'
   decks:

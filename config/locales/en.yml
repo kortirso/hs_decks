@@ -115,6 +115,8 @@ en:
     caption: 'Caption'
     author: 'Author'
     deck_power: 'Deck power'
+    reno_type: 'Reno deck'
+    typical: 'Typical deck'
   edit_deck:
     head: 'Deck Editing'
   decks:

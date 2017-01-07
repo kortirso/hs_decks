@@ -22,6 +22,7 @@
                 .columns.small-6= f.text_field :link, placeholder: t('new_deck.link')
                 .columns.small-2= f.text_field :power, placeholder: t('new_deck.deck_power')
                 .columns.small-3= f.select :style, options_for_select(@styles), prompt: t('general.tabs_4.p_5')
+                .columns.small-3= f.select :reno_type, options_for_select([[t('new_deck.typical'), 1], [t('new_deck.reno_type'), 2]], 1)
                 .columns.small-12= f.trix_editor :caption, value: nil, placeholder: t('new_deck.caption')
                 .clearfix
                 #filters

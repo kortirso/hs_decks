@@ -19,7 +19,7 @@ class DecksController < ApplicationController
     end
 
     def create
-        if Deck.build(deck_params, current_user.id)
+        if DeckConstructor.new(deck_params, current_user.id).build
             redirect_to decks_path
         else
             redirect_to new_deck_path
@@ -33,7 +33,7 @@ class DecksController < ApplicationController
     end
 
     def update
-        if @deck.refresh(deck_params)
+        if DeckConstructor.new(deck_params, current_user.id, @deck).refresh
             redirect_to decks_path
         else
             redirect_to edit_deck_path(@deck)
@@ -57,6 +57,6 @@ class DecksController < ApplicationController
     end
 
     def deck_params
-        params.permit!
+        params.slice(:deck, :cards).permit!
     end
 end

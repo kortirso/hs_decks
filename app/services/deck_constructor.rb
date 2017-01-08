@@ -82,18 +82,12 @@ class DeckConstructor
 
     def update_deck
         calc_price
-        check_deck_format
+        deck.check_deck_format
     end
 
     def calc_price
         price = 0
         deck.positions.includes(:card).each { |pos| price += DustPrice.calc(pos.card.rarity, pos.amount) }
         deck.update(price: price)
-    end
-
-    def check_deck_format
-        free_cards = 0
-        deck.cards.each { |card| free_cards += 1 if card.wild_format? }
-        deck.update(formats: 'wild') if free_cards > 0
     end
 end

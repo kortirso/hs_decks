@@ -18,6 +18,10 @@ class Deck < ApplicationRecord
     scope :of_power, -> (power) { where('power >= ?', power.to_i) }
     scope :of_style, -> (style) { where style_id: Style.return_id_by_name(style) }
 
+    def is_reno_type?
+        reno_type
+    end
+
     def self.filtered(params)
         decks = all
         return decks if params[:playerClass].nil?
@@ -35,7 +39,9 @@ class Deck < ApplicationRecord
         all.each { |deck| deck.check_deck_format }
     end
 
-    def is_reno_type?
-        reno_type
+    def check_deck_format
+        free_cards = 0
+        self.cards.each { |card| free_cards += 1 if card.wild_format? }
+        self.update(formats: 'wild') if free_cards > 0
     end
 end

@@ -13,6 +13,11 @@ class Position < ApplicationRecord
         return ids
     end
 
+    def self.collect_ids_as_hash(ids = {})
+        all.order(id: :asc).each { |pos| ids[pos.card_id.to_s] = pos.amount }
+        ids
+    end
+
     def self.collect_ids_with_caption
         ids = []
         all.order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount, pos.caption] }

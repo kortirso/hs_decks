@@ -2,7 +2,7 @@ require 'open-uri'
 require 'nokogiri'
 
 module Parser
-    class CollectionParser
+    class HearthpwnCollectionParser
         attr_reader :uri
         attr_accessor :list
 

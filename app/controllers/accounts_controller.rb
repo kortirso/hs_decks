@@ -2,12 +2,12 @@ class AccountsController < ApplicationController
     before_action :get_access
 
     def create
-        current_user.build_collection(collection_params)
+        CollectionConstructor.new({ cards: collection_params, user: current_user }).build_collection
     end
 
     private
 
     def collection_params
-        params.permit!.to_h
+        params.require(:cards).permit!
     end
 end

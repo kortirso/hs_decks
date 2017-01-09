@@ -34,9 +34,10 @@ class ExchangesEngine
 
     def check_card(card_name, index)
         card = Card.return_by_name(card_name)
+        return false unless card
         priority = exchanges[NUMBER_OF_PARAMS * (index - 1) + 2][1].to_i
         max_amount = card.is_legendary? ? 1 : exchanges[NUMBER_OF_PARAMS * (index - 1) + 3][1].to_i
-        creation(priority, max_amount, card.id) if card && check_parameters(priority, max_amount)
+        creation(priority, max_amount, card.id) if check_parameters(priority, max_amount)
     end
 
     def check_parameters(priority, max_amount)
@@ -45,10 +46,7 @@ class ExchangesEngine
 
     def creation(priority, max_amount, card_id)
         exchange = position.exchanges.find_by(card_id: card_id)
-        if exchange
-            exchange.update priority: priority, max_amount: max_amount
-        else
-            position.exchanges.create card_id: card_id, priority: priority, max_amount: max_amount
-        end
+        exchange.update(priority: priority, max_amount: max_amount) if exchange
+        position.exchanges.create card_id: card_id, priority: priority, max_amount: max_amount
     end
 end

@@ -10,7 +10,7 @@ class DeckConstructor
 
     def build
         return false unless good_params?
-        @deck = Deck.create name: deck_params[:name], playerClass: deck_params[:playerClass], formats: deck_params[:formats], link: deck_params[:link], caption: deck_params[:caption], author: deck_params[:author], user_id: user_id, player_id: Player.find_by(name_en: deck_params[:playerClass]).id, power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), reno_type: deck_params[:reno_type] == 1 ? false : true
+        @deck = Deck.create name: deck_params[:name], playerClass: deck_params[:playerClass], formats: deck_params[:formats], link: deck_params[:link], caption: deck_params[:caption], author: deck_params[:author], user_id: user_id, player_id: Player.find_by(name_en: deck_params[:playerClass]).id, power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), reno_type: deck_params[:reno_type] == '1' ? false : true
         build_positions
         update_deck
         true

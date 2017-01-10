@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170107083734) do
+ActiveRecord::Schema.define(version: 20170110081852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,9 +177,10 @@ ActiveRecord::Schema.define(version: 20170107083734) do
   create_table "players", force: :cascade do |t|
     t.string   "name_en"
     t.string   "name_ru"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "multi_class_id"
+    t.boolean  "playable",       default: true
     t.index ["multi_class_id"], name: "index_players_on_multi_class_id", using: :btree
   end
 

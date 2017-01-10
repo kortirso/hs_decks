@@ -6,6 +6,8 @@ class Player < ApplicationRecord
 
     validates :name_en, :name_ru, presence: true
 
+    scope :is_playable, -> { where playable: true }
+
     def self.names(locale)
         all.collect { |player| player.locale_name(locale) }.sort
     end

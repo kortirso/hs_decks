@@ -41,6 +41,7 @@ if Collection.all.size.zero?
     [['Priest', 'Жрец'], ['Warrior', 'Воин'], ['Warlock', 'Чернокнижник'], ['Mage', 'Маг'], ['Druid', 'Друид'], ['Hunter', 'Охотник'], ['Shaman', 'Шаман'], ['Paladin', 'Паладин'], ['Rogue', 'Разбойник'], ['Neutral', 'Нейтральный']].each do |player|
         Player.create name_en: player[0], name_ru: player[1]
     end
+    Player.find_by(name_en: 'Neutral').update(playable: false)
 
     [['Grimy Goons', 'Ржавые Бугаи', ['Warrior', 'Hunter', 'Paladin']], ['Jade Lotus', 'Нефритовый Лотус', ['Druid', 'Shaman', 'Rogue']], ['Kabal', 'Кабал', ['Priest', 'Warlock', 'Mage']]].each do |multi|
         multi_class = MultiClass.create name_en: multi[0], name_ru: multi[1]

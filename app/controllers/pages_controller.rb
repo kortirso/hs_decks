@@ -8,7 +8,7 @@ class PagesController < ApplicationController
 
     def decks
         @decks = Deck.filtered(filter_params).includes(:user).order(playerClass: :asc)
-        @playerClasses = Player.all.map { |elem| elem.locale_name(@locale) }
+        @playerClasses = Player.is_playable.map { |elem| elem.locale_name(@locale) }
         @styles = Style.get_names(@locale)
     end
 

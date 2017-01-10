@@ -5,7 +5,7 @@ class ChecksController < ApplicationController
 
     def index
         @checks = current_user.checks.includes(:deck).order(success: :desc)
-        @player_classes = Player.names(@locale)
+        @player_classes = Player.is_playable.names(@locale)
         @styles = Style.get_names(@locale)
     end
 

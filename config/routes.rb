@@ -11,7 +11,9 @@ Rails.application.routes.draw do
         get :autocomplete_card_name_ru, on: :collection
         get :autocomplete_card_name_en, on: :collection
     end
-    resources :shifts, only: [:index, :create, :destroy]
+    resources :shifts, only: [:index, :create, :destroy] do
+        post :create_shift, on: :collection
+    end
     resources :lines, only: [:create, :destroy]
     resources :collections, only: [:create]
     resources :checks, only: [:index, :show, :create]

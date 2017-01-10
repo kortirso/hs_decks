@@ -46,7 +46,7 @@ class ExchangesEngine
 
     def creation(priority, max_amount, card_id)
         exchange = position.exchanges.find_by(card_id: card_id)
-        exchange.update(priority: priority, max_amount: max_amount) if exchange
+        return exchange.update(priority: priority, max_amount: max_amount) if exchange
         position.exchanges.create card_id: card_id, priority: priority, max_amount: max_amount
     end
 end

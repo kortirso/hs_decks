@@ -1,17 +1,22 @@
 class LinesController < ApplicationController
     before_action :get_access
     before_action :check_user_role
+    before_action :find_line, only: :destroy
 
     def create
-        Line.build(lines_params)
+        LinesEngine.new(lines_params).build
     end
 
     def destroy
-        @line = Line.find_by(id: params[:id])
         @line.destroy
     end
 
     private
+
+    def find_line
+        @line = Line.find_by(id: params[:id])
+        render_404 if @line.nil?
+    end
 
     def lines_params
         params.require(:lines).permit!

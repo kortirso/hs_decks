@@ -55,58 +55,7 @@ class Card < ApplicationRecord
 
     def self.with_shifts
         cards = []
-        Shift.pluck(:card_id).uniq.each do |id|
-            cards.push Card.find(id)
-        end
+        Shift.pluck(:card_id).uniq.each { |id| cards.push Card.find(id) }
         cards
-    end
-
-    def self.check_cards_format
-        Collection.of_format('wild').includes(:cards).each { |collection| collection.cards.update_all(formats: 'wild') unless collection.cards.last.wild_format? }
-    end
-
-    def self.check_cards_crafted
-        Collection.adventures.includes(:cards).each { |collection| collection.cards.update_all(craft: false) if collection.cards.last.is_crafted? }
-    end
-
-    def self.check_locale(locale)
-        result = Message.new(locale).get_request
-        Collection.all.includes(:cards).each do |collection|
-            result[collection.name_en].each do |card|
-                current = collection.cards.find_by(cardId: card['cardId'])
-                current.refresh_params(locale, card) if current
-            end
-        end
-    end
-
-    def refresh_params(locale, card)
-        self["name_#{locale}"] = card['name']
-        self["image_#{locale}"] = card['img']
-        %w(type cost playerClass multiClassGroup rarity).each { |param| self[param] = card[param] }
-        self.player_id = Player.find_by(name_en: card['playerClass']).id unless card['playerClass'].nil?
-        self.multi_class_id = MultiClass.find_by(name_en: card['multiClassGroup']).id unless card['multiClassGroup'].nil?
-        self.save if self.changed?
-    end
-
-    def self.calc_usability
-        all.update_all(usable: 0)
-        Deck.all.includes(:cards).each do |deck|
-            deck.cards.each do |card|
-                updated_card = Card.find(card.id)
-                updated_card.update(usable: updated_card.usable + 1)
-            end
-        end
-        Exchange.all.each do |ex|
-            updated_card = Card.find(ex.card_id)
-            updated_card.update(usable: updated_card.usable + 1)
-        end
-        Line.all.each do |line|
-            updated_card = Card.find(line.card_id)
-            updated_card.update(usable: updated_card.usable + 1)
-        end
-        Shift.all.each do |shift|
-            updated_card = Card.find(shift.change_id)
-            updated_card.update(usable: updated_card.usable + 1)
-        end
     end
 end

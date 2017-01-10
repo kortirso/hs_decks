@@ -10,5 +10,5 @@
                 .image style="background-image: url('/cards/en/#{card.cardId}.png');"
                     .card-shadow
                 .inner
-                    = check_box_tag card.id, value = "#{checks ? amount : 0}", checked = checks
-                    = label_tag card.id, card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}", data: { mana: "#{card.cost}" }
+                    = check_box_tag "cards[#{card.id}]", value = "#{checks ? amount : 0}", checked = checks
+                    = label_tag "cards[#{card.id}]", card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}", data: { mana: "#{card.cost}" }

@@ -68,9 +68,9 @@ class SearchSubs
     def check_cards_in_deck(card_id, ex_card_id, ex_max_amount, amount)
         ex_card = Card.find(ex_card_id)
         ex_max_amount = 1 if @deck.is_reno_type?
-        if !cards_in_deck.key?(ex_card_id) || @deck.is_reno_type?
+        if !cards_in_deck.key?(ex_card_id)
             amount = cards_replace(card_id, ex_card_id, ex_max_amount, amount)
-        elsif cards_in_deck.key?(ex_card_id) && !ex_card.is_legendary? && cards_in_deck[ex_card_id] == 1
+        elsif cards_in_deck[ex_card_id] == 1 && !ex_card.is_legendary? && !@deck.is_reno_type?
             amount = cards_reshuffle(card_id, ex_card_id, amount)
         end
         amount

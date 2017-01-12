@@ -30,6 +30,11 @@ class Position < ApplicationRecord
         return ids
     end
 
+    def self.collect_ids_with_rarity_as_hash(ids = {})
+        all.includes(:card).order(id: :asc).each { |pos| ids[pos.card_id.to_s] = { amount: pos.amount, rarity: pos.card.rarity, crafted: pos.card.is_crafted? } }
+        ids
+    end
+
     def self.with_sorted_cards(locale = 'en')
         cards = []
         all.each { |pos| cards.push pos.card }

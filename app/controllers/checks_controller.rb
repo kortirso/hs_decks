@@ -17,7 +17,7 @@ class ChecksController < ApplicationController
     end
 
     def create
-        Check.build(current_user.id, check_params, @locale)
+        SearchEngine.new({ user: current_user, params: check_params, locale: @locale }).build
         head :ok
     end
 

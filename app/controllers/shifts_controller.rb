@@ -4,7 +4,7 @@ class ShiftsController < ApplicationController
     before_action :find_check, only: :destroy
 
     def index
-        @shifted_cards = Card.with_shifts.sort_by { |card| card.cost }
+        @shifted_cards = Card.with_shifts
     end
 
     def create

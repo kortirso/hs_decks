@@ -3,12 +3,12 @@ class PagesController < ApplicationController
     before_action :get_access, except: [:index, :decks, :about]
 
     def index
-        @news = News.all.order(id: :desc)
+        @news = News.order(id: :desc)
     end
 
     def decks
-        @decks = Deck.filtered(filter_params).includes(:user).order(playerClass: :asc)
-        @playerClasses = Player.is_playable.map { |elem| elem.locale_name(@locale) }
+        @decks = DeckFilteredQuery.new.filtered(filter_params)
+        @playerClasses = PlayerGetPlayableNamesQuery.query
         @styles = Style.get_names(@locale)
     end
 
@@ -22,7 +22,7 @@ class PagesController < ApplicationController
     end
 
     def unusable
-        @unusable_cards = current_user.get_unusable_cards.sort_by { |elem| elem.cost }
+        @unusable_cards = current_user.get_unusable_cards
     end
 
     def personal

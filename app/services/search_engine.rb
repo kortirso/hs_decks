@@ -1,12 +1,11 @@
 class SearchEngine
-    attr_reader :user, :user_collection, :deck_cards, :check_params, :locale, :check
+    attr_reader :user, :user_collection, :deck_cards, :check_params, :check
 
     def initialize(args)
         @user = args[:user]
         @user_collection = user.positions.collect_ids_as_hash
         @deck_cards = nil
         @check_params = args[:params].to_h
-        @locale = args[:locale]
         @check = nil
     end
 
@@ -17,7 +16,7 @@ class SearchEngine
             @deck_cards = deck.positions.collect_ids_with_rarity_as_hash
             if verify_deck
                 checks.push check.success
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), player: check.deck.player.locale_name(locale)
+                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), player: check.deck.player.locale_name(I18n.locale)
             end
         end
     end
@@ -62,7 +61,7 @@ class SearchEngine
             add_dust = DustPrice.calc(deck_cards[deck_card][:rarity], deck_cards[deck_card][:amount])
             caption = "#{I18n.t('check.caption_1')}#{add_dust}"
         else
-            caption = "#{I18n.t('check.caption_2')}#{Card.find(deck_card).collection.locale_name(locale)}"
+            caption = "#{I18n.t('check.caption_2')}#{Card.find(deck_card).collection.locale_name(I18n.locale)}"
         end
         {dust: add_dust, caption: caption}
     end

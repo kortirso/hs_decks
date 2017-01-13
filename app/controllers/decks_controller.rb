@@ -27,7 +27,7 @@ class DecksController < ApplicationController
     end
 
     def edit
-        @cards = Card.for_all_classes.or(Card.not_heroes.of_player_class(@deck.playerClass)).includes(:collection)
+        @cards = DeckGetAccessableCardsQuery.query(@deck.playerClass)
         @positions = @deck.positions.collect_ids
         @styles = Style.get_names(@locale)
     end

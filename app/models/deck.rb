@@ -18,21 +18,8 @@ class Deck < ApplicationRecord
     scope :of_power, -> (power) { where('power >= ?', power.to_i) }
     scope :of_style, -> (style) { where style_id: Style.return_id_by_name(style) }
 
-    def self.filtered(params)
-        decks = all
-        return decks if params[:playerClass].nil?
-        unless params[:playerClass].empty?
-            player = Player.return_by_name(params[:playerClass])
-            decks = player.decks if player
-        end
-        decks = decks.of_power(params[:power]) unless params[:power].empty?
-        decks = decks.of_format(params[:formats]) if %w(standard wild).include?(params[:formats])
-        decks = decks.of_style(params[:style]) unless params[:style].empty?
-        decks
-    end
-
     def self.check_format
-        all.each { |deck| deck.check_deck_format }
+        all.includes(:cards).each { |deck| deck.check_deck_format }
     end
 
     def check_deck_format(free_cards = 0)

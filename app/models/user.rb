@@ -19,11 +19,7 @@ class User < ApplicationRecord
     end
 
     def get_unusable_cards
-        cards_for_destroy, unused_cards = [], Card.not_heroes.not_free.unusable.to_a
-        self.cards.not_free.to_a.each do |user_card|
-            cards_for_destroy.push(user_card) if unused_cards.include?(user_card)
-        end
-        cards_for_destroy
+        cards.not_free.reject { |card| !card.usable.zero? }.sort_by { |elem| elem.cost }
     end
 
     def subscribe_for_news

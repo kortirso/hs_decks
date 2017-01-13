@@ -40,7 +40,7 @@ class Card < ApplicationRecord
 
     def self.with_shifts(cards = [])
         Shift.pluck(:card_id).uniq.each { |id| cards.push Card.find(id) }
-        cards
+        cards.sort_by { |card| card.cost }
     end
 
     def wild_format?

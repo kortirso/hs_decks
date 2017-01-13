@@ -8,7 +8,7 @@ class ExchangesController < ApplicationController
     autocomplete :card, :name_en
 
     def show
-        @positions = @deck.positions.includes(:card, :exchanges).to_a.sort_by { |elem| [elem.card.cost, elem.card["name_#{@locale}"]] }
+        @positions = DeckShowExchangesQuery.new(@deck).query
         @lines = @deck.lines
     end
 

@@ -23,6 +23,25 @@ RSpec.describe Deck, type: :model do
     end
 
     describe 'Methods' do
+        context '.check_deck_format' do
+            let!(:card_1) { create :card }
+            let!(:card_2) { create :card, :wild_card }
+            let!(:standard_position) { create :position_for_deck, card: card_1 }
+            let!(:wild_position) { create :position_for_deck, card: card_2 }
+
+            it 'does not update deck format if card in deck is standard' do
+                deck = standard_position.positionable
+
+                expect { deck.check_deck_format }.to_not change(deck, :formats).from('standard')
+            end
+
+            it 'updates deck format if card in deck is wild' do
+                deck = wild_position.positionable
+
+                expect { deck.check_deck_format }.to change(deck, :formats).from('standard').to('wild')
+            end
+        end
+
         context '.is_reno_type?' do
             let!(:deck_1) { create :deck }
             let!(:deck_2) { create :deck, reno_type: true }

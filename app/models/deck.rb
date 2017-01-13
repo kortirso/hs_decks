@@ -7,6 +7,7 @@ class Deck < ApplicationRecord
 
     has_many :checks, dependent: :destroy
     has_many :lines, dependent: :destroy
+    has_many :mulligans, dependent: :destroy
 
     validates :name, :playerClass, :user_id, :formats, :player_id, :power, presence: true
     validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue) }
@@ -17,6 +18,8 @@ class Deck < ApplicationRecord
     scope :of_format, -> (format) { where formats: format }
     scope :of_power, -> (power) { where('power >= ?', power.to_i) }
     scope :of_style, -> (style) { where style_id: Style.return_id_by_name(style) }
+
+    after_create :build_mulligan
 
     def self.check_format
         all.includes(:cards).each { |deck| deck.check_deck_format }
@@ -29,5 +32,11 @@ class Deck < ApplicationRecord
 
     def is_reno_type?
         reno_type
+    end
+
+    private
+
+    def build_mulligan
+        Player.is_playable.each { |player| Mulligan.create deck_id: self.id, player_id: player.id }
     end
 end

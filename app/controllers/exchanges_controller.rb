@@ -10,6 +10,7 @@ class ExchangesController < ApplicationController
     def show
         @positions = DeckShowExchangesQuery.new(@deck).query
         @lines = @deck.lines
+        @mulligans = @deck.mulligans.includes(:player, :positions)
     end
 
     def create

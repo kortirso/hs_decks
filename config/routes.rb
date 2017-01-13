@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         post :create_shift, on: :collection
     end
     resources :lines, only: [:create, :destroy]
+    resources :mulligans, only: [:create, :destroy]
     resources :collections, only: [:create]
     resources :checks, only: [:index, :show, :create]
     resources :decks

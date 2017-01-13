@@ -47,6 +47,28 @@
                         = link_to 'x', '', class: 'remove_line button', remote: true
                     p= link_to 'Добавить замену', '', class: 'duplicate_line button'
             = submit_tag t('buttons.save'), class: 'button'
+        = form_tag({ controller: 'mulligans', action: 'create' }, method: 'post', remote: true) do
+            h4 Муллиган для колоды
+            p В данном блоке можно указать муллиган для данной колоды против всех Героев.
+            - @mulligans.each do |mulligan|
+                table.with_exchanges
+                    thead
+                        tr
+                            th= mulligan.player.locale_name(@locale)
+                            th
+                    tbody
+                        - mulligan.positions.each do |position|
+                            tr id="position_#{position.id}"
+                                td
+                                    .card class="mana_#{position.card.cost} #{position.card.rarity}"
+                                        .image style="background-image: url('/cards/en/#{position.card.cardId}.png');"
+                                            .card-shadow
+                                        .inner
+                                            .lab class="mana_#{position.card.cost}"
+                                                = position.card["name_#{@locale}"]
+                                td
+                                    = link_to 'x', mulligan_path(position), method: :delete, remote: true
+            = submit_tag t('buttons.save'), class: 'button'
     #exchanges
         = simple_form_for :exchanges, url: exchanges_path, method: :post, remote: true do |f|
             h4 Замены для определенных карт

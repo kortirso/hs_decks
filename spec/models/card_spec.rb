@@ -19,6 +19,7 @@ RSpec.describe Card, type: :model do
     it { should have_many(:decks).through(:positions) }
     it { should have_many(:users).through(:positions) }
     it { should have_many(:checks).through(:positions) }
+    it { should have_many(:mulligans).through(:positions) }
     it { should have_many(:exchanges).through(:shifts) }
     it { should have_many :lines }
     

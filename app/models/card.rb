@@ -9,6 +9,7 @@ class Card < ApplicationRecord
     has_many :decks, through: :positions, source: :positionable, source_type: 'Deck'
     has_many :users, through: :positions, source: :positionable, source_type: 'User'
     has_many :checks, through: :positions, source: :positionable, source_type: 'Check'
+    has_many :mulligans, through: :positions, source: :positionable, source_type: 'Mulligan'
     has_many :lines
     has_many :shifts, dependent: :destroy
     has_many :exchanges, through: :shifts, source: :change

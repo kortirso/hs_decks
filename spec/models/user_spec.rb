@@ -60,30 +60,18 @@ RSpec.describe User, type: :model do
         expect(user.errors[:email]).to include('has already been taken')
     end
 
-    context 'methods' do
+    describe 'Methods' do
         context '.deck_master?' do
             let!(:user_1) { create :user }
             let!(:user_2) { create :user, :deck_master }
 
-            it 'should return false if user is not deck_master' do
+            it 'returns false if user is not deck_master' do
                 expect(user_1.deck_master?).to eq false
             end
 
-            it 'should return true if user is deck_master' do
+            it 'returns true if user is deck_master' do
                 expect(user_2.deck_master?).to eq true
             end
-        end
-
-        context '.build_collection' do
-
-        end
-
-        context '.update_collection' do
-
-        end
-        
-        context '.adding_to_collection' do
-
         end
     end
 end

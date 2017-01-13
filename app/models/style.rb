@@ -9,8 +9,7 @@ class Style < ApplicationRecord
 
     def self.return_id_by_name(name)
         style = find_by(name_en: name) || find_by(name_ru: name)
-        return nil if style.nil?
-        style.id
+        return style.nil? ? nil : style.id
     end
 
     def locale_name(locale)

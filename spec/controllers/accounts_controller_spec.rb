@@ -6,20 +6,20 @@ RSpec.describe AccountsController, type: :controller do
             sign_in_user
 
             it 'should call build_collection users method' do
-                expect_any_instance_of(User).to receive(:build_collection)
+                expect_any_instance_of(CollectionConstructor).to receive(:build_collection)
 
-                post :create, params: {}, format: :js
+                post :create, params: { cards: {'1'=>1}}, format: :js
             end
 
             it 'and should render head ok' do
-                post :create, params: {}, format: :js
+                post :create, params: { cards: {'1'=>1}}, format: :js
 
                 expect(response.status).to eq 200
             end
         end
 
         def do_request
-            post :create, params: {}
+            post :create, params: {}, format: :js
         end
     end
 end

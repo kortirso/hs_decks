@@ -103,13 +103,13 @@ RSpec.describe DecksController, type: :controller do
                 before { @current_user.update(role: 'deck_master') }
 
                 it 'should call Decks build method' do
-                    expect(Deck).to receive(:build)
+                    expect_any_instance_of(DeckConstructor).to receive(:build)
 
                     post :create, params: { deck: { name: 'Deck' } }
                 end
 
-                it 'should redirect to decks_path if Deck.build returns true' do
-                    post :create, params: { deck: { name: 'Deck', playerClass: 'Shaman', formats: 'standard', link: '', caption: '', author: '', power: 1, style: 'Aggro', reno_type: 1 }, "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}
+                it 'should redirect to decks_path if DeckConstructor.build returns true' do
+                    post :create, params: { deck: { name: 'Deck', playerClass: 'Shaman', formats: 'standard', link: '', caption: '', author: '', power: 1, style: 'Aggro', reno_type: 1 }, cards: {"#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}}
 
                     expect(response).to redirect_to decks_path
                 end
@@ -223,13 +223,13 @@ RSpec.describe DecksController, type: :controller do
                 end
 
                 it 'and should call Decks refresh method on @deck' do
-                    expect_any_instance_of(Deck).to receive(:refresh)
+                    expect_any_instance_of(DeckConstructor).to receive(:refresh)
 
                     patch :update, params: { id: users_deck.id, deck: { name: 'Deck' } }
                 end
 
-                it 'should redirect to decks_path if Deck.build returns true' do
-                    patch :update, params: { id: users_deck.id, deck: { name: 'Updated deck', link: '', caption: '', author: '', power: 1, style: 'Aggro', reno_type: 1 }, "#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}
+                it 'should redirect to decks_path if DeckConstructor.build returns true' do
+                    patch :update, params: { id: users_deck.id, deck: { name: 'Updated deck', link: '', caption: '', author: '', power: 1, style: 'Aggro', reno_type: 1 }, cards: {"#{cards[0].id}" => '2', "#{cards[1].id}" => '2', "#{cards[2].id}" => '2', "#{cards[3].id}" => '2', "#{cards[4].id}" => '2', "#{cards[5].id}" => '2', "#{cards[6].id}" => '2', "#{cards[7].id}" => '2', "#{cards[8].id}" => '2', "#{cards[9].id}" => '2', "#{cards[10].id}" => '2', "#{cards[11].id}" => '2', "#{cards[12].id}" => '2', "#{cards[13].id}" => '2', "#{cards[14].id}" => '2'}}
 
                     expect(response).to redirect_to decks_path
                 end

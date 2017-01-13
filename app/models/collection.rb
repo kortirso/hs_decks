@@ -12,10 +12,10 @@ class Collection < ApplicationRecord
     end
 
     def wild_format?
-        self.formats == 'wild'
+        formats == 'wild'
     end
 
     def is_adventure?
-        self.adventure
+        adventure
     end
 end

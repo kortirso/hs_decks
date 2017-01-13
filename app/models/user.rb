@@ -15,7 +15,7 @@ class User < ApplicationRecord
     after_create :welcome_notify
 
     def deck_master?
-        self.role == 'deck_master'
+        role == 'deck_master'
     end
 
     def get_unusable_cards
@@ -27,11 +27,11 @@ class User < ApplicationRecord
     end
 
     def subscribe_for_news
-        self.update(get_news: true) unless self.get_news
+        update(get_news: true) unless get_news
     end
 
     def unsubscribe_from_news
-        self.update(get_news: false) if self.get_news
+        update(get_news: false) if get_news
     end
 
     def hearthpwn_collection(params)

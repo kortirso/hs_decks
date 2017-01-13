@@ -14,43 +14,47 @@ RSpec.describe Player, type: :model do
     context 'Methods' do
         let!(:player) { create :player }
 
-        context '.locale_name' do
-            it 'should return name_en if en locale' do
-                expect(player.locale_name('en')).to eq player.name_en
-            end
-
-            it 'should return name_ru if ru locale' do
-                expect(player.locale_name('ru')).to eq player.name_ru
-            end
-        end
-
         context '.names' do
-            it 'should return list of name_en if en locale' do
+            it 'returns list of english player names if arg is en' do
                 expect(Player.names('en')).to eq [player.name_en]
             end
 
-            it 'should return list of name_ru if ru locale' do
+            it 'returns list of russian player names if arg is ru' do
                 expect(Player.names('ru')).to eq [player.name_ru]
             end
         end
         
         context '.return_en' do
-            it 'should return name_en if en name' do
-                expect(Player.return_en('Shaman')).to eq player.name_en
+            it 'returns english name if arg is en' do
+                expect(Player.return_en(player.name_en)).to eq player.name_en
             end
 
-            it 'should return name_en if ru name' do
-                expect(Player.return_en('Шаман')).to eq player.name_en
+            it 'returns english name if arg is ru' do
+                expect(Player.return_en(player.name_ru)).to eq player.name_en
             end
         end
 
         context '.return_by_name' do
-            it 'should return player object if en name' do
-                expect(Player.return_by_name('Shaman')).to eq player
+            it 'returns player by english name' do
+                expect(Player.return_by_name(player.name_en)).to eq player
             end
 
-            it 'should return player object if ru name' do
-                expect(Player.return_by_name('Шаман')).to eq player
+            it 'returns player by russian name' do
+                expect(Player.return_by_name(player.name_ru)).to eq player
+            end
+
+            it 'returns nil if player does not exist' do
+                expect(Player.return_by_name('')).to eq nil
+            end
+        end
+
+        context '.locale_name' do
+            it 'returns english name if arg is en' do
+                expect(player.locale_name('en')).to eq player.name_en
+            end
+
+            it 'returns russian name if arg is ru' do
+                expect(player.locale_name('ru')).to eq player.name_ru
             end
         end
     end

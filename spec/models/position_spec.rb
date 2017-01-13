@@ -32,7 +32,7 @@ RSpec.describe Position, type: :model do
         context '.collect_ids' do
             let!(:positions) { create_list(:position_for_user, 2, positionable: user) }
 
-            it 'should return cards id and amount in users collection' do
+            it 'returns cards id and amount in users collection' do
                 expect(user.positions.collect_ids).to eq [[positions.first.card_id, positions.first.amount], [positions.last.card_id, positions.last.amount]]
             end
         end
@@ -40,7 +40,7 @@ RSpec.describe Position, type: :model do
         context '.collect_ids_with_rarity' do
             let!(:positions) { create_list(:position_for_user, 2, positionable: user) }
 
-            it 'should return cards id and amount in users collection' do
+            it 'returns cards id and amount in users collection' do
                 expect(user.positions.collect_ids_with_rarity).to eq [[positions.first.card_id, positions.first.amount, positions.first.card.rarity, positions.first.card.is_crafted?], [positions.last.card_id, positions.last.amount, positions.last.card.rarity, positions.first.card.is_crafted?]]
             end
         end
@@ -53,7 +53,7 @@ RSpec.describe Position, type: :model do
             let!(:position_2) { create :position_for_user, positionable: user, card: card_2 }
             let!(:position_3) { create :position_for_user, positionable: user, card: card_3 }
 
-            it 'should returns array of cards' do
+            it 'returns array of cards' do
                 expect(user.positions.with_sorted_cards.kind_of? Array).to eq true
                 expect(user.positions.with_sorted_cards.size).to eq 3
             end

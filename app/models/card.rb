@@ -9,10 +9,7 @@ class Card < ApplicationRecord
     has_many :decks, through: :positions, source: :positionable, source_type: 'Deck'
     has_many :users, through: :positions, source: :positionable, source_type: 'User'
     has_many :checks, through: :positions, source: :positionable, source_type: 'Check'
-
-    has_many :exchanges
     has_many :lines
-
     has_many :shifts, dependent: :destroy
     has_many :exchanges, through: :shifts, source: :change
 
@@ -38,24 +35,23 @@ class Card < ApplicationRecord
     end
 
     def self.with_cost(cost)
-        return cost < 7 ? where(cost: cost) : where('cost >= 7')
+        cost < 7 ? where(cost: cost) : where('cost >= 7')
+    end
+
+    def self.with_shifts(cards = [])
+        Shift.pluck(:card_id).uniq.each { |id| cards.push Card.find(id) }
+        cards
     end
 
     def wild_format?
-        self.formats == 'wild'
+        formats == 'wild'
     end
 
     def is_crafted?
-        self.craft
+        craft
     end
 
     def is_legendary?
-        self.rarity == 'Legendary'
-    end
-
-    def self.with_shifts
-        cards = []
-        Shift.pluck(:card_id).uniq.each { |id| cards.push Card.find(id) }
-        cards
+        rarity == 'Legendary'
     end
 end

@@ -99,20 +99,20 @@ RSpec.describe ChecksController, type: :controller do
             sign_in_user
 
             it 'should call build Check method' do
-                expect(Check).to receive(:build)
+                expect_any_instance_of(SearchEngine).to receive(:build)
 
-                post :create, params: { success: '', playerClass: '', formats: 'standard', power: '', style: '' }
+                post :create, params: { success: '', dust: '', playerClass: '', formats: 'standard', power: '', style: '' }
             end
 
             it 'and should render head ok' do
-                post :create, params: { success: '', playerClass: '', formats: 'standard', power: '', style: '' }
+                post :create, params: { success: '', dust: '', playerClass: '', formats: 'standard', power: '', style: '' }
 
                 expect(response.status).to eq 200
             end
         end
 
         def do_request
-            post :create, params: { success: '', playerClass: '', formats: 'standard', power: '', style: '' }
+            post :create, params: { success: '', dust: '', playerClass: '', formats: 'standard', power: '', style: '' }
         end
     end
 end

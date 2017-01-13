@@ -6,6 +6,7 @@ FactoryGirl.define do
         author ''
         price 5000
         power 1
+        reno_type false
         association :user
         association :player
         association :style

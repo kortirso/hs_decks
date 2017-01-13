@@ -4,8 +4,8 @@ RSpec.describe Deck, type: :model do
     it { should belong_to :style }
     it { should have_many :positions }
     it { should have_many(:cards).through(:positions) }
-    it { should have_many :checks }
-    it { should have_many :lines }
+    it { should have_many(:checks).dependent(:destroy) }
+    it { should have_many(:lines).dependent(:destroy) }
     it { should validate_presence_of :name }
     it { should validate_presence_of :playerClass }
     it { should validate_presence_of :user_id }
@@ -22,42 +22,17 @@ RSpec.describe Deck, type: :model do
         expect(deck).to be_valid
     end
 
-    context 'methods' do
-        context '.build' do
+    describe 'Methods' do
+        context '.is_reno_type?' do
+            let!(:deck_1) { create :deck }
+            let!(:deck_2) { create :deck, reno_type: true }
 
-        end
-
-        context '.build_positions' do
-
-        end
-
-        context '.refresh' do
-
-        end
-
-        context '.update_positions' do
-
-        end
-
-        context '.check_deck_format' do
-
-        end
-
-        context '.good_params?' do
-            context '.check_deck_params' do
-
+            it 'returns false if deck is not reno_type' do
+                expect(deck_1.is_reno_type?).to eq false
             end
 
-            context '.check_30_cards' do
-
-            end
-
-            context '.check_dublicates' do
-
-            end
-
-            context '.check_cards_class' do
-
+            it 'returns true if deck is reno_type' do
+                expect(deck_2.is_reno_type?).to eq true
             end
         end
     end

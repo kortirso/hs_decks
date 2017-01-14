@@ -11,6 +11,7 @@ class DecksController < ApplicationController
     def show
         @packs = current_user.positions.collect_ids if current_user
         @positions = @deck.positions.collect_ids
+        @mulligans = @deck.mulligans.includes(:cards, :player)
     end
 
     def new

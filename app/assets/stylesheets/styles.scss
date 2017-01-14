@@ -248,6 +248,13 @@ nav {
                 }
             }
         }
+        .mulligans {
+            .tabs-panel {
+                img {
+                    width: 16%;
+                }
+            }
+        }
     }
 }
 
@@ -591,9 +598,9 @@ nav {
             }
         }
     }
-    .lines {
+    .lines, .mulligans {
         .pos {
-            .remove_line {
+            .remove_line, .remove_mulligan {
                 position: relative;
                 top: -2px;
                 margin: 0;
@@ -603,7 +610,7 @@ nav {
                 display: inline-block;
                 margin-right: 10px;
                 margin-bottom: 3px;
-                input {
+                input, select {
                     margin: 0;
                 }
                 &.long-input {
@@ -639,7 +646,18 @@ nav {
             }
         }
     }
-    .duplicate_line {
+    .mulligans {
+        margin-bottom: 5px;
+        table.with_lines {
+            thead {
+                th {
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .duplicate_line, .duplicate_mulligan {
         margin: 0;
     }
     .priority {

@@ -7,6 +7,11 @@ class Position < ApplicationRecord
     validates :amount, :positionable_id, :positionable_type, :card_id, presence: true
     validates :amount, inclusion: { in: 0..2 }
 
+    def self.sorted_by_cards
+        locale = I18n.locale
+        all.to_a.sort_by { |elem| [elem.card.cost, elem.card.locale_name(locale)] }
+    end
+
     def self.collect_ids(ids = [])
         all.order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount] }
         ids

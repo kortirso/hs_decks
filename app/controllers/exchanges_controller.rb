@@ -10,6 +10,8 @@ class ExchangesController < ApplicationController
     def show
         @positions = DeckShowExchangesQuery.new(@deck).query
         @lines = @deck.lines
+        @mulligans = @deck.mulligans.includes(:player, :positions)
+        @cards = @deck.cards.collect { |elem| elem["name_#{@locale}"] }
     end
 
     def create

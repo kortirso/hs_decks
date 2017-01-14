@@ -37,7 +37,19 @@
                         .card class="#{card.rarity}"
                             - checks = current_user.nil? ? false : ids.include?(card.id)
                             = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
-                            = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background-image: url('/cards/en/#{card.cardId}.png');"
+                            = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background-image: url('/cards/#{@locale}/#{card.cardId}.png');"
                 - if current_user
                     p= submit_tag t('buttons.save'), class: 'button'
+            .mulligans
+                h4 Муллиганы против различных Героев
+                - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)
+                ul#cards-tabs.tabs data-tabs=''
+                    - classes_list.each_with_index do |name, index|
+                        li.tabs-title class="#{'is-active' if index == 0}"
+                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
+                .tabs-content#tabs-content data-tabs-content='cards-tabs'
+                    - classes_list.each_with_index do |name, index|
+                        .tabs-panel class="class_#{name} #{'is-active' if index.zero?}" id="cards#{index}"
+                            - @mulligans.find_by(player_id: Player.return_by_name(name).id).positions.sorted_by_cards.each do |pos|
+                                = image_tag "/cards/#{@locale}/#{pos.card.cardId}.png"
 = render 'shared/save_modal'

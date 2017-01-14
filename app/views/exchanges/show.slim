@@ -56,7 +56,7 @@
                             th= mulligan.player.locale_name(@locale)
                             th
                     tbody
-                        - mulligan.positions.to_a.sort_by { |elem| [elem.card.cost, elem.card["name_#{I18n.locale}"]] }.each do |position|
+                        - mulligan.positions.sorted_by_cards.each do |position|
                             tr id="position_#{position.id}"
                                 td
                                     .card class="mana_#{position.card.cost} #{position.card.rarity}"

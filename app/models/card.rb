@@ -44,6 +44,10 @@ class Card < ApplicationRecord
         cards.sort_by { |card| card.cost }
     end
 
+    def locale_name(locale)
+        self["name_#{locale}"]
+    end
+
     def wild_format?
         formats == 'wild'
     end

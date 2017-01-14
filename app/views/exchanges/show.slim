@@ -4,7 +4,6 @@
         = simple_form_for :lines, url: lines_path, method: :post, remote: true do |f|
             h4 Очередь замен для колоды
             p В данном блоке можно указать замены для колоды, если замена не будет найдена для определенной карты, то следующая возможная замена будет браться из этого списка.
-            = submit_tag t('buttons.save'), class: 'button'
             = f.hidden_field :deck_id, value: @deck.id
             - if @lines.size > 0
                 table.with_lines
@@ -47,17 +46,17 @@
                         = link_to 'x', '', class: 'remove_line button', remote: true
                     p= link_to 'Добавить замену', '', class: 'duplicate_line button'
             = submit_tag t('buttons.save'), class: 'button'
-        = form_tag({ controller: 'mulligans', action: 'create' }, method: 'post', remote: true) do
+        = simple_form_for :mulligans, url: mulligans_path, method: :post, remote: true do |f|
             h4 Муллиган для колоды
-            p В данном блоке можно указать муллиган для данной колоды против всех Героев.
+            p В данном блоке можно указать муллиган для данной колоды против всех Героев. Максимум будет сохранено до 6 карт против каждого Героя.
             - @mulligans.each do |mulligan|
-                table.with_exchanges
+                table.with_lines
                     thead
                         tr
                             th= mulligan.player.locale_name(@locale)
                             th
                     tbody
-                        - mulligan.positions.each do |position|
+                        - mulligan.positions.to_a.sort_by { |elem| [elem.card.cost, elem.card["name_#{I18n.locale}"]] }.each do |position|
                             tr id="position_#{position.id}"
                                 td
                                     .card class="mana_#{position.card.cost} #{position.card.rarity}"
@@ -68,12 +67,17 @@
                                                 = position.card["name_#{@locale}"]
                                 td
                                     = link_to 'x', mulligan_path(position), method: :delete, remote: true
+                .mulligans
+                    = f.simple_fields_for "#{mulligan.id}" do |y|
+                        .pos data={ position: 0 }
+                            .large-input.inputs= y.input 'card_0', collection: @cards, label: false
+                            = link_to 'x', '', class: 'remove_mulligan button', remote: true
+                        = link_to 'Добавить карту', '', class: 'duplicate_mulligan button'
             = submit_tag t('buttons.save'), class: 'button'
     #exchanges
         = simple_form_for :exchanges, url: exchanges_path, method: :post, remote: true do |f|
             h4 Замены для определенных карт
             p В данном блоке указываются возможные замены для определенных карт в колоде.
-            = submit_tag t('buttons.save'), class: 'button'
             = f.hidden_field :deck_id, value: @deck.id
             - @positions.each do |pos|
                 .position

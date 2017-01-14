@@ -308,4 +308,31 @@ $(function() {
             $(this).closest('.pos').remove();
         }
     });
+
+    $('.duplicate_mulligan').click(function(e) {
+        var formsOnPage, newNestedForm;
+        e.preventDefault();
+        nestedExchange = $(this).closest('.mulligans').children('.pos').last();
+        newNestedForm = $(nestedExchange).clone();
+        formsOnPage = $(nestedExchange).data("position") + 1;
+        $(newNestedForm).attr('data-position', formsOnPage);    
+        $(newNestedForm).find('select').each(function() {
+            var newId, newName, oldId, oldName;
+            oldId = $(this).attr('id');
+            newId = oldId.split('_').slice(0, -1).join('_') + '_' +formsOnPage;
+            $(this).attr('id', newId);
+            oldName = $(this).attr('name');
+            newName = oldName.split('_')[0] + '_' + formsOnPage + ']';
+            $(this).attr('name', newName);
+            $(this).val('');
+        });
+        $(newNestedForm).insertAfter(nestedExchange);
+    });
+
+    $('#lines').on('click', '.remove_mulligan', function(e) {
+        e.preventDefault();
+        if($(this).closest('.mulligans').children('.pos').length != 1) {
+            $(this).closest('.pos').remove();
+        }
+    });
 });

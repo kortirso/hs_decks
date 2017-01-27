@@ -49,7 +49,7 @@ class DecksController < ApplicationController
     private
 
     def find_deck
-        @deck = Deck.find_by(id: params[:id])
+        @deck = Deck.friendly.find(params[:id])
         render_404 if @deck.nil? 
     end
 

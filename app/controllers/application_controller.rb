@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
     before_action :set_locale
     protect_from_forgery with: :exception
 
+    rescue_from ActionController::RoutingError, with: :render_404
+    rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
+    def catch_404
+        raise ActionController::RoutingError.new(params[:path])
+    end
+
     private
 
     def configure_permitted_parameters
@@ -22,7 +29,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-        session[:locale] == 'ru'  || session[:locale] == 'en' ? I18n.locale = session[:locale] : I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+        session[:locale] == 'ru' || session[:locale] == 'en' ? I18n.locale = session[:locale] : I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
         @locale = I18n.locale
     end
 end

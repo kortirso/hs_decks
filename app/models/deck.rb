@@ -1,5 +1,10 @@
+require 'babosa'
+
 class Deck < ApplicationRecord
     include Positionable
+    extend FriendlyId
+
+    friendly_id :slug_candidates, use: :slugged
     
     belongs_to :user
     belongs_to :player
@@ -20,6 +25,14 @@ class Deck < ApplicationRecord
     scope :of_style, -> (style) { where style_id: Style.return_id_by_name(style) }
 
     after_create :build_mulligan
+
+    def slug_candidates
+        [:name, [:name, :user_id], [:name, :user_id, :id]]
+    end
+
+    def normalize_friendly_id(input)
+        input.to_s.to_slug.normalize(transliterations: :russian).to_s
+    end
 
     def self.check_format
         all.includes(:cards).each { |deck| deck.check_deck_format }

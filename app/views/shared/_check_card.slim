@@ -3,7 +3,7 @@
     - amount = positions[ids.index(card.id)][1]
     - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
     .card class="#{card.rarity} #{card_class if decks} #{'uncrafted' unless card.is_crafted?}"
-        .image style="background-image: url('/cards/#{@locale}/#{card.cardId}.png');"
+        .image style="background-image: url('/cards/short/#{card.cardId}_short.jpg');"
             .card-shadow
         .inner
             - card_class = 'single' if decks && card_class == 'double' && decks[deck_ids.index(card.id)][1] == 1

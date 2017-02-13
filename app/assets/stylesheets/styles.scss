@@ -51,7 +51,7 @@ body {
         top: 0;
         left: 0;
         z-index: -2;
-        background-image: image-url('background.jpeg');
+        background-image: image-url('background.jpg');
         background-size: cover;
         background-position: center;
         .shadow {
@@ -378,12 +378,12 @@ nav {
         .image {
             position: absolute;
             top: 0;
-            left: 50%;
-            width: 50%;
-            height: 100%;
+            right: 0;
+            width: 116px;
+            height: 29px;
             background: #000;
-            background-position: 50% 25%;
-            background-size: 156px auto;
+            background-size: 116px 29px;
+            background-repeat: no-repeat;
             .card-shadow {
                 position: absolute;
                 width: 100%;

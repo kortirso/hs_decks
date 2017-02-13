@@ -7,7 +7,7 @@
             - card_name = card["name_#{locale}"]
             - collection_name = card.collection.locale_name(locale)
             .card class="mana_#{card.cost} #{collection_name.split(' ').join('_')} #{card.rarity} #{card.formats} #{card.multiClassGroup.split(' ').join('_') if card.multiClassGroup} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
-                .image style="background-image: url('/cards/#{locale}/#{card.cardId}.png');"
+                .image style="background-image: url('/cards/short/#{card.cardId}_short.jpg');"
                     .card-shadow
                 .inner
                     = check_box_tag "cards[#{card.id}]", value = "#{checks ? amount : 0}", checked = checks

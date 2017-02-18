@@ -20,7 +20,7 @@
                             tr id="line_#{line.id}"
                                 td
                                     .card class="mana_#{line.card.cost} #{line.card.rarity}"
-                                        .image style="background-image: url('/assets/short_cards/#{line.card.cardId}_short.jpg');"
+                                        .image style="background-image: url('../short_cards/#{line.card.cardId}_short.jpg');"
                                             .card-shadow
                                         .inner
                                             .lab class="mana_#{line.card.cost}"
@@ -60,7 +60,7 @@
                             tr id="position_#{position.id}"
                                 td
                                     .card class="mana_#{position.card.cost} #{position.card.rarity}"
-                                        .image style="background-image: url('/assets/short_cards/#{position.card.cardId}_short.jpg');"
+                                        .image style="background-image: url('../short_cards/#{position.card.cardId}_short.jpg');"
                                             .card-shadow
                                         .inner
                                             .lab class="mana_#{position.card.cost}"
@@ -82,7 +82,7 @@
             - @positions.each do |pos|
                 .position
                     .card class="mana_#{pos.card.cost} #{pos.card.rarity}"
-                        .image style="background-image: url('/assets/short_cards/#{pos.card.cardId}_short.jpg');"
+                        .image style="background-image: url('../short_cards/#{pos.card.cardId}_short.jpg');"
                             .card-shadow
                         .inner
                             - card_class = pos.amount == 1 ? 'single' : 'double'
@@ -102,7 +102,7 @@
                                         tr id="exchange_#{exchange.id}"
                                             td
                                                 .card class="mana_#{exchange.card.cost} #{exchange.card.rarity}"
-                                                    .image style="background-image: url('/assets/short_cards/#{exchange.card.cardId}_short.jpg');"
+                                                    .image style="background-image: url('../short_cards/#{exchange.card.cardId}_short.jpg');"
                                                         .card-shadow
                                                     .inner
                                                         .lab class="mana_#{exchange.card.cost}"

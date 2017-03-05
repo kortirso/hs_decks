@@ -40,7 +40,7 @@ en:
     all: 'All'
     index:
       head: 'Deck Hunter - application for the selection of the most appropriate decks for playing HearthStone on the basis of available player cards.'
-      version: 'Application version - 0.4.1 (alpha 4.1).'
+      version: 'Application version - 0.5.0 (alpha 5.0).'
       caption: 'In this version implemented basic functions to preserve the collection of cards and to analyze the decks which are available after registration. Registration (confirmation is not required) is necessary for the preservation of the collection of user cards.'
     tabs_2:
       tab: 'Cards collection'

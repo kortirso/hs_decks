@@ -21,7 +21,7 @@
             - @shifted_cards.each do |card|
                 .position
                     .card class="mana_#{card.cost} #{card.rarity}"
-                        .image style="background-image: url('../short_cards/#{card.cardId}_short.jpg');"
+                        .image class="card_#{card.cardId}"
                             .card-shadow
                         .inner
                             .lab class="mana_#{card.cost}"
@@ -39,7 +39,7 @@
                                     tr id="shift_#{shift.id}"
                                         td
                                             .card class="mana_#{shift.change.cost} #{shift.change.rarity}"
-                                                .image style="background-image: url('../short_cards/#{shift.change.cardId}_short.jpg');"
+                                                .image class="card_#{shift.change.cardId}"
                                                     .card-shadow
                                                 .inner
                                                     .lab class="mana_#{shift.change.cost}"

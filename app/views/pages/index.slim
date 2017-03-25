@@ -1,15 +1,90 @@
 - provide(:title, 'Deck Hunter | Main Page')
 #index_caption
-    h3= t('general.index.head')
-    h5= t('general.index.version')
-    p= t('general.index.caption')
-    h4 Новости
+    /h3= t('general.index.head')
+    /h5= t('general.index.version')
+    /p= t('general.index.caption')
     .row
-        - @news.each do |article|
-            .columns.small-4.end
-                .news
-                    p.header= article.label
-                    p= article.created_at.strftime("%Y.%m.%d")
-                    p.caption= article.caption
-                    - unless article.link.nil? || article.link.empty?
-                        p= link_to 'Подробности...', article.link, class: 'button', target: '_blank'
+        .columns.small-12.medium-8.small-centered
+            .page_block.about_block
+                h4 DeckHunter
+                p.first= "Собери эффективную колоду всего за 5 минут и "
+                p.second начни выигрывать в HearthStone уже сегодня.
+                p.third DeckHunter поможет быстро подобрать колоды для успешной игры в ладдере с учётом имеющихся у вас карт и определить наилучшие замены недостающих карт.
+    .row
+        .columns.small-12.medium-10.small-centered
+            .page_block.how_works_block
+                .row
+                    h4 Как это работает
+                    .columns.small-12.medium-4
+                        .works
+                            .image_block
+                                = image_tag ''
+                            .text_block
+                                .header Инструменты для хранения коллекции.
+                                .caption Сохраните свои карты один раз, а затем только обновляйте коллекцию.
+                    .columns.small-12.medium-4
+                        .works
+                            .image_block
+                                = image_tag ''
+                            .text_block
+                                .header Выбор параметров для анализа карт.
+                                .caption Определите, какой результат вы хотите получить.
+                    .columns.small-12.medium-4
+                        .works
+                            .image_block
+                                = image_tag ''
+                            .text_block
+                                .header Получение результатов подбора колод.
+                                .caption Ознакомьтесь с результатами автоматического анализа ваших карт.
+    .row
+        .columns.small-12.medium-10.small-centered
+            .page_block.opportunities_block
+                .row
+                    h4 Дополнительные возможности
+                    .columns.small-12.medium-4
+                        .opportunity
+                            .image_block
+                                = image_tag ''
+                            .text_block
+                                .header Полный инструментарий игрока в HearthStone.
+                                .caption Подбери эффективные колоды и замены недостающих карт.
+                    .columns.small-12.medium-4
+                        .opportunity
+                            .image_block
+                                = image_tag ''
+                            .text_block
+                                .header Помощь эксперта с легендарным рангом.
+                                .caption Узнай как правильно играть своими колодами (в разработке).
+                    .columns.small-12.medium-4
+                        .opportunity
+                            .image_block
+                                = image_tag ''
+                            .text_block
+                                .header Актуальные новости мира HearthStone.
+                                .caption Будь в курсе текущих актуальных колод.
+    .row
+        .columns.small-12.medium-10.small-centered
+            .page_block.top_decks
+                .row
+                    h4 Топ-4 лучших колод в стандартном режиме
+                    - @top_decks.each do |deck|
+                        .columns.small-12.medium-3
+                            .top_deck
+                                .image_block
+                                    = image_tag ''
+                                .text_block
+                                    .header= deck.name
+                                    .caption= link_to 'Обзор колоды', deck
+    .row
+        .columns.small-12.medium-10.small-centered
+            .page_block.all_news
+                .row
+                    h4 Последние новости проекта
+                    - @news.each do |article|
+                        .columns.small-12.medium-6
+                            .news
+                                p.header= article.label
+                                p.date= article.created_at.strftime("%Y.%m.%d")
+                                p.caption= article.caption
+                                - unless article.link.nil? || article.link.empty?
+                                    p= link_to 'Подробности...', article.link, class: 'button', target: '_blank'

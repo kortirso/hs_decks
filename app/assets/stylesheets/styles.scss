@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Ubuntu';
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500');
 
 @mixin before-after-mixin {
     &:before, &:after {
@@ -29,6 +29,7 @@
 * {
     font-family: 'Ubuntu', sans-serif !important;
     font-size: 16px;
+    font-weight: 300;
 }
 
 html, body {
@@ -56,7 +57,7 @@ body {
         background-position: center;
         .shadow {
             position: fixed;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             top: 0;
             left: 0;
             width: 100%;
@@ -104,7 +105,7 @@ nav {
 }
 
 #index_caption {
-    color: #FFF;
+    color: #DDD;
     padding: 20px;
 }
 
@@ -587,20 +588,89 @@ nav {
     }
 }
 
-.news {
-    background: #FFF;
+.page_block {
+    margin: 15px 0;
+    h4 {
+        text-align: center;
+        margin: 20px 0;
+    }
+}
+
+.all_news {
+    .news {
+        background: rgba(0, 0, 0, 0.75);
+        padding: 20px;
+        color: #EEE;
+        min-height: 230px;
+        margin-bottom: 20px;
+        p, a {
+            margin-bottom: 5px;
+        }
+        .header {
+            font-weight: 500;
+        }
+        .date {
+            font-style: italic;
+            font-size: 14px;
+            color: #AAA;
+        }
+        .caption {
+            min-height: 75px;
+            font-weight: 300;
+            color: #FFF;
+        }
+    }
+}
+
+.about_block {
+    h4 {
+        font-size: 30px;
+    }
+    p {
+        text-align: center;
+    }
+    .first {
+        font-size: 26px;
+        margin-bottom: 0;
+    }
+    .second {
+        color: #EEE;
+        text-shadow: 0 0 5px #FFF;
+        font-size: 26px;
+    }
+    .third {
+        font-size: 18px;
+    }
+}
+
+.works, .opportunity, .top_deck {
     padding: 20px;
-    color: #000;
-    min-height: 230px;
-    margin-bottom: 20px;
-    p, a {
-        margin-bottom: 5px;
+    .image_block {
+        height: 150px;
+        padding: 10px;
+        img {
+            height: 100%;
+            width: 130px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 1px solid #FFF;
+            overflow: hidden;
+            display: block;
+        }
     }
-    .header {
-        font-weight: 600;
-    }
-    .caption {
-        min-height: 75px;
+    .text_block {
+        .header {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 400;
+        }
+        .caption {
+            text-align: center;
+            margin-top: 5px;
+            a {
+                text-decoration: underline;
+            }
+        }
     }
 }
 

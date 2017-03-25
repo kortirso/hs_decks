@@ -3,7 +3,8 @@ class PagesController < ApplicationController
     before_action :get_access, except: [:index, :decks, :about]
 
     def index
-        @news = News.order(id: :desc)
+        @news = News.order(id: :desc).limit(4)
+        @top_decks = Deck.order(power: :asc).limit(4)
     end
 
     def decks

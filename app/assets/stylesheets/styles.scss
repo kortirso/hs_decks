@@ -74,15 +74,32 @@ body {
 }
 
 nav {
-    position: relative;
-    padding: 10px;
-    .buttons {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        a {
-            margin-left: 10px;
+    .top-bar {
+        background: rgba(0, 0, 0, 0.85);
+        ul {
+            background: none;
+            li {
+                a {
+                    color: #FFF;
+                    &:after {
+                        border-color: #FFF transparent transparent !important;
+                    }
+                }
+            }
+            &.submenu {
+                background: rgba(0, 0, 0, 0.85);
+            }
         }
+    }
+}
+
+@media screen and (min-width: 900px) {
+    nav .top-bar {
+        display: block !important;
+    }
+
+    nav .title-bar {
+        display: none !important;
     }
 }
 

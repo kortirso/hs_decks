@@ -49,7 +49,11 @@ class Card < ApplicationRecord
     end
 
     def wild_format?
-        formats == 'wild'
+        formats == 'wild' || in_hall_of_fame?
+    end
+
+    def in_hall_of_fame?
+        hall_of_fame
     end
 
     def is_crafted?

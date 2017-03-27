@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127074412) do
+ActiveRecord::Schema.define(version: 20170327054840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170127074412) do
     t.integer  "usable",          default: 0
     t.integer  "multi_class_id"
     t.string   "multiClassGroup"
+    t.boolean  "hall_of_fame",    default: false
     t.index ["collection_id"], name: "index_cards_on_collection_id", using: :btree
     t.index ["multi_class_id"], name: "index_cards_on_multi_class_id", using: :btree
     t.index ["player_id"], name: "index_cards_on_player_id", using: :btree

@@ -22,7 +22,6 @@
                     = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
         .tabs-content#tabs-content data-tabs-content='cards-tabs'
             = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
-                = submit_tag t('buttons.save'), class: 'button'
                 - ids = @packs.collect { |elem| elem[0] }
                 - classes_list.each_with_index do |name, index|
                     .tabs-panel class="class_#{name} #{'is-active' if index.zero?}" id="cards#{index}"

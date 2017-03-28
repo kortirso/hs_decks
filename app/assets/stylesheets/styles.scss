@@ -110,10 +110,13 @@ nav {
 }
 
 .page_inner {
-    background: #FFF;
-    color: #000;
+    //background: #FFF;
+    color: #DDD;
     margin: 20px;
     padding: 20px;
+    &.with_background {
+        background: rgba(0, 0, 0, 0.75);
+    }
     @include before-after-mixin;
 }
 
@@ -139,12 +142,18 @@ nav {
     .button {
         margin: 0 5px 0 0;
     }
+    #free_existed {
+        margin-top: -7px;
+    }
 }
 
 #new_deck {
-    background: #FFF;
-    padding: 0;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 10px;
     margin: 0;
+    #new_deck {
+        background: none;
+    }
     input, select {
         font-size: 0.8rem;
         height: 2.5rem;
@@ -172,7 +181,7 @@ nav {
 }
 
 #decks, #deck, #check, #new_deck {
-    background: #FFF;
+    //background: #FFF;
     @include before-after-mixin;
 }
 
@@ -574,9 +583,11 @@ nav {
 }
 
 .unusable_cards {
+    background: rgba(0, 0, 0, 0.75);
     .card {
         float: left;
         width: 12.5%;
+        background: none;
     }
 }
 
@@ -768,8 +779,11 @@ nav {
     }
     .position {
         padding-top: 10px;
-        border-bottom: 1px solid #000;
+        border-bottom: 1px solid #FFF;
         .exchanges {
+            label {
+                color: #FFF;
+            }
             padding: 10px 0;
             p {
                 margin: 0;
@@ -836,13 +850,53 @@ nav {
 trix-editor {
     min-height: 150px !important;
     margin-bottom: 10px !important;
+    background: #FFF;
+    color: #000;
+}
+
+#new_deck {
+    trix-toolbar {
+        .button_group {
+            button {
+                background: #FFF;
+            }
+        }
+    }
 }
 
 select {
-    background: none;
+    background: #FFF;
 }
 
 .card {
     border: none;
     overflow: visible;
+}
+
+table {
+    background: rgba(0, 0, 0, 0.75);
+    thead, tbody {
+        background: none;
+        color: #DDD;
+    }
+    tbody tr:nth-child(even) {
+        background: none;
+    }
+}
+
+.tabs, .tabs-content {
+    background: rgba(0, 0, 0, 0.75);
+    border: none;
+}
+
+.tabs {
+    padding: 10px;
+}
+
+.tabs-content {
+    padding: 0 10px 10px;
+}
+
+.tabs-panel {
+    padding: 0;
 }

@@ -1,5 +1,5 @@
 - provide(:title, 'Deck Hunter | Shifts Builder Page')
-.page_inner
+.page_inner.with_background
     #lines
         = simple_form_for :shifts, url: create_shift_shifts_path, method: :post, remote: true do |f|
             h4 Замены для определенных карт

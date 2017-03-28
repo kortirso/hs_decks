@@ -1,5 +1,5 @@
 - provide(:title, 'Deck Hunter | Exchanges Page')
-.page_inner
+.page_inner.with_background
     #lines
         = simple_form_for :lines, url: lines_path, method: :post, remote: true do |f|
             h4 Очередь замен для колоды

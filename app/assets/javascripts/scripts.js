@@ -49,10 +49,9 @@ $(function() {
 
     $('#cards_list').on('click', '.remove_card', function(e) {
         card_class = $(this).closest('.card').attr('class').split(' ').pop();
-
         object = $('.right_side').find('.' + card_class + ' label');
-        console.log(object);
 
+        amount = parseInt($('#card_amount').html());
         if ($(object).hasClass('double')) {
             $('#card_amount').html(amount - 2);
             $(object).mana_curve(-2);

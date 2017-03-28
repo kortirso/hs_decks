@@ -47,6 +47,27 @@ $(function() {
         $('.card.Kabal').show();
     }
 
+    $('#cards_list').on('click', '.remove_card', function(e) {
+        card_class = $(this).closest('.card').attr('class').split(' ').pop();
+
+        object = $('.right_side').find('.' + card_class + ' label');
+        console.log(object);
+
+        if ($(object).hasClass('double')) {
+            $('#card_amount').html(amount - 2);
+            $(object).mana_curve(-2);
+            $(object).removeClass('double').addClass('none');
+        }
+        else if ($(object).hasClass('single')) {
+            $('#card_amount').html(amount - 1);
+            $(object).mana_curve(-1);
+            $(object).removeClass('single').addClass('none');
+        }
+
+        $(object).closest('div').children('input').val(0);
+        $('#cards_list .' + card_class.split(' ').pop()).remove();
+    });
+
     $('#new-tabs-content .costs label').click(function(e) {
         e.preventDefault();
         amount = parseInt($('#card_amount').html());
@@ -59,6 +80,7 @@ $(function() {
                 $(this).mana_curve(1);
 
                 cloned = $(this).closest('.card').clone();
+                $(cloned).append('<span class="remove_card">x</span>');
                 current_mana_cost = parseInt($(cloned).attr('class').split(' ')[1].split('_')[1]);
                 current_name = $(cloned).data('card-name');
                 if($('#cards_list .card').size() == 0) $('#cards_list').append(cloned);

@@ -1,8 +1,5 @@
 - provide(:title, 'Deck Hunter | Main Page')
 #index_caption
-    /h3= t('general.index.head')
-    /h5= t('general.index.version')
-    /p= t('general.index.caption')
     .row
         .columns.small-12.medium-8.small-centered
             .page_block.about_block
@@ -20,21 +17,21 @@
                             .image_block
                                 = image_tag ''
                             .text_block
-                                .header Инструменты для хранения коллекции.
+                                .header Инструменты для хранения коллекции
                                 .caption Сохраните свои карты один раз, а затем только обновляйте коллекцию.
                     .columns.small-12.medium-4
                         .works
                             .image_block
                                 = image_tag ''
                             .text_block
-                                .header Выбор параметров для анализа карт.
+                                .header Выбор параметров для анализа карт
                                 .caption Определите, какой результат вы хотите получить.
                     .columns.small-12.medium-4
                         .works
                             .image_block
                                 = image_tag ''
                             .text_block
-                                .header Получение результатов подбора колод.
+                                .header Получение результатов подбора колод
                                 .caption Ознакомьтесь с результатами автоматического анализа ваших карт.
     .row
         .columns.small-12.medium-10.small-centered
@@ -46,21 +43,21 @@
                             .image_block
                                 = image_tag ''
                             .text_block
-                                .header Полный инструментарий игрока в HearthStone.
+                                .header Полный инструментарий игрока в HearthStone
                                 .caption Подбери эффективные колоды и замены недостающих карт.
                     .columns.small-12.medium-4
                         .opportunity
                             .image_block
                                 = image_tag ''
                             .text_block
-                                .header Помощь эксперта с легендарным рангом.
+                                .header Помощь эксперта с легендарным рангом
                                 .caption Узнай как правильно играть своими колодами (в разработке).
                     .columns.small-12.medium-4
                         .opportunity
                             .image_block
                                 = image_tag ''
                             .text_block
-                                .header Актуальные новости мира HearthStone.
+                                .header Актуальные новости мира HearthStone
                                 .caption Будь в курсе текущих актуальных колод.
     .row
         .columns.small-12.medium-10.small-centered
@@ -69,9 +66,9 @@
                     h4 Топ-4 лучших колод в стандартном режиме
                     - @top_decks.each do |deck|
                         .columns.small-12.medium-3
-                            .top_deck
+                            .top_deck class="#{deck.playerClass}"
                                 .image_block
-                                    = image_tag ''
+                                    = image_tag "heroes/#{deck.playerClass}_Big.png"
                                 .text_block
                                     .header= deck.name
                                     .caption= link_to 'Обзор колоды', deck

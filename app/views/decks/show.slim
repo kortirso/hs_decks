@@ -5,29 +5,27 @@
             .info_block
                 h4= t('deck.h4_3')
                 p
+                    = "#{t('general.tabs_3.power')} - "
+                    = @deck.power
+                p
+                    = t('deck.p_4')
+                    = @deck.price
+                p
                     = t('deck.p_1')
                     = @deck.formats
                 p
                     = t('deck.p_6')
                     = @deck.style.locale_name(@locale) unless @deck.style_id.nil?
                 p
-                    = "#{t('general.tabs_3.power')} - "
-                    = @deck.power
-                p
                     = t('deck.p_3')
                     = @deck.author
-                p
-                    = t('deck.p_4')
-                    = @deck.price
+                p= "Эксперт - #{@deck.user.username}"
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
-                p= t('deck.p_2')
                 = raw(@deck.caption)
         .right_side
             h4
                 = t('deck.h4_1')
                 = @deck.name
-                = t('deck.h4_2')
-                =@deck.user.username
             p= t('deck.p_5')
             = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
                 .cards
@@ -39,7 +37,7 @@
                             = check_box_tag card.id, value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
                             = label_tag card.id, '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background-image: url('/cards/#{@locale}/#{card.cardId}.png');"
                 - if current_user
-                    p= submit_tag t('buttons.save'), class: 'button'
+                    = submit_tag t('buttons.save'), class: 'button'
             .mulligans
                 h4 Муллиганы против различных Героев
                 - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)

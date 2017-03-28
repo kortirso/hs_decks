@@ -4,13 +4,12 @@
         h4
             = t('check.h4_1')
             = @deck.name
-            = t('check.h4_2')
-            = @deck.user.username
         .info_block
             .left_side
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
             .right_side
                 p WARNING! TEST MODE FOR SUBSTITUTION DECK
+                p= "Сила колоды - #{@deck.power}"
                 p
                     = t('check.p_1')
                     = "#{@check.success}/30"
@@ -20,6 +19,7 @@
                 p
                     = t('check.p_4')
                     = @deck.author
+                p= "Эксперт - #{@deck.user.username}"
                 p
                     = t('check.p_5')
                     = @deck.price

@@ -29,49 +29,9 @@ if About.all.size.zero?
     Fix.create about: about_4, body_en: 'Bug fixing.', body_ru: 'Исправление ошибок.'
 end
 
-if Collection.all.size.zero?
-    Card.destroy_all
-    Deck.destroy_all
-    Player.destroy_all
-    MultiClass.destroy_all
-
-    collections = []
-    result = Message.new.get_request
-
-    [['Priest', 'Жрец'], ['Warrior', 'Воин'], ['Warlock', 'Чернокнижник'], ['Mage', 'Маг'], ['Druid', 'Друид'], ['Hunter', 'Охотник'], ['Shaman', 'Шаман'], ['Paladin', 'Паладин'], ['Rogue', 'Разбойник'], ['Neutral', 'Нейтральный']].each do |player|
-        Player.create name_en: player[0], name_ru: player[1]
-    end
-    Player.find_by(name_en: 'Neutral').update(playable: false)
-
-    [['Grimy Goons', 'Ржавые Бугаи', ['Warrior', 'Hunter', 'Paladin']], ['Jade Lotus', 'Нефритовый Лотус', ['Druid', 'Shaman', 'Rogue']], ['Kabal', 'Кабал', ['Priest', 'Warlock', 'Mage']]].each do |multi|
-        multi_class = MultiClass.create name_en: multi[0], name_ru: multi[1]
-        multi[2].each { |m| Player.find_by(name_en: m).update(multi_class_id: multi_class.id) }
-    end
-
-    players = Player.all.to_a.collect { |p| [p.id, p.name_en] }.flatten
-    multies = MultiClass.all.to_a.collect { |p| [p.id, p.name_en] }.flatten
-
-    [['Basic', 'Базовый набор'], ['Classic', 'Классический набор'], ['Promo', 'Награды'], ['Reward', 'Призовые карты'], ['Naxxramas', 'Наксрамас'], ['Goblins vs Gnomes', 'Гоблины и Гномы'], ['Blackrock Mountain', 'Черная Гора'], ['The Grand Tournament', 'Большой Турнир'], ['The League of Explorers', 'Лига Исследователей'], ['Whispers of the Old Gods', 'Древние Боги'], ['Karazhan', 'Каражан'], ['Mean Streets of Gadgetzan', 'Злачный город Прибамбасск']].each do |collection_name|
-        collection = Collection.new name_en: collection_name[0], name_ru: collection_name[1]
-        result[collection_name[0]].each do |card|
-            player_id = players[players.index(card['playerClass']) - 1]
-            multi_class_id = card['multiClassGroup'] ? multies[multies.index(card['multiClassGroup']) - 1] : nil
-            collection.cards.build cardId: card['cardId'], name_en: card['name'], type: card['type'], cost: card['cost'], rarity: card['rarity'], image_en: card['img'], player_id: player_id, multi_class_id: multi_class_id, playerClass: card['playerClass'], multiClassGroup: card['multiClassGroup']
-        end
-        collections << collection
-    end
-    Collection.import collections, recursive: true
-
-    %w(Promo Reward Naxxramas Goblins\ vs\ Gnomes).each { |collection_name| Collection.find_by(name_en: collection_name).update(formats: 'wild') }
-    %w(Naxxramas Blackrock\ Mountain The\ League\ of\ Explorers Karazhan).each { |collection_name| Collection.find_by(name_en: collection_name).update(adventure: true) }
+unless Collection.all.size.zero?
     Card.check_cards_format
     Deck.check_format
-end
-
-if Style.all.size.zero?
-    [['Aggro', 'Агро'], ['Control', 'Контроль'], ['Midrange', 'Мидрейндж'], ['Tempo', 'Темпо'], ['Combo', 'Комбо'], ['Token', 'Токен'], ['Ramp', 'Рамп'], ['Fatique', 'Фатиг'], ['Mill', 'Милл']].each do |style|
-        Style.create name_en: style[0], name_ru: style[1]
-    end
 end
 
 if Shift.all.size.zero?

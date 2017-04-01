@@ -18,4 +18,13 @@ class Collection < ApplicationRecord
     def is_adventure?
         adventure
     end
+
+    def set_as_wild
+        self.update(formats: 'wild')
+        self.cards.update_all(formats: 'wild')
+    end
+
+    def set_as_adventure
+        self.update(adventure: true)
+    end
 end

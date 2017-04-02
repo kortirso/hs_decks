@@ -20,8 +20,10 @@ nav
                         li= link_to t('nav.expert_decks'), expert_decks_path
                         - if current_user
                             li= link_to t('nav.analyze'), checks_path
+        .top-bar-right
+            ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=""
                 li
-                    = link_to 'Личный кабинет', '#'
+                    = link_to 'Учетная запись', '#'
                     ul.menu
                         - if current_user
                             li= link_to t('nav.personal'), personal_path

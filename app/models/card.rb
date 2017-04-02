@@ -49,7 +49,7 @@ class Card < ApplicationRecord
     end
 
     def wild_format?
-        formats == 'wild' || in_hall_of_fame?
+        formats == 'wild'
     end
 
     def in_hall_of_fame?
@@ -62,5 +62,9 @@ class Card < ApplicationRecord
 
     def is_legendary?
         rarity == 'Legendary'
+    end
+
+    def put_in_hall_of_fame
+        self.update(hall_of_fame: true, formats: 'wild')
     end
 end

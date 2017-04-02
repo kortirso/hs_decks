@@ -1,3 +1,23 @@
 [
-    {"cardId":"UNG_001","name_en":"Изучение Ун'Горо", "name_ru":"Изучение Ун'Горо","type":"Spell","cost":2,"playerClass":"Warrior","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false}
+    {"cardId":"UNG_001","name_en":"Explore Un'Goro","name_ru":"Изучение Ун'Горо","type":"Spell","cost":2,"playerClass":"Warrior","rarity":"Epic","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_002","name_en":"Direhorn Hatchling","name_ru":"Детеныш дикорога","type":"Minion","cost":5,"playerClass":"Warrior","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_003","name_en":"Molten Blade","name_ru":"Клинок из лавы","type":"Weapon","cost":1,"playerClass":"Warrior","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_004","name_en":"Sudden Genesis","name_ru":"Неожиданный генезис","type":"Spell","cost":5,"playerClass":"Warrior","rarity":"Epic","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_005","name_en":"Cornered Sentry","name_ru":"Разведчица в беде","type":"Minion","cost":2,"playerClass":"Warrior","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_006","name_en":"Fire Plume's Heart","name_ru":"Сердце Пламенного хребта","type":"Spell","cost":1,"playerClass":"Warrior","rarity":"Legendary","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_007","name_en":"Tar Lord","name_ru":"Смоляной владыка","type":"Minion","cost":7,"playerClass":"Warrior","rarity":"Common","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_008","name_en":"King Mosh","name_ru":"Король Мош","type":"Minion","cost":9,"playerClass":"Warrior","rarity":"Legendary","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_009","name_en":"Iron Hide","name_ru":"Железный заслон","type":"Spell","cost":1,"playerClass":"Warrior","rarity":"Common","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_010","name_en":"Ornery Direhorn","name_ru":"Злобный дикорог","type":"Minion","cost":6,"playerClass":"Warrior","rarity":"Common","formats":"standard","craft":true,"hall_of_fame":false},
+
+    {"cardId":"UNG_011","name_en":"Elder Longneck", "name_ru":"Старый длинношей","type":"Minion","cost":3,"playerClass":"Druid","rarity":"Common","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_012","name_en":"Living Mana", "name_ru":"Живая мана","type":"Spell","cost":5,"playerClass":"Druid","rarity":"Epic","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_013","name_en":"Earthen Scales", "name_ru":"Земляная чешуя","type":"Spell","cost":1,"playerClass":"Druid","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_014","name_en":"Verdant Longneck", "name_ru":"Зеленое длинношеее","type":"Minion","cost":5,"playerClass":"Druid","rarity":"Common","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_015","name_en":"Tortollan Forager", "name_ru":"Тортольский фуражир","type":"Minion","cost":2,"playerClass":"Druid","rarity":"Common","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_016","name_en":"Tyrantus", "name_ru":"Тирантус","type":"Minion","cost":10,"playerClass":"Druid","rarity":"Legendary","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_017","name_en":"Shellshifter", "name_ru":"Оборотень в панцире","type":"Minion","cost":4,"playerClass":"Druid","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_018","name_en":"Jungle Giants", "name_ru":"Гиганты джунглей","type":"Spell","cost":1,"playerClass":"Druid","rarity":"Legendary","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_019","name_en":"Giant Anaconda", "name_ru":"Гигантская анаконда","type":"Minion","cost":7,"playerClass":"Druid","rarity":"Epic","formats":"standard","craft":true,"hall_of_fame":false},
+    {"cardId":"UNG_020","name_en":"Evolving Spores", "name_ru":"Эволюционировавшие споры","type":"Spell","cost":4,"playerClass":"Druid","rarity":"Rare","formats":"standard","craft":true,"hall_of_fame":false},
 ]

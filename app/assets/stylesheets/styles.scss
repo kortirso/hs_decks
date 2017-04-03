@@ -110,12 +110,12 @@ nav {
 }
 
 .page_inner {
-    //background: #FFF;
     color: #DDD;
     margin: 20px;
-    padding: 20px;
+    padding: 0;
     &.with_background {
         background: rgba(0, 0, 0, 0.75);
+        padding: 10px;
     }
     @include before-after-mixin;
 }

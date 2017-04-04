@@ -3,7 +3,7 @@
     h4= t('pages.checks.main.head')
     p= t('pages.checks.main.p_1')
     p= t('pages.checks.main.p_2')
-    = form_tag({ controller: 'checks', action: 'create' }, method: 'post', remote: true) do
+    = form_tag({ controller: 'checks', action: 'create' }, method: 'post') do
         .columns.small-3= text_field_tag :success, nil, placeholder: t('pages.checks.main.p_3')
         .columns.small-3= text_field_tag :dust, nil, placeholder: t('pages.checks.main.p_4')
         .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: t('pages.checks.main.p_6')

@@ -18,7 +18,7 @@ class ChecksController < ApplicationController
 
     def create
         SearchEngine.new({ user: current_user, params: check_params }).build
-        head :ok
+        redirect_to checks_path
     end
 
     private

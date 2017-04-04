@@ -16,7 +16,7 @@ class SearchEngine
             @deck_cards = deck.positions.collect_ids_with_rarity_as_hash
             if verify_deck
                 checks.push check.success
-                ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), player: check.deck.player.locale_name(I18n.locale)
+                #ActionCable.server.broadcast "user_#{check.user_id}_channel", check: check, deck: check.deck, order: checks.sort.reverse.index(check.success), username: check.deck.user.username, size: checks.size, button_1: I18n.t('buttons.view_check'), player: check.deck.player.locale_name(I18n.locale)
             end
         end
     end

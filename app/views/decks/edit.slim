@@ -1,36 +1,35 @@
-- provide(:title, 'Deck Hunter | Edit Deck Page')
+- provide(:title, "Deck Hunter | #{t('pages.new_deck.edit.head')}")
 .page_inner
     #new_deck
         - classes_list = [@deck.playerClass, 'Neutral']
         = form_for @deck, controller: 'decks', action: 'update', method: 'patch' do |f|
             - ids = @positions.collect { |elem| elem[0] }
             .left_side
-                h4= t('edit_deck.head')
-                p= t('new_deck.p_1')
+                h4= t('pages.new_deck.edit.head')
                 p
-                    = t('new_deck.p_2')
-                    span#card_amount= '30'
+                    = t('pages.new_deck.new.p_1')
+                    span#card_amount= @deck.positions.sum(:amount)
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
                 #cards_list                        
                     = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
                 = f.submit t('buttons.update'), class: 'button'
             .right_side
-                p= t('new_deck.change_click')
-                .columns.small-6= f.text_field :name, placeholder: t('new_deck.deck_name'), value: @deck.name
+                p= t('pages.new_deck.new.change_click')
+                .columns.small-6= f.text_field :name, placeholder: t('pages.new_deck.new.deck_name'), value: @deck.name
                 .columns.small-3= f.text_field :playerClass, value: @deck.playerClass, disabled: true
                 .columns.small-3= f.text_field :formats, value: @deck.formats, disabled: true
-                .columns.small-6= f.text_field :author, placeholder: t('new_deck.author'), value: @deck.author
-                .columns.small-6= f.text_field :link, placeholder: t('new_deck.link'), value: @deck.link
-                .columns.small-2= f.text_field :power, placeholder: t('new_deck.deck_power'), value: @deck.power
-                .columns.small-3= f.select :style, options_for_select(@styles, (@deck.style_id.nil? ? nil : @deck.style.locale_name(@locale))), prompt: t('general.tabs_4.p_5')
-                .columns.small-3= f.text_field :reno_type, value: @deck.is_reno_type? ? t('new_deck.reno_type') : t('new_deck.typical'), disabled: true
-                .columns.small-12= f.trix_editor :caption, value: @deck.caption, placeholder: t('new_deck.caption')
+                .columns.small-6= f.text_field :author, placeholder: t('pages.check.main.p_2'), value: @deck.author
+                .columns.small-6= f.text_field :link, placeholder: t('pages.new_deck.new.link'), value: @deck.link
+                .columns.small-2= f.text_field :power, placeholder: t('pages.new_deck.new.deck_power'), value: @deck.power
+                .columns.small-3= f.select :style, options_for_select(@styles, (@deck.style_id.nil? ? nil : @deck.style.locale_name(@locale))), prompt: t('pages.collection.main.all')
+                .columns.small-3= f.text_field :reno_type, value: @deck.is_reno_type? ? t('pages.new_deck.new.reno_type') : t('pages.new_deck.new.typical'), disabled: true
+                .columns.small-12= f.trix_editor :caption, value: @deck.caption, placeholder: t('pages.new_deck.new.caption')
                 .clearfix
                 #filters
                     span
-                        strong= t('general.tabs_2.filters')
-                    span= t('general.tabs_2.mana_cost')
-                    span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('general.all')
+                        strong= t('pages.collection.main.filters')
+                    span= t('pages.collection.main.mana_cost')
+                    span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('pages.collection.main.all')
                 ul#new-cards-tabs.tabs data-tabs=''
                     - classes_list.each_with_index do |name, index|
                         li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"

@@ -1,4 +1,3 @@
----
 en:
   buttons:
     save: Save
@@ -8,6 +7,11 @@ en:
     upload: Download
     view_check: Check
     check_decks: Check the deck
+    new_deck: New deck
+    edit: Edit
+    exchanges: Exchanges
+    delete: Delete
+    update: Update
   nav:
     main_page: Main
     deck_builder: Designer decks
@@ -102,6 +106,21 @@ en:
         p: Deck
         caption: By clicking on the square with the number of cards in the deck, you can specify for these cards their number in your collection.
         mulligans: Mulligans against different Heroes
+    new_deck:
+      main:
+        header: From this page, you can view your decks, edit them, or create a new one.
+        ex_const: Deck constructor
+      new:
+        head: New deck
+        p_1: Cards amount in the deck - 
+        change_click: Нажмите на карту, чтобы изменить выбранное количество от 0 до 2
+        deck_name: Deck's name
+        link: Link
+        caption: Caption
+        reno_type: Reno deck
+        typical: Typical deck
+      edit:
+        head: Edit deck
     about:
       main:
         p_1: The system is designed to automatically determine the best expert decks to play in HearthStone based on existing user cards and also to automatically determine the best replacements for missing cards.

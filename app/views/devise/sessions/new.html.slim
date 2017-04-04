@@ -1,10 +1,10 @@
 - provide(:title, 'Deck Hunter | Login Page')
-.page_inner
+.page_inner.with_background
     #auth
         .columns.medium-8
-            h2= t('auth.auth')
-            = simple_form_for(User.new, as: :user, url: session_path(:user)) do |f|
-                .columns.medium-7= f.input :email, required: true, autofocus: true, label: 'Email'
-                .columns.medium-7= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable), label: t('auth.pass')
+            h2= t('modals.auth')
+            = simple_form_for User.new, as: :user, url: session_path(:user) do |f|
+                .columns.medium-7= f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email'
+                .columns.medium-7= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable), label: false, placeholder: t('modals.pass')
                 .clearfix
-                = f.button :submit, t('auth.enter'), class: 'button', id: 'authorization'
+                = f.button :submit, t('modals.enter'), class: 'button', id: 'authorization'

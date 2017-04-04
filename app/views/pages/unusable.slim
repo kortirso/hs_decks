@@ -1,7 +1,7 @@
-- provide(:title, 'Deck Hunter | Unusable Cards')
+- provide(:title, "Deck Hunter | #{t('pages.unusable.title')}")
 .page_inner
-    h4 Неиспользуемые карты
-    p На этой странице вы видите карты, которые есть в вашей коллекции, но они не используются ни в одной колоде. Поэтому вы можете распылить их и, на полученную пыль, скрафтить необходимые вам карты для использования какой-либо экспертной колоды.
+    h4= t('pages.unusable.title')
+    p= t('pages.unusable.main.p')
     .unusable_cards.row
         - @unusable_cards.each do |card|
             .card

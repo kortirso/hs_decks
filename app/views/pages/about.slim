@@ -1,7 +1,7 @@
-- provide(:title, 'Deck Hunter | About Page')
+- provide(:title, "Deck Hunter | #{t('nav.about')}")
 .page_inner
-    h4= t('general.tabs_5.head')
-    p= t('general.tabs_5.p_1')
-    p= t('general.tabs_5.p_2')
-    h4= t('general.tabs_5.logs')
+    h4 Deck Hunter
+    p= t('pages.about.main.p_1')
+    p= t('pages.about.main.p_2')
+    h4= t('pages.about.main.logs')
     ul= react_component('AboutBox', locale: @locale)

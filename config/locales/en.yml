@@ -1,130 +1,139 @@
+---
 en:
-  nav:
-    main_page: 'Main Page'
-    deck_builder: 'Deck Builder'
-    collection: 'Collection'
-    unusable: 'Unusable cards'
-    expert_decks: 'Expert Decks'
-    analyze: 'Card Analyze'
-    about: 'About System'
-    login: 'Login'
-    logout: 'Logout'
-    signup: 'SignIn'
-    personal: 'Personal Page'
   buttons:
-    save: 'Save'
-    update: 'Update'
-    set_free: 'Set all free cards as existed'
-    view_deck: 'View Deck'
-    view_check: 'View Check'
-    view: 'View'
-    edit: 'Edit'
-    delete: 'Delete'
-    new_deck: 'New Deck'
-    main_page: 'Main Page'
-    check_decks: 'Check Decks'
-    submit: 'Submit'
-    subscribe: 'Subscribe'
-    unsubscribe: 'Unsubscribe'
-    exchanges: 'Exchanges'
-    upload: 'Upload'
-  auth:
-    auth: 'Authorization'
-    reg: 'Registration'
-    pass: 'Password'
-    username: 'Username'
-    confirm: 'Password confirmation'
-    enter: 'Sign In'
-    minimal: 'Minimal password length - 6 symbols'
-  general:
-    all: 'All'
+    save: Save
+    submit: Apply
+    subscribe: Subscribe
+    unsubscribe: Unsubscribe
+    upload: Download
+    view_check: Check
+    check_decks: Check the deck
+  nav:
+    main_page: Main
+    deck_builder: Designer decks
+    card_collection: Collection of cards
+    collection: Collection
+    unusable: Spray
+    expert_decks: Expert decks
+    decks: Decks
+    analyze: Card analysis
+    account: Account
+    personal: Personal page
+    about: About the system
+    logout: Logout
+    login: Singin
+    signup: Signup
+    menu: Menu
+  modals:
+    auth: Authorization
+    reg: Check
+    pass: Password
+    username: Nickname
+    confirm: Confirm password
+    enter: Log
+    minimal: Minimum password length - 6 characters
+    exchange:
+      h1: Replace saved!
+      p: To show the changes - reload the page.
+    save:
+      h1: Card saved!
+      p: Great, your collection card updated.
+    upload:
+      h1: The download is started!
+      p: When the download is card collection is complete, your mail will receive
+        the message.
+  pages:
     index:
-      head: 'Deck Hunter - application for the selection of the most appropriate decks for playing HearthStone on the basis of available player cards.'
-      version: 'Application version - 0.5.0 (alpha 5.0).'
-      caption: 'In this version implemented basic functions to preserve the collection of cards and to analyze the decks which are available after registration. Registration (confirmation is not required) is necessary for the preservation of the collection of user cards.'
-    tabs_2:
-      tab: 'Cards collection'
-      head: 'At this section you can choose cards from your collection.'
-      p_1: 'Click to card to change amount from 0 to 2 and then click to Save.'
-      filters: 'Filters'
-      mana_cost: 'Mana cost'
-      collection: 'Collection'
-      existed: 'All class cards are existed'
-      unexisted: 'All class cards are unexisted'
-    tabs_3:
-      tab: "Expert's decks"
-      head: 'All decks existed in system.'
-      p_1: 'At this page you can view all decks of our experts.'
-      name: 'Deck name'
-      class: 'Deck class'
-      format: 'Deck format'
-      expert: 'Deck expert'
-      price: 'Deck price'
-      author: 'Author'
-      power: 'Deck power'
-      style: 'Deck style'
-    tabs_4:
-      tab: 'Decks analyzer'
-      head: 'Current cards analyzer'
-      p_1: 'At this page you can start analyze your cards and look on best decks for you.'
-      p_2: 'In addition you can select minimal success rating of decks, maximum dust amount you can spend for crafting cards, spesific player class and deck format.'
-      p_3: 'Minimal success rating in %'
-      p_4: 'Max dust needs for crafting'
-      p_5: 'Deck type'
-      p_6: 'Player Hero'
-      last_checks: 'Last deck checks'
-      success: 'Success'
-      dust: 'Needs dust to success'
-    tabs_5:
-      tab: 'About System'
-      head: 'Deck Hunter'
-      p_1: 'The system is designed to automatically determine the best expert decks for playing HearthStone based on existing user cards, as well as to automatically determine the best replacements of missing cards.'
-      p_2: 'The user only need to define the parameters of the analysis (for example, select a specific Hero class or to analyze all decks), and the system displayed the results of analysis with grouping them by success.'
-      logs: 'Realized functions'
-  check:
-    h4_1: 'At this page you can see checking your cards with deck '
-    h4_2: ' from expert '
-    p_1: 'Deck success rating - '
-    p_2: 'Deck format - '
-    p_3: 'Deck caption - '
-    p_4: 'Deck author - '
-    p_5: 'Deck price - '
-    p_6: 'You need dust to craft unexisted cards - '
-    h5_1: 'Expert deck'
-    h5_2: 'Deck with your cards'
-    h5_3: 'Deck with substitutions'
-    caption_1: 'You can craft this card for a few dust - '
-    caption_2: 'You can not craft this card, it is from adventure - '
-  deck:
-    h4_1: 'Deck '
-    h4_2: ' from expert '
-    h4_3: 'Deck Information'
-    p_1: 'Deck format - '
-    p_2: 'Deck caption: '
-    p_3: 'Deck author - '
-    p_4: 'Deck price - '
-    p_5: 'Clicking on cards amount cause changing amount of this cards in your collection.'
-    p_6: 'Deck type - '
-  new_deck:
-    head: 'New Deck creating'
-    p_1: 'Here you can see selected cards and their amount'
-    p_2: 'Cards amount in the deck - '
-    change_click: 'Click to cards to change amount from 0 to 2'
-    deck_name: 'Deck Name'
-    link: 'Link'
-    caption: 'Caption'
-    author: 'Author'
-    deck_power: 'Deck power'
-    reno_type: 'Reno deck'
-    typical: 'Typical deck'
-  edit_deck:
-    head: 'Deck Editing'
-  decks:
-    head: 'At this page you can view and edit all your decks and create new one.'
-    deck_name: "Deck's name"
-    class: 'Player Class'
-  personal:
-    head: 'Personal Page'
-    about: 'At this page you can subscribe (or unsubscribe) for news from projects about new decks or other news about HearthStone game.'
-    subscribe: 'You subscribe for getting news.'
-    unsubscribe: 'You unsubscribe for getting news.'
+      title: Home
+      main:
+        p_1: Assemble an effective deck in just 5 minutes and
+        p_2: start winning in HearthStone today.
+        p_3: DeckHunter will help to select the deck to be successful in the ladder, given existing cards and determine the best possible substitute for any missing card.
+        p_4: The site contains the best decks that you can use in the ladder. If you want to know what deck can collect, you need to log in on the website, keep the existing card in the collection and will tell you the best decks to play.
+      how_works:
+        header: How it works
+        h_1: Tools storage collection
+        p_1: Save your cards once and then only update the collection.
+        h_2: The choice of parameters for the analysis of cards
+        p_2: Determine what result you want to obtain.
+        h_3: Getting results selection of decks
+        p_3: Check out the results of the automatic analysis of your cards.
+      opportunities:
+        header: Additional features
+        h_1: A complete Toolkit player in HearthStone
+        p_1: Effective pick up the deck and replace the missing cards.
+        h_2: Expert help with the legendary rank
+        p_2: Learn how to play their decks (in development).
+        h_3: The latest news in the world of HearthStone
+        p_3: Be aware of the current relevant decks.
+      top: Top 4 decks in standard mode
+      show_deck: Overview of the deck
+      news: Latest project news
+      about_news: Details...
+    collection:
+      main:
+        p_1: Click on the card to change the number of cards from 0 to 2, then click on the Save button.
+        p_2: A collection of cards can be synchronized with a collection on the resource Hearthpwn
+        sync: Sync
+        filters: Filters
+        mana_cost: Price cards
+        all: All
+        set_free: Mark all base cards
+        existed: Have all the class cards
+        unexisted: No class cards
+    unusable:
+      title: Spray cards
+      main:
+        p: On this page you can see the cards that are in your collection, but they are not used in any deck. So you can spray them on the dust, crafted card you need to use in an expert deck.
+    decks:
+      main:
+        p: On this page you can view all the decks of our experts
+        name: Name
+        class: Hero Class
+        format: Format
+        expert: Expert
+        price: The cost
+        author: Author
+        power: The power of the deck
+        style: Type of deck
+    about:
+      main:
+        p_1: The system is designed to automatically determine the best expert decks to play in HearthStone based on existing user cards and also to automatically determine the best replacements for missing cards.
+        p_2: The user only needs to define the parameters of the analysis of decks (for example, to choose a class of Hero or analysis of all of the deck), and the system displayed the results of the analysis, grouping them according to success.
+        logs: Implemented features
+    personal:
+      main:
+        p: On this page you can subscribe (or unsubscribe) to receive updates from the project about new decks or upgrading existing decks, as well as various news about HearthStone.
+        subscribe: You are subscribed to receive news.
+        unsubscribe: You are subscribed to receive news.
+        pwn:
+          header: Download of collection cards Hearthpwn
+          p: If you have an account on the resource hearthpwn.com then you can load the cards with this resource.
+          instr: The instructions for the Hearthpwn
+          i_1: 1. Create an account on
+          i_2: 2. Install the program
+          i_3: 3. Start and Innkeeper HearthStone card collection will be synchronized with the resource Hearthpwn.
+    checks:
+      main:
+        head: Analysis of existing cards
+        p_1: On this page you can launch a scan of your card and find out what expert deck you can collect.
+        p_2: You can also specify the minimum success threshold of the selection of the deck, the maximum amount of dust, which you can spend on crafting cards, a certain class of character or format of the deck.
+        p_3: The composure of the deck
+        p_4: Available dust
+        p_5: All types of decks
+        p_6: All classes
+        last_checks: Latest audited
+        success: Discipline
+        dust: Price
+    check:
+      main:
+        header: You can study the test your cards for the deck
+        p_1: The format of the deck
+        p_2: The author of the deck
+        p_3: The cost of the deck
+        p_4: You need dust to craft the missing cards
+        h5_1: Deck expert
+        h5_2: Your cards
+        h5_3: Deck replacements
+        caption_1: You can craft this card for dust
+        caption_2: You can't craft this card, it's from adventure

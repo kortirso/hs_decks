@@ -1,40 +1,28 @@
-- provide(:title, 'Deck Hunter | Check Page')
+- provide(:title, "Deck Hunter | #{t('nav.analyze')}")
 .page_inner.with_background
     #check
         h4
-            = t('check.h4_1')
+            = t('pages.check.main.header')
             = @deck.name
         .info_block
             .left_side
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
             .right_side
                 p WARNING! TEST MODE FOR SUBSTITUTION DECK
-                p= "Сила колоды - #{@deck.power}"
-                p
-                    = t('check.p_1')
-                    = "#{@check.success}/30"
-                p
-                    = t('check.p_2')
-                    = @deck.formats
-                p
-                    = t('check.p_4')
-                    = @deck.author
-                p= "Эксперт - #{@deck.user.username}"
-                p
-                    = t('check.p_5')
-                    = @deck.price
-                p
-                    = t('check.p_6')
-                    = @check.dust
-                p
-                    = t('check.p_3')
-                    = raw(@deck.caption)
+                p= "#{t('pages.decks.main.power')} - #{@deck.power}"
+                p= "#{t('pages.checks.main.p_3')} - #{@check.success}/30"
+                p= "#{t('pages.check.main.p_1')} - #{@deck.formats}"
+                p= "#{t('pages.check.main.p_2')} - #{@deck.author}"
+                p= "#{t('pages.decks.main.expert')} - #{@deck.user.username}"
+                p= "#{t('pages.check.main.p_3')} - #{@deck.price}"
+                p= "#{t('pages.check.main.p_4')} - #{@check.dust}"
+                /p= raw(@deck.caption)
         .check
-            h5= t('check.h5_1')
+            h5= t('pages.check.main.h5_1')
             = render 'shared/check_card', cards: @deck.cards, locale: @locale, positions: @positions, decks: nil
         .check
-            h5= t('check.h5_2')
+            h5= t('pages.check.main.h5_2')
             = render 'shared/check_card', cards: @check.cards, locale: @locale, positions: @lines, decks: @positions , deck_ids: @positions.map { |elem| elem[0] }
         .check
-            h5= t('check.h5_3')
+            h5= t('pages.check.main.h5_3')
             = render 'shared/check_card', cards: @check.substitution.cards, locale: @locale, positions: @subs, decks: nil

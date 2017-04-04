@@ -59,9 +59,9 @@ class SearchEngine
     def check_crafted(deck_card, add_dust = 0)
         if deck_cards[deck_card][:crafted]
             add_dust = DustPrice.calc(deck_cards[deck_card][:rarity], deck_cards[deck_card][:amount])
-            caption = "#{I18n.t('check.caption_1')}#{add_dust}"
+            caption = "#{I18n.t('pages.check.main.caption_1')} - #{add_dust}"
         else
-            caption = "#{I18n.t('check.caption_2')}#{Card.find(deck_card).collection.locale_name(I18n.locale)}"
+            caption = "#{I18n.t('pages.check.main.caption_2')} - #{Card.find(deck_card).collection.locale_name(I18n.locale)}"
         end
         {dust: add_dust, caption: caption}
     end

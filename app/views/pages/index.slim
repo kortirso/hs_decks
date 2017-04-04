@@ -1,70 +1,70 @@
-- provide(:title, 'Deck Hunter | Main Page')
+- provide(:title, "Deck Hunter | #{t('pages.index.title')}")
 #index_caption
     .row
         .columns.small-12.medium-8.small-centered
             .page_block.about_block
                 h4 DeckHunter
-                p.first= "Собери эффективную колоду всего за 5 минут и "
-                p.second начни выигрывать в HearthStone уже сегодня.
-                p.third DeckHunter поможет быстро подобрать колоды для успешной игры в ладдере с учётом имеющихся у вас карт и определить наилучшие замены недостающих карт.
-                p На сайте собраны лучшие колоды, которые вы можете использовать в ладдере. Если вы хотите узнать, какую колоду можете собрать, то вам необходимо авторизоваться на сайте, сохранить имеющиеся карты в коллекции и система укажет наилучшие колоды для игры.
+                p.first= t('pages.index.main.p_1')
+                p.second= t('pages.index.main.p_2')
+                p.third= t('pages.index.main.p_3')
+                p= t('pages.index.main.p_4')
     .row
         .columns.small-12.medium-10.small-centered
             .page_block.how_works_block
                 .row
-                    h4 Как это работает
+                    h4= t('pages.index.how_works.header')
                     .columns.small-12.medium-4
                         .works
                             .image_block
                                 = image_tag '1.png'
                             .text_block
-                                .header Инструменты для хранения коллекции
-                                .caption Сохраните свои карты один раз, а затем только обновляйте коллекцию.
+                                .header= t('pages.index.how_works.h_1')
+                                .caption= t('pages.index.how_works.p_1')
                     .columns.small-12.medium-4
                         .works
                             .image_block
                                 = image_tag '2.png'
                             .text_block
-                                .header Выбор параметров для анализа карт
-                                .caption Определите, какой результат вы хотите получить.
+                                .header= t('pages.index.how_works.h_2')
+                                .caption= t('pages.index.how_works.p_2')
                     .columns.small-12.medium-4
                         .works
                             .image_block
                                 = image_tag '3.png'
                             .text_block
-                                .header Получение результатов подбора колод
-                                .caption Ознакомьтесь с результатами автоматического анализа ваших карт.
+                                .header= t('pages.index.how_works.h_3')
+                                .caption= t('pages.index.how_works.p_3')
     .row
         .columns.small-12.medium-10.small-centered
             .page_block.opportunities_block
                 .row
-                    h4 Дополнительные возможности
+                    h4= t('pages.index.opportunities.header')
                     .columns.small-12.medium-4
                         .opportunity
                             .image_block
                                 = image_tag '1.png'
                             .text_block
-                                .header Полный инструментарий игрока в HearthStone
-                                .caption Подбери эффективные колоды и замены недостающих карт.
+                                .header= t('pages.index.opportunities.h_1')
+                                .caption= t('pages.index.opportunities.p_1')
                     .columns.small-12.medium-4
                         .opportunity
                             .image_block
                                 = image_tag '2.png'
                             .text_block
-                                .header Помощь эксперта с легендарным рангом
-                                .caption Узнай как правильно играть своими колодами (в разработке).
+                                .header= t('pages.index.opportunities.h_2')
+                                .caption= t('pages.index.opportunities.p_2')
                     .columns.small-12.medium-4
                         .opportunity
                             .image_block
                                 = image_tag '3.png'
                             .text_block
-                                .header Актуальные новости мира HearthStone
-                                .caption Будь в курсе текущих актуальных колод.
+                                .header= t('pages.index.opportunities.h_3')
+                                .caption= t('pages.index.opportunities.p_3')
     .row
         .columns.small-12.medium-10.small-centered
             .page_block.top_decks
                 .row
-                    h4 Топ-4 лучших колод в стандартном режиме
+                    h4= t('pages.index.top')
                     - @top_decks.each do |deck|
                         .columns.small-12.medium-3
                             .top_deck class="#{deck.playerClass}"
@@ -72,12 +72,12 @@
                                     = image_tag "heroes/#{deck.playerClass}_Big.png"
                                 .text_block
                                     .header= deck.name
-                                    .caption= link_to 'Обзор колоды', deck
+                                    .caption= link_to t('pages.index.show_deck'), deck
     .row
         .columns.small-12.medium-10.small-centered
             .page_block.all_news
                 .row
-                    h4 Последние новости проекта
+                    h4= t('pages.index.news')
                     - @news.each do |article|
                         .columns.small-12.medium-6
                             .news
@@ -85,4 +85,4 @@
                                 p.date= article.created_at.strftime("%Y.%m.%d")
                                 p.caption= article.caption
                                 - unless article.link.nil? || article.link.empty?
-                                    p= link_to 'Подробности...', article.link, class: 'button', target: '_blank'
+                                    p= link_to t('pages.index.about_news'), article.link, class: 'button', target: '_blank'

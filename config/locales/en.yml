@@ -40,8 +40,7 @@ en:
       p: Great, your collection card updated.
     upload:
       h1: The download is started!
-      p: When the download is card collection is complete, your mail will receive
-        the message.
+      p: When the download is card collection is complete, your mail will receive the message.
   pages:
     index:
       title: Home
@@ -96,6 +95,13 @@ en:
         author: Author
         power: The power of the deck
         style: Type of deck
+    deck:
+      title: Deck caption
+      main:
+        header: Information
+        p: Deck
+        caption: By clicking on the square with the number of cards in the deck, you can specify for these cards their number in your collection.
+        mulligans: Mulligans against different Heroes
     about:
       main:
         p_1: The system is designed to automatically determine the best expert decks to play in HearthStone based on existing user cards and also to automatically determine the best replacements for missing cards.

@@ -16,7 +16,6 @@
                 p= "#{t('pages.decks.main.expert')} - #{@deck.user.username}"
                 p= "#{t('pages.check.main.p_3')} - #{@deck.price}"
                 p= "#{t('pages.check.main.p_4')} - #{@check.dust}"
-                /p= raw(@deck.caption)
         .check
             h5= t('pages.check.main.h5_1')
             = render 'shared/check_card', cards: @deck.cards, locale: @locale, positions: @positions, decks: nil

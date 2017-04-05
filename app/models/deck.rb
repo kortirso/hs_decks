@@ -38,6 +38,10 @@ class Deck < ApplicationRecord
         locale == 'en' ? self.name_en : self.name
     end
 
+    def locale_caption(locale)
+        locale == 'en' ? self.caption_en : self.caption
+    end
+
     def self.check_format
         all.includes(:cards).each { |deck| deck.check_deck_format }
     end

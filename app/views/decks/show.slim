@@ -11,9 +11,9 @@
                 p= "#{t('pages.check.main.p_2')} - #{@deck.author}"
                 p= "#{t('pages.decks.main.expert')} - #{@deck.user.username}"
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
-                = raw(@deck.caption)
+                = raw(@deck.locale_caption(session[:locale]))
         .right_side
-            h4= "#{t('pages.deck.main.p')} #{@deck.name}"
+            h4= "#{t('pages.deck.main.p')} #{@deck.locale_name(session[:locale])}"
             p= t('pages.deck.main.caption')
             = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
                 .cards

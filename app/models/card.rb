@@ -31,6 +31,10 @@ class Card < ApplicationRecord
     scope :crafted, -> { where craft: true }
     scope :unusable, -> { where usable: 0 }
 
+    def self.return_for_format(formats)
+        formats == 'wild' ? all : of_format('standard')
+    end
+
     def self.return_by_name(name)
         find_by(name_en: name) || find_by(name_ru: name)
     end

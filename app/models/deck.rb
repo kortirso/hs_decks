@@ -47,6 +47,15 @@ class Deck < ApplicationRecord
         reno_type
     end
 
+    def is_wild?
+        formats == 'wild'
+    end
+
+    def convert_to_standard
+        self.update(formats: 'standard')
+        self.positions.each { |p| p.destroy if p.card.wild_format? }
+    end
+
     private
 
     def build_mulligan

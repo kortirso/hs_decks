@@ -1,11 +1,11 @@
 class DecksController < ApplicationController
     before_action :get_access, except: :show
     before_action :check_user_role, except: :show
-    before_action :find_deck, only: [:show, :edit, :update, :destroy]
-    before_action :check_deck_author, only: [:edit, :update, :destroy]
+    before_action :find_deck, only: [:show, :edit, :update, :destroy, :change_format]
+    before_action :check_deck_author, only: [:edit, :update, :destroy, :change_format]
 
     def index
-        @decks = current_user.decks
+        @decks = current_user.decks.order(playerClass: :asc, formats: :asc, power: :desc)
     end
 
     def show
@@ -28,7 +28,7 @@ class DecksController < ApplicationController
     end
 
     def edit
-        @cards = DeckGetAccessableCardsQuery.query(@deck.playerClass)
+        @cards = DeckGetAccessableCardsQuery.query(@deck)
         @positions = @deck.positions.collect_ids
         @styles = Style.get_names(@locale)
     end
@@ -44,6 +44,11 @@ class DecksController < ApplicationController
     def destroy
         @deck.destroy
         redirect_to decks_path
+    end
+
+    def change_format
+        @deck.convert_to_standard
+        redirect_to edit_deck_path(@deck)
     end
 
     private

@@ -12,6 +12,7 @@ ru:
     exchanges: Замены
     delete: Удалить
     update: Обновить
+    to_std: В стандарт
   nav:
     main_page: Главная
     deck_builder: Конструктор колод

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     resources :mulligans, only: [:create, :destroy]
     resources :collections, only: [:create]
     resources :checks, only: [:index, :show, :create]
-    resources :decks
+    resources :decks do
+        post :change_format, on: :collection
+    end
 
     scope path: '/pages', controller: :pages do
         get 'index' => :index

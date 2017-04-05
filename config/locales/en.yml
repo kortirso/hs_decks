@@ -12,6 +12,7 @@ en:
     exchanges: Exchanges
     delete: Delete
     update: Update
+    to_std: To standard
   nav:
     main_page: Main
     deck_builder: Designer decks

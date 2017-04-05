@@ -63,6 +63,6 @@ class DecksController < ApplicationController
     end
 
     def deck_params
-        params.slice(:deck, :cards_list).permit!
+        params.slice(:deck, :cards).permit!
     end
 end

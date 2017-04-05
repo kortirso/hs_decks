@@ -3,7 +3,7 @@ class DeckConstructor
 
     def initialize(params, user_id, deck = nil)
         @deck_params = params[:deck].to_h
-        @cards_params = params[:cards_list].to_h
+        @cards_params = params[:cards].to_h
         @user_id = user_id
         @deck = deck
     end

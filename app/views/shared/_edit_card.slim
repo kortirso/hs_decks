@@ -6,6 +6,6 @@
         .image class="card_#{card.cardId}"
             .card-shadow
         .inner
-            = check_box_tag "cards_list[#{card.id}]", value = "#{checks ? amount : 0}", checked = checks
-            = label_tag "cards_list[#{card.id}]", card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}"
+            = check_box_tag "cards[#{card.id}]", value = "#{checks ? amount : 0}", checked = checks
+            = label_tag "cards[#{card.id}]", card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}"
         span.remove_card x

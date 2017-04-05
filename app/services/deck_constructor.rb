@@ -3,14 +3,14 @@ class DeckConstructor
 
     def initialize(params, user_id, deck = nil)
         @deck_params = params[:deck].to_h
-        @cards_params = params[:cards].to_h
+        @cards_params = params[:cards_list].to_h
         @user_id = user_id
         @deck = deck
     end
 
     def build
         return false unless good_params?
-        @deck = Deck.create name: deck_params[:name], playerClass: deck_params[:playerClass], formats: deck_params[:formats], link: deck_params[:link], caption: deck_params[:caption], author: deck_params[:author], user_id: user_id, player_id: Player.find_by(name_en: deck_params[:playerClass]).id, power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), reno_type: deck_params[:reno_type] == '1' ? false : true
+        @deck = Deck.create name: deck_params[:name], name_en: deck_params[:name_en], playerClass: deck_params[:playerClass], formats: deck_params[:formats], link: deck_params[:link], caption: deck_params[:caption], caption_en: deck_params[:caption_en], author: deck_params[:author], user_id: user_id, player_id: Player.find_by(name_en: deck_params[:playerClass]).id, power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), reno_type: deck_params[:reno_type] == '1' ? false : true
         build_positions
         update_deck
         true
@@ -18,7 +18,7 @@ class DeckConstructor
 
     def refresh
         return false unless good_params?
-        deck.update name: deck_params[:name], link: deck_params[:link], caption: deck_params[:caption], author: deck_params[:author], power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style])
+        deck.update name: deck_params[:name], name_en: deck_params[:name_en], link: deck_params[:link], caption: deck_params[:caption], caption_en: deck_params[:caption_en], author: deck_params[:author], power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style])
         update_positions
         update_deck
         true

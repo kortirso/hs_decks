@@ -3,7 +3,7 @@
     #check
         h4
             = t('pages.check.main.header')
-            = @deck.name
+            = " #{@deck.locale_name(session[:locale])}"
         .info_block
             .left_side
                 = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana

@@ -71,7 +71,7 @@
                                 .image_block
                                     = image_tag "heroes/#{deck.playerClass}_Big.png"
                                 .text_block
-                                    .header= deck.name
+                                    .header= deck.locale_name(session[:locale])
                                     .caption= link_to t('pages.index.show_deck'), deck
     .row
         .columns.small-12.medium-10.small-centered

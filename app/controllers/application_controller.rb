@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
+    protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :set_locale
-    protect_from_forgery with: :exception
 
     rescue_from ActionController::RoutingError, with: :render_404
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
@@ -29,7 +29,12 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-        session[:locale] == 'ru' || session[:locale] == 'en' ? I18n.locale = session[:locale] : I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+        if session[:locale].nil?
+            I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales)
+            session[:locale] = I18n.locale
+        else
+            I18n.locale = session[:locale]
+        end
         @locale = I18n.locale
     end
 end

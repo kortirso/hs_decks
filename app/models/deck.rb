@@ -34,6 +34,10 @@ class Deck < ApplicationRecord
         input.to_s.to_slug.normalize(transliterations: :russian).to_s
     end
 
+    def locale_name(locale)
+        locale == 'en' ? self.name_en : self.name
+    end
+
     def self.check_format
         all.includes(:cards).each { |deck| deck.check_deck_format }
     end

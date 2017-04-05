@@ -30,7 +30,7 @@
                     tr
                         td= "#{check.success}/30"
                         td= check.dust
-                        td= link_to check.deck.name, deck_path(check.deck)
+                        td= link_to check.deck.locale_name(session[:locale]), deck_path(check.deck)
                         td= check.deck.player.locale_name(@locale)
                         td= check.deck.power
                         td= check.deck.formats

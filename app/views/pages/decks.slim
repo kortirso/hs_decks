@@ -19,7 +19,7 @@
             tbody
                 - @decks.each do |deck|
                     tr
-                        td= link_to deck.name, deck_path(deck)
+                        td= link_to deck.locale_name(session[:locale]), deck_path(deck)
                         td= deck.player.locale_name(@locale)
                         td= deck.power
                         td= deck.price

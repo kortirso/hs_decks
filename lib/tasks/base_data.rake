@@ -1,6 +1,6 @@
 namespace :patching do
     desc 'loading base database'
-    task :base_data do
+    task base_data: :environment do
         # create player classes
         [['Priest', 'Жрец'], ['Warrior', 'Воин'], ['Warlock', 'Чернокнижник'], ['Mage', 'Маг'], ['Druid', 'Друид'], ['Hunter', 'Охотник'], ['Shaman', 'Шаман'], ['Paladin', 'Паладин'], ['Rogue', 'Разбойник'], ['Neutral', 'Нейтральный']].each do |player|
             Player.create name_en: player[0], name_ru: player[1]

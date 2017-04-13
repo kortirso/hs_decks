@@ -7,8 +7,7 @@ namespace :patching do
         # put cards to Hall of Fame
         ['Azure Drake', 'Sylvanas Windrunner', 'Ragnaros the Firelord', 'Power Overwhelming', 'Ice Lance', 'Conceal'].each { |c| Card.find_by(name_en: c).put_in_hall_of_fame }
 
-        # update cards and decks
-        Card.check_cards_format
-        Deck.check_format
+        # update decks
+        Deck.all.each { |d| d.check_deck_format }
     end
 end

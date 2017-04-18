@@ -39,6 +39,7 @@ Rails.application.routes.draw do
                 get 'all' => :all
                 post 'all_post' => :all_post
             end
+            resources :cards, only: :index
             resources :decks, only: [:index, :show]
             resources :about, only: :index
         end

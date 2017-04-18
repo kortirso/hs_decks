@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405041353) do
+ActiveRecord::Schema.define(version: 20170418132040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,18 +34,22 @@ ActiveRecord::Schema.define(version: 20170405041353) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.string   "formats",         default: "standard", null: false
-    t.string   "image_en"
     t.string   "name_ru"
-    t.string   "image_ru"
     t.integer  "player_id"
     t.boolean  "craft",           default: true
     t.integer  "usable",          default: 0
     t.integer  "multi_class_id"
     t.string   "multiClassGroup"
     t.boolean  "hall_of_fame",    default: false
+    t.integer  "race_id"
+    t.integer  "attack"
+    t.integer  "health"
+    t.string   "mechanics",                                         array: true
+    t.string   "race_name"
     t.index ["collection_id"], name: "index_cards_on_collection_id", using: :btree
     t.index ["multi_class_id"], name: "index_cards_on_multi_class_id", using: :btree
     t.index ["player_id"], name: "index_cards_on_player_id", using: :btree
+    t.index ["race_id"], name: "index_cards_on_race_id", using: :btree
   end
 
   create_table "checks", force: :cascade do |t|
@@ -221,6 +225,13 @@ ActiveRecord::Schema.define(version: 20170405041353) do
     t.boolean  "must_have",         default: false
     t.index ["card_id"], name: "index_positions_on_card_id", using: :btree
     t.index ["positionable_id", "positionable_type"], name: "index_positions_on_positionable_id_and_positionable_type", using: :btree
+  end
+
+  create_table "races", force: :cascade do |t|
+    t.string   "name_en"
+    t.string   "name_ru"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shifts", force: :cascade do |t|

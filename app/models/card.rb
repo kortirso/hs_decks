@@ -4,6 +4,7 @@ class Card < ApplicationRecord
     belongs_to :collection
     belongs_to :player
     belongs_to :multi_class
+    belongs_to :race
 
     has_many :positions, dependent: :destroy
     has_many :decks, through: :positions, source: :positionable, source_type: 'Deck'

@@ -925,3 +925,20 @@ table {
         padding-left: 0;
     }
 }
+
+footer {
+    background: rgba(0, 0, 0, 0.75);
+    color: #FFF;
+    padding: 10px;
+    h4 {
+        font-size: 18px;
+    }
+    p {
+        margin-bottom: 3px;
+        font-size: 14px;
+    }
+    img {
+        width: 25px;
+        border-radius: 6px;
+    }
+}

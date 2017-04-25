@@ -20,8 +20,9 @@
                 .columns.small-3= f.select :formats, options_for_select(%w(wild standard)), include_blank: false
                 .columns.small-6= f.text_field :author, placeholder: t('pages.check.main.p_2')
                 .columns.small-6= f.text_field :link, placeholder: t('pages.new_deck.new.link')
-                .columns.small-2= f.text_field :power, placeholder: t('pages.decks.main.deck_power')
+                .columns.small-1= f.text_field :power, placeholder: t('pages.decks.main.deck_power')
                 .columns.small-3= f.select :style, options_for_select(@styles), prompt: t('pages.collection.main.all')
+                .columns.small-3= f.select :race, options_for_select(@races), prompt: t('pages.collection.main.races')
                 .columns.small-3= f.select :reno_type, options_for_select([[t('pages.new_deck.new.typical'), 1], [t('pages.new_deck.new.reno_type'), 2]], 1)
                 .columns.small-12= f.trix_editor :caption, value: nil, placeholder: t('pages.new_deck.new.caption')
                 .columns.small-12= f.trix_editor :caption_en, value: nil, placeholder: 'English deck caption'

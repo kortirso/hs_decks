@@ -15,7 +15,7 @@ class DecksController < ApplicationController
     end
 
     def new
-        @cards = Card.not_heroes.includes(:collection)
+        @cards = Card.includes(:collection)
         @styles = Style.get_names(@locale)
     end
 

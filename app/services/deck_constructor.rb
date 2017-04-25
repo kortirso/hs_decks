@@ -53,7 +53,7 @@ class DeckConstructor
 
     def check_cards_class
         ids = cards_params.keys.map { |k| k.to_i }
-        allowed_cards_ids = Card.for_all_classes.or(Card.not_heroes.of_player_class(deck.try(:playerClass) || deck_params[:playerClass])).collect { |x| x.id }
+        allowed_cards_ids = Card.for_all_classes.or(Card.of_player_class(deck.try(:playerClass) || deck_params[:playerClass])).collect { |x| x.id }
         errors = 0
         ids.each { |pos| errors += 1 unless allowed_cards_ids.include? pos }
         errors != 0

@@ -5,7 +5,7 @@ class SearchSubs
     def initialize(deck, cards_in_deck)
         @deck = deck
         @playerClass = deck.playerClass
-        @cards = Card.for_all_classes.of_rarity('Free').or(Card.not_heroes.of_player_class(@playerClass).of_rarity('Free')).to_a
+        @cards = Card.for_all_classes.of_rarity('Free').or(Card.of_player_class(@playerClass).of_rarity('Free')).to_a
         @cards_in_deck = {}
         transform_cards_list(cards_in_deck)
     end

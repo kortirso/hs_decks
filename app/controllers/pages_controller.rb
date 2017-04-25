@@ -16,7 +16,7 @@ class PagesController < ApplicationController
     end
 
     def collection
-        @cards = Card.not_heroes.includes(:collection)
+        @cards = Card.includes(:collection)
         @packs = current_user.positions.collect_ids
     end
 

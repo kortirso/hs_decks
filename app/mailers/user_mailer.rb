@@ -10,10 +10,10 @@ class UserMailer < ApplicationMailer
         mail(to: @user.email, subject: 'News from Deck Hunter project')
     end
 
-    def upload_collection(result, user, username)
-        @result = result
-        @user = user
-        @username = username
+    def upload_collection(args)
+        @result = args[:message]
+        @user = args[:user]
+        @username = args[:username]
         mail(to: @user.email, subject: 'Uploading card collection at Deck Hunter project')
     end
 end

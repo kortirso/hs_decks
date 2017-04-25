@@ -8,9 +8,7 @@ class PagesController < ApplicationController
     end
 
     def decks
-        @decks = DeckFilteredQuery.new.filtered(filter_params)
-        @playerClasses = PlayerGetPlayableNamesQuery.query
-        @styles = Style.get_names(@locale)
+        @decks = Deck.includes(:user).order(power: :desc, playerClass: :desc)
     end
 
     def about

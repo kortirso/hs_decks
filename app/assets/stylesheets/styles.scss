@@ -44,6 +44,7 @@ html, body {
 
 body {
     @include scroll-bar;
+    position: relative;
     color: #000;
     .inside {
         position: fixed;
@@ -75,6 +76,11 @@ body {
 }
 
 nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
     .top-bar {
         background: rgba(0, 0, 0, 0.85);
         ul {
@@ -92,6 +98,13 @@ nav {
             }
         }
     }
+}
+
+.content {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 152px;
+    padding-top: 54px;
 }
 
 @media screen and (min-width: 900px) {
@@ -930,6 +943,10 @@ footer {
     background: rgba(0, 0, 0, 0.75);
     color: #FFF;
     padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     h4 {
         font-size: 18px;
     }

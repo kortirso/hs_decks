@@ -12,11 +12,12 @@ html lang='en'
         = javascript_include_tag 'application'
         = csrf_meta_tag
     body
+        .inside
+            .shadow
         = render 'shared/metrics'
         = render 'shared/navigation'
         = render 'shared/logins'
-        .inside
-            .shadow
-        .row
-            == yield
-        = render 'shared/footer'
+        .content
+            .row
+                == yield
+            = render 'shared/footer'

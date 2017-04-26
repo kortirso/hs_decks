@@ -4,12 +4,11 @@
     p= t('pages.checks.main.p_1')
     p= t('pages.checks.main.p_2')
     = form_tag({ controller: 'checks', action: 'create' }, method: 'post') do
-        .columns.small-3= text_field_tag :success, nil, placeholder: t('pages.checks.main.p_3')
-        .columns.small-3= text_field_tag :dust, nil, placeholder: t('pages.checks.main.p_4')
-        .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: t('pages.checks.main.p_6')
-        .columns.small-3= select_tag :formats, options_for_select(%w(standard wild))
-        .columns.small-2= text_field_tag :power, nil, placeholder: t('pages.decks.main.power')
-        .columns.small-3= select_tag :style, options_for_select(@styles), prompt: t('pages.checks.main.p_5')
+        .row
+            .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: t('pages.checks.main.p_6')
+            .columns.small-3= select_tag :formats, options_for_select(%w(standard wild))
+            .columns.small-3= text_field_tag :power, nil, placeholder: t('pages.decks.main.power')
+            .columns.small-3= select_tag :style, options_for_select(@styles), prompt: t('pages.checks.main.p_5')
         = submit_tag t('buttons.check_decks'), class: 'button'
     #checks
         h5= t('pages.checks.main.last_checks')

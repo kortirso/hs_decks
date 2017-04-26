@@ -22,6 +22,6 @@
         .check
             h5= t('pages.check.main.h5_2')
             = render 'shared/check_card', cards: @check.cards, locale: @locale, positions: @lines, decks: @positions , deck_ids: @positions.map { |elem| elem[0] }
-        .check
+        /.check
             h5= t('pages.check.main.h5_3')
             = render 'shared/check_card', cards: @check.substitution.cards, locale: @locale, positions: @subs, decks: nil

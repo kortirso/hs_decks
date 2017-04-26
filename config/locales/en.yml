@@ -145,8 +145,6 @@ en:
         head: Analysis of existing cards
         p_1: On this page you can launch a scan of your card and find out what expert deck you can collect.
         p_2: You can also specify the minimum success threshold of the selection of the deck, the maximum amount of dust, which you can spend on crafting cards, a certain class of character or format of the deck.
-        p_3: The composure of the deck
-        p_4: Available dust
         p_5: All types of decks
         p_6: All classes
         last_checks: Latest audited

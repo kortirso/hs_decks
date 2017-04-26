@@ -13,11 +13,12 @@ class ChecksController < ApplicationController
         @deck = @check.deck
         @positions = @deck.positions.collect_ids
         @lines = @check.positions.collect_ids_with_caption
-        @subs = @check.substitution.positions.collect_ids
+        #@subs = @check.substitution.positions.collect_ids
+        @subs = nil
     end
 
     def create
-        SearchEngine.new({ user: current_user, params: check_params }).build
+        Subs::SearchService.new({user: current_user, params: check_params}).call
         redirect_to checks_path
     end
 
@@ -33,6 +34,6 @@ class ChecksController < ApplicationController
     end
 
     def check_params
-        params.permit(:success, :dust, :playerClass, :formats, :power, :style)
+        params.permit(:playerClass, :formats, :power, :style)
     end
 end

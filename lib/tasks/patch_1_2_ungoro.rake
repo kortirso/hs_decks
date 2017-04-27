@@ -9,7 +9,7 @@ namespace :patching do
         # add data to minion cards
         races = Race.all.collect { |r| [r.name_en, r.id] }
         result = Message.new().get_request
-        ["Basic", "Classic", "Promo", "Hall of Fame", "Naxxramas", "Goblins vs Gnomes", "Blackrock Mountain", "The Grand Tournament", "The League of Explorers", "Whispers of the Old Gods", "Karazhan", "Mean Streets of Gadgetzan", "Journey to Un'Goro"].each do |collection|
+        ["Basic", "Classic", "Promo", "Hall of Fame", "Naxxramas", "Goblins vs Gnomes", "Blackrock Mountain", "The Grand Tournament", "The League of Explorers", "Whispers of the Old Gods", "One Night in Karazhan", "Mean Streets of Gadgetzan", "Journey to Un'Goro"].each do |collection|
             result[collection].select { |card| card['type'] == 'Minion' }.each do |card|
                 real_card = Card.find_by(name_en: card['name'])
                 next if real_card.nil?

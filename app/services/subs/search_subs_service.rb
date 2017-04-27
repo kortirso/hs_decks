@@ -1,12 +1,13 @@
 module Subs
     class SearchSubsService
-        attr_reader :deck, :race_cards, :user_collection, :cards_in_deck, :card
+        attr_reader :deck, :race_cards, :user_collection, :random_cards, :cards_in_deck, :card
 
         def initialize(args)
             @deck = args[:deck]
-            @race_cards = deck.race.cards
             @user_collection = args[:user_collection]
             get_cards_in_deck(args[:deck_cards])
+            get_cards_for_random
+            get_race_cards
         end
 
         def find_exchange(card_id, amount)
@@ -26,6 +27,16 @@ module Subs
             args.each { |key, value| cards_in_deck[key] = value[:amount] }
         end
 
+        def get_cards_for_random
+            @random_cards = Card.for_all_classes.or(Card.of_player_class(deck.playerClass))
+            @random_cards = random_cards.return_for_format('standard') if deck.formats == 'standard'
+            @random_cards = random_cards.select { |c| user_collection[c.id.to_s].present? }
+        end
+
+        def get_race_cards
+            @race_cards = deck.race.cards.select { |c| c.playerClass == 'Neutral' || c.playerClass == deck.playerClass }.select { |c| user_collection[c.id.to_s].present? }
+        end
+
         def check_must_have(amount)
             pos = deck.positions.find_by(card_id: card.id)
             amount = 0 if pos.must_have
@@ -34,35 +45,35 @@ module Subs
 
         def check_shifts_in_deck(amount)
             deck.positions.find_by(card_id: card.id).exchanges.order(priority: :desc).select { |ex| user_collection[ex.card_id.to_s].present? }.each do |ex|
-                return 0 if amount.zero?
                 amount = check_cards_in_deck(ex.card_id, ex.max_amount, amount)
+                return 0 if amount.zero?
             end
             amount
         end
 
         def check_shifts_in_lines(amount)
             deck.lines.order(priority: :desc).select { |ex| user_collection[ex.card_id.to_s].present? }.each do |ex|
-                return 0 if amount.zero?
                 if card.cost.between?(ex.min_mana, ex.max_mana)
                     amount = check_cards_in_deck(ex.card_id, ex.max_amount, amount)
                 end
+                return 0 if amount.zero?
             end
             amount
         end
 
         def check_all_shifts(amount)
             card.shifts.includes(:card, :change).order(priority: :desc).select { |ex| user_collection[ex.change_id.to_s].present? }.each do |ex|
-                return 0 if amount.zero?
                 amount = check_cards_in_deck(ex.change_id, amount, amount) if is_sub_approached?(ex)
+                return 0 if amount.zero?
             end
             amount
         end
 
         def check_shifts_in_race(amount)
             return amount if deck.race_id.nil?
-            race_cards.select { |c| c.cost.between?(card.cost - 1, card.cost + 1) && user_collection[c.id.to_s].present? }.each do |ex|
+            race_cards.each do |ex|
+                amount = check_cards_in_deck(ex.id, user_collection[ex.id.to_s], amount)
                 return 0 if amount.zero?
-                amount = check_cards_in_deck(ex.id, 2, amount)
             end
             amount
         end
@@ -77,7 +88,7 @@ module Subs
 
         def cards_replace(ex_card_id, ex_max_amount, amount)
             ex_max_amount = 1 if deck.is_reno_type?
-            ex_in_collection = user_collection[ex_card_id].nil? ? 0 : user_collection[ex_card_id]
+            ex_in_collection = user_collection[ex_card_id.to_s].nil? ? 0 : user_collection[ex_card_id.to_s]
             real_changes = [cards_in_deck[card.id.to_s], ex_max_amount, amount, ex_in_collection].min
 
             if real_changes > 0
@@ -90,13 +101,18 @@ module Subs
             amount -= real_changes
         end
 
-        def check_random_shifts(amount)
-            cards = Card.for_all_classes.of_rarity('Free').or(Card.of_player_class(deck.playerClass).of_rarity('Free')).to_a
-            cards_for_random = cards.select { |for_random| card.cost.between?(for_random.cost - 1, for_random.cost + 1) && !cards_in_deck.key?(for_random.id.to_s) }
-            if cards_for_random.size > 0
-                cards_in_deck[card.id.to_s] -= amount
-                cards_in_deck.delete(card.id.to_s) if cards_in_deck[card.id.to_s].zero?
-                cards_in_deck[cards_for_random.sample.id.to_s] = amount
+        def check_random_shifts(amount)            
+            cards_for_random = random_cards.select { |for_random| card.cost.between?(for_random.cost - 1, for_random.cost + 2) && cards_in_deck[for_random.id.to_s].nil? }
+
+            %w(Legendary Epic Rare Common Free).each do |rarity|
+                cards_for_random.select { |c| c.rarity == rarity }.each do |ex|
+                    break if amount <= 0
+                    real_changes = [user_collection[ex.id.to_s], amount].min
+                    cards_in_deck[card.id.to_s] -= real_changes
+                    cards_in_deck.delete(card.id.to_s) if cards_in_deck[card.id.to_s].zero?
+                    cards_in_deck[ex.id.to_s] = real_changes
+                    amount -= real_changes
+                end
             end
         end
 

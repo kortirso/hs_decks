@@ -16,7 +16,7 @@ module Subs
             Subs::SelectDecksService.call(check_params).each do |deck|
                 check = user.checks.create deck: deck, success: 0
                 check_deck_service.check_deck({deck: deck, check: check})
-                #define_subs_service.search_subs({deck: deck, check: check})
+                define_subs_service.search_subs({deck: deck, check: check})
             end
         end
 

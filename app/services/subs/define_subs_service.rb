@@ -6,7 +6,7 @@ module Subs
             @user_collection = args[:user_collection]
         end
 
-        def search_subs(args, t = Time.current)
+        def search_subs(args)
             select_data_from_deck(args)
             deck_cards.each_key do |card_id|
                 if user_collection.key?(card_id)
@@ -26,7 +26,7 @@ module Subs
             @search_engine = Subs::SearchSubsService.new({deck: args[:deck], deck_cards: deck_cards, user_collection: user_collection})
         end
 
-        def update_check(lines = [])
+        def update_check(lines = [], t = Time.current)
             search_engine.cards_in_deck.each { |key, amount| lines.push "('#{key}', #{substitution.id}, 'Substitution', '#{amount}', '#{nil}', '#{t}', '#{t}')" unless amount.nil? }
             Position.connection.execute "INSERT INTO positions (card_id, positionable_id, positionable_type, amount, caption, created_at, updated_at) VALUES #{lines.join(", ")}"
         end

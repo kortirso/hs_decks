@@ -13,8 +13,7 @@ class ChecksController < ApplicationController
         @deck = @check.deck
         @positions = @deck.positions.collect_ids
         @lines = @check.positions.collect_ids_with_caption
-        #@subs = @check.substitution.positions.collect_ids
-        @subs = nil
+        @subs = @check.substitution.positions.collect_ids
     end
 
     def create

@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
     before_action :get_access
 
     def create
-        current_user.hearthpwn_collection(shift_params)
+        UploadCollectionJob.perform_later({user: current_user, username: shift_params[:username]})
     end
 
     private

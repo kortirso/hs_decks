@@ -1,14 +1,14 @@
 class UploadCollectionJob < ApplicationJob
     queue_as :default
 
-    def perform(user, username)
-        cards = Parser::HearthpwnCollectionParser.new(username).parsing
-        if cards.nil?
-            result = 'Такого пользователя не существует'
+    def perform(args)
+        cards = Hearthpwn::CollectionParserService.call({username: args[:username]})
+        if cards.empty?
+            result = 'Такого пользователя не существует или коллекция не доступна'
         else
-            HearthpwnCollectionConstructor.new({ user: user, cards: cards }).execute
+            Hearthpwn::CollectionConstructorService.call({user: args[:user], cards: cards})
             result = 'Коллекция карт успешно загружена'
         end
-        UserMailer.upload_collection(result, user, username).deliver
+        UserMailer.upload_collection({message: result, user: args[:user], username: args[:username]}).deliver
     end
 end

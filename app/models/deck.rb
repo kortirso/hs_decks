@@ -9,6 +9,7 @@ class Deck < ApplicationRecord
     belongs_to :user
     belongs_to :player
     belongs_to :style
+    belongs_to :race
 
     has_many :checks, dependent: :destroy
     has_many :lines, dependent: :destroy

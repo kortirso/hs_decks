@@ -25,17 +25,17 @@ en:
     account: Account
     personal: Personal page
     about: About the system
-    logout: Logout
-    login: Singin
-    signup: Signup
+    logout: Log Out
+    login: Log In
+    signup: Sign Up
     menu: Menu
   modals:
     auth: Authorization
     reg: Check
     pass: Password
-    username: Nickname
+    username: Username
     confirm: Confirm password
-    enter: Log
+    enter: Log In
     minimal: Minimum password length - 6 characters
     exchange:
       h1: Replace saved!
@@ -54,6 +54,9 @@ en:
         p_2: start winning in HearthStone today.
         p_3: DeckHunter will help to select the deck to be successful in the ladder, given existing cards and determine the best possible substitute for any missing card.
         p_4: The site contains the best decks that you can use in the ladder. If you want to know what deck can collect, you need to log in on the website, keep the existing card in the collection and will tell you the best decks to play.
+      footer:
+        h: Contacts
+        p: If you have questions or feedback, you can use this contacts
       how_works:
         header: How it works
         h_1: Tools storage collection
@@ -85,6 +88,7 @@ en:
         set_free: Mark all base cards
         existed: Have all the class cards
         unexisted: No class cards
+        races: Prefered race of minions
     unusable:
       title: Spray cards
       main:
@@ -145,7 +149,6 @@ en:
         p_1: On this page you can launch a scan of your card and find out what expert deck you can collect.
         p_2: You can also specify the minimum success threshold of the selection of the deck, the maximum amount of dust, which you can spend on crafting cards, a certain class of character or format of the deck.
         p_3: The composure of the deck
-        p_4: Available dust
         p_5: All types of decks
         p_6: All classes
         last_checks: Latest audited

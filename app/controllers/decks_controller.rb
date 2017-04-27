@@ -15,8 +15,9 @@ class DecksController < ApplicationController
     end
 
     def new
-        @cards = Card.not_heroes.includes(:collection)
+        @cards = Card.includes(:collection)
         @styles = Style.get_names(@locale)
+        @races = Race.get_names(@locale)
     end
 
     def create
@@ -31,6 +32,7 @@ class DecksController < ApplicationController
         @cards = DeckGetAccessableCardsQuery.query(@deck)
         @positions = @deck.positions.collect_ids
         @styles = Style.get_names(@locale)
+        @races = Race.get_names(@locale)
     end
 
     def update

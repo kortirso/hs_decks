@@ -10,7 +10,7 @@ class DeckConstructor
 
     def build
         return false unless good_params?
-        @deck = Deck.create name: deck_params[:name], name_en: deck_params[:name_en], playerClass: deck_params[:playerClass], formats: deck_params[:formats], link: deck_params[:link], caption: deck_params[:caption], caption_en: deck_params[:caption_en], author: deck_params[:author], user_id: user_id, player_id: Player.find_by(name_en: deck_params[:playerClass]).id, power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), reno_type: deck_params[:reno_type] == '1' ? false : true
+        @deck = Deck.create name: deck_params[:name], name_en: deck_params[:name_en], playerClass: deck_params[:playerClass], formats: deck_params[:formats], link: deck_params[:link], caption: deck_params[:caption], caption_en: deck_params[:caption_en], author: deck_params[:author], user_id: user_id, player_id: Player.find_by(name_en: deck_params[:playerClass]).id, power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), race_id: Race.return_id_by_name(deck_params[:race]), reno_type: deck_params[:reno_type] == '1' ? false : true
         build_positions
         update_deck
         true
@@ -18,7 +18,7 @@ class DeckConstructor
 
     def refresh
         return false unless good_params?
-        deck.update name: deck_params[:name], name_en: deck_params[:name_en], link: deck_params[:link], caption: deck_params[:caption], caption_en: deck_params[:caption_en], author: deck_params[:author], power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style])
+        deck.update name: deck_params[:name], name_en: deck_params[:name_en], link: deck_params[:link], caption: deck_params[:caption], caption_en: deck_params[:caption_en], author: deck_params[:author], power: deck_params[:power], style_id: Style.return_id_by_name(deck_params[:style]), race_id: Race.return_id_by_name(deck_params[:race])
         update_positions
         update_deck
         true
@@ -53,7 +53,7 @@ class DeckConstructor
 
     def check_cards_class
         ids = cards_params.keys.map { |k| k.to_i }
-        allowed_cards_ids = Card.for_all_classes.or(Card.not_heroes.of_player_class(deck.try(:playerClass) || deck_params[:playerClass])).collect { |x| x.id }
+        allowed_cards_ids = Card.for_all_classes.or(Card.of_player_class(deck.try(:playerClass) || deck_params[:playerClass])).collect { |x| x.id }
         errors = 0
         ids.each { |pos| errors += 1 unless allowed_cards_ids.include? pos }
         errors != 0

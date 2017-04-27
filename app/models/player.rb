@@ -19,8 +19,4 @@ class Player < ApplicationRecord
     def self.return_by_name(name)
         find_by(name_en: name) || find_by(name_ru: name)
     end
-
-    def locale_name(locale)
-        self["name_#{locale}"]
-    end
 end

@@ -30,10 +30,6 @@ class User < ApplicationRecord
         update(get_news: false) if get_news
     end
 
-    def hearthpwn_collection(params)
-        UploadCollectionJob.perform_later(self, params[:username])
-    end
-
     private
 
     def welcome_notify

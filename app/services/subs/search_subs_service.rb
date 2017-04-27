@@ -34,7 +34,7 @@ module Subs
         end
 
         def get_race_cards
-            @race_cards = deck.race.cards.select { |c| c.playerClass == 'Neutral' || c.playerClass == deck.playerClass }.select { |c| user_collection[c.id.to_s].present? }
+            @race_cards = deck.race.cards.select { |c| c.playerClass == 'Neutral' || c.playerClass == deck.playerClass }.select { |c| user_collection[c.id.to_s].present? } unless deck.race_id.nil?
         end
 
         def check_must_have(amount)

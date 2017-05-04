@@ -54,6 +54,7 @@ en:
         p_2: start winning in HearthStone today.
         p_3: DeckHunter will help to select the deck to be successful in the ladder, given existing cards and determine the best possible substitute for any missing card.
         p_4: The site contains the best decks that you can use in the ladder. If you want to know what deck can collect, you need to log in on the website, keep the existing card in the collection and will tell you the best decks to play.
+        p_5: To save the collection and analyze cards you need to be authorized (no mail confirmation is required).
       footer:
         h: Contacts
         p: If you have questions or feedback, you can use this contacts

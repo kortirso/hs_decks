@@ -1,2 +1,0 @@
-describe Message do
-end

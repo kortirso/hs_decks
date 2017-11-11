@@ -12,7 +12,7 @@ RSpec.describe PagesController, type: :controller do
         before { get :decks }
 
         it 'assigns the requested decks to @decks' do
-            expect(assigns(:decks)).to eq decks
+            expect(assigns(:decks)).to eq decks.reverse
         end
 
         it 'and renders account page' do

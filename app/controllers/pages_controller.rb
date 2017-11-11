@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
     include SubscribeController
-    skip_before_action :check_access
-    before_action :get_access, except: %i[index decks about]
+    skip_before_action :check_access, only: %i[index decks about]
 
     def index
         @news = News.order(id: :desc).limit(4)
@@ -9,7 +8,7 @@ class PagesController < ApplicationController
     end
 
     def decks
-        @decks = Deck.includes(:user).order(power: :desc, playerClass: :desc)
+        @decks = Deck.includes(:user).order(power: :desc, playerClass: :desc).to_a
     end
 
     def about; end

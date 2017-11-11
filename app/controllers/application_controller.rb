@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :check_access
+    before_action :locale
 
     rescue_from ActionController::RoutingError, with: :render_404
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
@@ -26,5 +27,9 @@ class ApplicationController < ActionController::Base
 
     def render_404
         render template: 'layouts/404', status: 404
+    end
+
+    def locale
+        @locale = :en
     end
 end

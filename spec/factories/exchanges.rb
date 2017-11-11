@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :exchange do
         association :position, factory: :position_for_user
         association :card

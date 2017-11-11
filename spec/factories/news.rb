@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :news do
         url_label 'something'
         label 'News Label'

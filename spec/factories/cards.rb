@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :card do
         sequence(:cardId) { |i| "cardId_#{i}" }
         sequence(:name_en) { |i| "name_en_#{i}" }

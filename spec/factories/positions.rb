@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :position_for_user, class: 'Position' do
         amount 1
         caption ''

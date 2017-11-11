@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :deck do
         name 'First deck'
         playerClass 'Shaman'

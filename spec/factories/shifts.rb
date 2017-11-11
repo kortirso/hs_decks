@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :shift do
         priority 10
         association :card

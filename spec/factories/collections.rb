@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :collection do
         name_en 'Basic'
         name_ru 'Базовый набор'

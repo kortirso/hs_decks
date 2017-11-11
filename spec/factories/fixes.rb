@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :fix do
         body_en 'Fix'
         body_ru 'Исправление'

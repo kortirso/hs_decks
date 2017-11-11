@@ -11,13 +11,10 @@ html lang='en'
         = stylesheet_link_tag 'application', media: 'all'
         = javascript_include_tag 'application'
         = csrf_meta_tag
-    body
-        .inside
-            .shadow
-        = render 'shared/metrics'
+    body class=yield(:body)
         = render 'shared/navigation'
         = render 'shared/logins'
         .content
-            .row
-                == yield
+            == yield
             = render 'shared/footer'
+        = render 'shared/metrics' if Rails.env.production?

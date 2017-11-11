@@ -1,89 +1,80 @@
 - provide(:title, "Deck Hunter | #{t('pages.index.title')}")
-#index_caption
+- provide(:body, 'index_page')
+section.banner
+    header
+        h1 Помощник в составлении колод для HearthStone
+        p= t('pages.index.main.p_3')
+section.how_it_works
     .row
-        .columns.small-12.medium-8.small-centered
-            .page_block.about_block
-                h4 DeckHunter
-                p.first= t('pages.index.main.p_1')
-                p.second= t('pages.index.main.p_2')
-                p.third= t('pages.index.main.p_3')
-                p= t('pages.index.main.p_4')
-                p= t('pages.index.main.p_5')
-    .row
-        .columns.small-12.medium-10.small-centered
-            .page_block.how_works_block
-                .row
-                    h4= t('pages.index.how_works.header')
-                    .columns.small-12.medium-4
-                        .works
-                            .image_block
-                                = image_tag '1.png'
-                            .text_block
-                                .header= t('pages.index.how_works.h_1')
-                                .caption= t('pages.index.how_works.p_1')
-                    .columns.small-12.medium-4
-                        .works
-                            .image_block
-                                = image_tag '2.png'
-                            .text_block
-                                .header= t('pages.index.how_works.h_2')
-                                .caption= t('pages.index.how_works.p_2')
-                    .columns.small-12.medium-4
-                        .works
-                            .image_block
-                                = image_tag '3.png'
-                            .text_block
-                                .header= t('pages.index.how_works.h_3')
-                                .caption= t('pages.index.how_works.p_3')
-    /.row
-        .columns.small-12.medium-10.small-centered
-            .page_block.opportunities_block
-                .row
-                    h4= t('pages.index.opportunities.header')
-                    .columns.small-12.medium-4
-                        .opportunity
-                            .image_block
-                                = image_tag '1.png'
-                            .text_block
-                                .header= t('pages.index.opportunities.h_1')
-                                .caption= t('pages.index.opportunities.p_1')
-                    .columns.small-12.medium-4
-                        .opportunity
-                            .image_block
-                                = image_tag '2.png'
-                            .text_block
-                                .header= t('pages.index.opportunities.h_2')
-                                .caption= t('pages.index.opportunities.p_2')
-                    .columns.small-12.medium-4
-                        .opportunity
-                            .image_block
-                                = image_tag '3.png'
-                            .text_block
-                                .header= t('pages.index.opportunities.h_3')
-                                .caption= t('pages.index.opportunities.p_3')
-    .row
-        .columns.small-12.medium-10.small-centered
-            .page_block.top_decks
-                .row
-                    h4= t('pages.index.top')
-                    - @top_decks.each do |deck|
-                        .columns.small-12.medium-3
-                            .top_deck class="#{deck.playerClass}"
-                                .image_block
-                                    = image_tag "heroes/#{deck.playerClass}_Big.png"
-                                .text_block
-                                    .header= deck.locale_name(session[:locale])
-                                    .caption= link_to t('pages.index.show_deck'), deck
-    .row
-        .columns.small-12.medium-10.small-centered
-            .page_block.all_news
-                .row
-                    h4= t('pages.index.news')
-                    - @news.each do |article|
-                        .columns.small-12.medium-6
-                            .news
-                                p.header= article.label
-                                p.date= article.created_at.strftime("%Y.%m.%d")
-                                p.caption= article.caption
-                                - unless article.link.nil? || article.link.empty?
-                                    p= link_to t('pages.index.about_news'), article.link, class: 'button', target: '_blank'
+        h2
+            span Почему на DeckHunter
+            br /
+            | легко и удобно собирать колоды
+        .block.left
+            .text_block
+                p Удобное ознакомление с экспертными колодами
+                p Обзор лучших колод и тактика игры.
+            .image_block
+                = image_tag 'background.jpg'
+        .block.right
+            .text_block
+                p Инструменты для хранения коллекции карт
+                p Зарегистрируйтесь и сохраните свои карты один раз, а затем только обновляйте коллекцию.
+                p Доступен ручной ружим обновления коллекции и автоматическая загрузка с HearthPWN.
+            .image_block
+                = image_tag 'background.jpg'
+        .block.left
+            .text_block
+                p Интерфейс для выявления наиболее собранных колод
+                p Возможно у вас уже есть карты, чтобы собрать эффективную колоду.
+            .image_block
+                = image_tag 'background.jpg'
+        .block.right
+            .text_block
+                p Система подбора замен
+                p Автоматическая система подберет замены недостающим картам на основе имеющихся карт в коллекции.
+            .image_block
+                = image_tag 'background.jpg'
+.row
+    .information
+        .block.top_standard
+            h2 Лучшие стандартные колоды
+            .sub_block
+                .image_block
+                    = image_tag "heroes/Shaman_Big.png"
+                .text_block
+                    .header Midrange Shaman
+                    .power Сила колоды - 10/10
+                    .caption= link_to 'Посмотреть колоду', '#'
+            .sub_block
+                .image_block
+                    = image_tag "heroes/Paladin_Big.png"
+                .text_block
+                    .header Agro Paladin
+                    .power Сила колоды - 9/10
+                    .caption= link_to 'Посмотреть колоду', '#'
+        .block.top_wild
+            h2 Лучшие вольные колоды
+            .sub_block
+                .image_block
+                    = image_tag "heroes/Paladin_Big.png"
+                .text_block
+                    .header Secret Paladin
+                    .power Сила колоды - 10/10
+                    .caption= link_to 'Посмотреть колоду', '#'
+            .sub_block
+                .image_block
+                    = image_tag "heroes/Shaman_Big.png"
+                .text_block
+                    .header Midrange Shaman
+                    .power Сила колоды - 9/10
+                    .caption= link_to 'Посмотреть колоду', '#'
+        .block.all_news
+            h2 Новости
+            - @news.each do |article|
+                .full_block
+                    .text_block
+                        .header= article.label
+                        .caption= article.caption
+                        .date= article.created_at.strftime("%Y.%m.%d")
+                        

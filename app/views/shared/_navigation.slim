@@ -1,37 +1,25 @@
-nav
-    .title-bar data-responsive-toggle='example-menu'
-        button.menu-icon type='button' data-toggle='example-menu'
-        .title-bar-title= t('nav.menu')
-    .top-bar#example-menu
-        .top-bar-left
-            ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=''
-                li= link_to t('nav.main_page'), root_path
-                - if current_user
-                    - if current_user.deck_master?
-                        li= link_to t('nav.deck_builder'), decks_path
-                    li
-                        = link_to t('nav.card_collection'), '#'
-                        ul.menu
-                            li= link_to t('nav.collection'), collection_path
-                            /li= link_to t('nav.unusable'), unusable_path
-                li
-                    = link_to t('nav.expert_decks'), '#'
-                    ul.menu
-                        li= link_to t('nav.decks'), expert_decks_path
-                        - if current_user
-                            li= link_to t('nav.analyze'), checks_path
-        .top-bar-right
-            ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=''
-                li
-                    = link_to t('nav.account'), '#'
-                    ul.menu
-                        - if current_user
-                            li= link_to t('nav.personal'), personal_path
-                        li= link_to t('nav.about'), about_path
-                        - if current_user
-                            li= link_to t('nav.logout'), destroy_user_session_path, method: :delete
-                        - else
-                            li
-                                a data-open='login'= t('nav.login')
-                            li
-                                a data-open='signup'= t('nav.signup')
+nav.nav role='navigation'
+    .row
+        .top-bar#example-menu
+            .top-bar-left
+                ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=''
+                    li= link_to t('nav.main_page'), root_path
+                    - if current_user
+                        - if current_user.deck_master?
+                            li= link_to t('nav.deck_builder'), decks_path
+                        li= link_to t('nav.collection'), collection_path
+                    li= link_to t('nav.decks'), expert_decks_path
+                    - if current_user
+                        li= link_to t('nav.analyze'), checks_path
+            .top-bar-right
+                ul.menu.dropdown.vertical.medium-horizontal data-dropdown-menu=''
+                    - if current_user
+                        li= link_to t('nav.logout'), destroy_user_session_path, method: :delete
+                    - else
+                        li
+                            a data-open='login'= t('nav.login')
+                        li
+                            a data-open='signup'= t('nav.signup')
+        .title-bar data-responsive-toggle='example-menu'
+            button.menu-icon type='button' data-toggle='example-menu'
+            .logo= link_to t('nav.main_page'), root_path

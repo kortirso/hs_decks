@@ -1,3 +1,4 @@
+# Represents deck like objects
 module Positionable
     extend ActiveSupport::Concern
 

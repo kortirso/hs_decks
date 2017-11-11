@@ -1,3 +1,4 @@
+# Represents users
 class User < ApplicationRecord
     include Positionable
 
@@ -7,7 +8,7 @@ class User < ApplicationRecord
     has_many :checks
 
     validates :role, :username, presence: true
-    validates :role, inclusion: { in: %w(user deck_master) }
+    validates :role, inclusion: { in: %w[user deck_master] }
     validates :username, uniqueness: true, length: { in: 1..20 }
 
     scope :news_subscribers, -> { where get_news: true }
@@ -18,8 +19,8 @@ class User < ApplicationRecord
         role == 'deck_master'
     end
 
-    def get_unusable_cards
-        cards.not_free.reject { |card| !card.usable.zero? }.sort_by { |elem| elem.cost }
+    def unusable_cards
+        cards.not_free.select { |card| card.usable.zero? }.sort_by(&:cost)
     end
 
     def subscribe_for_news

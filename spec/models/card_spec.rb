@@ -9,10 +9,10 @@ RSpec.describe Card, type: :model do
     it { should validate_presence_of :collection_id }
     it { should validate_presence_of :usable }
     it { should validate_presence_of :formats }
-    it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
-    it { should validate_inclusion_of(:type).in_array(%w(Hero Spell Minion Weapon)) }
-    it { should validate_inclusion_of(:playerClass).in_array(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)) }
-    it { should validate_inclusion_of(:rarity).in_array(%w(Free Common Rare Epic Legendary)) }
+    it { should validate_inclusion_of(:formats).in_array(%w[standard wild]) }
+    it { should validate_inclusion_of(:type).in_array(%w[Hero Spell Minion Weapon]) }
+    it { should validate_inclusion_of(:playerClass).in_array(%w[Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral]) }
+    it { should validate_inclusion_of(:rarity).in_array(%w[Free Common Rare Epic Legendary]) }
     it { should have_many(:positions).dependent(:destroy) }
     it { should have_many(:shifts).dependent(:destroy) }
     it { should have_many(:exchanges).through(:shifts) }
@@ -22,7 +22,6 @@ RSpec.describe Card, type: :model do
     it { should have_many(:mulligans).through(:positions) }
     it { should have_many(:exchanges).through(:shifts) }
     it { should have_many :lines }
-    
 
     it 'should be valid' do
         card = create :card
@@ -74,29 +73,29 @@ RSpec.describe Card, type: :model do
             end
         end
 
-        context '.is_crafted?' do
+        context '.craft?' do
             let!(:card_1) { create :card }
             let!(:card_2) { create :card, craft: false }
 
             it 'returns true if it is crafted' do
-                expect(card_1.is_crafted?).to eq true
+                expect(card_1.craft?).to eq true
             end
 
             it 'returns false if it is not crafted' do
-                expect(card_2.is_crafted?).to eq false
+                expect(card_2.craft?).to eq false
             end
         end
 
-        context '.is_legendary?' do
+        context '.legendary?' do
             let!(:card_1) { create :card, rarity: 'Legendary' }
             let!(:card_2) { create :card }
 
             it 'should return true if it is legendary' do
-                expect(card_1.is_legendary?).to eq true
+                expect(card_1.legendary?).to eq true
             end
 
             it 'should return false if it is not legendary' do
-                expect(card_2.is_legendary?).to eq false
+                expect(card_2.legendary?).to eq false
             end
         end
     end

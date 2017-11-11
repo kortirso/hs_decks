@@ -4,6 +4,7 @@ AllCops:
     - '**/config.ru'
   Exclude:
     - db/schema.rb
+    - db/migrate/*
     - config.ru
     - lib/**/*.rake
     - vendor/**/*

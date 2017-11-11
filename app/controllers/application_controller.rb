@@ -1,12 +1,13 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
+    before_action :check_access
 
     rescue_from ActionController::RoutingError, with: :render_404
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
     def catch_404
-        raise ActionController::RoutingError.new(params[:path])
+        raise ActionController::RoutingError.new(params[:path]), 'error'
     end
 
     private
@@ -14,8 +15,8 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation) }
     end
-    
-    def get_access
+
+    def check_access
         render_404 unless current_user
     end
 

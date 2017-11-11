@@ -1,3 +1,4 @@
+# Represents App Versions
 class About < ApplicationRecord
     has_many :fixes, dependent: :destroy
 

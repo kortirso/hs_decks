@@ -1,3 +1,4 @@
+# represents positions in deck like objects
 class Position < ApplicationRecord
     belongs_to :positionable, polymorphic: true
     belongs_to :card
@@ -28,18 +29,18 @@ class Position < ApplicationRecord
     end
 
     def self.collect_ids_with_rarity(ids = [])
-        all.includes(:card).order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount, pos.card.rarity, pos.card.is_crafted?] }
+        all.includes(:card).order(id: :asc).each { |pos| ids.push [pos.card_id, pos.amount, pos.card.rarity, pos.card.craft?] }
         ids
     end
 
     def self.collect_ids_with_rarity_as_hash(ids = {})
-        all.includes(:card).order(id: :asc).each { |pos| ids[pos.card_id.to_s] = { amount: pos.amount, rarity: pos.card.rarity, crafted: pos.card.is_crafted? } }
+        all.includes(:card).order(id: :asc).each { |pos| ids[pos.card_id.to_s] = { amount: pos.amount, rarity: pos.card.rarity, crafted: pos.card.craft? } }
         ids
     end
 
     def self.with_sorted_cards(locale = 'en', cards = [])
         all.each { |pos| cards.push pos.card }
-        return cards.sort_by { |card| [card.cost, card["name_#{locale}"]] }
+        cards.sort_by { |card| [card.cost, card["name_#{locale}"]] }
     end
 
     def self.amount_by_mana(result = [0, 0, 0, 0, 0, 0, 0, 0])
@@ -47,7 +48,7 @@ class Position < ApplicationRecord
         result
     end
 
-    def set_musthave(value)
+    def musthave(value)
         update(must_have: value)
     end
 end

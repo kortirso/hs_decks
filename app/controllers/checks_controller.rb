@@ -1,5 +1,4 @@
 class ChecksController < ApplicationController
-    before_action :get_access
     before_action :find_check, only: :show
     before_action :check_author, only: :show
 
@@ -17,7 +16,7 @@ class ChecksController < ApplicationController
     end
 
     def create
-        Subs::SearchService.new({user: current_user, params: check_params}).call
+        Subs::SearchService.new(user: current_user, params: check_params).call
         redirect_to checks_path
     end
 
@@ -25,7 +24,7 @@ class ChecksController < ApplicationController
 
     def find_check
         @check = Check.find_by(id: params[:id])
-        render_404 if @check.nil? 
+        render_404 if @check.nil?
     end
 
     def check_author

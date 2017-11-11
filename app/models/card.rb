@@ -1,3 +1,4 @@
+# Represents cards
 class Card < ApplicationRecord
     self.inheritance_column = nil
 
@@ -16,18 +17,18 @@ class Card < ApplicationRecord
     has_many :exchanges, through: :shifts, source: :change
 
     validates :cardId, :name_en, :type, :rarity, :collection_id, :formats, :usable, presence: true
-    validates :type, inclusion: { in: %w(Hero Spell Minion Weapon) }
-    validates :playerClass, inclusion: { in: %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral) }
-    validates :multiClassGroup, inclusion: { in: %w(Grimy\ Goons Jade\ Lotus Kabal) }, allow_nil: true
-    validates :rarity, inclusion: { in: %w(Free Common Rare Epic Legendary) }
-    validates :formats, inclusion: { in: %w(standard wild) }
+    validates :type, inclusion: { in: %w[Hero Spell Minion Weapon] }
+    validates :playerClass, inclusion: { in: %w[Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral] }
+    validates :multiClassGroup, inclusion: { in: %w[Grimy\ Goons Jade\ Lotus Kabal] }, allow_nil: true
+    validates :rarity, inclusion: { in: %w[Free Common Rare Epic Legendary] }
+    validates :formats, inclusion: { in: %w[standard wild] }
 
-    scope :of_type, -> (type) { where type: type }
+    scope :of_type, ->(type) { where type: type }
     scope :for_all_classes, -> { where playerClass: 'Neutral' }
-    scope :of_player_class, -> (player_class) { where playerClass: player_class }
-    scope :of_rarity, -> (rarity) { where rarity: rarity }
+    scope :of_player_class, ->(player_class) { where playerClass: player_class }
+    scope :of_rarity, ->(rarity) { where rarity: rarity }
     scope :not_free, -> { where.not(rarity: 'Free') }
-    scope :of_format, -> (formats) { where formats: formats }
+    scope :of_format, ->(formats) { where formats: formats }
     scope :crafted, -> { where craft: true }
     scope :unusable, -> { where usable: 0 }
 
@@ -45,26 +46,18 @@ class Card < ApplicationRecord
 
     def self.with_shifts(cards = [])
         Shift.pluck(:card_id).uniq.each { |id| cards.push Card.find(id) }
-        cards.sort_by { |card| card.cost }
+        cards.sort_by(&:cost)
     end
 
     def wild_format?
         formats == 'wild'
     end
 
-    def in_hall_of_fame?
-        hall_of_fame
-    end
-
-    def is_crafted?
-        craft
-    end
-
-    def is_legendary?
+    def legendary?
         rarity == 'Legendary'
     end
 
     def put_in_hall_of_fame
-        self.update(hall_of_fame: true, formats: 'wild')
+        update(hall_of_fame: true, formats: 'wild')
     end
 end

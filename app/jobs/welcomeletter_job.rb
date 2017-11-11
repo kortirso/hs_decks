@@ -1,3 +1,4 @@
+# Welcome Mailer Job
 class WelcomeletterJob < ApplicationJob
     queue_as :default
 

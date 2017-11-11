@@ -1,3 +1,4 @@
+# Represents substitutions for cards in deck
 class Line < ApplicationRecord
     belongs_to :deck
     belongs_to :card

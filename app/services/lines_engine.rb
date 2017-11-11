@@ -31,7 +31,7 @@ class LinesEngine
         card = Card.return_by_name(card_name)
         return false unless card
         priority = exchanges[NUMBER_OF_PARAMS * (index - 1) + 1][1].to_i
-        max_amount = card.is_legendary? ? 1 : exchanges[NUMBER_OF_PARAMS * (index - 1) + 2][1].to_i
+        max_amount = card.legendary? ? 1 : exchanges[NUMBER_OF_PARAMS * (index - 1) + 2][1].to_i
         min_mana = exchanges[NUMBER_OF_PARAMS * (index - 1) + 3][1].to_i
         max_mana = exchanges[NUMBER_OF_PARAMS * (index - 1) + 4][1].to_i
         creation(priority, max_amount, min_mana, max_mana, card.id) if check_parameters(priority, max_amount, min_mana, max_mana)

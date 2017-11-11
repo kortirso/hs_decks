@@ -1,5 +1,4 @@
 class LinesController < ApplicationController
-    before_action :get_access
     before_action :check_user_role
     before_action :find_line, only: :destroy
 

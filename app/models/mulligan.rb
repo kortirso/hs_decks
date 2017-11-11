@@ -1,3 +1,4 @@
+# Represents mulligans
 class Mulligan < ApplicationRecord
     include Positionable
 

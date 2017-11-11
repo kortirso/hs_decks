@@ -1,5 +1,4 @@
 class ExchangesController < ApplicationController
-    before_action :get_access
     before_action :check_user_role
     before_action :find_deck, only: :show
     before_action :check_deck_author, only: :show

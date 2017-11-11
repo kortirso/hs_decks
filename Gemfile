@@ -54,10 +54,10 @@ gem 'route_translator'
 # Fast batch record creation (used by migration tasks)
 gem 'activerecord-import'
 
-#gem 'remotipart', github: 'mshibuya/remotipart'
-#gem 'whenever'
-#gem 'jquery-ui-rails'
-#gem 'rails4-autocomplete'
+# gem 'remotipart', github: 'mshibuya/remotipart'
+# gem 'whenever'
+# gem 'jquery-ui-rails'
+# gem 'rails4-autocomplete'
 
 # Admin panel
 gem 'rails_admin', '1.2.0'

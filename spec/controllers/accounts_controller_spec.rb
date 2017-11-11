@@ -8,11 +8,11 @@ RSpec.describe AccountsController, type: :controller do
             it 'should call build_collection users method' do
                 expect_any_instance_of(CollectionConstructor).to receive(:build_collection)
 
-                post :create, params: { cards: {'1'=>1}}, format: :js
+                post :create, params: { cards: { '1' => 1 } }, format: :js
             end
 
             it 'and should render head ok' do
-                post :create, params: { cards: {'1'=>1}}, format: :js
+                post :create, params: { cards: { '1' => 1 } }, format: :js
 
                 expect(response.status).to eq 200
             end

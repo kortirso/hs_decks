@@ -13,7 +13,7 @@ class ScheduleTasks
     end
 
     def check_cards_crafted
-        Collection.adventures.includes(:cards).each { |collection| collection.cards.update_all(craft: false) if collection.cards.last.is_crafted? }
+        Collection.adventures.includes(:cards).each { |collection| collection.cards.update_all(craft: false) if collection.cards.last.craft? }
     end
 
     def check_decks_format

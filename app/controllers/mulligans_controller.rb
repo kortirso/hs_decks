@@ -1,5 +1,4 @@
 class MulligansController < ApplicationController
-    before_action :get_access
     before_action :find_mulligan_position, only: :destroy
 
     def create

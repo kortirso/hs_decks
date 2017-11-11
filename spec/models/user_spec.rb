@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:cards).through(:positions) }
     it { should have_many :decks }
     it { should have_many :checks }
-    it { should validate_inclusion_of(:role).in_array(%w(user deck_master)) }
+    it { should validate_inclusion_of(:role).in_array(%w[user deck_master]) }
     it { should validate_uniqueness_of :username }
     it { should validate_length_of :username }
 
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
         User.create(username: 'tester1', email: 'example@gmail.com', password: 'password')
         user = User.new(username: 'tester2', email: 'example@gmail.com', password: 'password')
         user.valid?
-        
+
         expect(user.errors[:email]).to include('has already been taken')
     end
 

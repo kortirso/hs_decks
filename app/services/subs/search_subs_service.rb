@@ -80,14 +80,14 @@ module Subs
 
         def check_cards_in_deck(ex_card_id, ex_max_amount, amount)
             ex_card = Card.find(ex_card_id)
-            if !cards_in_deck.key?(ex_card_id) || cards_in_deck[ex_card_id] == 1 && !ex_card.is_legendary? && !deck.is_reno_type?
+            if !cards_in_deck.key?(ex_card_id) || cards_in_deck[ex_card_id] == 1 && !ex_card.legendary? && !deck.reno_type?
                 amount = cards_replace(ex_card_id, ex_max_amount, amount)
             end
             amount
         end
 
         def cards_replace(ex_card_id, ex_max_amount, amount)
-            ex_max_amount = 1 if deck.is_reno_type?
+            ex_max_amount = 1 if deck.reno_type?
             ex_in_collection = user_collection[ex_card_id.to_s].nil? ? 0 : user_collection[ex_card_id.to_s]
             real_changes = [cards_in_deck[card.id.to_s], ex_max_amount, amount, ex_in_collection].min
 

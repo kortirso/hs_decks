@@ -1,3 +1,4 @@
+# Represents news
 class News < ApplicationRecord
     validates :url_label, :label, :caption, presence: true
 

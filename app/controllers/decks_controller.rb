@@ -1,8 +1,8 @@
 class DecksController < ApplicationController
-    before_action :get_access, except: :show
+    skip_before_action :check_access, only: :show
     before_action :check_user_role, except: :show
-    before_action :find_deck, only: [:show, :edit, :update, :destroy, :change_format]
-    before_action :check_deck_author, only: [:edit, :update, :destroy, :change_format]
+    before_action :find_deck, only: %i[show edit update destroy change_format]
+    before_action :check_deck_author, only: %i[edit update destroy change_format]
 
     def index
         @decks = current_user.decks.order(playerClass: :asc, formats: :asc, power: :desc)
@@ -57,7 +57,7 @@ class DecksController < ApplicationController
 
     def find_deck
         @deck = Deck.friendly.find(params[:id])
-        render_404 if @deck.nil? 
+        render_404 if @deck.nil?
     end
 
     def check_deck_author

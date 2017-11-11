@@ -3,7 +3,7 @@ RSpec.describe Collection, type: :model do
     it { should validate_presence_of :name_en }
     it { should validate_presence_of :name_ru }
     it { should validate_presence_of :formats }
-    it { should validate_inclusion_of(:formats).in_array(%w(standard wild)) }
+    it { should validate_inclusion_of(:formats).in_array(%w[standard wild]) }
 
     it 'should be valid' do
         collection = create :collection
@@ -36,15 +36,15 @@ RSpec.describe Collection, type: :model do
             end
         end
 
-        context '.is_adventure?' do
+        context '.adventure?' do
             let!(:collection_2) { create :collection, adventure: true }
 
             it 'returns false if it is not adventure' do
-                expect(collection.is_adventure?).to eq false
+                expect(collection.adventure?).to eq false
             end
 
             it 'returns true if it is adventure' do
-                expect(collection_2.is_adventure?).to eq true
+                expect(collection_2.adventure?).to eq true
             end
         end
     end

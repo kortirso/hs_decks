@@ -1,3 +1,4 @@
+# Represents fix captions
 class Fix < ApplicationRecord
     belongs_to :about
 

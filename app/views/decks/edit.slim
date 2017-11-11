@@ -19,13 +19,13 @@
                 .columns.small-3= f.text_field :name_en, placeholder: 'English deck name', value: @deck.name_en
                 .columns.small-2= f.text_field :playerClass, value: @deck.playerClass, disabled: true
                 .columns.small-2= f.text_field :formats, value: @deck.formats, disabled: true
-                .columns.small-2= link_to t('buttons.to_std'), change_format_decks_path(id: @deck.id), class: 'button', method: :post if @deck.is_wild?
+                .columns.small-2= link_to t('buttons.to_std'), change_format_decks_path(id: @deck.id), class: 'button', method: :post if @deck.wild?
                 .columns.small-6= f.text_field :author, placeholder: t('pages.check.main.p_2'), value: @deck.author
                 .columns.small-6= f.text_field :link, placeholder: t('pages.new_deck.new.link'), value: @deck.link
                 .columns.small-2= f.text_field :power, placeholder: t('pages.new_deck.new.deck_power'), value: @deck.power
                 .columns.small-3= f.select :style, options_for_select(@styles, (@deck.style_id.nil? ? nil : @deck.style.locale_name(@locale))), prompt: t('pages.collection.main.all')
                 .columns.small-3= f.select :race, options_for_select(@races, (@deck.race_id.nil? ? nil : @deck.race.locale_name(@locale))), prompt: t('pages.collection.main.races')
-                .columns.small-3= f.text_field :reno_type, value: @deck.is_reno_type? ? t('pages.new_deck.new.reno_type') : t('pages.new_deck.new.typical'), disabled: true
+                .columns.small-3= f.text_field :reno_type, value: @deck.reno_type? ? t('pages.new_deck.new.reno_type') : t('pages.new_deck.new.typical'), disabled: true
                 .columns.small-12= f.trix_editor :caption, value: @deck.caption, placeholder: t('pages.new_deck.new.caption')
                 .columns.small-12= f.trix_editor :caption_en, value: @deck.caption_en, placeholder: 'English deck caption'
                 .clearfix

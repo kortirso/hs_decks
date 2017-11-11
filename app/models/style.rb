@@ -1,3 +1,4 @@
+# Represents decks styles
 class Style < ApplicationRecord
     has_many :decks
 

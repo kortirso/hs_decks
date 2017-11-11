@@ -4,18 +4,18 @@ Rails.application.routes.draw do
 
     devise_for :users
 
-    resources :accounts, only: [:create]
-    resources :exchanges, only: [:show, :create, :destroy] do
+    resources :accounts, only: %i[create]
+    resources :exchanges, only: %i[show create destroy] do
         get :autocomplete_card_name_ru, on: :collection
         get :autocomplete_card_name_en, on: :collection
     end
-    resources :shifts, only: [:index, :create, :destroy] do
+    resources :shifts, only: %i[index create destroy] do
         post :create_shift, on: :collection
     end
-    resources :lines, only: [:create, :destroy]
-    resources :mulligans, only: [:create, :destroy]
-    resources :collections, only: [:create]
-    resources :checks, only: [:index, :show, :create]
+    resources :lines, only: %i[create destroy]
+    resources :mulligans, only: %i[create destroy]
+    resources :collections, only: %i[create]
+    resources :checks, only: %i[index show create]
     resources :decks do
         post :change_format, on: :collection
     end
@@ -38,11 +38,11 @@ Rails.application.routes.draw do
                 post 'all_post' => :all_post
             end
             resources :cards, only: :index
-            resources :decks, only: [:index, :show]
+            resources :decks, only: %i[index show]
             resources :about, only: :index
         end
     end
-    
+
     root 'pages#index'
-    match "*path", to: "application#catch_404", via: :all
+    match '*path', to: 'application#catch_404', via: :all
 end

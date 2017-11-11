@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
     include SubscribeController
-    before_action :get_access, except: [:index, :decks, :about]
+    skip_before_action :check_access
+    before_action :get_access, except: %i[index decks about]
 
     def index
         @news = News.order(id: :desc).limit(4)
@@ -11,9 +12,7 @@ class PagesController < ApplicationController
         @decks = Deck.includes(:user).order(power: :desc, playerClass: :desc)
     end
 
-    def about
-        
-    end
+    def about; end
 
     def collection
         @cards = Card.includes(:collection)
@@ -21,7 +20,7 @@ class PagesController < ApplicationController
     end
 
     def unusable
-        @unusable_cards = current_user.get_unusable_cards
+        @unusable_cards = current_user.unusable_cards
     end
 
     def personal

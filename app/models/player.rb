@@ -1,6 +1,7 @@
+# Represents palyer classes
 class Player < ApplicationRecord
     belongs_to :multi_class
-    
+
     has_many :cards
     has_many :decks
 

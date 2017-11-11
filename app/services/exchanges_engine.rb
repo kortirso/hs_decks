@@ -29,14 +29,14 @@ class ExchangesEngine
             card_name = exchanges[NUMBER_OF_PARAMS * (index - 1) + 1][1]
             check_card(card_name, index) unless card_name.empty?
         end
-        position.set_musthave(exchanges[0][1] == '1' ? true : false)
+        position.musthave(exchanges[0][1] == '1' ? true : false)
     end
 
     def check_card(card_name, index)
         card = Card.return_by_name(card_name)
         return false unless card
         priority = exchanges[NUMBER_OF_PARAMS * (index - 1) + 2][1].to_i
-        max_amount = card.is_legendary? ? 1 : exchanges[NUMBER_OF_PARAMS * (index - 1) + 3][1].to_i
+        max_amount = card.legendary? ? 1 : exchanges[NUMBER_OF_PARAMS * (index - 1) + 3][1].to_i
         creation(priority, max_amount, card.id) if check_parameters(priority, max_amount)
     end
 

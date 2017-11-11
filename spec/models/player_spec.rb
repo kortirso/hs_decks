@@ -23,7 +23,7 @@ RSpec.describe Player, type: :model do
                 expect(Player.names('ru')).to eq [player.name_ru]
             end
         end
-        
+
         context '.return_en' do
             it 'returns english name if arg is en' do
                 expect(Player.return_en(player.name_en)).to eq player.name_en

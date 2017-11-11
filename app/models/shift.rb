@@ -1,3 +1,4 @@
+# Represents shifts for cards
 class Shift < ApplicationRecord
     belongs_to :card
     belongs_to :change, class_name: 'Card'

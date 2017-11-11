@@ -1,3 +1,2 @@
 describe Message do
-
 end

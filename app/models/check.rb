@@ -1,3 +1,4 @@
+# Represents checks
 class Check < ApplicationRecord
     include Positionable
 
@@ -8,5 +9,5 @@ class Check < ApplicationRecord
 
     validates :user_id, :deck_id, :success, presence: true
 
-    scope :of_user, -> (user_id) { where user_id: user_id }
+    scope :of_user, ->(user_id) { where user_id: user_id }
 end

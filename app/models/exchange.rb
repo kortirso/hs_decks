@@ -1,3 +1,4 @@
+# Represents exchanges for cards
 class Exchange < ApplicationRecord
     belongs_to :position
     belongs_to :card

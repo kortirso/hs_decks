@@ -1,3 +1,4 @@
+# Email Job
 class NewsletterJob < ApplicationJob
     queue_as :default
 

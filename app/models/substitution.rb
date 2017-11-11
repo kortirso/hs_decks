@@ -1,3 +1,4 @@
+# Represents substitutions for checks
 class Substitution < ApplicationRecord
     include Positionable
 

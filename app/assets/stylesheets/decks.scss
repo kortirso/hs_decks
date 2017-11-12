@@ -1,0 +1,35 @@
+.decks_page {
+    h1 {
+        font-size: 30px;
+    }
+    .decks {
+        display: flex;
+        flex-direction: row;
+        .block {
+            width: 45%;
+            margin-right: 10%;
+            &:nth-of-type(2) {
+                margin-right: 0;
+            }
+            h2 {
+                font-size: 16px;
+                text-align: center;
+                background: #000;
+                color: #FFF;
+                text-transform: uppercase;
+                padding: 10px 0;
+                margin-bottom: 15px;
+            }
+            .accordion {
+                .accordion-item {
+                    .accordion-title {
+                        color: #000;
+                    }
+                    .accordion-content {
+
+                    }
+                }
+            }
+        }
+    }
+}

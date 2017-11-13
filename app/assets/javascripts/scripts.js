@@ -136,7 +136,7 @@ $(function() {
         }
     });
 
-    $('#tabs-content .costs label').click(function(e) {
+    $('#cards_collection .costs label').click(function(e) {
         e.preventDefault();
         if($(this).hasClass('none')) {
             $(this).removeClass('none').addClass('single');

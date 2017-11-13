@@ -9,14 +9,19 @@ body {
         .top-bar {
             display: flex !important;
             background: none;
+            padding: 10px 0;
             .menu {
                 background: none;
                 li {
+                    margin-right: 30px;
                     a {
                         color: #000;
                         font-size: 16px;
                         font-weight: 400;
-                        padding: 10px 16px;
+                        padding: 10px 0;
+                    }
+                    &:nth-last-of-type(1) {
+                        margin-right: 0;
                     }
                 }
             }

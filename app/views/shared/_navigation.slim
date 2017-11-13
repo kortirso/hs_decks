@@ -17,9 +17,7 @@ nav.nav role='navigation'
                         li= link_to t('nav.logout'), destroy_user_session_path, method: :delete
                     - else
                         li
-                            a data-open='login'= t('nav.login')
-                        li
-                            a data-open='signup'= t('nav.signup')
+                            a data-open='login' Личный кабинет
         .title-bar data-responsive-toggle='example-menu'
             button.menu-icon type='button' data-toggle='example-menu'
             .logo= link_to t('nav.main_page'), root_path

@@ -180,6 +180,17 @@ $(function() {
         }
     });
 
+    $('#cards_collection ul li a').on('click', function() {
+        $('#cards_collection ul li.is-active a').attr('aria-selected', false);
+        $('#cards_collection ul li.is-active').removeClass('is-active');
+
+        $('#cards_collection ul li.' + this.id + ' a').attr('aria-selected', true);
+        $('#cards_collection ul li.' + this.id).show().addClass('is-active');
+
+        $('#cards_collection .tabs-content .is-active').attr('aria-hidden', true).removeClass('is-active');
+        $('#' + $('#cards_collection ul li.' + this.id + ' a').attr('aria-controls')).attr('aria-hidden', false).addClass('is-active');
+    });
+
     $('select#deck_playerClass').on('change', function() {
         $('#card_amount').html('0');
         mana_curve_reset();

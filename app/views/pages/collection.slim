@@ -1,24 +1,25 @@
 - provide(:title, "Deck Hunter | #{t('nav.card_collection')}")
-.page_inner
+- provide(:body, 'collection_page')
+.row
+    - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
+    h4= t('nav.card_collection')
+    p= t('pages.collection.main.p_1')
+    p= t('pages.collection.main.p_2')
+    p= link_to t('pages.collection.main.sync'), personal_path, class: 'button small'
+    #filters
+        span
+            strong= t('pages.collection.main.filters')
+        span= t('pages.collection.main.mana_cost')
+        span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('pages.collection.main.all')
+        span= t('nav.collection')
+        span= select_tag :collection, options_for_select(Collection.all.order(id: :asc).collect { |c| c.locale_name(@locale) }), prompt: t('pages.collection.main.all')
+        span= link_to t('pages.collection.main.set_free'), '', id: 'free_existed', class: 'button small'
     #cards_collection
-        - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
-        h4= t('nav.card_collection')
-        p= t('pages.collection.main.p_1')
-        p= t('pages.collection.main.p_2')
-        p= link_to t('pages.collection.main.sync'), personal_path, class: 'button small'
-        #filters
-            span
-                strong= t('pages.collection.main.filters')
-            span= t('pages.collection.main.mana_cost')
-            span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('pages.collection.main.all')
-            span= t('nav.collection')
-            span= select_tag :collection, options_for_select(Collection.all.order(id: :asc).collect { |c| c.locale_name(@locale) }), prompt: t('pages.collection.main.all')
-            span= link_to t('pages.collection.main.set_free'), '', id: 'free_existed', class: 'button small'
-        ul#cards-tabs.tabs data-tabs=''
+        ul.tabs data-tabs=''
             - classes_list.each_with_index do |name, index|
-                li.tabs-title class="#{'is-active' if index == 0}"
-                    = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
-        .tabs-content#tabs-content data-tabs-content='cards-tabs'
+                li.tabs-title class="#{name}" class="#{'is-active' if index == 0}"
+                    = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", id: "#{name}"
+        .tabs-content data-tabs-content='cards-tabs'
             = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
                 - ids = @packs.collect { |elem| elem[0] }
                 - classes_list.each_with_index do |name, index|

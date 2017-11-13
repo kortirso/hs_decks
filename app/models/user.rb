@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
     scope :news_subscribers, -> { where get_news: true }
 
-    #after_create :welcome_notify
+    after_create :welcome_notify
 
     def deck_master?
         role == 'deck_master'

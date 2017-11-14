@@ -1,3 +1,7 @@
 class NewsSerializer < ActiveModel::Serializer
-    attributes :id, :url_label, :label, :caption, :image, :link
+    attributes :id, :label, :caption, :link, :date
+
+    def date
+        object.created_at.strftime('%Y.%m.%d')
+    end
 end

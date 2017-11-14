@@ -1,5 +1,5 @@
 class DeckSerializer < ActiveModel::Serializer
-    attributes :id, :name, :price, :formats, :power, :player_name, :style_name, :author, :expert, :mana_curve
+    attributes :id, :name, :price, :power, :player_name, :slug
 
     def player_name
         object.player.name_en

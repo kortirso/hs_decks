@@ -106,18 +106,16 @@
                     }
                 }
             }
-            .full_block {
-                .text_block {
-                    padding: 0 20px 0 0;
-                    .header {
-                        font-size: 18px;
-                        font-weight: 400;
-                    }
-                    .date {
-                        font-size: 14px;
-                        text-align: right;
-                        font-style: italic;
-                    }
+            .article_block {
+                padding: 0 20px 0 0;
+                .header {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+                .date {
+                    font-size: 14px;
+                    text-align: right;
+                    font-style: italic;
                 }
             }
         }

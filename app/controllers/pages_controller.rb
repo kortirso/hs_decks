@@ -3,8 +3,16 @@ class PagesController < ApplicationController
     skip_before_action :check_access, only: %i[index decks about]
 
     def index
-        @news = News.order(id: :desc).limit(4)
-        @top_decks = Deck.order(power: :desc).limit(4)
+        respond_to do |format|
+            format.html
+            format.json do
+                render json: {
+                    standard_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('standard').includes(:player).order(power: :desc).limit(4), each_serializer: DeckSerializer),
+                    wild_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('wild').includes(:player).order(power: :desc).limit(4), each_serializer: DeckSerializer),
+                    news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc).limit(4), each_serializer: NewsSerializer)
+                }
+            end
+        end
     end
 
     def decks

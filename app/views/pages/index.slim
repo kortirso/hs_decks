@@ -1,5 +1,6 @@
 - provide(:title, "Deck Hunter | #{t('pages.index.title')}")
 - provide(:body, 'index_page')
+= javascript_pack_tag 'index_page_box'
 section.banner
     header
         h1 Помощник в составлении колод для HearthStone
@@ -36,45 +37,4 @@ section.how_it_works
             .image_block
                 = image_tag 'background.jpg'
 .row
-    .information
-        .block.top_standard
-            h2 Лучшие стандартные колоды
-            .sub_block
-                .image_block
-                    = image_tag "heroes/Shaman_Big.png"
-                .text_block
-                    .header Midrange Shaman
-                    .power Сила колоды - 10/10
-                    .caption= link_to 'Посмотреть колоду', '#'
-            .sub_block
-                .image_block
-                    = image_tag "heroes/Paladin_Big.png"
-                .text_block
-                    .header Agro Paladin
-                    .power Сила колоды - 9/10
-                    .caption= link_to 'Посмотреть колоду', '#'
-        .block.top_wild
-            h2 Лучшие вольные колоды
-            .sub_block
-                .image_block
-                    = image_tag "heroes/Paladin_Big.png"
-                .text_block
-                    .header Secret Paladin
-                    .power Сила колоды - 10/10
-                    .caption= link_to 'Посмотреть колоду', '#'
-            .sub_block
-                .image_block
-                    = image_tag "heroes/Shaman_Big.png"
-                .text_block
-                    .header Midrange Shaman
-                    .power Сила колоды - 9/10
-                    .caption= link_to 'Посмотреть колоду', '#'
-        .block.all_news
-            h2 Новости
-            - @news.each do |article|
-                .full_block
-                    .text_block
-                        .header= article.label
-                        .caption= article.caption
-                        .date= article.created_at.strftime("%Y.%m.%d")
-                        
+    = react_component('IndexPageBox', locale: I18n.locale)                        

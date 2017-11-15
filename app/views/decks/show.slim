@@ -4,6 +4,9 @@
     .deck
         .block.deck_list
             h2 Список карт
+            - ids = @positions.collect { |elem| elem[0] }
+            #cards_list                        
+                = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
         .block.information
             h2 Информация
             p= "Сила колоды - #{@deck.power}"

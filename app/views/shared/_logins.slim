@@ -1,21 +1,21 @@
 #login.reveal.tiny data-reveal=''
     ul.tabs data-tabs='' id='example-tabs'
         li.tabs-title.is-active
-            a href='#panel1' aria-selected='true' Sign In
+            a href='#panel1' aria-selected='true' Вход
         li.tabs-title
-            a data-tabs-target='panel2' href='#panel2' Sign Up
+            a data-tabs-target='panel2' href='#panel2' Регистрация
     .tabs-content data-tabs-content='example-tabs'
         .tabs-panel.is-active id='panel1'
             = simple_form_for User.new, as: :user, url: session_path(:user) do |f|
                 = f.input :email, autofocus: true, label: false, placeholder: 'Email'
-                = f.input :password, autocomplete: 'off', label: false, placeholder: t('modals.pass')
-                = f.button :submit, 'Sign In', class: 'button', id: 'authorization'
+                = f.input :password, autocomplete: 'off', label: false, placeholder: 'Пароль'
+                = f.button :submit, 'Вход', class: 'button', id: 'authorization'
         .tabs-panel id='panel2'
             = simple_form_for User.new, as: :user, url: registration_path(:user) do |f|
-                = f.input :username, required: true, label: false, placeholder: t('modals.username')
+                = f.input :username, required: true, label: false, placeholder: 'Имя пользователя'
                 = f.input :email, required: true, label: false, placeholder: 'Email'
-                = f.input :password, required: true, label: false, placeholder: t('modals.pass')
-                = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: t('modals.confirm')
-                = f.button :submit, 'Sign Up', class: 'button', id: 'registration'
+                = f.input :password, required: true, label: false, placeholder: 'Пароль'
+                = f.input :password_confirmation, autocomplete: 'off', required: true, label: false, placeholder: 'Подтверждение пароля'
+                = f.button :submit, 'Регистрация', class: 'button', id: 'registration'
     button.close-button aria-label=('Close modal') data-close='' type='button'
         span aria-hidden='true' &times;

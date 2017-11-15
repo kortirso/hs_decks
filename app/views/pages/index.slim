@@ -1,10 +1,10 @@
-- provide(:title, "Deck Hunter | #{t('pages.index.title')}")
+- provide(:title, 'Deck Hunter | Главная страница')
 - provide(:body, 'index_page')
 = javascript_pack_tag 'index_page_box'
 section.banner
     header
         h1 Помощник в составлении колод для HearthStone
-        p= t('pages.index.main.p_3')
+        p DeckHunter поможет быстро подобрать колоды для успешной игры в ладдере с учётом имеющихся у вас карт и определить наилучшие замены недостающих карт.
 section.how_it_works
     .grid-container
         h2
@@ -14,7 +14,7 @@ section.how_it_works
         .block.left
             .text_block
                 p Удобное ознакомление с экспертными колодами
-                p Обзор лучших колод и тактика игры.
+                p Обзор только лучших колод и тактика игры.
             .image_block
                 = image_tag 'background.jpg'
         .block.right
@@ -37,4 +37,4 @@ section.how_it_works
             .image_block
                 = image_tag 'background.jpg'
 .grid-container
-    = react_component('IndexPageBox', locale: I18n.locale)                        
+    = react_component('IndexPageBox', locale: I18n.locale)

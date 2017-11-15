@@ -16,7 +16,15 @@ class PagesController < ApplicationController
     end
 
     def decks
-        @decks = Deck.includes(:user).order(power: :desc, playerClass: :desc).to_a
+        respond_to do |format|
+            format.html
+            format.json do
+                render json: {
+                    standard_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('standard').includes(:player).order(power: :desc), each_serializer: DeckSerializer),
+                    wild_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('wild').includes(:player).order(power: :desc), each_serializer: DeckSerializer)
+                }
+            end
+        end
     end
 
     def about; end

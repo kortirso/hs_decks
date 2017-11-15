@@ -1,5 +1,5 @@
 - provide(:title, "Deck Hunter | #{t('pages.new_deck.new.head')}")
-.row#new_deck_page
+.grid-container#new_deck_page
     - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
     = form_for Deck.new, controller: 'decks', action: 'create', method: 'post' do |f|
         .left_side

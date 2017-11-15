@@ -18,12 +18,12 @@
                 .mulligans {
                     .tabs {
                         .tabs-title {
-                            border: 1px solid #FFF;
+                            padding: 2px;
                             a {
                                 padding: 0;
                             }
                             &.is-active {
-                                border: 1px solid blue;
+                                box-shadow: inset 0 0 0 2px #2199e8;
                             }
                         }
                     }

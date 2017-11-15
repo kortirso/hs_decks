@@ -5,11 +5,14 @@
 
 @import 'short_cards.scss';
 @import 'styles.scss';
+
 @import 'navigation.scss';
-@import 'index.scss';
-@import 'decks.scss';
+
+@import 'pages_index.scss';
+@import 'pages_collection.scss';
+@import 'pages_decks.scss';
+
 @import 'deck.scss';
 @import 'new_decks.scss';
 @import 'logins.scss';
-@import 'collection.scss';
 @import 'card.scss';

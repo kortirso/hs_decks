@@ -1,10 +1,11 @@
 import React from 'react';
 import LocalizedStrings from 'react-localization';
 import I18nData from './i18n_data.json';
+import Foundation from 'foundation-sites';
 
 let strings = new LocalizedStrings(I18nData);
 
-class TasksBox extends React.Component {
+export default class IndexPageBox extends React.Component {
 
     constructor() {
         super();
@@ -18,6 +19,10 @@ class TasksBox extends React.Component {
     componentWillMount() {
         this._fetchIndexPageData();
         strings.setLanguage(this.props.locale);
+    }
+
+    componentDidMount() {
+        $(document).foundation();
     }
 
     _fetchIndexPageData() {
@@ -96,5 +101,3 @@ class TasksBox extends React.Component {
         );
     }
 }
-
-export default TasksBox;

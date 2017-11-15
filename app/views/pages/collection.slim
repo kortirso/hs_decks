@@ -15,10 +15,10 @@
         span= select_tag :collection, options_for_select(Collection.all.order(id: :asc).collect { |c| c.locale_name(@locale) }), prompt: t('pages.collection.main.all')
         span= link_to t('pages.collection.main.set_free'), '', id: 'free_existed', class: 'button small'
     #cards_collection
-        ul.tabs data-tabs=''
+        ul.tabs data-tabs='' id='cards-tabs'
             - classes_list.each_with_index do |name, index|
                 li.tabs-title class="#{name}" class="#{'is-active' if index == 0}"
-                    = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}", id: "#{name}"
+                    = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}"
         .tabs-content data-tabs-content='cards-tabs'
             = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
                 - ids = @packs.collect { |elem| elem[0] }

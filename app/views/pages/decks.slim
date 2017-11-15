@@ -1,27 +1,7 @@
-- provide(:title, "Deck Hunter | #{t('nav.expert_decks')}")
+- provide(:title, 'Deck Hunter | Экспертные колоды')
 - provide(:body, 'decks_page')
+= javascript_pack_tag 'decks_page_box'
 .grid-container
-    h1= t('nav.expert_decks')
-    p= t('pages.decks.main.p')
-    .decks
-        .block
-            h2 Колоды стандартного режима
-            ul.accordion data-accordion='' data-allow-all-closed='true'
-                li.accordion-item data-accordion-item=''
-                    = link_to 'Тир 1', '#', class: 'accordion-title'
-                    .accordion-content data-tab-content=''
-
-                li.accordion-item data-accordion-item=''
-                    = link_to 'Тир 2', '#', class: 'accordion-title'
-                    .accordion-content data-tab-content=''
-
-        .block
-            h2 Колоды вольного режима
-            ul.accordion data-accordion='' data-allow-all-closed='true'
-                li.accordion-item data-accordion-item=''
-                    = link_to 'Тир 1', '#', class: 'accordion-title'
-                    .accordion-content data-tab-content=''
-
-                li.accordion-item data-accordion-item=''
-                    = link_to 'Тир 2', '#', class: 'accordion-title'
-                    .accordion-content data-tab-content=''
+    h1 Экспертные колоды
+    p На этой странице вы можете просмотреть все колоды наших экспертов
+    = react_component('DecksPageBox', locale: I18n.locale)

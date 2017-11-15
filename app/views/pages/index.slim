@@ -6,7 +6,7 @@ section.banner
         h1 Помощник в составлении колод для HearthStone
         p= t('pages.index.main.p_3')
 section.how_it_works
-    .row
+    .grid-container
         h2
             span Почему на DeckHunter
             br /
@@ -36,5 +36,5 @@ section.how_it_works
                 p Автоматическая система подберет замены недостающим картам на основе имеющихся карт в коллекции.
             .image_block
                 = image_tag 'background.jpg'
-.row
+.grid-container
     = react_component('IndexPageBox', locale: I18n.locale)                        

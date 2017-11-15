@@ -1,41 +1,32 @@
 - provide(:title, "Deck Hunter | #{t('pages.deck.title')}")
-.page_inner
-    #deck
-        .left_side
-            .info_block
-                h4= t('pages.deck.main.header')
-                p= "#{t('pages.decks.main.power')} - #{@deck.power}"
-                p= "#{t('pages.check.main.p_3')} - #{@deck.price}"
-                p= "#{t('pages.check.main.p_1')} - #{@deck.formats}"
-                p= "#{t('pages.decks.main.style')} - #{@deck.style.locale_name(@locale) unless @deck.style_id.nil?}"
-                p= "#{t('pages.check.main.p_2')} - #{@deck.author}"
-                p= "#{t('pages.decks.main.expert')} - #{@deck.user.username}"
-                = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
-                = raw(@deck.locale_caption(session[:locale]))
-        .right_side
-            h4= "#{t('pages.deck.main.p')} #{@deck.locale_name(session[:locale])}"
-            p= t('pages.deck.main.caption')
-            = form_tag({ controller: 'accounts', action: 'create' }, method: 'post', remote: true) do
-                .cards
-                    - ids = @packs.collect { |elem| elem[0] } if current_user
-                    - positions_ids = @positions.collect { |p| p[0] }
-                    - @deck.cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
-                        .card class="#{card.rarity}"
-                            - checks = current_user.nil? ? false : ids.include?(card.id)
-                            = check_box_tag "cards[#{card.id}]", value = "#{checks ? @packs[ids.index(card.id)][1] : 0}", checked = checks
-                            = label_tag "cards[#{card.id}]", '', class: "#{checks ? (@packs[ids.index(card.id)][1] == 1 ? 'single' : 'double') : 'none'} base_#{@positions[positions_ids.index card.id][1]}", style: "background-image: url('/cards/#{@locale}/#{card.cardId}.png');"
-                - if current_user
-                    = submit_tag t('buttons.save'), class: 'button'
+- provide(:body, 'deck_page')
+.grid-container
+    .deck
+        .block.deck_list
+            h2 Список карт
+        .block.information
+            h2 Информация
+            p= "Сила колоды - #{@deck.power}"
+            p= "Цена - #{@deck.price}"
+            p= "Формат - #{@deck.formats}"
+            p= "Тип - #{@deck.style.locale_name(@locale) unless @deck.style_id.nil?}"
+            p= "Автор - #{@deck.author}"
+            p= "Эксперт - #{@deck.user.username}"
+            = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
+        .block.caption
+            h2
+                | Описание колоды 
+                = @deck.locale_name(session[:locale])
+            = raw(@deck.locale_caption(session[:locale]))
             .mulligans
-                h4= t('pages.deck.main.mulligans')
+                h4 Муллиганы
                 - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)
-                ul#cards-tabs.tabs data-tabs=''
+                ul.tabs data-tabs='' id='cards-tabs'
                     - classes_list.each_with_index do |name, index|
                         li.tabs-title class="#{'is-active' if index == 0}"
-                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
-                .tabs-content#tabs-content data-tabs-content='cards-tabs'
+                            = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}"
+                .tabs-content data-tabs-content='cards-tabs'
                     - classes_list.each_with_index do |name, index|
-                        .tabs-panel class="class_#{name} #{'is-active' if index.zero?}" id="cards#{index}"
-                            - @mulligans.find_by(player_id: Player.return_by_name(name).id).positions.sorted_by_cards.each do |pos|
-                                = image_tag "/cards/#{@locale}/#{pos.card.cardId}.png"
+                        .tabs-panel class="#{'is-active' if index.zero?}" id="cards#{index}"
+                            p= index
 = render 'shared/save_modal'

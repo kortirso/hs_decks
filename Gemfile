@@ -33,9 +33,6 @@ gem 'redis', '~> 3.0'
 # Store secrets
 gem 'figaro'
 
-# Foundation for frontend
-gem 'foundation-rails', '6.4.1.2'
-
 # Auto-prefixing CSS for cross-browser compat.
 gem 'autoprefixer-rails', '6.7.6'
 

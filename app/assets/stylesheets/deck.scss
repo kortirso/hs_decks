@@ -1,0 +1,38 @@
+.deck_page {
+    .deck {
+        display: flex;
+        flex-direction: row;
+        .block {
+            padding: 0 10px;
+            &.deck_list {
+                width: 20%
+            }
+            &.information {
+                width: 20%;
+                p {
+                    margin-bottom: 5px;
+                }
+            }
+            &.caption {
+                width: 60%;
+                .mulligans {
+                    .tabs {
+                        .tabs-title {
+                            border: 1px solid #FFF;
+                            a {
+                                padding: 0;
+                            }
+                            &.is-active {
+                                border: 1px solid blue;
+                            }
+                        }
+                    }
+                }
+            }
+            h2 {
+                font-size: 24px;
+                font-weight: 300;
+            }
+        }
+    }
+}

@@ -30,8 +30,6 @@ class TasksBox extends React.Component {
         });
     }
 
-    
-
     _prepareDecksList(type) {
         let decksList;
         let header;

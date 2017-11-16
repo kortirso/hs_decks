@@ -1,28 +1,23 @@
 - provide(:title, "Deck Hunter | #{t('pages.deck.title')}")
 - provide(:body, 'deck_page')
 .grid-container
+    .header
+        h1= @deck.locale_name(session[:locale])
+        .date= "Обновлено - #{@deck.updated_at.strftime('%d/%m/%Y')}"
     .deck
-        .block.deck_list
-            h2 Список карт
-            - ids = @positions.collect { |elem| elem[0] }
-            #cards_list                        
-                = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
-        .block.information
-            h2 Информация
-            p= "Сила колоды - #{@deck.power}"
-            p= "Цена - #{@deck.price}"
-            p= "Формат - #{@deck.formats}"
-            p= "Тип - #{@deck.style.locale_name(@locale) unless @deck.style_id.nil?}"
-            p= "Автор - #{@deck.author}"
-            p= "Эксперт - #{@deck.user.username}"
-            = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
         .block.caption
-            h2
-                | Описание колоды 
-                = @deck.locale_name(session[:locale])
-            = raw(@deck.locale_caption(session[:locale]))
+            .sub_block
+                h2 Информация
+                p= "Сила колоды - #{@deck.power}"
+                p= "Цена - #{@deck.price}"
+                p= "Формат - #{@deck.formats}"
+                p= "Тип - #{@deck.style.locale_name(@locale) unless @deck.style_id.nil?}"
+                p= "Автор - #{@deck.author}"
+            .sub_block
+                h2 Описание колоды
+                = raw(@deck.locale_caption(session[:locale]))
             .mulligans
-                h4 Муллиганы
+                h2 Муллиганы
                 - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)
                 ul.tabs data-tabs='' id='cards-tabs'
                     - classes_list.each_with_index do |name, index|
@@ -32,4 +27,12 @@
                     - classes_list.each_with_index do |name, index|
                         .tabs-panel class="#{'is-active' if index.zero?}" id="cards#{index}"
                             p= index
+        .block.deck_list
+            h2 Список карт
+            = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
+            - ids = @positions.collect { |elem| elem[0] }
+            #cards_list
+                = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
+javascript:
+    $(document).foundation();
 = render 'shared/save_modal'

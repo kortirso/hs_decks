@@ -208,12 +208,6 @@ $(function() {
         $('#cards_list .card').remove();
     });
 
-    $('.card').mouseenter(function() {
-        $(this).children('.card_caption').show();
-    }).mouseleave(function() {
-        $(this).children('.card_caption').hide();
-    });
-
     $('.duplicate_exchange').click(function(e) {
         var formsOnPage, newNestedForm;
         e.preventDefault();

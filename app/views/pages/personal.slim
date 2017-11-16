@@ -1,7 +1,8 @@
 - provide(:title, "Deck Hunter | #{t('nav.personal')}")
-.page_inner
-    h3= t('nav.personal')
-    p= t('pages.personal.main.p')
+.grid-container
+    .head
+        h1= t('nav.personal')
+        p= t('pages.personal.main.p')
     #subscribe
         - if @user.get_news
             p= t('pages.personal.main.subscribe')

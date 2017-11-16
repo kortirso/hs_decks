@@ -1,7 +1,7 @@
-- provide(:title, "Deck Hunter | #{t('pages.deck.title')}")
+- provide(:title, 'Deck Hunter | Описание колоды')
 - provide(:body, 'deck_page')
 .grid-container
-    .header
+    .head
         h1= @deck.locale_name(session[:locale])
         .date= "Обновлено - #{@deck.updated_at.strftime('%d/%m/%Y')}"
     .deck

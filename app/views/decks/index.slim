@@ -2,8 +2,9 @@
 .grid-container
     = link_to t('pages.new_deck.main.ex_const'), shifts_path, class: 'button'
     #decks
-        h4= t('pages.new_deck.main.header')
-        p= link_to t('buttons.new_deck'), new_deck_path, class: 'button'
+        .header
+            h1= t('pages.new_deck.main.header')
+            p= link_to t('buttons.new_deck'), new_deck_path, class: 'button'
         table.with-background
             thead
                 tr

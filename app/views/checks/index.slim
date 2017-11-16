@@ -1,28 +1,29 @@
-- provide(:title, "Deck Hunter | #{t('nav.analyze')}")
-.page_inner#user data={ owner: "#{current_user.id}" }
-    h4= t('pages.checks.main.head')
-    p= t('pages.checks.main.p_1')
-    p= t('pages.checks.main.p_2')
+- provide(:title, 'Deck Hunter | Анализ карт')
+- provide(:body, 'checks_page')
+.grid-container#user data={ owner: "#{current_user.id}" }
+    .head
+        h1 Анализ существующих карт
+        p На этой странице вы можете запустить проверку ваших карт и узнать, какую экспертную колоду вы сможете полностью собрать.
+        p Также вы можете указать минимальный порог успешности подбора колоды, максимальное количество пыли, которое вы можете потратить на крафт карт, определенный класс героя или формат колоды.
     = form_tag({ controller: 'checks', action: 'create' }, method: 'post') do
-        .row
-            .columns.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: t('pages.checks.main.p_6')
-            .columns.small-3= select_tag :formats, options_for_select(%w(standard wild))
-            .columns.small-3= text_field_tag :power, nil, placeholder: t('pages.decks.main.power')
-            .columns.small-3= select_tag :style, options_for_select(@styles), prompt: t('pages.checks.main.p_5')
-        = submit_tag t('buttons.check_decks'), class: 'button'
+        .grid-x
+            .cell.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: 'Все классы'
+            .cell.small-3= select_tag :formats, options_for_select(%w(standard wild))
+            .cell.small-3= text_field_tag :power, nil, placeholder: 'Сила колоды'
+            .cell.small-3= select_tag :style, options_for_select(@styles), prompt: 'Все типы колод'
+        = submit_tag 'Проверить колоды', class: 'button'
     #checks
-        h5= t('pages.checks.main.last_checks')
+        h2 Последняя проведенная проверка
         table.with-background
             thead
                 tr
-                    th= t('pages.checks.main.success')
-                    th= t('pages.checks.main.dust')
-                    th= t('pages.decks.main.name')
-                    th= t('pages.decks.main.class')
-                    th= t('pages.decks.main.power')
-                    th= t('pages.decks.main.format')
-                    th= t('pages.decks.main.author')
-                    th= t('pages.decks.main.expert')
+                    th Собранность
+                    th Цена
+                    th Название
+                    th Класс Героя
+                    th Сила колоды
+                    th Формат
+                    th Автор
                     th
             tbody
                 - @checks.each do |check|
@@ -34,5 +35,4 @@
                         td= check.deck.power
                         td= check.deck.formats
                         td= check.deck.author
-                        td= check.deck.user.username
-                        td= link_to t('buttons.view_check'), check_path(check), class: 'button small'
+                        td= link_to 'Проверка', check_path(check), class: 'button small'

@@ -46,26 +46,6 @@ body {
         position: relative;
         min-height: 100%;
         padding: 82px 0 150px;
-        footer {
-            background: rgba(0, 0, 0, 0.75);
-            color: #FFF;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            h4 {
-                font-size: 18px;
-            }
-            p {
-                margin-bottom: 3px;
-                font-size: 14px;
-            }
-            img {
-                width: 25px;
-                border-radius: 6px;
-            }
-        }
     }
     &.index_page {
         .content {

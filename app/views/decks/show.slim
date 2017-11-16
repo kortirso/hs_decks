@@ -33,6 +33,6 @@
             - ids = @positions.collect { |elem| elem[0] }
             #cards_list
                 = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
-javascript:
-    $(document).foundation();
 = render 'shared/save_modal'
+script type='text/javascript'
+    = render 'scripts/foundation.js'

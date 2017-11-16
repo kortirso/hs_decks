@@ -1,15 +1,39 @@
 .collection_page {
-    .tabs-title {
-        a {
-            padding: 2px;
+    .header {
+        h1 {
+            font-size: 34px;
+            line-height: 30px;
+            font-weight: 300;
+            margin-bottom: 5px;
         }
-        &.is-active a {
-            box-shadow: inset 0 0 0 2px #2199e8;
+        p {
+            margin-bottom: 5px;
+        }
+    }
+    .tabs {
+        display: inline-block;
+        .tabs-title {
+            a {
+                padding: 2px;
+                img {
+                    width: 52px;
+                }
+            }
+            &.is-active a {
+                box-shadow: inset 0 0 0 2px #2199e8;
+            }
         }
     }
     .tabs-content {
+        border: none;
+        background: none;
         .tabs-panel {
-            @include before-after-mixin;
+            padding: 0;
+            p {
+                a {
+                    margin: 0 10px 0 0;
+                }
+            }
             .costs {
                 margin-bottom: 10px;
                 p:nth-of-type(1) {
@@ -26,16 +50,21 @@
 }
 
 #filters {
+    margin: 10px 0;
     span {
         margin-right: 10px;
+        display: inline-block;
     }
     #mana_cost, #collection {
-        display: inline;
+        margin: 0;
     }
     #mana_cost {
         width: 100px;
     }
     #collection {
         width: 250px;
+    }
+    #free_existed {
+        margin-bottom: 5px;
     }
 }

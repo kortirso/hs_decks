@@ -30,6 +30,6 @@ class ApplicationController < ActionController::Base
     end
 
     def locale
-        @locale = :en
+        @locale = :ru
     end
 end

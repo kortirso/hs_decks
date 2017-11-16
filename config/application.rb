@@ -10,7 +10,7 @@ module HsDecks
         config.assets.paths << Rails.root.join('node_modules')
 
         I18n.available_locales = %i[en ru]
-        config.i18n.default_locale = :en
+        config.i18n.default_locale = :ru
 
         config.active_record.schema_format = :ruby
         config.generators do |g|

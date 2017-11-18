@@ -27,3 +27,5 @@
                         = link_to t('buttons.edit'), edit_deck_path(deck), class: 'button small'
                         = link_to t('buttons.exchanges'), exchange_path(deck.id), class: 'button small'
                         = link_to t('buttons.delete'), deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small'
+script type='text/javascript'
+    = render 'scripts/foundation.js'

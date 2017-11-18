@@ -1,37 +1,36 @@
-- provide(:title, "Deck Hunter | #{t('pages.new_deck.new.head')}")
-.grid-container#new_deck_page
+- provide(:title, 'Deck Hunter | Новая колода')
+- provide(:body, 'new_deck_page')
+.grid-container
     - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
     = form_for Deck.new, controller: 'decks', action: 'create', method: 'post' do |f|
         .left_side
             .head
-                h1= t('pages.new_deck.new.head')
+                h1 Новая колода
             p
-                = t('pages.new_deck.new.p_1')
+                | Количество карт в колоде - 
                 span#card_amount= '0'
             = render 'shared/mana_curve', by_mana: nil
-            = render 'shared/card_type', by_type: nil
             #cards_list
-            = f.submit t('buttons.save'), class: 'button'
+            = f.submit 'Сохранить', class: 'button'
         .right_side
-            p= t('pages.new_deck.new.change_click')
             .grid-x
-                .cell.small-3= f.text_field :name, placeholder: t('pages.new_deck.new.deck_name')
+                .cell.small-3= f.text_field :name, placeholder: 'Название колоды'
                 .cell.small-3= f.text_field :name_en, placeholder: 'English deck name'
                 .cell.small-3= f.select :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
                 .cell.small-3= f.select :formats, options_for_select(%w(wild standard)), include_blank: false
-                .cell.small-6= f.text_field :author, placeholder: t('pages.check.main.p_2')
-                .cell.small-6= f.text_field :link, placeholder: t('pages.new_deck.new.link')
-                .cell.small-1= f.text_field :power, placeholder: t('pages.decks.main.deck_power')
-                .cell.small-3= f.select :style, options_for_select(@styles), prompt: t('pages.collection.main.all')
-                .cell.small-3= f.select :race, options_for_select(@races), prompt: t('pages.collection.main.races')
-                .cell.small-3= f.select :reno_type, options_for_select([[t('pages.new_deck.new.typical'), 1], [t('pages.new_deck.new.reno_type'), 2]], 1)
-                .cell.small-12= f.trix_editor :caption, value: nil, placeholder: t('pages.new_deck.new.caption')
+                .cell.small-6= f.text_field :author, placeholder: 'Автор колоды'
+                .cell.small-6= f.text_field :link, placeholder: 'Ссылка'
+                .cell.small-2= f.text_field :power, placeholder: 'Сила колоды'
+                .cell.small-3= f.select :style, options_for_select(@styles), prompt: 'Все'
+                .cell.small-4= f.select :race, options_for_select(@races), prompt: 'Приоритетные существа'
+                .cell.small-3= f.select :reno_type, options_for_select([['Обычная колода', 1], ['Рено колода', 2]], 1)
+                .cell.small-12= f.trix_editor :caption, value: nil, placeholder: 'Описание'
                 .cell.small-12= f.trix_editor :caption_en, value: nil, placeholder: 'English deck caption'
             #filters
                 span
-                    strong= t('pages.collection.main.filters')
-                span= t('pages.collection.main.mana_cost')
-                span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('pages.collection.main.all')
+                    strong Фильтры
+                span Цена карт
+                span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: 'Все'
             ul.tabs data-tabs='' id='new-cards-tabs'
                 - classes_list.each_with_index do |name, index|
                     li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"

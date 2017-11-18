@@ -1,15 +1,15 @@
 - provide(:title, 'Deck Hunter | Shifts Builder Page')
-.page_inner.with_background
+.grid-container
     #lines
         = simple_form_for :shifts, url: create_shift_shifts_path, method: :post, remote: true do |f|
             h4 Замены для определенных карт
             p В данном блоке можно создать замены для определенных карт в независимости от колод.
             = submit_tag t('buttons.save'), class: 'button'
-            .long-input.inputs= f.input 'main_card', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false, placeholder: 'Choose card'
+            .long-input.inputs= f.input 'main_card', label: false, placeholder: 'Choose card'
             .lines
                 = f.simple_fields_for :shifts do |y|
                     .pos data={ position: 0 }
-                        .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false, placeholder: 'Choose exchange'
+                        .long-input.inputs= y.input 'card_0', label: false, placeholder: 'Choose exchange'
                         .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
                         = link_to 'x', '', class: 'remove_line button', remote: true
                     p= link_to 'Добавить замену', '', class: 'duplicate_line button'
@@ -50,7 +50,7 @@
                                             = link_to 'x', shift_path(shift), method: :delete, remote: true
                         = f.simple_fields_for "#{card.id}" do |y|
                             .pos data={ position: 0 }
-                                .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
+                                .long-input.inputs= y.input 'card_0', label: false
                                 .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
                                 = link_to 'x', '', class: 'remove_exchange button', remote: true
                             p= link_to 'Добавить замену', '', class: 'duplicate_exchange button'

@@ -1,5 +1,5 @@
 - provide(:title, 'Deck Hunter | Exchanges Page')
-.page_inner.with_background
+.grid-container
     #lines
         = simple_form_for :lines, url: lines_path, method: :post, remote: true do |f|
             h4 Очередь замен для колоды
@@ -38,7 +38,7 @@
             .lines
                 = f.simple_fields_for 'line' do |y|
                     .pos data={ position: 0 }
-                        .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
+                        .long-input.inputs= y.input 'card_0', label: false
                         .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
                         .small-input.inputs= y.input 'max_0', label: false, placeholder: 'max amount'
                         .small-input.inputs= y.input 'min_mana_0', label: false, placeholder: 'min mana'
@@ -118,7 +118,7 @@
                             = y.check_box "must_have_#{pos.id}", value: "#{checks ? 1 : 0}", checked: checks
                             = y.label "must_have_#{pos.id}", 'Must Have'
                             .pos data={ position: 0 }
-                                .long-input.inputs= y.input 'card_0', url: ("#{@locale}" == 'ru' ? autocomplete_card_name_ru_exchanges_path : autocomplete_card_name_en_exchanges_path), as: :autocomplete, label: false
+                                .long-input.inputs= y.input 'card_0', label: false
                                 .small-input.inputs= y.input 'priority_0', label: false, placeholder: 'priority'
                                 .small-input.inputs= y.input 'max_0', label: false, placeholder: 'max amount'
                                 = link_to 'x', '', class: 'remove_exchange button', remote: true

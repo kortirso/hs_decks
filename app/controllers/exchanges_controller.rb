@@ -3,8 +3,6 @@ class ExchangesController < ApplicationController
     before_action :find_deck, only: :show
     before_action :check_deck_author, only: :show
     before_action :find_exchange, only: :destroy
-    autocomplete :card, :name_ru
-    autocomplete :card, :name_en
 
     def show
         @positions = DeckShowExchangesQuery.new(@deck).query

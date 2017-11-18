@@ -1,0 +1,30 @@
+.admin_decks_page {
+    .head {
+        .button {
+            margin-right: 5px;
+            margin-bottom: 0;
+        }
+    }
+    table {
+        thead {
+            tr {
+                th {
+                    font-weight: 400;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    &:nth-last-of-type(1) {
+                        text-align: right;
+                    }
+                }
+            }
+            .button {
+                margin-right: 5px;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

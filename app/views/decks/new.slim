@@ -3,7 +3,8 @@
     - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
     = form_for Deck.new, controller: 'decks', action: 'create', method: 'post' do |f|
         .left_side
-            h4= t('pages.new_deck.new.head')
+            .head
+                h1= t('pages.new_deck.new.head')
             p
                 = t('pages.new_deck.new.p_1')
                 span#card_amount= '0'
@@ -13,29 +14,33 @@
             = f.submit t('buttons.save'), class: 'button'
         .right_side
             p= t('pages.new_deck.new.change_click')
-            .columns.small-3= f.text_field :name, placeholder: t('pages.new_deck.new.deck_name')
-            .columns.small-3= f.text_field :name_en, placeholder: 'English deck name'
-            .columns.small-3= f.select :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
-            .columns.small-3= f.select :formats, options_for_select(%w(wild standard)), include_blank: false
-            .columns.small-6= f.text_field :author, placeholder: t('pages.check.main.p_2')
-            .columns.small-6= f.text_field :link, placeholder: t('pages.new_deck.new.link')
-            .columns.small-1= f.text_field :power, placeholder: t('pages.decks.main.deck_power')
-            .columns.small-3= f.select :style, options_for_select(@styles), prompt: t('pages.collection.main.all')
-            .columns.small-3= f.select :race, options_for_select(@races), prompt: t('pages.collection.main.races')
-            .columns.small-3= f.select :reno_type, options_for_select([[t('pages.new_deck.new.typical'), 1], [t('pages.new_deck.new.reno_type'), 2]], 1)
-            .columns.small-12= f.trix_editor :caption, value: nil, placeholder: t('pages.new_deck.new.caption')
-            .columns.small-12= f.trix_editor :caption_en, value: nil, placeholder: 'English deck caption'
-            .clearfix
+            .grid-x
+                .cell.small-3= f.text_field :name, placeholder: t('pages.new_deck.new.deck_name')
+                .cell.small-3= f.text_field :name_en, placeholder: 'English deck name'
+                .cell.small-3= f.select :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
+                .cell.small-3= f.select :formats, options_for_select(%w(wild standard)), include_blank: false
+                .cell.small-6= f.text_field :author, placeholder: t('pages.check.main.p_2')
+                .cell.small-6= f.text_field :link, placeholder: t('pages.new_deck.new.link')
+                .cell.small-1= f.text_field :power, placeholder: t('pages.decks.main.deck_power')
+                .cell.small-3= f.select :style, options_for_select(@styles), prompt: t('pages.collection.main.all')
+                .cell.small-3= f.select :race, options_for_select(@races), prompt: t('pages.collection.main.races')
+                .cell.small-3= f.select :reno_type, options_for_select([[t('pages.new_deck.new.typical'), 1], [t('pages.new_deck.new.reno_type'), 2]], 1)
+                .cell.small-12= f.trix_editor :caption, value: nil, placeholder: t('pages.new_deck.new.caption')
+                .cell.small-12= f.trix_editor :caption_en, value: nil, placeholder: 'English deck caption'
             #filters
                 span
                     strong= t('pages.collection.main.filters')
                 span= t('pages.collection.main.mana_cost')
                 span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: t('pages.collection.main.all')
-            ul#new-cards-tabs.tabs data-tabs=''
+            ul.tabs data-tabs='' id='new-cards-tabs'
                 - classes_list.each_with_index do |name, index|
                     li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
-                        = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}", 'aria-selected' => "#{'true' if index == 0}"
-            .tabs-content#new-tabs-content data-tabs-content='new-cards-tabs'
+                        = link_to image_tag("heroes/#{name}.png", alt: name), "#cards#{index}"
+            .tabs-content data-tabs-content='new-cards-tabs'
                 - classes_list.each_with_index do |name, index|
                     .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
                         = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: nil, ids: []
+script type='text/javascript'
+    = render 'scripts/foundation.js'
+    = render 'scripts/filters_format.js'
+    = render 'scripts/new_deck_cards.js'

@@ -36,6 +36,9 @@ gem 'figaro'
 # Auto-prefixing CSS for cross-browser compat.
 gem 'autoprefixer-rails', '6.7.6'
 
+# Front
+gem 'foundation-rails', '6.4.1.3'
+
 # Use Slim as the templating engine. Better than ERB
 gem 'slim'
 

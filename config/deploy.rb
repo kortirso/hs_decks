@@ -25,9 +25,9 @@ namespace :deploy do
     after :publishing, :restart
 end
 
-namespace :deploy do
+namespace :yarn do
     desc 'Yarn'
-    task :yarn do
+    task :install do
         on roles(:app) do
             within release_path do
                 with rails_env: fetch(:rails_env) do
@@ -38,4 +38,4 @@ namespace :deploy do
     end
 end
 
-before 'assets:precompile ', 'deploy:yarn'
+after 'bundler:install', 'yarn:install'

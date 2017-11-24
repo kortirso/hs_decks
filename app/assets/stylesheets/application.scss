@@ -1,7 +1,8 @@
 /*
 *= require trix
-*= require foundation-sites/dist/css/foundation
 */
+
+@import 'foundation/foundation_and_overrides.scss';
 
 @import 'short_cards.scss';
 @import 'styles.scss';

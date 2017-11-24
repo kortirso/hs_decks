@@ -1,7 +1,6 @@
 import React from 'react';
 import LocalizedStrings from 'react-localization';
 //import I18nData from './i18n_data.json';
-import Foundation from 'foundation-sites';
 
 //let strings = new LocalizedStrings(I18nData);
 

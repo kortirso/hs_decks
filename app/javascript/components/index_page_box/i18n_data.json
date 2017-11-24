@@ -2,11 +2,15 @@
     "en":{
         "standard_header": "Best standard deck",
         "wild_header": "Best wild decks",
-        "news_header": "News"
+        "news_header": "News",
+        "power": "Deck's power",
+        "view": "View deck"
     },
     "ru": {
-        "select": "Лучшие стандартные колоды",
-        "localize": "Лучшие вольные колоды",
-        "output": "Новости"
+        "standard_header": "Лучшие стандартные колоды",
+        "wild_header": "Лучшие вольные колоды",
+        "news_header": "Новости",
+        "power": "Сила колоды",
+        "view": "Посмотреть колоду"
     }
 }

@@ -20,7 +20,7 @@ export default class DecksPageBox extends React.Component {
     }
 
     componentDidMount() {
-        $(document).foundation();
+        $('.accordion').foundation();
     }
 
     _fetchPageData() {
@@ -65,7 +65,7 @@ export default class DecksPageBox extends React.Component {
             return (
                 <div className='sub_block' key={deck.id}>
                     <div className='image_block'>
-                        <img src={`../assets/heroes/${deck.player_name}_Big.png`} />
+                        <img src={`/images/heroes/${deck.player_name}_Big.png`} />
                     </div>
                     <div className='text_block'>
                         <div className='header'>{deck.name}</div>

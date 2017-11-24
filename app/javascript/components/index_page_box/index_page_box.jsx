@@ -21,7 +21,7 @@ export default class IndexPageBox extends React.Component {
     }
 
     componentDidMount() {
-        $(document).foundation();
+        $('.information').foundation();
     }
 
     _fetchIndexPageData() {
@@ -39,10 +39,10 @@ export default class IndexPageBox extends React.Component {
         let header;
         if (type == 'standard') {
             decksList = this._prepareDeck(this.state.standardDecks);
-            header = 'Лучшие стандартные колоды';
+            header = strings.standard_header;
         } else {
             decksList = this._prepareDeck(this.state.wildDecks);
-            header = 'Лучшие вольные колоды';
+            header = strings.wild_header;
         }
         return (
             <div className='block'>
@@ -57,12 +57,12 @@ export default class IndexPageBox extends React.Component {
             return (
                 <div className='sub_block' key={deck.id}>
                     <div className='image_block'>
-                        <img src={`assets/heroes/${deck.player_name}_Big.png`} />
+                        <img src={`/images/heroes/${deck.player_name}_Big.png`} />
                     </div>
                     <div className='text_block'>
                         <div className='header'>{deck.name}</div>
-                        <div className='power'>Сила колоды - {deck.power}</div>
-                        <div className='caption'><a href={`decks/${deck.slug}`}>Посмотреть колоду</a></div>
+                        <div className='power'>{strings.power} - {deck.power}</div>
+                        <div className='caption'><a href={`decks/${deck.slug}`}>{strings.view}</a></div>
                     </div>
                 </div>
             );
@@ -72,7 +72,7 @@ export default class IndexPageBox extends React.Component {
     _prepareNewsList() {
         return (
             <div className='block'>
-                <h2>Новости</h2>
+                <h2>{strings.news_header}</h2>
                 {this._prepareNews()}
             </div>
         )

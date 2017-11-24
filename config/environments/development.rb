@@ -1,7 +1,7 @@
 Rails.application.configure do
     # Settings specified here will take precedence over those in config/application.rb.
 
-    config.x.webpacker[:dev_server_host] = 'http://localhost:3035'
+    config.x.webpacker[:dev_server_host] = 'http://localhost:8080'
 
     # In the development environment your application's code is reloaded on
     # every request. This slows down response time but is perfect for development

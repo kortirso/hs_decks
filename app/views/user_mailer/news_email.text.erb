@@ -1,11 +1,8 @@
-Привет, <%= @user.username %>
+Добрый день, <%= @user.username %>
+
+У нас тут подоспели новости от проекта DeckHunter.
 
 ==============================
 
-Внимание! Новые новости от проекта HearthStone Deck Builder.
-
 <%= @news.label %>
 <%= @news.caption %>
-<% unless @news.link.empty? %>
-<%= "Подробности по ссылке - #{@news.link}" %>
-<% end %>

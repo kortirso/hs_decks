@@ -1,13 +1,8 @@
-doctype html
-html lang='en'
-    head
-        meta http-equiv='Content-Type' content='text/html; charset=utf-8'
-        style
-        
-    body
-        h1= "Привет, #{@user.username}"
-        p Внимание! Новые новости от проекта HearthStone Deck Builder.
-        h3= @news.label
-        p= @news.caption
-        - unless @news.link.empty?
-            p= link_to 'Подробности', @news.link
+.mailer
+    .head
+        h1= "Добрый день, #{@user.username}"
+        p У нас тут подоспели новости от проекта DeckHunter.
+    .body
+        .block
+            h2= @news.label
+            p= @news.caption

@@ -54,11 +54,6 @@ gem 'route_translator'
 # Fast batch record creation (used by migration tasks)
 gem 'activerecord-import'
 
-# gem 'remotipart', github: 'mshibuya/remotipart'
-# gem 'whenever'
-# gem 'jquery-ui-rails'
-# gem 'rails4-autocomplete'
-
 # Admin panel
 gem 'rails_admin', '1.2.0'
 
@@ -99,6 +94,7 @@ group :development do
     gem 'capistrano-rails', require: false
     gem 'capistrano-rvm', require: false
     gem 'capistrano-sidekiq', require: false
+    gem 'letter_opener'
     gem 'listen', '~> 3.0.5'
     gem 'spring'
     gem 'spring-watcher-listen', '~> 2.0.0'

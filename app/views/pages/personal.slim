@@ -1,23 +1,27 @@
-- provide(:title, "Deck Hunter | #{t('nav.personal')}")
-.grid-container
-    .head
-        h1= t('nav.personal')
-        p= t('pages.personal.main.p')
-    #subscribe
-        - if @user.get_news
-            p= t('pages.personal.main.subscribe')
-            = link_to t('buttons.unsubscribe'), news_unsubscribe_path, class: 'button', method: :post, remote: true
-        - else
-            p= t('pages.personal.main.unsubscribe')
-            = link_to t('buttons.subscribe'), news_subscribe_path, class: 'button', method: :post, remote: true
-    #hearthpwn
-        h4= t('pages.personal.main.pwn.header')
-        p= t('pages.personal.main.pwn.p')
-        p
-            a data-open='instructionModal'= t('pages.personal.main.pwn.instr')
-        = form_tag({ controller: 'collections', action: 'create' }, method: 'post', remote: true) do
-            .columns.small-2= text_field_tag :username, nil, placeholder: 'Username'
-            = submit_tag t('buttons.upload'), class: 'button'
+- provide(:title, 'Deck Hunter | Личная страница')
+- provide(:body, 'personal_page')
+.grid-container.personal
+    .block
+        .head
+            h1 Подписка на новости
+            p Вы можете подписаться (или отписаться) на получение новостей от проекта о новых колодах или обновлении уже имеющихся колод, а также на различные новости о HearthStone.
+        .inside
+            - if @user.get_news
+                p= t('pages.personal.main.subscribe')
+                = link_to t('buttons.unsubscribe'), news_unsubscribe_path, class: 'button', method: :post, remote: true
+            - else
+                p= t('pages.personal.main.unsubscribe')
+                = link_to t('buttons.subscribe'), news_subscribe_path, class: 'button', method: :post, remote: true
+    .block
+        .head
+            h1= t('pages.personal.main.pwn.header')
+            p= t('pages.personal.main.pwn.p')
+        .inside
+            p
+                a data-open='instructionModal'= t('pages.personal.main.pwn.instr')
+            = form_tag({ controller: 'collections', action: 'create' }, method: 'post', remote: true) do
+                .columns.small-2= text_field_tag :username, nil, placeholder: 'Username'
+                = submit_tag t('buttons.upload'), class: 'button'
 = render 'shared/upload_modal'
 #instructionModal.reveal data-reveal=''
     h4= t('pages.personal.main.pwn.instr')
@@ -30,3 +34,5 @@
     p= t('pages.personal.main.pwn.i_3')
     button.close-button aria-label=('Close modal') data-close='' type='button'
         span aria-hidden='true' &times;
+script type='text/javascript'
+    = render 'scripts/foundation.js'

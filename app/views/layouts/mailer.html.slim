@@ -2,16 +2,16 @@ doctype html
 html lang='en'
     head
         meta http-equiv='Content-Type' content='text/html; charset=utf-8'
+        link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400&amp;subset=cyrillic' rel='stylesheet'
         style
-            | @import url('https://fonts.googleapis.com/css?family=Open+Sans:300&subset=cyrillic');
-            | * {font-weight: 300;font-size: 16px;font-family: 'Open Sans';}
-            | h1 {font-size: 32px;color: #c11525;}
-            | h2 {font-size: 24px;color: #1779ba;}
-            | p {margin: 0 0 5px;}
             | .mailer {max-width: 600px;margin: 0 auto;}
-            | .head {margin-bottom: 25px;}
-            | .body .block {margin-bottom: 25px;}
-            | .body ul {list-style: none;padding-left: 0;}
-            | .body ul li {padding-left: 20px;margin: 10px 0;}
+            | .mailer * {font-weight: 300;font-size: 16px;font-family: 'Open Sans';}
+            | .mailer h1 {font-size: 32px;color: #c11525;}
+            | .mailer h2 {font-size: 24px;color: #1779ba;}
+            | .mailer p {margin: 0 0 5px;}
+            | .mailer .head {margin-bottom: 25px;}
+            | .mailer .body .block {margin-bottom: 25px;}
+            | .mailer .body ul {list-style: none;padding-left: 0;}
+            | .mailer .body ul li {padding-left: 20px;margin: 10px 0;}
     body
         = yield

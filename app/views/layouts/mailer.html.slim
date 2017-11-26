@@ -2,16 +2,6 @@ doctype html
 html lang='en'
     head
         meta http-equiv='Content-Type' content='text/html; charset=utf-8'
-        link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400&amp;subset=cyrillic' rel='stylesheet'
-        style
-            | .mailer {max-width: 600px;margin: 0 auto;}
-            | .mailer * {font-weight: 300;font-size: 16px;font-family: 'Open Sans';}
-            | .mailer h1 {font-size: 32px;color: #c11525;}
-            | .mailer h2 {font-size: 24px;color: #1779ba;}
-            | .mailer p {margin: 0 0 5px;}
-            | .mailer .head {margin-bottom: 25px;}
-            | .mailer .body .block {margin-bottom: 25px;}
-            | .mailer .body ul {list-style: none;padding-left: 0;}
-            | .mailer .body ul li {padding-left: 20px;margin: 10px 0;}
+        = stylesheet_link_tag 'mailer'
     body
         = yield

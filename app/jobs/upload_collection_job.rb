@@ -10,6 +10,6 @@ class UploadCollectionJob < ApplicationJob
             Hearthpwn::CollectionConstructorService.call(user: args[:user], cards: cards)
             result = 'Коллекция карт успешно загружена'
         end
-        UserMailer.upload_collection(message: result, user: args[:user], username: args[:username]).deliver
+        UserMailer.upload_collection_email(message: result, user: args[:user], username: args[:username]).deliver
     end
 end

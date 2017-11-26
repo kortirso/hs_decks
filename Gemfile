@@ -82,6 +82,9 @@ gem 'friendly_id', '~> 5.1.0'
 # Code analyzation
 gem 'rubocop', '~> 0.49.1', require: false
 
+# Mailer
+gem 'premailer-rails'
+
 group :development, :test do
     gem 'factory_bot_rails'
     gem 'rails-controller-testing'
@@ -94,7 +97,6 @@ group :development do
     gem 'capistrano-rails', require: false
     gem 'capistrano-rvm', require: false
     gem 'capistrano-sidekiq', require: false
-    gem 'letter_opener'
     gem 'listen', '~> 3.0.5'
     gem 'spring'
     gem 'spring-watcher-listen', '~> 2.0.0'

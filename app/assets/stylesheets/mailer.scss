@@ -1,0 +1,38 @@
+.mailer {
+    max-width: 600px;
+    margin: 0 auto;
+    * {
+        font-weight: 300;
+        font-size: 18px;
+        font-family: 'Helvetica Neue', sans-serif;
+    }
+    h1 {
+        font-size: 32px;
+        color: #c11525;
+        font-weight: 400;
+    }
+    h2 {
+        font-size: 24px;
+        color: #1779ba;
+        font-weight: 400;
+    }
+    p {
+        margin: 0 0 5px;
+    }
+    .head {
+        margin-bottom: 25px;
+    }
+    .body {
+        .block {
+            margin-bottom: 25px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            li {
+                padding-left: 20px;
+                margin: 10px 0;
+            }
+        }
+    }
+}

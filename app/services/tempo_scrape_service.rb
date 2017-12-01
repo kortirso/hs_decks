@@ -15,7 +15,7 @@ class TempoScrapeService
 
     private
 
-    def create_deck(deck)
+    def create_deck(deck, price = 0)
         browser.goto(deck['url'])
 
         Watir::Wait.until { browser.div(class: 'db-deck-cards').exists? }
@@ -24,9 +24,13 @@ class TempoScrapeService
 
         browser.elements(class: 'db-deck-card').each do |elem|
             card_name = elem.div(class: 'db-deck-card-name').text
+            card = Card.find_by(name_en: card_name)
             amount = elem.div(class: 'db-deck-card-qty').present? ? elem.div(class: 'db-deck-card-qty').text : 1
-            deck.positions.create(amount: amount, card_id: Card.find_by(name_en: card_name).id)
+            deck.positions.create(amount: amount, card_id: card.id)
+            price += DustPrice.calc(card.rarity, amount)
         end
+
+        deck.update(price: price)
 
         sleep(1)
     end

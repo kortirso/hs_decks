@@ -13,6 +13,7 @@
                 p= "Формат - #{@deck.formats}"
                 p= "Тип - #{@deck.style.locale_name(@locale) unless @deck.style_id.nil?}"
                 p= "Автор - #{@deck.author}"
+                p= link_to 'Исходное описание колоды', @deck.link, target: '_blank'
             .sub_block
                 h2 Описание колоды
                 = raw(@deck.locale_caption(session[:locale]))

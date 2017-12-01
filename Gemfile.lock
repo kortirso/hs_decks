@@ -92,6 +92,8 @@ GEM
       sidekiq (>= 3.4)
     case_transform (0.2)
       activesupport
+    childprocess (0.8.0)
+      ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -289,6 +291,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
+    rubyzip (1.2.1)
     sass (3.4.25)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -296,6 +299,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    selenium-webdriver (3.8.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     sidekiq (5.0.5)
@@ -344,6 +350,12 @@ GEM
     unicode-display_width (1.3.0)
     warden (1.2.7)
       rack (>= 1.0)
+    watir (6.10.0)
+      selenium-webdriver (~> 3.4, >= 3.4.1)
+    webdrivers (3.2.2)
+      nokogiri (~> 1.6)
+      rubyzip (~> 1.0)
+      selenium-webdriver (~> 3.0)
     webpacker (3.0.2)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
@@ -401,6 +413,8 @@ DEPENDENCIES
   therubyracer
   trix
   uglifier (= 3.2.0)
+  watir (= 6.10.0)
+  webdrivers (~> 3.0)
   webpacker (~> 3.0)
   webpacker-react (~> 0.3.2)
 

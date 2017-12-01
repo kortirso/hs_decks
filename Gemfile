@@ -85,6 +85,10 @@ gem 'rubocop', '~> 0.49.1', require: false
 # Mailer
 gem 'premailer-rails'
 
+# Scraping decks
+gem 'watir', '6.10.0'
+gem 'webdrivers', '~> 3.0'
+
 group :development, :test do
     gem 'factory_bot_rails'
     gem 'rails-controller-testing'

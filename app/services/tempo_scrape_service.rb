@@ -27,9 +27,8 @@ class TempoScrapeService
             card = Card.find_by(name_en: card_name)
             amount = elem.div(class: 'db-deck-card-qty').present? ? elem.div(class: 'db-deck-card-qty').text : 1
             deck.positions.create(amount: amount, card_id: card.id)
-            price += DustPrice.calc(card.rarity, amount)
+            price += DustPrice.calc(card.rarity, amount.to_i)
         end
-
         deck.update(price: price)
 
         sleep(1)

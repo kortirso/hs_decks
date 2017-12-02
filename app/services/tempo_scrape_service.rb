@@ -20,7 +20,7 @@ class TempoScrapeService
 
         Watir::Wait.until { browser.div(class: 'db-deck-cards').exists? }
 
-        deck = Deck.create name: deck['name'], name_en: deck['name_en'], playerClass: deck['player_class'], formats: deck['formats'], link: deck['url'], user_id: user_id, player_id: Player.find_by(name_en: deck['player_class']).id, power: deck['power'], author: deck['author']
+        deck = Deck.create name: deck['name'], name_en: deck['name_en'], playerClass: deck['player_class'], formats: deck['formats'], link: deck['url'], user_id: user_id, player_id: Player.find_by(name_en: deck['player_class']).id, power: deck['power'], author: deck['author'], reno_type: deck['reno']
 
         browser.elements(class: 'db-deck-card').each do |elem|
             card_name = elem.div(class: 'db-deck-card-name').text
@@ -31,6 +31,7 @@ class TempoScrapeService
         end
         deck.update(price: price)
 
+        puts "Deck #{deck['name']} is loaded"
         sleep(1)
     end
 end

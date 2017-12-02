@@ -1,15 +1,13 @@
 - ids = positions.collect { |elem| elem[0] }
 - cards.order(cost: :asc, "name_#{@locale}" => :asc).each do |card|
     - amount = positions[ids.index(card.id)][1]
-    - checks = ids.include?(card.id)
     - card_class = amount > 0 ? (amount == 1 ? 'single' : 'double') : 'none'
-    - card_name = card["name_#{locale}"]
     .card class="#{card.rarity} #{card_class if decks} #{'uncrafted' unless card.craft?}"
         .image class="card_#{card.cardId}"
             .card-shadow
         .inner
             - card_class = 'single' if decks && card_class == 'double' && decks[deck_ids.index(card.id)][1] == 1
-            = label_tag "cards[#{card.id}]", card_name, class: "#{checks ? (amount == 1 ? 'single' : 'double') : 'none'} mana_#{card.cost}", data: { mana: "#{card.cost}" }
+            = label_tag "cards[#{card.id}]", card["name_#{locale}"], class: "#{card_class} mana_#{card.cost}", data: { mana: "#{card.cost}" }
         - if positions[ids.index(card.id)][2] && !positions[ids.index(card.id)][2].empty?
             .card_caption
                 = positions[ids.index(card.id)][2]

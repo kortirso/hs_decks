@@ -33,7 +33,7 @@
             = render 'shared/mana_curve', by_mana: @deck.positions.amount_by_mana
             - ids = @positions.collect { |elem| elem[0] }
             #cards_list
-                = render 'shared/edit_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
+                = render 'shared/show_card', cards: @deck.positions.includes(:card).with_sorted_cards(@locale), locale: @locale, positions: @positions, ids: ids
 = render 'shared/save_modal'
 script type='text/javascript'
     = render 'scripts/foundation.js'

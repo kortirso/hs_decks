@@ -17,7 +17,7 @@
             .sub_block
                 h2 Описание колоды
                 = raw(@deck.locale_caption(session[:locale]))
-            .mulligans
+            /.mulligans
                 h2 Муллиганы
                 - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue)
                 ul.tabs data-tabs='' id='cards-tabs'

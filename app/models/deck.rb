@@ -29,7 +29,7 @@ class Deck < ApplicationRecord
     after_create :build_mulligan
 
     def slug_candidates
-        [:name, %i[name user_id], %i[name user_id id]]
+        [:name_en, %i[name_en user_id], %i[name_en user_id id]]
     end
 
     def normalize_friendly_id(input)

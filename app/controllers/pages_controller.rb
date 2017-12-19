@@ -7,8 +7,8 @@ class PagesController < ApplicationController
             format.html
             format.json do
                 render json: {
-                    standard_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('standard').includes(:player).order(power: :desc).limit(4), each_serializer: DeckSerializer),
-                    wild_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('wild').includes(:player).order(power: :desc).limit(4), each_serializer: DeckSerializer),
+                    standard_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('standard').includes(:player).order(power: :desc).limit(6), each_serializer: DeckSerializer),
+                    wild_decks: ActiveModel::Serializer::CollectionSerializer.new(Deck.of_format('wild').includes(:player).order(power: :desc).limit(6), each_serializer: DeckSerializer),
                     news: ActiveModel::Serializer::CollectionSerializer.new(News.order(id: :desc).limit(4), each_serializer: NewsSerializer)
                 }
             end

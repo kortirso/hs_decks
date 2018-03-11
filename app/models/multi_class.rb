@@ -1,5 +1,9 @@
 # Represents multiclasses
 class MultiClass < ApplicationRecord
-    has_many :players
-    has_many :cards
+  extend Nameable
+
+  has_many :players
+  has_many :cards
+
+  validates :name, presence: true
 end

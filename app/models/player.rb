@@ -1,23 +1,19 @@
-# Represents palyer classes
+# Represents player classes
 class Player < ApplicationRecord
-    belongs_to :multi_class
+  extend Nameable
 
-    has_many :cards
-    has_many :decks
+  belongs_to :multi_class, optional: true
 
-    validates :name_en, :name_ru, presence: true
+  has_many :cards, dependent: :destroy
+  has_many :decks, dependent: :destroy
 
-    scope :is_playable, -> { where playable: true }
+  validates :name, presence: true
 
-    def self.names(locale)
-        all.collect { |player| player.locale_name(locale) }.sort
+  scope :is_playable, -> { where playable: true }
+
+  class << self
+    def names_list(locale)
+      all.collect { |player| player.name[locale] }.sort
     end
-
-    def self.return_en(name)
-        return_by_name(name).name_en
-    end
-
-    def self.return_by_name(name)
-        find_by(name_en: name) || find_by(name_ru: name)
-    end
+  end
 end

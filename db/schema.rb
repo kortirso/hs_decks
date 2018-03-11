@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171111131700) do
+ActiveRecord::Schema.define(version: 20180311055028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "abouts", id: :serial, force: :cascade do |t|
     t.string "version", null: false
@@ -153,10 +154,9 @@ ActiveRecord::Schema.define(version: 20171111131700) do
   end
 
   create_table "multi_classes", id: :serial, force: :cascade do |t|
-    t.string "name_en"
-    t.string "name_ru"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.hstore "name", default: {"en"=>"", "ru"=>""}, null: false
   end
 
   create_table "news", id: :serial, force: :cascade do |t|
@@ -170,12 +170,11 @@ ActiveRecord::Schema.define(version: 20171111131700) do
   end
 
   create_table "players", id: :serial, force: :cascade do |t|
-    t.string "name_en"
-    t.string "name_ru"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "multi_class_id"
     t.boolean "playable", default: true
+    t.hstore "name", default: {"en"=>"", "ru"=>""}, null: false
     t.index ["multi_class_id"], name: "index_players_on_multi_class_id"
   end
 

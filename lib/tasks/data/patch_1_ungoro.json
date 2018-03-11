@@ -72,7 +72,7 @@
     {"cardId":"UNG_071","name_en":"Bloodbloom","name_ru":"Кроволист","type":"Spell","cost":2,"playerClass":"Warlock","rarity":"Epic"},
     {"cardId":"UNG_072","name_en":"Feeding Time","name_ru":"Налетай!","type":"Spell","cost":5,"playerClass":"Warlock","rarity":"Rare"},
     {"cardId":"UNG_073","name_en":"Tar Lurker","name_ru":"Смоляной скрытень","type":"Minion","cost":5,"playerClass":"Warlock","rarity":"Common"},
-    {"cardId":"UNG_074","name_en":"Ravernous Pterrordax","name_ru":"Ненасытный терродактиль","type":"Minion","cost":4,"playerClass":"Warlock","rarity":"Common"},
+    {"cardId":"UNG_074","name_en":"Ravenous Pterrordax","name_ru":"Ненасытный терродактиль","type":"Minion","cost":4,"playerClass":"Warlock","rarity":"Common"},
     {"cardId":"UNG_075","name_en":"Lakkari Sacrifice","name_ru":"Жертва Лаккари","type":"Spell","cost":1,"playerClass":"Warlock","rarity":"Legendary"},
     {"cardId":"UNG_076","name_en":"Chittering Tunneler","name_ru":"Стрекочущий землерой","type":"Minion","cost":3,"playerClass":"Warlock","rarity":"Epic"},
     {"cardId":"UNG_077","name_en":"Lakkari Felhound","name_ru":"Гончая Лаккари","type":"Minion","cost":4,"playerClass":"Warlock","rarity":"Common"},

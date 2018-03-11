@@ -19,7 +19,7 @@ namespace :patching do
 
     # create deck styles
     [['Aggro', 'Агро'], ['Control', 'Контроль'], ['Midrange', 'Мидрейндж'], ['Tempo', 'Темпо'], ['Combo', 'Комбо'], ['Token', 'Токен'], ['Ramp', 'Рамп'], ['Fatique', 'Фатиг'], ['Mill', 'Милл']].each do |style|
-      Style.create name_en: style[0], name_ru: style[1]
+      Style.create(name: { en: style[0], ru: style[1] })
     end
 
     # create cards

@@ -1,6 +1,9 @@
 # Represents decks styles
 class Style < ApplicationRecord
-    has_many :decks
+  include Localizeable
+  extend Nameable
 
-    validates :name_en, :name_ru, presence: true, uniqueness: true
+  has_many :decks
+
+  validates :name, presence: true
 end

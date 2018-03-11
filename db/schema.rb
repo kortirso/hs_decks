@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311083838) do
+ActiveRecord::Schema.define(version: 20180311131828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20180311083838) do
 
   create_table "cards", id: :serial, force: :cascade do |t|
     t.string "cardId", null: false
-    t.string "name_en", null: false
     t.string "type", null: false
     t.integer "cost"
     t.string "playerClass"
@@ -35,18 +34,18 @@ ActiveRecord::Schema.define(version: 20180311083838) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "formats", default: "standard", null: false
-    t.string "name_ru"
     t.integer "player_id"
     t.boolean "craft", default: true
     t.integer "usable", default: 0
     t.integer "multi_class_id"
     t.string "multiClassGroup"
-    t.boolean "hall_of_fame", default: false
     t.integer "race_id"
     t.integer "attack"
     t.integer "health"
     t.string "mechanics", array: true
     t.string "race_name"
+    t.hstore "name", default: {"en"=>"", "ru"=>""}, null: false
+    t.string "dbfid", default: "", null: false
     t.index ["collection_id"], name: "index_cards_on_collection_id"
     t.index ["multi_class_id"], name: "index_cards_on_multi_class_id"
     t.index ["player_id"], name: "index_cards_on_player_id"
@@ -191,10 +190,9 @@ ActiveRecord::Schema.define(version: 20180311083838) do
   end
 
   create_table "races", id: :serial, force: :cascade do |t|
-    t.string "name_en"
-    t.string "name_ru"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.hstore "name", default: {"en"=>"", "ru"=>""}, null: false
   end
 
   create_table "shifts", id: :serial, force: :cascade do |t|

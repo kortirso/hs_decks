@@ -14,7 +14,6 @@ namespace :patching do
     end
 
     # update collections
-    %w(Promo Hall\ of\ Fame Naxxramas Goblins\ vs\ Gnomes Blackrock\ Mountain The\ Grand\ Tournament The\ League\ of\ Explorers).each { |c| Collection.find_by_locale_name('en', c).set_as_wild }
     %w(Naxxramas Blackrock\ Mountain The\ League\ of\ Explorers One\ Night\ in\ Karazhan).each { |c| Collection.find_by_locale_name('en', c).set_as_adventure }
 
     # create deck styles
@@ -22,15 +21,43 @@ namespace :patching do
       Style.create(name: { en: style[0], ru: style[1] })
     end
 
+    # add races
+    [['Murloc', 'Мурлок'], ['Beast', 'Зверь'], ['Demon', 'Демон'], ['Totem', 'Тотем'], ['Elemental', 'Элементаль'], ['Pirate', 'Пират'], ['Dragon', 'Дракон'], ['Mech', 'Механизм']].each do |race|
+      Race.create(name: { en: race[0], ru: race[1] })
+    end
+
     # create cards
-    cards_file = File.read("#{Rails.root}/lib/tasks/data/base_data.json")
+    cards_list = CardCollectionService.new.get_cards
     cards = []
-    collection_list = Collection.all.collect{ |c| [c.id, c.name_en] }
-    player_list = Player.all.collect{ |p| [p.id, p.name_en] }
-    multis_list = MultiClass.all.collect{ |p| [p.id, p.name_en] }
-    JSON.parse(cards_file).each do |card|
-      cards << Card.new(cardId: card['cardId'], name_en: card['name_en'], name_ru: card['name_ru'], type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], formats: card['formats'], craft: card['craft'], hall_of_fame: card['hall_of_fame'], collection_id: collection_list.rassoc(card['collection']['name_en'])[0], player_id: player_list.rassoc(card['playerClass'])[0], multi_class_id: (card['multiClassGroup'].nil? ? nil : multis_list.rassoc(card['multiClassGroup'])[0]), multiClassGroup: card['multiClassGroup'])
+    player_list = Player.all.collect{ |p| [p.id, p.locale_name('en')] }
+    multis_list = MultiClass.all.collect{ |p| [p.id, p.locale_name('en')] }
+    races_list = Race.all.collect { |r| [r.id, r.locale_name('en') ] }
+
+    Collection.all.each do |collection|
+      collection_name = collection.locale_name('en')
+      cards_list[collection_name].each do |card|
+        mechs = []
+        card['mechanics'].each { |mech| mechs.push mech['name'] } unless card['mechanics'].nil?
+
+        cards << Card.new(cardId: card['cardId'], dbfid: card['dbfId'], name: { en: card['name'], ru: '' }, type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], formats: 'standard', craft: card['craft'], collection_id: collection.id, player_id: player_list.rassoc(card['playerClass'])[0], multi_class_id: (card['multiClassGroup'].nil? ? nil : multis_list.rassoc(card['multiClassGroup'])[0]), multiClassGroup: card['multiClassGroup'], attack: card['attack'], health: card['health'], mechanics: (mechs.size.zero? ? nil : mechs), race_id: (card['race'].nil? ? nil : races_list.rassoc(card['race'])[0]), race_name: card['race'])
+      end
     end
     Card.import cards
+
+    # set cards as wild
+    %w(Promo Hall\ of\ Fame Naxxramas Goblins\ vs\ Gnomes Blackrock\ Mountain The\ Grand\ Tournament The\ League\ of\ Explorers).each { |c| Collection.find_by_locale_name('en', c).set_as_wild }
+    Collection.adventures.of_format('wild').each { |c| c.cards.update_all(craft: true) }
+
+    # update russian names for cards
+    cards_list = CardCollectionService.new('ru').get_cards
+    Collection.all.each do |collection|
+      collection_name = collection.locale_name('en')
+      cards_list[collection_name].each do |card|
+        current_card = Card.find_by(dbfid: card['dbfId'])
+        name = current_card.name
+        name['ru'] = card['name']
+        current_card.update(name: name)
+      end
+    end
   end
 end

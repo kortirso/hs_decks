@@ -1,4 +1,5 @@
 FactoryBot.define do
-    factory :race do
-    end
+  factory :race do
+    name(en: 'Murloc', ru: 'Мурлок')
+  end
 end

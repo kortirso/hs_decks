@@ -9,13 +9,13 @@ namespace :patching do
     Player.create(name: { en: 'Neutral', ru: 'Нейтральный' }, playable: false)
 
     # create collections
-    [['Basic', 'Базовый набор'], ['Classic', 'Классический набор'], ['Promo', 'Награды'], ['Reward', 'Призовые карты'], ['Naxxramas', 'Наксрамас'], ['Goblins vs Gnomes', 'Гоблины и Гномы'], ['Blackrock Mountain', 'Черная Гора'], ['The Grand Tournament', 'Большой Турнир'], ['The League of Explorers', 'Лига Исследователей'], ['Whispers of the Old Gods', 'Древние Боги'], ['Karazhan', 'Каражан'], ['Mean Streets of Gadgetzan', 'Злачный город Прибамбасск']].each do |collection_name|
-      Collection.create name_en: collection_name[0], name_ru: collection_name[1]
+    [['Basic', 'Базовый набор'], ['Classic', 'Классический набор'], ['Promo', 'Награды'], ['Hall of Fame', 'Зал славы'], ['Naxxramas', 'Наксрамас'], ['Goblins vs Gnomes', 'Гоблины и Гномы'], ['Blackrock Mountain', 'Черная Гора'], ['The Grand Tournament', 'Большой Турнир'], ['The League of Explorers', 'Лига Исследователей'], ['Whispers of the Old Gods', 'Древние Боги'], ['One Night in Karazhan', 'Вечеринка в Каражане'], ['Mean Streets of Gadgetzan', 'Злачный город Прибамбасск'], ["Journey to Un'Goro", "Экспедиция в Ун'Горо"], ['Knights of the Frozen Throne', 'Рыцари Ледяного Трона'], ['Kobolds & Catacombs', 'Кобольды и катакомбы']].each do |collection_name|
+      Collection.create(name: { en: collection_name[0], ru: collection_name[1] })
     end
 
     # update collections
-    %w(Promo Reward Naxxramas Goblins\ vs\ Gnomes).each { |c| Collection.find_by(name_en: c).set_as_wild }
-    %w(Naxxramas Blackrock\ Mountain The\ League\ of\ Explorers Karazhan).each { |c| Collection.find_by(name_en: c).set_as_adventure }
+    %w(Promo Hall\ of\ Fame Naxxramas Goblins\ vs\ Gnomes Blackrock\ Mountain The\ Grand\ Tournament The\ League\ of\ Explorers).each { |c| Collection.find_by_locale_name('en', c).set_as_wild }
+    %w(Naxxramas Blackrock\ Mountain The\ League\ of\ Explorers One\ Night\ in\ Karazhan).each { |c| Collection.find_by_locale_name('en', c).set_as_adventure }
 
     # create deck styles
     [['Aggro', 'Агро'], ['Control', 'Контроль'], ['Midrange', 'Мидрейндж'], ['Tempo', 'Темпо'], ['Combo', 'Комбо'], ['Token', 'Токен'], ['Ramp', 'Рамп'], ['Fatique', 'Фатиг'], ['Mill', 'Милл']].each do |style|

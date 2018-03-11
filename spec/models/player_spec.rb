@@ -13,6 +13,16 @@ RSpec.describe Player, type: :model do
   context 'Methods' do
     let!(:player) { create :player }
 
+    context '.locale_name' do
+      it 'returns english name if arg is en' do
+        expect(player.locale_name('en')).to eq player.name['en']
+      end
+
+      it 'returns russian name if arg is ru' do
+        expect(player.locale_name('ru')).to eq player.name['ru']
+      end
+    end
+
     context '.names_list' do
       it 'returns list of english player names if arg is en' do
         expect(Player.names_list('en')).to eq [player.name['en']]

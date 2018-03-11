@@ -12,6 +12,16 @@ RSpec.describe MultiClass, type: :model do
   context 'Methods' do
     let!(:multi_class) { create :multi_class }
 
+    context '.locale_name' do
+      it 'returns english name if arg is en' do
+        expect(multi_class.locale_name('en')).to eq multi_class.name['en']
+      end
+
+      it 'returns russian name if arg is ru' do
+        expect(multi_class.locale_name('ru')).to eq multi_class.name['ru']
+      end
+    end
+
     context '.find_by_locale_name' do
       it 'returns object if arg for en' do
         expect(MultiClass.find_by_locale_name('en', multi_class.name['en'])).to eq multi_class

@@ -1,5 +1,6 @@
 # Represents multiclasses
 class MultiClass < ApplicationRecord
+  include Localizeable
   extend Nameable
 
   has_many :players

@@ -4,7 +4,8 @@ class Message
     attr_reader :uri
 
     def initialize(locale = 'en')
-        @uri = URI("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1&locale=#{full_locale(locale)}")
+        #@uri = URI("https://omgvamp-hearthstone-v1.p.mashape.com/cards?collectible=1&locale=#{full_locale(locale)}")
+        @uri = URI("https://omgvamp-hearthstone-v1.p.mashape.com/info?locale=#{full_locale(locale)}")
     end
 
     def full_locale(locale)

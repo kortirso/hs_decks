@@ -1,5 +1,6 @@
 # Represents player classes
 class Player < ApplicationRecord
+  include Localizeable
   extend Nameable
 
   belongs_to :multi_class, optional: true

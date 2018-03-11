@@ -1,8 +1,11 @@
 # Represents cards collections
 class Collection < ApplicationRecord
+  include Localizeable
+  extend Nameable
+
   has_many :cards, dependent: :destroy
 
-  validates :name_en, :name_ru, :formats, presence: true
+  validates :name, :formats, presence: true
   validates :formats, inclusion: { in: %w[standard wild] }
 
   scope :of_format, ->(format) { where formats: format }

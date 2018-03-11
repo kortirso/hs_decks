@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 git_source(:github) do |repo_name|
-    repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-    "https://github.com/#{repo_name}.git"
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  "https://github.com/#{repo_name}.git"
 end
 
 gem 'jquery-rails'
@@ -27,8 +27,6 @@ gem 'uglifier', '3.2.0'
 gem 'foreman'
 gem 'webpacker', '~> 3.0'
 gem 'webpacker-react', '~> 0.3.2'
-
-gem 'redis', '~> 3.0'
 
 # Store secrets
 gem 'figaro'
@@ -61,6 +59,7 @@ gem 'rails_admin', '1.2.0'
 gem 'nokogiri'
 
 # Background-jobs
+gem 'redis', '~> 3.0'
 gem 'redis-namespace'
 gem 'sidekiq', '5.0.5'
 
@@ -90,23 +89,25 @@ gem 'watir', '6.10.0'
 gem 'webdrivers', '~> 3.0'
 
 group :development, :test do
-    gem 'factory_bot_rails'
-    gem 'rails-controller-testing'
-    gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
 end
 
 group :development do
-    gem 'capistrano', require: false
-    gem 'capistrano-bundler', require: false
-    gem 'capistrano-rails', require: false
-    gem 'capistrano-rvm', require: false
-    gem 'capistrano-sidekiq', require: false
-    gem 'listen', '~> 3.0.5'
-    gem 'spring'
-    gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-sidekiq', require: false
+  gem 'listen', '~> 3.0.5'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
-    gem 'json_spec'
-    gem 'shoulda-matchers'
+  gem 'json_spec'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end

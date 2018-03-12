@@ -30,7 +30,7 @@ class PagesController < ApplicationController
     def about; end
 
     def collection
-        @cards = Card.includes(:collection)
+        @cards = Card.includes(:collection).collectible
         @packs = current_user.positions.collect_ids
     end
 

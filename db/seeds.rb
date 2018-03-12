@@ -35,7 +35,7 @@ Collection.all.each do |collection|
     mechs = []
     card['mechanics'].each { |mech| mechs.push mech['name'] } unless card['mechanics'].nil?
 
-    cards << Card.new(cardId: card['cardId'], dbfid: card['dbfId'], name: { en: card['name'], ru: '' }, type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], formats: 'standard', craft: card['craft'], collection_id: collection.id, player_id: player_list.rassoc(card['playerClass'])[0], multi_class_id: (card['multiClassGroup'].nil? ? nil : multis_list.rassoc(card['multiClassGroup'])[0]), multiClassGroup: card['multiClassGroup'], attack: card['attack'], health: card['health'], mechanics: (mechs.size.zero? ? nil : mechs), race_id: (card['race'].nil? ? nil : races_list.rassoc(card['race'])[0]), race_name: card['race'])
+    cards << Card.new(cardId: card['cardId'], dbfid: card['dbfId'], name: { en: card['name'], ru: '' }, type: card['type'], cost: card['cost'], playerClass: card['playerClass'], rarity: card['rarity'], formats: 'standard', craft: card['craft'], collection_id: collection.id, player_id: player_list.rassoc(card['playerClass'])[0], multi_class_id: (card['multiClassGroup'].nil? ? nil : multis_list.rassoc(card['multiClassGroup'])[0]), multiClassGroup: (card['multiClassGroup'].nil? ? '' : card['multiClassGroup']), attack: card['attack'], health: card['health'], mechanics: (mechs.size.zero? ? nil : mechs), race_id: (card['race'].nil? ? nil : races_list.rassoc(card['race'])[0]), race_name: card['race'])
   end
 end
 Card.import cards

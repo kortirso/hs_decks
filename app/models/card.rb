@@ -22,7 +22,7 @@ class Card < ApplicationRecord
   validates :cardId, :name, :type, :rarity, :collection_id, :player_id, :formats, :usable, presence: true
   validates :type, inclusion: { in: %w[Hero Spell Minion Weapon] }
   validates :playerClass, inclusion: { in: %w[Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral] }
-  validates :multiClassGroup, inclusion: { in: %w[Grimy\ Goons Jade\ Lotus Kabal] }, allow_nil: true
+  validates :multiClassGroup, inclusion: { in: %w[Grimy\ Goons Jade\ Lotus Kabal] }, allow_blank: true
   validates :rarity, inclusion: { in: %w[Free Common Rare Epic Legendary] }
   validates :formats, inclusion: { in: %w[standard wild] }
 
@@ -34,6 +34,10 @@ class Card < ApplicationRecord
   scope :of_format, ->(formats) { where formats: formats }
   scope :crafted, -> { where craft: true }
   scope :unusable, -> { where usable: 0 }
+
+  def self.collectible
+    (all.where.not(type: 'Hero') + all.where.not(cost: nil)).uniq
+  end
 
   def self.return_for_format(formats)
     formats == 'wild' ? all : of_format('standard')

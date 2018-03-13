@@ -1,11 +1,11 @@
 - (0..7).each do |cost|
     .costs class="cost_#{cost}"
         - cards_with_cost = cost < 7 ? cards.select { |card| card.cost == cost } : cards.select { |card| card.cost >= 7 }
-        - cards_with_cost.sort_by{ |card| [card.cost, card.locale_name(locale.to_s)] }.each do |card|
+        - cards_with_cost.sort_by{ |card| [card.cost, card.locale_name(locale)] }.each do |card|
             - checks = ids.include?(card.id)
             - amount = checks ? positions[ids.index(card.id)][1] : 0
-            - card_name = card.locale_name(locale.to_s)
-            - collection_name = card.collection.locale_name(locale.to_s)
+            - card_name = card.locale_name(locale)
+            - collection_name = card.collection.locale_name(locale)
             .card class="mana_#{card.cost} #{collection_name.split(' ').join('_').split("'").join()} #{card.rarity} #{card.formats} #{card.multiClassGroup.split(' ').join('_') if card.multiClassGroup} #{card.id}" data={ card_name: "#{card_name.split(' ').join('_')}" }
                 .image class="card_#{card.cardId}"
                     .card-shadow

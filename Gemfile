@@ -25,7 +25,7 @@ gem 'uglifier', '3.2.0'
 
 # Add Webpack
 gem 'foreman'
-gem 'webpacker', '~> 3.0'
+gem 'webpacker', '~> 3.3.0'
 gem 'webpacker-react', '~> 0.3.2'
 
 # Store secrets

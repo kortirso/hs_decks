@@ -1,0 +1,9 @@
+.content {
+  min-height: 100vh;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  overflow-y: scroll;
+  position: relative;
+  padding: 82px 0 150px;
+}

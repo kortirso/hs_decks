@@ -12,6 +12,7 @@
     "rails-ujs": "^5.1.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-localization": "^0.1.8",
     "webpacker-react": "^0.3.2"
   },
   "scripts": {

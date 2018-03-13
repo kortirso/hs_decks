@@ -1,0 +1,6 @@
+= render 'components/navigation/navigation'
+= render 'components/auth/auth'
+.content
+  = yield
+  = render 'components/footer/footer'
+/= render 'shared/metrics' if Rails.env.production?

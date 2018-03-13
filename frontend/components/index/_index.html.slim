@@ -1,0 +1,38 @@
+= javascript_pack_tag 'index_page_box'
+section.banner
+  header
+    h1 Помощник в составлении колод для HearthStone
+    p DeckHunter поможет быстро подобрать колоды для успешной игры в ладдере с учётом имеющихся у вас карт и определить наилучшие замены недостающих карт.
+section.how_it_works
+  .grid-container
+    h2
+      span Почему на DeckHunter
+      br /
+      | легко и удобно собирать колоды
+    .block.left
+      .text_block
+        p Удобное ознакомление с экспертными колодами
+        p Обзор только лучших колод и тактика игры.
+      .image_block
+        = image_tag asset_pack_path('images/steps/1.jpg')
+    .block.right
+      .text_block
+        p Инструменты для хранения коллекции карт
+        p Зарегистрируйтесь и сохраните свои карты один раз, а затем только обновляйте коллекцию.
+        p Доступен ручной ружим обновления коллекции и автоматическая загрузка с HearthPWN.
+      .image_block
+        = image_tag asset_pack_path('images/steps/2.jpg')
+    .block.left
+      .text_block
+        p Интерфейс для выявления наиболее собранных колод
+        p Возможно у вас уже есть карты, чтобы собрать эффективную колоду.
+      .image_block
+        = image_tag asset_pack_path('images/steps/3.jpg')
+    .block.right
+      .text_block
+        p Система подбора замен
+        p Автоматическая система подберет замены недостающим картам на основе имеющихся карт в коллекции.
+      .image_block
+        = image_tag asset_pack_path('images/steps/4.jpg')
+.grid-container
+  = react_component('IndexPageBox', locale: I18n.locale)

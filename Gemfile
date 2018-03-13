@@ -7,7 +7,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'jquery-rails'
 gem 'rails', '5.1.4'
 gem 'therubyracer', platforms: :ruby
 
@@ -17,12 +16,6 @@ gem 'pg', '0.21'
 # Use Puma as the app server
 gem 'puma', '3.10.0'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '5.0.6'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '3.2.0'
-
 # Add Webpack
 gem 'foreman'
 gem 'webpacker', '~> 3.3.0'
@@ -30,12 +23,6 @@ gem 'webpacker-react', '~> 0.3.2'
 
 # Store secrets
 gem 'figaro'
-
-# Auto-prefixing CSS for cross-browser compat.
-gem 'autoprefixer-rails', '6.7.6'
-
-# Front
-gem 'foundation-rails', '6.4.1.3'
 
 # Use Slim as the templating engine. Better than ERB
 gem 'slim'
@@ -53,7 +40,7 @@ gem 'route_translator'
 gem 'activerecord-import'
 
 # Admin panel
-gem 'rails_admin', '1.2.0'
+gem 'rails_admin', '1.3.0'
 
 # Scrape hearthpwn data
 gem 'nokogiri'

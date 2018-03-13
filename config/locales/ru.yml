@@ -1,4 +1,17 @@
 ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              blank: "can't be blank"
+              taken: "has already been taken"
+            email:
+              blank: "can't be blank"
+              taken: "has already been taken"
+            password:
+              blank: "can't be blank"
   buttons:
     save: Сохранить
     submit: Применить

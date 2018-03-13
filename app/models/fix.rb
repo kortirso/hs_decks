@@ -1,10 +1,10 @@
 # Represents fix captions
 class Fix < ApplicationRecord
-    belongs_to :about
+  belongs_to :about
 
-    validates :body_en, :body_ru, :about_id, presence: true
+  validates :body_en, :body_ru, :about_id, presence: true
 
-    def locale_body(locale)
-        self["body_#{locale}"]
-    end
+  def locale_body(locale)
+    self["body_#{locale}"]
+  end
 end

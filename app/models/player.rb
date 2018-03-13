@@ -11,10 +11,4 @@ class Player < ApplicationRecord
   validates :name, presence: true
 
   scope :is_playable, -> { where playable: true }
-
-  class << self
-    def names_list(locale)
-      all.collect { |player| player.name[locale] }.sort
-    end
-  end
 end

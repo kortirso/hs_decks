@@ -1,10 +1,8 @@
 # Represents App Versions
 class About < ApplicationRecord
-    has_many :fixes, dependent: :destroy
+  include Localizeable
 
-    validates :version, :label_en, :label_ru, presence: true
+  has_many :fixes, dependent: :destroy
 
-    def locale_label(locale)
-        self["label_#{locale}"]
-    end
+  validates :version, :name, presence: true
 end

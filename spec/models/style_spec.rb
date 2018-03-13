@@ -9,44 +9,11 @@ RSpec.describe Style, type: :model do
   end
 
   context 'Methods' do
-    let!(:style) { create :style }
+    it_behaves_like 'Localizeable'
+    it_behaves_like 'Nameable'
 
-    context '.locale_name' do
-      it 'returns english name if arg is en' do
-        expect(style.locale_name('en')).to eq style.name['en']
-      end
-
-      it 'returns russian name if arg is ru' do
-        expect(style.locale_name('ru')).to eq style.name['ru']
-      end
-    end
-
-    context '.find_by_locale_name' do
-      it 'returns object if arg for en' do
-        expect(Style.find_by_locale_name('en', style.name['en'])).to eq style
-      end
-
-      it 'returns object if arg for ru' do
-        expect(Style.find_by_locale_name('ru', style.name['ru'])).to eq style
-      end
-
-      it 'returns nil for incorrect data' do
-        expect(Style.find_by_locale_name('ru', style.name['en'])).to eq nil
-      end
-    end
-
-    context '.find_by_name' do
-      it 'returns object if arg is en' do
-        expect(Style.find_by_name(style.name['en'])).to eq style
-      end
-
-      it 'returns object if arg is ru' do
-        expect(Style.find_by_name(style.name['ru'])).to eq style
-      end
-
-      it 'returns nil for incorrect data' do
-        expect(Style.find_by_name('123')).to eq nil
-      end
+    def nameable_object
+      create :style
     end
   end
 end

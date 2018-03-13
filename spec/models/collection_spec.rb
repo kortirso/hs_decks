@@ -11,19 +11,15 @@ RSpec.describe Collection, type: :model do
   end
 
   context 'Methods' do
-    let!(:collection) { create :collection }
+    it_behaves_like 'Localizeable'
+    it_behaves_like 'Nameable'
 
-    context '.locale_name' do
-      it 'returns english name if arg is en' do
-        expect(collection.locale_name('en')).to eq collection.name['en']
-      end
-
-      it 'returns russian name if arg is ru' do
-        expect(collection.locale_name('ru')).to eq collection.name['ru']
-      end
+    def nameable_object
+      create :collection
     end
 
     context '.wild?' do
+      let!(:collection) { create :collection }
       let!(:collection_2) { create :collection, :wild_collection }
 
       it 'returns false if collection is not wild' do
@@ -36,6 +32,7 @@ RSpec.describe Collection, type: :model do
     end
 
     context '.adventure?' do
+      let!(:collection) { create :collection }
       let!(:collection_2) { create :collection, adventure: true }
 
       it 'returns false if it is not adventure' do
@@ -44,34 +41,6 @@ RSpec.describe Collection, type: :model do
 
       it 'returns true if it is adventure' do
         expect(collection_2.adventure?).to eq true
-      end
-    end
-
-    context '.find_by_locale_name' do
-      it 'returns object if arg for en' do
-        expect(Collection.find_by_locale_name('en', collection.name['en'])).to eq collection
-      end
-
-      it 'returns object if arg for ru' do
-        expect(Collection.find_by_locale_name('ru', collection.name['ru'])).to eq collection
-      end
-
-      it 'returns nil for incorrect data' do
-        expect(Collection.find_by_locale_name('ru', collection.name['en'])).to eq nil
-      end
-    end
-
-    context '.find_by_name' do
-      it 'returns object if arg is en' do
-        expect(Collection.find_by_name(collection.name['en'])).to eq collection
-      end
-
-      it 'returns object if arg is ru' do
-        expect(Collection.find_by_name(collection.name['ru'])).to eq collection
-      end
-
-      it 'returns nil for incorrect data' do
-        expect(Collection.find_by_name('123')).to eq nil
       end
     end
   end

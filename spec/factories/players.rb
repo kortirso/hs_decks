@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :player do
-    name(en: 'Shaman', ru: 'Шаман')
+    sequence(:name) { |i| { en: "Shaman_#{i}", ru: "Шаман_#{i}" } }
 
     trait :with_multiclass do
       association :multi_class

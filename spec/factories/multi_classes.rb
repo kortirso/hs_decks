@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :multi_class do
-    name(en: 'Grimy Goons', ru: 'Ржавые Бугаи')
+    sequence(:name) { |i| { en: "Grimy Goons #{i}", ru: "Ржавые Бугаи #{i}" } }
   end
 end

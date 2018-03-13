@@ -1,13 +1,13 @@
 # Represents checks
 class Check < ApplicationRecord
-    include Positionable
+  include Positionable
 
-    belongs_to :user
-    belongs_to :deck
+  belongs_to :user
+  belongs_to :deck
 
-    has_one :substitution, dependent: :destroy
+  has_one :substitution, dependent: :destroy
 
-    validates :user_id, :deck_id, :success, presence: true
+  validates :user_id, :deck_id, :success, presence: true
 
-    scope :of_user, ->(user_id) { where user_id: user_id }
+  scope :of_user, ->(user_id) { where user_id: user_id }
 end

@@ -1,8 +1,8 @@
 # Represents substitutions for checks
 class Substitution < ApplicationRecord
-    include Positionable
+  include Positionable
 
-    belongs_to :check
+  belongs_to :check
 
-    validates :check_id, presence: true
+  validates :check_id, presence: true
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :collection do
-    name(en: 'Basic', ru: 'Базовый набор')
+    sequence(:name) { |i| { en: "Basic #{i}", ru: "Базовый набор _#{i}" } }
     formats 'standard'
     adventure false
 

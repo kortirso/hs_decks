@@ -7,6 +7,7 @@ import "components/auth/auth";
 import "components/footer/footer";
 
 import "components/index/index";
+import "components/collection/collection";
 
 import Rails from "rails-ujs";
 

@@ -1,12 +1,12 @@
 {
-    "en":{
-        "standard_header": "Best standard deck",
-        "wild_header": "Best wild decks",
-        "news_header": "News"
-    },
-    "ru": {
-        "select": "Лучшие стандартные колоды",
-        "localize": "Лучшие вольные колоды",
-        "output": "Новости"
-    }
+  "en":{
+    "standard_header": "Best standard deck",
+    "wild_header": "Best wild decks",
+    "news_header": "News"
+  },
+  "ru": {
+    "select": "Лучшие стандартные колоды",
+    "localize": "Лучшие вольные колоды",
+    "output": "Новости"
+  }
 }

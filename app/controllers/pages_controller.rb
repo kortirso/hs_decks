@@ -42,9 +42,7 @@ class PagesController < ApplicationController
     @user = current_user
   end
 
-  private
-
-  def filter_params
+  private def filter_params
     params.permit(:playerClass, :power, :formats, :style)
   end
 end

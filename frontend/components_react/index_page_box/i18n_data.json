@@ -1,16 +1,16 @@
 {
-    "en":{
-        "standard_header": "Best standard deck",
-        "wild_header": "Best wild decks",
-        "news_header": "News",
-        "power": "Deck's power",
-        "view": "View deck"
-    },
-    "ru": {
-        "standard_header": "Лучшие стандартные колоды",
-        "wild_header": "Лучшие вольные колоды",
-        "news_header": "Новости",
-        "power": "Сила колоды",
-        "view": "Посмотреть колоду"
-    }
+  "en":{
+    "standard_header": "Best standard deck",
+    "wild_header": "Best wild decks",
+    "news_header": "News",
+    "power": "Deck's power",
+    "view": "View deck"
+  },
+  "ru": {
+    "standard_header": "Лучшие стандартные колоды",
+    "wild_header": "Лучшие вольные колоды",
+    "news_header": "Новости",
+    "power": "Сила колоды",
+    "view": "Посмотреть колоду"
+  }
 }

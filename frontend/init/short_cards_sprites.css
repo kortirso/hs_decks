@@ -1,0 +1,49 @@
+.card_AT_001 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: 0 0;
+}
+
+.card_AT_002 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -116px 0;
+}
+
+.card_AT_003 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -232px 0;
+}
+
+.card_AT_004 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -348px 0;
+}
+
+.card_AT_005 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -464px 0;
+}
+
+.card_AT_006 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -580px 0;
+}
+
+.card_AT_007 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -696px 0;
+}
+
+.card_AT_008 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -812px 0;
+}
+
+.card_AT_009 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -928px 0;
+}
+
+.card_AT_010 {
+  background: url("../images/short_cards_sprite.png");
+  background-position: -1044px 0;
+}

@@ -54,8 +54,6 @@
     right: 0;
     width: 116px;
     height: 29px;
-    background-size: 116px 29px;
-    background-repeat: no-repeat;
 
     .card-shadow {
       position: absolute;

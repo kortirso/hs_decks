@@ -1,1 +1,1 @@
-import "./admin_decks_new.css"
+import "./admin_decks_new.css";

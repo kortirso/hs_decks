@@ -9,6 +9,8 @@ import "components/footer/footer";
 import "components/index/index";
 import "components/collection/collection";
 
+import "components/admin_decks/admin_decks";
+
 import Rails from "rails-ujs";
 
 Rails.start();

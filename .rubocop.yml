@@ -3,7 +3,7 @@ AllCops:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
-    - db/schema.rb
+    - db/*
     - db/migrate/*
     - config.ru
     - lib/**/*.rake

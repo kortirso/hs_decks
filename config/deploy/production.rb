@@ -8,7 +8,7 @@ set :rails_env, :production
 set :stage, :production
 
 set :ssh_options,
-  keys: %w[/home/kortirso/.ssh/id_rsa /users/kortirso/.ssh/id_rsa],
-  forward_agent: true,
-  auth_methods: %w[publickey password],
-  port: 2999
+    keys: %w[~/.ssh/id_rsa],
+    forward_agent: true,
+    auth_methods: %w[publickey password],
+    port: 2999

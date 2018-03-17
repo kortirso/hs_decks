@@ -1,8 +1,0 @@
-- provide(:title, "Deck Hunter | #{t('pages.unusable.title')}")
-.page_inner
-    h4= t('pages.unusable.title')
-    p= t('pages.unusable.main.p')
-    .unusable_cards.row
-        - @unusable_cards.each do |card|
-            .card
-                = image_tag("/cards/#{@locale}/#{card.cardId}.png")

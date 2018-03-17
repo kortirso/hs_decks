@@ -1,5 +1,47 @@
 const $ = require("jquery");
 
+$('#cards_list').on('click', '.remove_card', function(e) {
+  var card_class = $(this).closest('.card').attr('class').split(' ').pop();
+  var object = $('.right_side').find('.' + card_class + ' label');
+
+  var amount = parseInt($('#card_amount').html());
+  if ($(object).hasClass('double')) {
+    $('#card_amount').html(amount - 2);
+    $(object).mana_curve(-2);
+    $(object).removeClass('double').addClass('none');
+  }
+  else if ($(object).hasClass('single')) {
+    $('#card_amount').html(amount - 1);
+    $(object).mana_curve(-1);
+    $(object).removeClass('single').addClass('none');
+  }
+
+  $(object).closest('div').children('input').val(0);
+  $('#cards_list .' + card_class.split(' ').pop()).remove();
+});
+
+$('#deck .cards .card label').click(function(e) {
+  e.preventDefault();
+  if($(this).hasClass('none')) {
+    $(this).removeClass('none').addClass('single');
+    $(this).closest('div').children('input').val(1).attr('checked', true);
+  }
+  else if($(this).hasClass('single')) {
+    if($(this).closest('.card').hasClass('Legendary')) {
+      $(this).removeClass('single').addClass('none');
+      $(this).closest('div').children('input').val(0);
+    }
+    else {
+      $(this).removeClass('single').addClass('double');
+      $(this).closest('div').children('input').val(2);
+    }
+  }
+  else {
+    $(this).removeClass('double').addClass('none');
+    $(this).closest('div').children('input').val(0);
+  }
+});
+
 $("#cards_collection .costs label").click(function(e) {
   e.preventDefault();
   if ($(this).hasClass("none")) {

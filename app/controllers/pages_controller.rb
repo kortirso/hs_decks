@@ -34,10 +34,6 @@ class PagesController < ApplicationController
     @packs = current_user.positions.collect_ids
   end
 
-  def unusable
-    @unusable_cards = current_user.unusable_cards
-  end
-
   def personal
     @user = current_user
   end

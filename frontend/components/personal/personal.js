@@ -1,1 +1,1 @@
-import "./personal.css"
+import "./personal.css";

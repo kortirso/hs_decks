@@ -1,0 +1,25 @@
+.grid-container
+  .head
+    h1
+      | Вы можете изучить проверку ваших карт для колоды 
+      = " #{@deck.locale_name(session[:locale])}"
+  .block
+    .left_side
+      = render 'components/mana_curve/mana_curve', by_mana: @deck.positions.amount_by_mana
+    .right_side
+      p= "#{t('pages.decks.main.power')} - #{@deck.power}"
+      p= "#{t('pages.checks.main.p_3')} - #{@check.success}/30"
+      p= "#{t('pages.check.main.p_1')} - #{@deck.formats}"
+      p= "#{t('pages.check.main.p_2')} - #{@deck.author}"
+      p= "#{t('pages.check.main.p_3')} - #{@deck.price}"
+      p= "#{t('pages.check.main.p_4')} - #{@check.dust}"
+  .block
+    .check
+      h2 Колода эксперта
+      = render 'components/check_card/check_card', cards: @deck.cards, locale: @locale, positions: @positions, decks: nil
+    .check
+      h2 Ваши карты
+      = render 'components/check_card/check_card', cards: @check.cards, locale: @locale, positions: @lines, decks: @positions , deck_ids: @positions.map { |elem| elem[0] }
+    .check
+      h2 Колода с заменами
+      = render 'components/check_card/check_card', cards: @check.substitution.cards, locale: @locale, positions: @subs, decks: nil

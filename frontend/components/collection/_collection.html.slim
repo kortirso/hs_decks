@@ -26,6 +26,6 @@
             p
               = link_to 'Есть все классовые карты', '', class: "button small class_existed class_#{name}"
               = link_to 'Нет классовых карт', '', class: "button small class_unexisted class_#{name}"
-            = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @packs, ids: ids
+            = render 'components/card/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @packs, ids: ids
         = submit_tag 'Сохранить', class: 'button'
 /= render 'shared/save_modal'

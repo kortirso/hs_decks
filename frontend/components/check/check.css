@@ -1,0 +1,29 @@
+.check_page {
+  .block {
+    display: flex;
+    flex-direction: row;
+
+    .left_side {
+      width: 25%;
+    }
+
+    .right_side {
+      width: 75%;
+
+      p {
+        margin-bottom: 5px;
+      }
+    }
+
+    .check {
+      width: 33%;
+      padding-bottom: 30px;
+
+      h2 {
+        font-size: 24px;
+        font-weight: 300;
+        text-align: left;
+      }
+    }
+  }
+}

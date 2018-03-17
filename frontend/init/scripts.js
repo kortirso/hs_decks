@@ -331,7 +331,7 @@ $(".costs label").click(function(e) {
           .split("_")[1]
       );
       let current_name = $(cloned).data("card-name");
-      if ($("#cards_list .card").size() == 0) $("#cards_list").append(cloned);
+      if ($("#cards_list .card").length == 0) $("#cards_list").append(cloned);
       else {
         i = 0;
         $("#cards_list .card").each(function() {
@@ -351,7 +351,7 @@ $(".costs label").click(function(e) {
           }
           i += 1;
         });
-        if ($("#cards_list .card").size() == i) $("#cards_list").append(cloned);
+        if ($("#cards_list .card").length == i) $("#cards_list").append(cloned);
       }
     }
   } else if ($(this).hasClass("single")) {

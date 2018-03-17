@@ -25,16 +25,16 @@
         .cell.small-3= f.select :style, options_for_select(@styles, (@deck.style_id.nil? ? nil : @deck.style.locale_name(@locale))), prompt: 'Все'
         .cell.small-4= f.select :race, options_for_select(@races, (@deck.race_id.nil? ? nil : @deck.race.locale_name(@locale))), prompt: 'Приоритетные существа'
         .cell.small-3= f.text_field :reno_type, value: @deck.reno_type? ? 'Рено колода' : 'Обычная колода', disabled: true
-      /#filters
+      #filters
         span
           strong Фильтры
         span Цена карт
         span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: 'Все'
-      /ul.tabs data-tabs='' id='new-cards-tabs'
+      ul.tabs data-tabs='' id='new-cards-tabs'
         - classes_list.each_with_index do |name, index|
           li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
             = link_to image_tag(asset_pack_path("images/heroes/#{name}.png"), alt: name), "#cards#{index}"
-      /.tabs-content data-tabs-content='new-cards-tabs'
+      .tabs-content data-tabs-content='new-cards-tabs'
         - classes_list.each_with_index do |name, index|
           .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
-            = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @positions, ids: ids
+            = render 'components/card/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: @positions, ids: ids

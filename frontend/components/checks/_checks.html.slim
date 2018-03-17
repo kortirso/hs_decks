@@ -1,0 +1,36 @@
+.grid-container#user data={ owner: "#{current_user.id}" }
+  .head
+    h1 Анализ существующих карт
+    p На этой странице вы можете запустить проверку ваших карт и узнать, какую экспертную колоду вы сможете полностью собрать.
+    p Также вы можете указать минимальный порог успешности подбора колоды, максимальное количество пыли, которое вы можете потратить на крафт карт, определенный класс героя или формат колоды.
+  = form_tag({ controller: 'checks', action: 'create' }, method: 'post') do
+    .grid-x
+      .cell.small-3= select_tag :playerClass, options_for_select(@player_classes), prompt: 'Все классы'
+      .cell.small-3= select_tag :formats, options_for_select(%w(standard wild))
+      .cell.small-3= text_field_tag :power, nil, placeholder: 'Сила колоды'
+      .cell.small-3= select_tag :style, options_for_select(@styles), prompt: 'Все типы колод'
+    = submit_tag 'Проверить колоды', class: 'button'
+  #checks
+    h2 Последняя проведенная проверка
+    table.with-background
+      thead
+        tr
+          th Собранность
+          th Цена
+          th Название
+          th Класс Героя
+          th Сила колоды
+          th Формат
+          th Автор
+          th
+      tbody
+        - @checks.each do |check|
+          tr
+          td= "#{check.success}/30"
+          td= check.dust
+          td= link_to check.deck.locale_name(@locale), deck_path(check.deck)
+          td= check.deck.player.locale_name(@locale)
+          td= check.deck.power
+          td= check.deck.formats
+          td= check.deck.author
+          td= link_to 'Проверка', check_path(check), class: 'button small'

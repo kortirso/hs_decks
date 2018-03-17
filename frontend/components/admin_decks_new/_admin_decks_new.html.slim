@@ -1,0 +1,37 @@
+.grid-container
+  - classes_list = %w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue Neutral)
+  = form_for Deck.new, controller: 'decks', action: 'create', method: 'post' do |f|
+    .left_side
+      .head
+        h1 Новая колода
+      p
+        | Количество карт в колоде - 
+        span#card_amount= '0'
+      = render 'components/mana_curve/mana_curve', by_mana: nil
+      #cards_list
+      = f.submit 'Сохранить', class: 'button'
+    .right_side
+      .grid-x
+        .cell.small-3= text_field_tag 'deck[name]', nil, placeholder: 'Название колоды'
+        .cell.small-3= text_field_tag 'deck[name_en]', nil, placeholder: 'Название колоды'
+        .cell.small-3= f.select :playerClass, options_for_select(%w(Priest Warrior Warlock Mage Druid Hunter Shaman Paladin Rogue))
+        .cell.small-3= f.select :formats, options_for_select(%w(wild standard)), include_blank: false
+        .cell.small-6= f.text_field :author, placeholder: 'Автор колоды'
+        .cell.small-6= f.text_field :link, placeholder: 'Ссылка'
+        .cell.small-2= f.text_field :power, placeholder: 'Сила колоды'
+        .cell.small-3= f.select :style, options_for_select(@styles), prompt: 'Все'
+        .cell.small-4= f.select :race, options_for_select(@races), prompt: 'Приоритетные существа'
+        .cell.small-3= f.select :reno_type, options_for_select([['Обычная колода', 1], ['Рено колода', 2]], 1)
+      #filters
+        span
+          strong Фильтры
+        span Цена карт
+        span= select_tag :mana_cost, options_for_select(%w(0 1 2 3 4 5 6 7)), prompt: 'Все'
+      ul.tabs data-tabs='' id='new-cards-tabs'
+        - classes_list.each_with_index do |name, index|
+          li.tabs-title class="#{name}" class="#{'is-active visibled' if index == 0}"
+            = link_to image_tag(asset_pack_path("images/heroes/#{name}.png"), alt: name), "#cards#{index}"
+      .tabs-content data-tabs-content='new-cards-tabs'
+        - classes_list.each_with_index do |name, index|
+          .tabs-panel class="#{'is-active' if index == 0}" id="cards#{index}"
+            = render 'shared/card', cards: @cards.select { |card| card.playerClass == name }, locale: @locale, positions: nil, ids: []

@@ -2,6 +2,7 @@ require 'babosa'
 
 # Represents deckss
 class Deck < ApplicationRecord
+  include Localizeable
   include Positionable
   extend FriendlyId
 
@@ -29,15 +30,11 @@ class Deck < ApplicationRecord
   after_create :build_mulligan
 
   def slug_candidates
-    [:name_en, %i[name_en user_id], %i[name_en user_id id]]
+    [:name, %i[name user_id], %i[name user_id id]]
   end
 
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize(transliterations: :russian).to_s
-  end
-
-  def locale_name(locale)
-    locale == 'en' ? name_en : name
   end
 
   def locale_caption(locale)

@@ -1,0 +1,8 @@
+- by_mana = [0, 0, 0, 0, 0, 0, 0, 0] if by_mana.nil?
+#mana_curve
+  - (0..7).each do |col|
+    .col id="mana_#{col}"
+      .count= by_mana[col]
+      .inner_col
+        .filled style="height: #{by_mana.max != 0 ? by_mana[col] * 100 / by_mana.max : 0}px"
+      .mana_col class="mana_#{col}"

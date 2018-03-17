@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180313050243) do
+ActiveRecord::Schema.define(version: 20180317035334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 20180313050243) do
   end
 
   create_table "decks", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
     t.integer "user_id", null: false
     t.string "playerClass", null: false
     t.datetime "created_at", null: false
@@ -86,9 +85,9 @@ ActiveRecord::Schema.define(version: 20180313050243) do
     t.integer "style_id"
     t.boolean "reno_type", default: false
     t.string "slug"
-    t.string "name_en"
     t.text "caption_en"
     t.integer "race_id"
+    t.hstore "name", default: {"en"=>"", "ru"=>""}, null: false
     t.index ["player_id"], name: "index_decks_on_player_id"
     t.index ["race_id"], name: "index_decks_on_race_id"
     t.index ["slug"], name: "index_decks_on_slug", unique: true

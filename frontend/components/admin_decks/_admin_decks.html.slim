@@ -2,7 +2,6 @@
   .head
     h1 С этой страницы вы можете просмотреть ваши колоды, отредактировать их или создать новую.
     = link_to 'Новая колода', new_deck_path, class: 'button'
-    /= link_to 'Конструктор замен', shifts_path, class: 'button'
   table.with-background
     thead
       tr
@@ -16,7 +15,7 @@
     tbody
       - @decks.each do |deck|
         tr
-          td= link_to deck.name, deck_path(deck)
+          td= link_to deck.locale_name(@locale), deck_path(deck)
           td= deck.player.locale_name(@locale)
           td= deck.price
           td= deck.formats
@@ -24,5 +23,4 @@
           td= deck.power
           td
             = link_to 'Изменить', edit_deck_path(deck), class: 'button small'
-            = link_to 'Замены', exchange_path(deck.id), class: 'button small'
             = link_to 'Удалить', deck_path(deck), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button small'

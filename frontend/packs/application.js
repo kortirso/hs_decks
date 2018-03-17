@@ -10,6 +10,7 @@ import "components/footer/footer";
 import "components/index/index";
 import "components/collection/collection";
 import "components/decks/decks";
+import "components/deck/deck";
 
 import "components/admin_decks/admin_decks";
 import "components/admin_decks_new/admin_decks_new";

@@ -1,0 +1,65 @@
+.deck_page {
+  .deck {
+    display: flex;
+    flex-direction: row;
+
+    .block {
+      &.deck_list {
+        width: 30%;
+
+        #cards_list {
+          margin-top: 20px;
+        }
+      }
+
+      &.caption {
+        width: 65%;
+        margin-right: 5%;
+
+        p {
+          margin-bottom: 5px;
+        }
+
+        .sub_block {
+          margin-bottom: 30px;
+        }
+
+        .mulligans {
+          .tabs {
+            display: inline-block;
+
+            .tabs-title {
+              padding: 2px;
+
+              a {
+                padding: 0;
+
+                img {
+                  width: 52px;
+                }
+              }
+
+              &.is-active {
+                box-shadow: inset 0 0 0 2px #2199e8;
+              }
+            }
+          }
+
+          .tabs-content {
+            border: none;
+            background: none;
+
+            .tabs-panel {
+              padding: 20px 0;
+            }
+          }
+        }
+      }
+
+      h2 {
+        font-size: 24px;
+        font-weight: 300;
+      }
+    }
+  }
+}

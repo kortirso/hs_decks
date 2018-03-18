@@ -1,5 +1,5 @@
 module Subs
-    class CreateSubsService
-
-    end
+  # description
+  class CreateSubsService
+  end
 end

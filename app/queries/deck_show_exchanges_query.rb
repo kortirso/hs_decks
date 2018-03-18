@@ -7,8 +7,6 @@ class DeckShowExchangesQuery
   end
 
   def query
-    deck
-      .positions.includes(:card, :exchanges).to_a
-      .sort_by { |elem| [elem.card.cost, elem.card["name_#{I18n.locale}"]] }
+    deck.positions.includes(:card, :exchanges).to_a.sort_by { |elem| [elem.card.cost, elem.card["name_#{I18n.locale}"]] }
   end
 end
